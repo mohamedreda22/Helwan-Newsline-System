@@ -51,15 +51,15 @@ The system aims to provide a centralized platform for communication and informat
 
 ### Functional Requirements
 
-#### Title: Login
-#### Title: Register
-#### Title: View Profile
-#### Title: Manage Profile (Update, Delete)
-#### Title: Add Comment, Add Reaction
-#### Title: Manage Posts
-#### Title: Manage Department
-#### Title: Notification
-#### Title: Forget Password
+#### Login
+#### Register
+#### View Profile
+#### Manage Profile (Update, Delete)
+#### Add Comment, Add Reaction
+#### Manage Posts
+#### Manage Department
+#### Notification
+#### Forget Password
 
 ### Non-Functional Requirements
 
@@ -90,6 +90,3 @@ As a Student or Administrator:
 - Forgot Password
 
 These functionalities ensure efficient interaction and adherence to non-functional requirements.
-
----
-This README provides an overview of the University Newsline System, its objectives, features, scope, constraints, and functional/non-functional requirements, along with a user story highlighting user engagement and management functionalities.
