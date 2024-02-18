@@ -1,47 +1,38 @@
+
 import universityImage from "../assets/images/universityImage.jpeg";
-import ryadyaBanat from "../assets/images/ryadya-banat.png";
-import ryadyabanen from "../assets/images/ryadya-banen.png";
-import fanaya from "../assets/images/fanaya.png";
-import ektesad from "../assets/images/ektesad.png";
-import gamela from "../assets/images/gamela.png";
-import tamred from "../assets/images/tamred.png";
-import sydala from "../assets/images/saydala.png";
-import olom from "../assets/images/olom.png";
-import hasbat from "../assets/images/hasbat.png";
-import tab from "../assets/images/tab.png";
-import music from "../assets/images/music.png";
-import handsaMatarya from "../assets/images/handsa-matrya.png";
-import handsaHelwan from "../assets/images/handsa-helwan.png";
-import Tarbya from "../assets/images/tarbya.png";
-import adab from "../assets/images/adab.png";
-import hokok from "../assets/images/hokok.png";
-import khdma from "../assets/images/khadma.png";
-import tgara from "../assets/images/tgara.png";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
 import "../styles/Collages.css";
 import { Link } from "react-router-dom";
 import React from "react";
 
+function importAll(r) {
+  let images = {};
+  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  return images;
+}
+
+const images = importAll(require.context('../assets/images', false, /\.(png|jpe?g|svg)$/));
+
 const imageTextData = [
-  { imageUrl: ryadyaBanat, text: "تربية رياضية بنات", link: "/ryadyaBanat" },
-  { imageUrl: ryadyabanen, text: "تربية رياضية بنين", link: "/ryadyabanen" },
-  { imageUrl: ektesad, text: "اقتصاد منزلي", link: "/ektesad" },
-  { imageUrl: fanaya, text: "تربية فنية", link: "/fanaya" },
-  { imageUrl: gamela, text: "فنون جميلة", link: "/gamela" },
-  { imageUrl: tamred, text: "تمريض", link: "/tamred" },
-  { imageUrl: sydala, text: "صيدلة", link: "/sydala" },
-  { imageUrl: olom, text: "علوم", link: "/olom" },
-  { imageUrl: hasbat, text: "حاسبات", link: "/hasbat" },
-  { imageUrl: tab, text: "طب", link: "/tab" },
-  { imageUrl: music, text: "تربية موسيقية", link: "/ryadyaBanat" },
-  { imageUrl: handsaMatarya, text: "هندسة (مطرية)", link: "/ryadyaBanat" },
-  { imageUrl: handsaHelwan, text: "هندسة (حلوان)", link: "/ryadyaBanat" },
-  { imageUrl: Tarbya, text: "تربية", link: "/ryadyaBanat" },
-  { imageUrl: adab, text: "أداب", link: "/ryadyaBanat" },
-  { imageUrl: hokok, text: "حقوق", link: "/ryadyaBanat" },
-  { imageUrl: khdma, text: "خدمة اجتماعية", link: "/ryadyaBanat" },
-  { imageUrl: tgara, text: "تجارة", link: "/ryadyaBanat" },
+  { imageName: 'ryadya-banat.png', text: "تربية رياضية بنات", link: "/ryadyaBanat" },
+  { imageName: 'ryadya-banen.png', text: "تربية رياضية بنين", link: "/ryadyabanen" },
+  { imageName: 'ektesad.png', text: "اقتصاد منزلي", link: "/ektesad" },
+  { imageName: 'fanaya.png', text: "تربية فنية", link: "/fanaya" },
+  { imageName: 'gamela.png', text: "فنون جميلة", link: "/gamela" },
+  { imageName: 'tamred.png', text: "تمريض", link: "/tamred" },
+  { imageName: 'saydala.png', text: "صيدلة", link: "/sydala" },
+  { imageName: 'olom.png', text: "علوم", link: "/olom" },
+  { imageName: 'hasbat.png', text: "حاسبات", link: "/hasbat" },
+  { imageName: 'tab.png', text: "طب", link: "/tab" },
+  { imageName: 'music.png', text: "تربية موسيقية", link: "/ryadyaBanat" },
+  { imageName: 'handsa-matrya.png', text: "هندسة (مطرية)", link: "/ryadyaBanat" },
+  { imageName: 'handsa-helwan.png', text: "هندسة (حلوان)", link: "/ryadyaBanat" },
+  { imageName: 'tarbya.png', text: "تربية", link: "/ryadyaBanat" },
+  { imageName: 'adab.png', text: "أداب", link: "/ryadyaBanat" },
+  { imageName: 'hokok.png', text: "حقوق", link: "/ryadyaBanat" },
+  { imageName: 'khadma.png', text: "خدمة اجتماعية", link: "/ryadyaBanat" },
+  { imageName: 'tgara.png', text: "تجارة", link: "/ryadyaBanat" },
 ];
 function Collages() {
   return (
@@ -61,8 +52,8 @@ function Collages() {
                 <div className="photo-item">
                   <Link to={item.link}>
                     <img
-                      src={item.imageUrl}
-                      alt={`Image ${index + 1}`}
+                      src={images[item.imageName].default} 
+                      alt={`Collage ${index + 1}`}
                       className="img-fluid"
                     />
                   </Link>
