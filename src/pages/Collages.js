@@ -7,39 +7,49 @@ import React from "react";
 
 function importAll(r) {
   let images = {};
-  r.keys().map((item, index) => { images[item.replace('./', '')] = r(item); });
+  r.keys().map((item, index) => 
+    { images[item.replace('./', '')] = r(item);
+   });
   return images;
 }
 
 const images = importAll(require.context('../assets/images', false, /\.(png|jpe?g|svg)$/));
 
 const imageTextData = [
-  { imageName: 'ryadya-banat.png', text: "تربية رياضية بنات", link: "/ryadyaBanat" },
-  { imageName: 'ryadya-banen.png', text: "تربية رياضية بنين", link: "/ryadyabanen" },
-  { imageName: 'ektesad.png', text: "اقتصاد منزلي", link: "/ektesad" },
-  { imageName: 'fanaya.png', text: "تربية فنية", link: "/fanaya" },
-  { imageName: 'gamela.png', text: "فنون جميلة", link: "/gamela" },
-  { imageName: 'tamred.png', text: "تمريض", link: "/tamred" },
-  { imageName: 'saydala.png', text: "صيدلة", link: "/sydala" },
-  { imageName: 'olom.png', text: "علوم", link: "/olom" },
-  { imageName: 'hasbat.png', text: "حاسبات", link: "/hasbat" },
-  { imageName: 'tab.png', text: "طب", link: "/tab" },
-  { imageName: 'music.png', text: "تربية موسيقية", link: "/ryadyaBanat" },
-  { imageName: 'handsa-matrya.png', text: "هندسة (مطرية)", link: "/ryadyaBanat" },
-  { imageName: 'handsa-helwan.png', text: "هندسة (حلوان)", link: "/ryadyaBanat" },
-  { imageName: 'tarbya.png', text: "تربية", link: "/ryadyaBanat" },
-  { imageName: 'adab.png', text: "أداب", link: "/ryadyaBanat" },
-  { imageName: 'hokok.png', text: "حقوق", link: "/ryadyaBanat" },
-  { imageName: 'khadma.png', text: "خدمة اجتماعية", link: "/ryadyaBanat" },
-  { imageName: 'tgara.png', text: "تجارة", link: "/ryadyaBanat" },
+  { imageName: 'ryadya-banat.png', text: "تربية رياضية بنات" },
+  { imageName: 'ryadya-banen.png', text: "تربية رياضية بنين" },
+  { imageName: 'ektesad.png', text: "اقتصاد منزلي" },
+  { imageName: 'fanaya.png', text: "تربية فنية" },
+  { imageName: 'gamela.png', text: "فنون جميلة" },
+  { imageName: 'tamred.png', text: "تمريض" },
+  { imageName: 'saydala.png', text: "صيدلة" },
+  { imageName: 'olom.png', text: "علوم" },
+  { imageName: 'hasbat.png', text: "حاسبات" },
+  { imageName: 'tab.png', text: "طب" },
+  { imageName: 'music.png', text: "تربية موسيقية" },
+  { imageName: 'handsa-matrya.png', text: "هندسة (مطرية)" },
+  { imageName: 'handsa-helwan.png', text: "هندسة (حلوان)" },
+  { imageName: 'tarbya.png', text: "تربية" },
+  { imageName: 'adab.png', text: "أداب" },
+  { imageName: 'hokok.png', text: "حقوق" },
+  { imageName: 'khadma.png', text: "خدمة اجتماعية" },
+  { imageName: 'tgara.png', text: "تجارة" },
 ];
+
+// Dynamically generate the link based on imageName
+const smartImageTextData = imageTextData.map(item => ({
+  ...item,
+  link: `/${item.imageName.split('.')[0]}`,
+}));
+
+
 function Collages() {
   return (
     <>
       <Navbar />
       <div className="container-fluid px-0">
         <img
-          src={universityImage}
+          src={images['universityImage.jpeg']}
           alt="University Image"
           className="university-image"
         />
@@ -51,7 +61,7 @@ function Collages() {
                 <div className="photo-item">
                   <Link to={item.link}>
                     <img
-                      src={images[item.imageName].default} 
+                      src={images[item.imageName]} 
                       alt={`Collage ${index + 1}`}
                       className="img-fluid"
                     />
