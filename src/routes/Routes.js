@@ -1,7 +1,8 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
+import EditArticle from "../pages/EditArticle";
  // import SideBar from './components/SideBar';
-import AddArticle from '../pages/AddArticle';
+//import AddArticle from '../pages/AddArticle';
 // import Navbar from './layouts/Navbar';
 // import Footer from './layouts/Footer';
 
@@ -13,8 +14,11 @@ export const router = createBrowserRouter([
     // element: <Message/>,
 
 
+    // path: "/",
+    // element: <AddArticle/>,
+
     path: "/",
-    element: <AddArticle/>,
+    element: <EditArticle/>,
 
     // path: "/",
     // element: <Collages />,
