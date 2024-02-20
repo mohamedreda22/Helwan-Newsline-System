@@ -1,6 +1,3 @@
- 
-.logo img{
-    width: 155px;
-   height: 164px;
-   flex-shrink: 0;
-}
+ .side2{
+   background-color: beige;
+ }

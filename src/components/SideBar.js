@@ -6,14 +6,14 @@ import '../styles/SideBar.css';
 import {Nav} from 'react-bootstrap';
 const SideBar = () => {
     return ( 
-         <div  dir="rtl">
+         <div className='Side'  dir="rtl">
              <div className="logo">
             <img src={logo} alt="logo" />
              </div>
               <Sidebar  className='side2'>
              <Menu>
-             <Nav.Link href="#h" className='active' >    <span class="material-icons-outlined">calendar_month</span> اهم الاحداث</Nav.Link>
-             <Nav.Link href="#ho" className='active' >    <span class="material-icons-outlined"> sports_football</span>    الرياضة</Nav.Link>
+             <Nav.Link href="#h" className='active' ><span class="material-icons-outlined">calendar_month</span> اهم الاحداث</Nav.Link>
+             <Nav.Link href="#ho" className='active' ><span class="material-icons-outlined"> sports_football</span>    الرياضة</Nav.Link>
              <SubMenu   label="المقالات"  >
                 
                 <Nav.Link href="#hom" className='active' ><span class="material-icons-outlined"> add</span>   اضافة مقال </Nav.Link>
@@ -34,6 +34,7 @@ const SideBar = () => {
                <MenuItem></MenuItem>
                <MenuItem></MenuItem>
                <MenuItem></MenuItem>
+               
                
                
                <Nav.Link href="#homNN" className='active' ><span class="material-icons-outlined"> logout </span>      تسجيل الخروج       </Nav.Link>

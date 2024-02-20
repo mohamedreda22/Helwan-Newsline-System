@@ -1,7 +1,7 @@
  
-.Search{   
+.search{   
 position:absolute;
-width: 100%;
+width: 80%;
 margin-top: 0px;
 top: 30px;
 height: 70px;
@@ -9,7 +9,7 @@ text-align: right;
 display: grid;
 top: 0%;
 background-color: gray;
-color: blue;
+ 
 
 
 }
@@ -17,3 +17,104 @@ color: blue;
     text-align: right; 
     font-size: large;
  }
+
+ *{
+     background-color: rgb(230, 226, 226);  
+ }
+
+ .arts{
+    color: #000;
+
+font-family: Inder;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+ margin-top: -550px;
+ margin-right: 250px;
+ }
+ .add{
+    color: #000;
+
+font-family: Inder;
+font-size: 40px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+text-align: center;
+ }
+ .add2{
+    color: #000;
+
+font-family: Inder;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+ margin-right: 250px;
+ margin-left: 777px;
+  
+ }
+ .txt{
+    width: 282px;
+height: 50px;
+/* ;
+margin-top: -140px; */
+background-color: white;
+margin-left: 765px;
+border: none;
+ }
+ .add3{
+ color: #000;
+font-family: Inder;
+font-size: 30px;
+font-style: normal;
+font-weight: 400;
+line-height: normal;
+ margin-left: 450px;
+ margin-top: -90px;
+  
+ } 
+ 
+ .txt2{
+    width: 282px;
+height: 50px;
+ /* 
+margin-top: -50px; */
+background-color: white;
+margin-left: 250px;
+border: none;
+ }
+ .lbl{
+    margin-left: 100px;
+ }
+ .add4{
+    color: #000;
+   font-family: Inder;
+   font-size: 30px;
+   font-style: normal;
+   font-weight: 400;
+   line-height: normal;
+    /* 
+    margin-top: -90px; */
+    margin-right: 250px;
+    margin-left: 777px;
+    margin-top: 80px;
+     
+    } 
+    .subject{
+        
+    background-color: white;
+    margin-left: 250px;
+    border: none;
+    width:800px ;
+     }
+     .btn{
+        /* margin-top: 100px; */
+        background-color: blue;
+        color: white;
+        width:400px;
+        height: 50px;
+        margin-left: 400px;
+        margin-top: 80px;
+     }
