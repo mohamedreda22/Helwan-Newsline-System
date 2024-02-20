@@ -1,3 +1,6 @@
+<<<<<<< HEAD
+import React from "react";
+=======
 ///////gdfdfdfsadfsdfsdfsd
 //hhhhhuguuuu
 //jjjjjjj
@@ -5,22 +8,20 @@
 //Yasmina
 
 import React, { useState, useEffect } from "react";
+>>>>>>> main
 import "./App.css";
-import HomePage from "./components/homePage";
-import Loading from "./components/loading";
+//import HomePage from "./components/homePage";
+//import Loading from "./components/loading";
+import Collages from "./pages/Collages";
 
 function App() {
-  const [isLoading, setIsLoading] = useState(true);
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-
-    return () => clearTimeout(timer);
-  }, []);
-
-  return <div className="App">{isLoading ? <Loading /> : <HomePage />}</div>;
+  return (
+    <>
+{/*       <HomePage />
+      <Loading /> */}
+      <Collages />
+    </>
+  );
 }
 
 export default App;

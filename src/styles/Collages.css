@@ -1,0 +1,22 @@
+.university-image {
+  width: 100%;
+  height: auto;
+}
+
+.photo-item {
+  position: relative;
+}
+
+.photo-item img {
+  width: 100%;
+  max-width: 150px;
+  height: auto;
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+.photo-item p {
+  margin-top: 10px;
+  font: bold;
+  font-size: 20px;
+}
