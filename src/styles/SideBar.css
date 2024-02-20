@@ -1,6 +1,8 @@
- 
-.logo img{
-    width: 155px;
-   height: 164px;
-   flex-shrink: 0;
+.logo img {
+  width: 155px;
+  height: 164px;
+  flex-shrink: 0;
+}
+.container22 {
+    width: 100%;
 }
