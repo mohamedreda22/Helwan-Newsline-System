@@ -1,6 +1,6 @@
 import React from 'react';
 import '../styles/AddArticle.css'
-//import SideBar from './components/SideBar'
+ 
  import SideBar from '../components/SideBar'
  
  const AddArticle = () => {

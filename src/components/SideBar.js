@@ -8,9 +8,10 @@ const SideBar = () => {
     return ( 
          <div className='Side'  dir="rtl">
              <div className="logo">
-            <img src={logo} alt="logo" />
+            <img src={logo} alt="logo"  width="64"
+              height="60" />
              </div>
-              <Sidebar  className='side2'>
+              <Sidebar>
              <Menu>
              <Nav.Link href="#h" className='active' ><span class="material-icons-outlined">calendar_month</span> اهم الاحداث</Nav.Link>
              <Nav.Link href="#ho" className='active' ><span class="material-icons-outlined"> sports_football</span>    الرياضة</Nav.Link>
