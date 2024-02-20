@@ -1,6 +1,34 @@
- 
-.logo img{
+.sideBar {
+    display: flex;
+    flex-direction: column;
+    background-color: #ffffff; /* Background color of the sidebar */
+    width: 366px; /* Adjust width based on design */
+    height: 1767px; /* Adjust height based on design */
+    padding: 20px; /* Adjust padding based on design */
+    box-shadow: 4px 4px 15px rgba(0.25, 0, 0, 0.25); /* Adjust shadow based on design */
+    position: fixed;
+    top: 0;
+    right: 0;
+/*     overflow-y: auto;
+ */    
+
+  }
+  
+  .side2 {
+    width: 366px; /* Adjust the width as needed */
+    height: 1767px;
+    background: var(--White, #FFF);
+    flex-shrink: 0;
+    color: #000000; /* Example text color */
+  }
+  
+  .logo {
     width: 155px;
-   height: 164px;
-   flex-shrink: 0;
-}
+    height: 164px;
+    margin: 20px ;
+
+  }
+  
+  .menuItemWrapper {
+    flex-grow: 1;
+  }
