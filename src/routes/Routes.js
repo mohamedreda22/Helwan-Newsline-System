@@ -3,11 +3,12 @@ import React from "react";
 import Collages from "../pages/Collages";
 import SideBar from "../components/SideBar";
 import AddEvent from "../components/addEvent";
+import ShowEvents from "../components/showEvents";
 
 export const router =createBrowserRouter ([
   {
     path: "/",
-    element: <AddEvent />,
+    element: <ShowEvents />,
     children:[
       {
         path: "/logInTop",

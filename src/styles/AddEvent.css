@@ -155,3 +155,15 @@ text-align: center;}
     font-size: 14px;
     font-weight: bold;
 }
+.custom-error-alert {
+    background-color: #42198f; 
+    color: rgba(0, 0, 0, 0.827); 
+    border-radius: 8px; 
+}
+.custom-success-alert {
+    background-color: #08900ded; /* Green background */
+    color: rgba(0, 0, 0, 0.827); 
+    border-radius: 8px; 
+    padding: 20px; 
+    
+}

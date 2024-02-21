@@ -3,6 +3,7 @@ import axios from "axios";
 import '../styles/AddEvent.css';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import Simplert from 'react-simplert';
 
 
 export default function AddEvent(){
@@ -22,6 +23,8 @@ export default function AddEvent(){
     const [error, setError] = useState('');
     const [categories, setCategories] = useState([]);
     const [eventDate, setEventDate] = useState(null);
+    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
+    const [showErrorAlert, setShowErrorAlert] = useState(false);
 
     const handleDateChange = (date) => {
         setEventDate(date);
@@ -61,17 +64,19 @@ export default function AddEvent(){
                 );
             console.log('Response:', response);
             if (response && response.status === 200) {
-                alert('تم إضافة الحدث بنجاح');
                 console.log('Form data submitted:', response.data);
+                setShowSuccessAlert(true);
                 resetForm();
             } else {
                 alert('فشل إضافة الحدث');
                 console.log('Response data:', response.data);
+                setShowErrorAlert(true);
+
             }
         } catch (error) {
             console.error('Error:', error);
-            console.log('Response data:', error.response ? error.response.data : '');
-            alert('An error occurred. Please try again later.');
+            setError('حدث خطأ أثناء إضافة الحدث');
+            setShowErrorAlert(true);
         } finally {
             setIsLoading(false);
         }
@@ -283,9 +288,30 @@ const formatDate = (date) => {
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
+
                     {error && <div className="error">{error}</div>}
-                </form>
+
+                <Simplert
+                showSimplert={showErrorAlert}
+                type="error"
+                title="Failed"
+                message="An error occurred. Please try again later."
+                onClose={() => setShowErrorAlert(false)}
+                customClass="custom-error-alert" 
+
+            />
+            <Simplert
+                showSimplert={showSuccessAlert}
+                type="success"
+                title="Success"
+                message="Event added successfully."
+                onClose={() => setShowSuccessAlert(false)}
+                customClass="custom-success-alert" 
+            />
+            </form>
+
             </div>
+
         </div>
     )
 }
