@@ -7,13 +7,14 @@ import { RouterProvider } from 'react-router-dom';
 import {router} from './routes/Routes'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import reportWebVitals from './reportWebVitals';
+import AddEvent from './components/addEvent';
 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
     <RouterProvider router={router}>
         <Router>
-            <App />
+            <AddEvent />
         </Router>
     </RouterProvider>
 

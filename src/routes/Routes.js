@@ -2,16 +2,16 @@ import {createBrowserRouter } from "react-router-dom";
 import React from "react";
 import Collages from "../pages/Collages";
 import SideBar from "../components/SideBar";
-import LogIn from "../pages/LogIn";
+import AddEvent from "../components/addEvent";
 
 export const router =createBrowserRouter ([
   {
     path: "/",
-    element: <LogIn />,
+    element: <AddEvent />,
     children:[
       {
         path: "/logInTop",
-        element: <LogIn />,
+        element: <AddEvent />,
       },
       {
         path: "/collages",
@@ -21,6 +21,10 @@ export const router =createBrowserRouter ([
         path: "/sideBar",
         element: <SideBar />,
       },
+      {
+        path: "/addEvent",
+        element: <AddEvent />,
+      }
       
     ]
   }

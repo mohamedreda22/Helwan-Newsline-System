@@ -22,7 +22,7 @@ function LogIn() {
         setIsLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:9090/university/api/modernhome/auth/login?email=${formData.email}&password=${formData.password}`);
+            const response = await axios.post(`http://localhost:9090//auth/login?email=${formData.email}&password=${formData.password}`);
             console.log('Response:', response);
             if (response && response.status === 202) {
                 alert('تم تسجيل الدخول بنجاح');

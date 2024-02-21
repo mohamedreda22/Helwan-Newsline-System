@@ -1,0 +1,157 @@
+.add-event-page {
+    padding: 20px;
+    background-color: #f4f4f4;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+.add-event-container {
+    background-color: #D9D9D94D;
+    padding: 40px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 800px;
+    margin: 0 auto;
+    animation: addEvent 0.8s ease-in-out forwards;
+
+}
+
+.header {
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #091160;
+    animation: addEvent 0.8s ease-in-out forwards;
+text-align: center;}
+
+@keyframes addEvent {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.form-group {
+    margin-bottom: 30px;
+
+}
+
+.form-control {
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+
+}
+
+.btn-submit {
+    background-color: #091160;
+    color: white;
+    padding: 15px 0;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 18px;
+    width: 100%;
+    transition: background-color 0.3s;
+}
+
+.btn-submit:hover {
+    background-color: #06384d;
+}
+
+.error {
+    color: red;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
+.form-group {
+    flex: 1; 
+    margin-right: 15px; 
+}
+@media (max-width: 768px) {
+    .form-group {
+        flex-basis: 100%; 
+        margin-right: 0; 
+        margin-bottom: 15px; 
+    }
+}
+.form-row {
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 30px; 
+}
+.lable{
+    font-size: 18px;
+    margin-bottom: 10px;
+    color: #091160;
+}
+/* Style the DatePicker input */
+.react-datepicker-wrapper {
+    width: 100%; /* Set width to fill the container */
+}
+
+.react-datepicker__input-container input {
+    width: 100%; /* Set width to fill the container */
+    height: 40px; /* Adjust input height */
+    padding: 5px 10px; /* Adjust padding */
+    font-size: 16px; /* Adjust font size */
+    border: 1px solid #ccc; /* Add border */
+    border-radius: 5px; /* Add border radius */
+    box-sizing: border-box; /* Include padding and border in the width */
+}
+
+/* Style the DatePicker calendar*/
+.react-datepicker {
+    font-size: 16px; /* Adjust font size */ 
+}
+
+.react-datepicker__header {
+    background-color: #f0f0f0; /* Set header background color */
+    border-bottom: none; /* Remove border bottom */
+}
+
+.react-datepicker__day-name, .react-datepicker__day {
+    width: 40px; /* Set day width */
+    height: 40px; /* Set day height */
+    line-height: 40px; /* Center day vertically */
+    margin: 2px; /* Add margin between days */
+    font-size: 16px; /* Adjust font size */
+}
+
+.react-datepicker__day--selected {
+    background-color: #007bff; /* Set selected day background color */
+    color: #fff; /* Set selected day text color */
+    border-radius: 50%; /* Make selected day circle */
+}
+
+.react-datepicker__day--keyboard-selected {
+    background-color: #007bff; /* Set keyboard-selected day background color */
+    color: #fff; /* Set keyboard-selected day text color */
+    border-radius: 50%; /* Make keyboard-selected day circle */
+}
+.form-control-file{
+    width: 100%;
+    padding: 15px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+    visibility: inherit;
+}
+.error{
+    color: red;
+    margin-top: 15px;
+    font-size: 14px;
+    font-weight: bold;
+}
