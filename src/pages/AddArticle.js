@@ -1,15 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import '../styles/AddArticle.css'
- 
+
  import SideBar from '../components/SideBar'
  
  const AddArticle = () => {
+  
+  const [name, setName] = useState("");
     return ( 
       <div>
-        <SideBar/>
+        {/* <SideBar/> */}
         
-         
-         <div  dir="rtl" className='search'>
+        <form>
+      <label>Enter your name:
+        <input
+          type="text" 
+          value={name}
+          onChange={(e) => setName(e.target.value)}
+        />
+      </label>
+    </form>
+
+
+
+
+
+         {/* <form >
+         <h2 dir="rtl" className='arts '> المقالات</h2>
+         <hr/>
+          <h3 className='add'>اضافة مقال</h3>
+
+         </form> */}
+         {/* <div  dir="rtl" className='search'>
            <input type ="text" placeholder='بحث .....' ></input>
            <span class="material-icons-outlined">search</span>
           
@@ -31,7 +52,28 @@ import '../styles/AddArticle.css'
 
             <button className='btn'>
                 حفظ
-            </button>  
+            </button>   */}
+             {/* <form class="d-flex" role="search" className='search'>
+            <input
+              class="form-control me-2"
+              type="search"
+              placeholder="Search "
+              aria-label="Search"
+            />
+              <span class="material-icons-outlined">search</span>
+          </form> */}
+
+
+          {/* 
+          <Form>
+            <Form.Group>
+              <Form.Control type='text'  placeholder='....بحث' className='search'/>
+              {/* <span class="material-icons-outlined">search</span> 
+            </Form.Group>
+
+          </Form> 
+        */}
+
       </div>
      );
  }

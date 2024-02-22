@@ -1,11 +1,12 @@
 import { createBrowserRouter } from "react-router-dom";
 import React from "react";
-import EditArticle from "../pages/EditArticle";
+//import EditArticle from "../pages/EditArticle";
  // import SideBar from './components/SideBar';
-//import AddArticle from '../pages/AddArticle';
+import AddArticle from '../pages/AddArticle';
 // import Navbar from './layouts/Navbar';
 // import Footer from './layouts/Footer';
-
+import SideBar from "../components/SideBar";
+import AddArticle2 from "../pages/AddArticle2";
 //import Message from '../pages/Message';
 export const router = createBrowserRouter([
   {
@@ -14,11 +15,16 @@ export const router = createBrowserRouter([
     // element: <Message/>,
 
 
-    // path: "/",
-    // element: <AddArticle/>,
-
     path: "/",
-    element: <EditArticle/>,
+    element: <AddArticle2/>,
+
+    // path: "/",
+    // element: <EditArticle/>,
+
+
+    // path: "/",
+    // element: <SideBar/>,
+
 
     // path: "/",
     // element: <Collages />,

@@ -1,18 +1,29 @@
 import React from 'react'; 
 import {Sidebar,Menu,MenuItem,SubMenu,} from 'react-pro-sidebar';
- 
+import Form from 'react-bootstrap/Form';
 import logo from "../assets/images/logo.png";
 import '../styles/SideBar.css';
 import {Nav} from 'react-bootstrap';
 const SideBar = () => {
     return ( 
          <div className='Side'  dir="rtl">
-             <div className="logo">
-            <img src={logo} alt="logo"  width="64"
-              height="60" />
+            <Form>
+            <Form.Group>
+            <Form.Control type='text'  placeholder=' بحث....' className='search'/>
+              {/* <span className='bar' class="material-icons-outlined">search</span> */}
+            </Form.Group>
+
+          </Form>
+            
+              <Sidebar className='sidebar'>
+              <div className="logo">
+            <img src={logo} alt="logo"  
+            width="100px"
+              height="100" 
+               />
              </div>
-              <Sidebar>
              <Menu>
+             <MenuItem></MenuItem>
              <Nav.Link href="#h" className='active' ><span class="material-icons-outlined">calendar_month</span> اهم الاحداث</Nav.Link>
              <Nav.Link href="#ho" className='active' ><span class="material-icons-outlined"> sports_football</span>    الرياضة</Nav.Link>
              <SubMenu   label="المقالات"  >
