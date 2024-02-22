@@ -63,3 +63,47 @@
     margin-right: 5px; 
     border: none;
 }
+h2{
+    text-align: center;
+    padding-right: 290px;
+    padding-top: 20px;
+    animation: events 0.8s ease-in-out forwards;
+
+}
+@keyframes events {
+    0% {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+/* .add-event-btn{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    background-color: #434343;
+    color: #ffffff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    z-index: 999;
+} */
+.total-events{
+    text-align: left;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    color: #000;
+    font-size: large;
+    font-style: italic;
+    font-weight: bold;
+}
+.total-events span{
+    color: red;
+    font-weight: bold;
+}

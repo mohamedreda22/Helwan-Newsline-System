@@ -1,0 +1,38 @@
+.edit-event-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #f9f9f9;
+}
+
+.edit-event-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.edit-event-label {
+    font-weight: bold;
+}
+
+.edit-event-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.save-icon,
+.cancel-icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.save-icon:hover,
+.cancel-icon:hover {
+    filter: brightness(0.8);
+}

@@ -4,20 +4,20 @@ import logo from "../assets/images/logo.png";
 import '../styles/SideBar.css';
 import { Nav } from 'react-bootstrap';
 
-const SideBar = () => {
+export default function SideBar  ()  {
     return ( 
         <div className='sideBar' dir="rtl">
             <div className="logo">
-                <img src={logo} alt="logo" />
+            <img src={logo} alt="logo" style={{ width: '100px', height: 'auto' }} />
             </div>
             <div className="menuItemWrapper">
             <Sidebar className='side2'>
                 <Menu>
                   <SubMenu label=" اهم الاحداث">
-                     <Nav.Link href="#addEvent" className='active'>
+                     <Nav.Link href="addEvent" className='active'>
                         <span className="material-icons-outlined">add</span> اضافة حدث
                      </Nav.Link>
-                     <Nav.Link href="#showEvents" className='active'>
+                     <Nav.Link href="showEvents" className='active'>
                         <span className="material-icons-outlined">calendar_month</span> كل الاحداث
                     </Nav.Link>
 
@@ -55,7 +55,7 @@ const SideBar = () => {
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
                     {[...Array(2)].map((_, index) => <MenuItem key={index}></MenuItem>)}
-                    <Nav.Link href="#logOut" className='active'>
+                    <Nav.Link href="logInTop"  className='active'>
                         <span className="material-icons-outlined">logout</span> تسجيل الخروج
                     </Nav.Link>
                 </Menu>
@@ -64,5 +64,3 @@ const SideBar = () => {
         </div>
     );
 }
-
-export default SideBar;

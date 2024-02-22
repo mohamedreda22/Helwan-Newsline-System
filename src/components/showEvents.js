@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+/* import React, { useState, useEffect } from "react";
 import axios from "axios";
 import '../styles/Events.css'; 
 import arrow_left from '../assets/icons/arrow_circle_left.svg'
@@ -15,13 +15,13 @@ export default function Events() {
     const [sortByDate, setSortByDate] = useState(false); 
     const [sortOrder, setSortOrder] = useState('newToOld'); 
 
-    const eventsPerPage = 9;
+    const eventsPerPage = 9; */
 
-    useEffect(() => {
+/*     useEffect(() => {
         fetchEvents();
-    }, []);
+    }, []); */
 
-    const fetchEvents = async () => {
+/*     const fetchEvents = async () => {
         try {
             const response = await axios.get('http://localhost:9090/university/events');
             let fetchedEvents = response.data;
@@ -35,9 +35,9 @@ export default function Events() {
             setError('An error occurred while fetching events.');
             setIsLoading(false);
         }
-    };
+    }; */
 
-    const sortEventsByDate = (eventsArray) => {
+/*     const sortEventsByDate = (eventsArray) => {
         return eventsArray.sort((a, b) => {
             if (sortOrder === 'newToOld') {
                 return new Date(b.event_date) - new Date(a.event_date);
@@ -45,9 +45,9 @@ export default function Events() {
                 return new Date(a.event_date) - new Date(b.event_date);
             }
         });
-    };
+    }; */
 
-    const toggleSortByDate = () => {
+   /*  const toggleSortByDate = () => {
         setSortByDate(!sortByDate);
     };
 
@@ -56,8 +56,8 @@ export default function Events() {
     };
     const handlePageChange = (pageNumber) => {
         setCurrentPage(pageNumber);
-    };
-
+    }; */
+/* 
     const handleDeleteEvent = async (event_id) => {
         try {
             await axios.delete(`http://localhost:9090/university/events/${event_id}`);
@@ -67,8 +67,8 @@ export default function Events() {
             console.error('Error deleting event:', error);
             setError('An error occurred while deleting the event.');
         }
-    };
-    const handleEditEvent = async (event_id) =>{
+    }; */
+/*     const handleEditEvent = async (event_id) =>{
         try {
             await axios.put(`http://localhost:9090/university/events/${event_id}`);
             fetchEvents();
@@ -76,8 +76,8 @@ export default function Events() {
             console.error('Error editing event:', error);
             setError('An error occurred while editing the event.');
         }
-    }
-    const formatDateTime = (event_date, event_time) => {
+    } */
+/*     const formatDateTime = (event_date, event_time) => {
         if (!event_date  || !event_time) {
             return 'Date/Time Not Available';
         }
@@ -93,8 +93,8 @@ export default function Events() {
             hour12: true,
         });
         return `${formattedTime}, ${formattedDate}`;
-    };
-    const renderPaginationButtons = () => {
+    }; */
+/*     const renderPaginationButtons = () => {
         const totalPages = Math.ceil(events.length / eventsPerPage);
         const paginationButtons = [];
         for (let i = 1; i <= totalPages; i++) {
@@ -109,16 +109,16 @@ export default function Events() {
             );
         }
         return paginationButtons;
-    };
+    }; */
 
     // Logic to get current events to display
-    const indexOfLastEvent = currentPage * eventsPerPage;
+/*     const indexOfLastEvent = currentPage * eventsPerPage;
     const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
     const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
 
     // Change page
-    const paginate = (pageNumber) => setCurrentPage(pageNumber);
-
+    const paginate = (pageNumber) => setCurrentPage(pageNumber); */
+/* 
     const renderDeleteIcon = (event_id) => {
         return (
             <img
@@ -128,8 +128,8 @@ export default function Events() {
                 onClick={() => handleDeleteEvent(event_id)}
             />
         );
-    };
-     const renderEditIcon =(event_id) =>{
+    }; */
+/*      const renderEditIcon =(event_id) =>{
         return (
             <img 
             src={edit_icon}
@@ -138,8 +138,8 @@ export default function Events() {
             onClick={() => handleEditEvent(event_id)}
             />
         )
-     }  
-     const renderWatchIcon=(event_link_path)=>{
+     }   */
+/*      const renderWatchIcon=(event_link_path)=>{
             return(
                 <a href={event_link_path} target="_blank" rel="noreferrer">
                     <img src={watch}
@@ -148,8 +148,8 @@ export default function Events() {
                     />
                 </a>
             )
-     }
-        const renderLocationIcon=(event_place)=>{
+     } */
+/*         const renderLocationIcon=(event_place)=>{
             return(
                 event_place && event_place !== "N/A" ?
                 <div class="location-container">
@@ -157,8 +157,8 @@ export default function Events() {
                     <span>{event_place}</span>
                     </div>: null
             )
-        }
-             
+        } */
+/*              
     if (!isLoading && !error) {
           return (
         <div className="events-container">
@@ -172,9 +172,8 @@ export default function Events() {
             <button onClick={toggleSortByDate}>ترتيب حسب التاريخ</button>            
             <button onClick={toggleSortOrder}>
             {sortOrder === 'newToOld' ? 'الأحداث الجديدة إلى القديمة' : 'الأحداث القديمة إلى الجديدة'}
-            </button>
-            <table className="events-table">
-                <thead>
+            </button> */
+{/*                 <thead>
                     <tr>
                         <th>العنوان</th>
                         <th>الوصف</th>
@@ -184,23 +183,22 @@ export default function Events() {
                         <th>حذف</th>
                         <th>تعديل</th>
                     </tr>
-                </thead>
-                <tbody>
-                    {currentEvents.map(event => (
-                        <tr key={event.event_id}>
-                            <td>{event.event_address}</td>
-{/*                             <td>{event.description}</td>
- */}                        <td >مشاهدة اللقاء{renderWatchIcon(event.event_link_path)}</td>
+                </thead> */}
+{/*                 <tbody>
+                    {currentEvents.map(event => (                         
+                    <tr key={event.event_id}>
+                             <td>{event.event_address}</td>
+                              <td>{event.description}</td>
+                       <td >مشاهدة اللقاء{renderWatchIcon(event.event_link_path)}</td> 
                             <td>{formatDateTime(event.event_date, event.event_time)}</td>
-                            <td>{renderLocationIcon(event.event_place)}</td>
+                             <td>{renderLocationIcon(event.event_place)}</td>
                             <td>{renderDeleteIcon(event.event_id)}</td>
-                            <td>{renderEditIcon(event.event_id)}</td>
+                            <td>{renderEditIcon(event.event_id)}</td> 
                         </tr>
                     ))}
-                </tbody>
-            </table>
+                </tbody> */} 
 {/* Pagination */}
-{events.length > eventsPerPage && (
+{/* {events.length > eventsPerPage && (
     <div className="pagination">
         <button
             className="page-btn"
@@ -219,9 +217,6 @@ export default function Events() {
         <img src={arrow_right} alt="Right Arrow" className="arrow-icon" />
         </button>
     </div>
-)}
+)} */}
 
-        </div>
-    );
-}
-}
+

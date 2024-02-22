@@ -1,37 +1,22 @@
-import {createBrowserRouter } from "react-router-dom";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import React from "react";
 import Collages from "../pages/Collages";
 import SideBar from "../components/SideBar";
 import AddEvent from "../components/addEvent";
-import ShowEvents from "../components/showEvents";
+import Events from "../components/events";
+import LogIn from "../pages/LogIn";
 
-export const router =createBrowserRouter ([
-  {
-    path: "/",
-    element: <ShowEvents />,
-    children:[
-      {
-        path: "/logInTop",
-        element: <AddEvent />,
-      },
-      {
-        path: "/collages",
-        element: <Collages />,
-      },
-      {
-        path: "/sideBar",
-        element: <SideBar />,
-      },
-      {
-        path: "/addEvent",
-        element: <AddEvent />,
-      }
-      
-    ]
-  }
-
-  
-
-]
-
-)
+export const RouterComponent = () => {
+  return (
+    <Router>
+      <Routes>
+        <Route path="/" element={<Events />} />
+        <Route path="/logInTop" element={<LogIn />} />
+        <Route path="/collages" element={<Collages />} />
+        <Route path="/sideBar" element={<SideBar />} />
+        <Route path="/addEvent" element={<AddEvent />} />
+        <Route path="/showEvents" element={<Events />} />
+      </Routes>
+    </Router>
+  );
+};

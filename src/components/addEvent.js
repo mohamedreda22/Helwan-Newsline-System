@@ -1,10 +1,15 @@
-import React ,{ useState,useEffect } from "react";
+import React ,{ useState,useEffect,useRef } from "react";
 import axios from "axios";
 import '../styles/AddEvent.css';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
+import CalendarIcon from '../assets/icons/calendar.svg';
+import TimePicker from 'react-time-picker';
 import Simplert from 'react-simplert';
-
+import TimeIcon from '../assets/icons/time.svg';
+import 'react-time-picker/dist/TimePicker.css';
+import 'react-clock/dist/Clock.css';
+import Sidebar from "./SideBar"; 
 
 export default function AddEvent(){
     const [formData, setFormData] = useState({
@@ -25,11 +30,21 @@ export default function AddEvent(){
     const [eventDate, setEventDate] = useState(null);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const datePickerRef = useRef(null);
+    const [eventTime, setEventTime] = useState('12:00'); // Initial time
+    const timePickerRef = useRef(null);
+    
 
     const handleDateChange = (date) => {
         setEventDate(date);
+        console.log(date)
     };
 
+    const handleTimeChange =(newTime)=>{
+        setEventTime(newTime);
+        console.log(newTime)
+
+    }
 
     useEffect(() => {
         // Fetch categories from the server when the component mounts
@@ -55,7 +70,6 @@ export default function AddEvent(){
             return;
         }
         const formattedDate = eventDate ? formatDate(eventDate) : ''; // Check if eventDate is set
-
         setIsLoading(true);
         try {
             const response = await axios.post(
@@ -113,8 +127,19 @@ const formatDate = (date) => {
     
         reader.readAsDataURL(file);
     }; */
-    
 
+    const handleDateIconClick = () => {
+        // When the icon is clicked, focus on the DatePicker to open the calendar
+        if (datePickerRef.current) {
+          datePickerRef.current.setOpen(true);
+        }
+      };
+
+      const handleTimeIconClick =()=>{
+        if (timePickerRef.current) {
+            timePickerRef.current.setOpen(true);
+          
+      }}
 
     // Reset form
     const resetForm = () => {
@@ -137,6 +162,7 @@ const formatDate = (date) => {
 
     return(
         <div className="add-event-page">
+            <Sidebar />
             <h3>اهم الاحداث</h3>
             <div className="add-event-container">
                 <h1 className="header">إضافة حدث</h1>
@@ -166,7 +192,10 @@ const formatDate = (date) => {
                         >
                                 <option value="">اختر التصنيف</option>
                                 {categories.map(category => (
-                                    <option key={category.category_id} value={category.category_id}>{category.category_name}</option>
+                                    <option key={category.category_id} 
+                                    value={category.category_id}>
+                                        {category.category_name}
+                                        </option>
                                 ))}
                             </select>
 
@@ -175,7 +204,7 @@ const formatDate = (date) => {
                  
                     <div className="form-group">
                         <label className="lable" htmlFor="description">الوصف</label>
-                        <input
+                        <textarea
                             type="text"
                             id="description"
                             name="description"
@@ -211,23 +240,23 @@ const formatDate = (date) => {
                 <div className="form-row"> 
                     <div className="form-group">
                         <label className="lable" htmlFor="event_date">التاريخ</label>
-{/*                             <input
-                            type="date"
-                            id="event_date"
-                            name="event_date"
-                            value={formData.event_date}
-                            onChange={handleChange}
-                            className="form-control"
-                            /> */}
                            <DatePicker
+                            ref={datePickerRef}
                             selected={eventDate}
                             onChange={handleDateChange}
-                            dateFormat="dd-MM-yyyy"
+                            dateFormat="dd/MM/yyyy"
                             className="form-control"
                             name="event_date"
                             id="event_date"
-
+                            calendarClassName="calendar-container"
                             />
+                           <img 
+                           src={CalendarIcon} 
+                           alt="Calendar" 
+                           className="calendar-icon" 
+                           onClick={handleDateIconClick}
+                           />
+
                     </div>
                         <div className="form-group">
                         <label className="lable" htmlFor="event_time">الساعة</label>
@@ -240,6 +269,23 @@ const formatDate = (date) => {
                             className="form-control"
                             placeholder="HH:mm AM/PM"
                         />
+{/*                         <TimePicker
+                            id="event_time"
+                            value={eventTime}
+                            onChange={handleTimeChange}
+                            className="form-control"
+                            disableClock={true} 
+                            clearIcon={null} 
+                            ref={timePickerRef}
+                            autoFocus={true}
+                            format="h:mm a" // Set the format to 12-hour with AM/PM
+                            /> */}
+                         <img 
+                           src={TimeIcon} 
+                           alt="Time" 
+                           className="time-icon" 
+                           onClick={handleTimeIconClick}
+                           />
                         
                     </div>
                     </div> 
