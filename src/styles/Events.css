@@ -26,12 +26,12 @@
 }
 
 .page-btn:hover {
-    background-color: #434343;
+    background-color: #b2ea16;
     color: #ffffff;
 }
 
 .page-btn.active {
-    background-color: #434343;
+    background-color: #f80606;
     color: #ffffff;
 }
 
@@ -80,19 +80,16 @@ h2{
         transform: translateY(0);
     }
 }
-/* .add-event-btn{
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    background-color: #434343;
-    color: #ffffff;
-    cursor: pointer;
-    transition: background-color 0.3s, color 0.3s;
-    z-index: 999;
-} */
+.events-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 20px;
+    padding-right: 60px;
+    animation: events 0.8s ease-in-out forwards;
+}
 .total-events{
     text-align: left;
     padding-top: 20px;
@@ -102,8 +99,10 @@ h2{
     font-size: large;
     font-style: italic;
     font-weight: bold;
+    animation: events 0.8s ease-in-out forwards;
 }
 .total-events span{
     color: red;
     font-weight: bold;
+
 }

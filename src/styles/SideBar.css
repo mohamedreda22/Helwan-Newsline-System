@@ -2,31 +2,34 @@
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  width: 296px;
-  height: 100%; /* Set height to 100% to cover the entire height of the viewport */
+  width: 256px;
+  height: 100vh;
   padding: 15px;
   box-shadow: 4px 4px 15px rgba(0.25, 0, 0, 0.25);
   position: fixed;
   top: 0;
   right: 0;
+  z-index: 1000;
+  overflow-y: auto; /* Enable vertical scrolling */
+  scrollbar-width: none;
+
 }
 
 .side2 {
-  width: 366px; /* Adjust the width as needed */
-  height: 100%; /* Set height to 100% to cover the entire height of the viewport */
+  width: 326px;
   background: var(--White, #FFF);
-  flex-shrink: 0;
-  color: #000000; /* Example text color */
+  color: #000000;
 }
 
 .logo {
-  width: 100%; /* Set the width to 100% to fill the container */
-  height: auto; /* Let the height adjust proportionally based on the width */
-  max-width: 200px; /* Set a maximum width to prevent the logo from becoming too large */
-  margin: 20px auto; /* Center the logo horizontally with auto margins */
+  width: 100%;
+  height: auto;
+  max-width: 160px;
+  margin: 20px auto;
 }
-
 
 .menuItemWrapper {
   flex-grow: 1;
 }
+.sideBar::-webkit-scrollbar {
+  display: none;}

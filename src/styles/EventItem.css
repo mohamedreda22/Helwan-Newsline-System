@@ -4,14 +4,16 @@
     flex-direction: row;
     justify-content: space-between;
     padding: 10px;
-    border-bottom: 1px solid #000000; 
+    border-bottom: 1px solid #000000;
     padding-bottom: 12px;
+    margin-right: 200px;
 }
 
 .event-item-container .event-item-address,
 .event-item-container .event-item-description,
 .event-item-container .event-item-link {
     flex: 1;
+    min-width: 100px; 
     padding: 0 10px;
 }
 
@@ -24,6 +26,7 @@
 
 .event-item-container .event-item-link img {
     margin-right: 5px;
+
 }
 
 .event-item-container .location-icon,
@@ -32,18 +35,40 @@
     cursor: pointer;
     width: 25px;
     height: 25px;
+    margin-left: 30px;
 }
-.event-item-container .event-item-image{
+
+.event-item-container .event-item-image {
     width: 77px;
     height: 76px;
     border-radius: 10%;
     object-fit: cover;
 }
-.event-item-container .watch-icon{
-    width: 32px; 
+
+.event-item-container .watch-icon {
+    width: 32px;
     height: auto;
-    margin-top: 5px; 
+    margin-top: 5px;
     border: none;
 }
 
+.event-item-container .event-item-address {
+    font-family: Inder;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: right;
+}
 
+.event-item-container .event-item-description {
+    font-family: Inder;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: right;
+    color: #565555;
+    overflow: hidden;   
+
+}
