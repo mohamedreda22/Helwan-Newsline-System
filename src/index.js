@@ -3,11 +3,11 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 // import App from './App';
 import reportWebVitals from './reportWebVitals';
-import { RouterProvider } from 'react-router-dom';
-import {router} from './routes/Routes'
+// import { RouterProvider } from 'react-router-dom';
+// import {router} from './routes/Routes'
  import 'bootstrap/dist/css/bootstrap.min.css'
 
- 
+ import { RouterComponent } from './routes/Routes'; 
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
@@ -19,7 +19,10 @@ root.render(
   //   {/* <Footer/> */}
   //   <Message/>
   // </React.StrictMode>
-  <RouterProvider router={router}/>
+  <React.StrictMode>
+  <RouterComponent /> {/* Render your RouterComponent */}
+</React.StrictMode>,
+ 
 );
 
 // If you want to start measuring performance in your app, pass a function
