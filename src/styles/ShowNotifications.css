@@ -16,3 +16,6 @@
   background: #091160;
   color: white;
 }
+.delete-icon{
+  cursor: pointer;
+}

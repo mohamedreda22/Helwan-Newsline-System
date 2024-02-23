@@ -1,9 +1,10 @@
 import React from "react";
 import SideBar from "../components/SideBar";
-import AllNotifications from "../components/ShowNotifications";
+import ShowNotifications from "../components/ShowNotifications";
 import SearchBar from "../layouts/SearchBar";
 import "../styles/Notifications.css";
 import Button from "react-bootstrap/Button";
+import AddNotificationForm from "../components/AddNotificationForm";
 
 
 function Notifications() {
@@ -18,7 +19,8 @@ function Notifications() {
             <Button variant="link">الإيميلات</Button>
           </div>
           <div className="container-2">
-            <AllNotifications />
+            <AddNotificationForm />
+            <ShowNotifications />
           </div>
         </div>
         <div className="col-lg-2">
