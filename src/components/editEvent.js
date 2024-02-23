@@ -8,21 +8,23 @@ import TimePicker from 'react-time-picker';
 import Simplert from 'react-simplert';
 import TimeIcon from '../assets/icons/time.svg';
 import 'react-time-picker/dist/TimePicker.css';
-import { Dropdown } from "bootstrap";
 
 export default function EditEvent({ event, onSave, onCancel }) {
     const [formData, setFormData] = useState({
-        event_address: event.event_address || "",
-        category_id: event.category_id || "",
-        description: event.description || "",
-        source: event.source || "",
-        event_place: event.event_place || "",
-        event_date: event.event_date || "",
-        event_time: event.event_time || "",
-        event_broadcast: event.event_broadcast || "",
-        event_link_path: event.event_link_path || "",
-/*         event_image_path: event.event_image_path || "",
- */    });
+        event_address: event?.event_address || "",
+        category_id: event?.category_id || "",
+        event_place: event?.event_place || "",
+        event_date: event?.event_date || "",
+        event_time: event?.event_time || "",
+        event_broadcast: event?.event_broadcast || "",
+        event_link_path: event?.event_link_path || "",
+
+ /*                    event_address: "",
+                    category_id: "",
+                    event_place: "",
+                    event_broadcast: "",
+                    event_link_path: "", */
+     });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
@@ -33,8 +35,24 @@ export default function EditEvent({ event, onSave, onCancel }) {
     const timePickerRef = useRef(null);
 
     useEffect(() => {
-        setFormData({ ...formData, event_date: eventDate, event_time: eventTime });
+        setFormData({
+            ...formData,
+            event_address: event?.event_address || "",
+            category_id: event?.category_id || "",
+            event_place: event?.event_place || "",
+            event_broadcast: event?.event_broadcast || "",
+            event_link_path: event?.event_link_path || "",
+        });
+    }, [event]);
+
+    useEffect(() => {
+        setFormData((prevData) => ({
+            ...prevData,
+            event_date: eventDate,
+            event_time: eventTime,
+        }));
     }, [eventDate, eventTime]);
+
     useEffect(() => {
         fetchCategories();
     }, []);
@@ -48,12 +66,16 @@ export default function EditEvent({ event, onSave, onCancel }) {
         e.preventDefault();
         try {
             const updatedFormData = {
-                ...formData,
-                event_date: eventDate,
-                event_time: eventTime,
+                event_address: formData.event_address,
+                category_id: formData.category_id,
+                event_place: formData.event_place,
+                event_date: eventDate, 
+                event_time: eventTime, 
+                event_broadcast: formData.event_broadcast,
+                event_link_path: formData.event_link_path,
                 
             };
-            await axios.put(`http://localhost:9090/university/events/${event.event_id}`, updatedFormData);
+            await axios.put(`http://localhost:9091/university/events/${event.event_id}`, updatedFormData);
             setShowSuccessAlert(true);
             onSave();
         } catch (error) {
@@ -81,7 +103,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
       }}
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:9090/university/categories');
+            const response = await axios.get('http://localhost:9091/university/categories');
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -155,7 +177,6 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         value={formData.event_place}
                         onChange={handleChange}
                         className="form-control"
-                        required
                     />
                 </div></div>
                 <div className="form-row">
@@ -233,8 +254,9 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         className="form-control"
                     /> */}
                 </div>
+                
 
-                <button type="submit" className="btn-submit" onClick={onSave} style={{width:"30%"}}>
+                <button type="submit" className="btn-submit" style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
                 <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>

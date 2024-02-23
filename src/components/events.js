@@ -22,9 +22,16 @@ export default function Events() {
         fetchEvents();
     }, []);
 
+    useEffect(() => {
+        if (isEditing && eventIdToEdit) {
+            const eventToEdit = events.find(event => event.event_id === eventIdToEdit);
+            setEditedEvent(eventToEdit);
+        }
+    }, [isEditing, eventIdToEdit, events]);
+
     const fetchEvents = async () => {
         try {
-            const response = await axios.get('http://localhost:9090/university/events');
+            const response = await axios.get('http://localhost:9091/university/events');
             setEvents(response.data);
             setIsLoading(false);
         } catch (error) {
@@ -36,7 +43,7 @@ export default function Events() {
 
     const handleDeleteEvent = async (eventId) => {
         try {
-            await axios.delete(`http://localhost:9090/university/events/${eventId}`);
+            await axios.delete(`http://localhost:9091/university/events/${eventId}`);
             fetchEvents();
         } catch (error) {
             console.error('Error deleting event:', error);
@@ -47,8 +54,6 @@ export default function Events() {
     const handleEditEvent = (eventId) => {
         setIsEditing(true);
         setEventIdToEdit(eventId);
-        const eventToEdit = events.find(event => event.event_id === eventId);
-        setEditedEvent(eventToEdit); 
         };
 
     const handleCancelEdit = () => {
@@ -96,7 +101,7 @@ export default function Events() {
                 event_address: editedEvent.event_address
             };
     
-            await axios.put(`http://localhost:9090/university/events/${editedEvent.event_id}`, updatedEvent);
+            await axios.put(`http://localhost:9091/university/events/${editedEvent.event_id}`, updatedEvent);
             fetchEvents();
             handleCancelEdit(); 
         } catch (error) {
@@ -109,7 +114,7 @@ export default function Events() {
     if (!isLoading && !error) {
         return (
             <div className="events-page">
-                <SideBar /> {/* Render the Sidebar component */}
+                <SideBar />
                 <div className="events-container">
                     <h2>جميع الاحداث</h2>
                     {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
@@ -152,12 +157,11 @@ export default function Events() {
                     )}
                 </div>
 
-                {isEditing && eventIdToEdit &&(
+                {isEditing && eventIdToEdit && editedEvent && (
                     <EditEvent
-                        event={events.find(event => event.event_id === eventIdToEdit)}
+                        event={editedEvent}
                         onSave={handleSave}
                         onCancel={handleCancelEdit}
-                        editedEvent={editedEvent}
                         />
                 )}
             </div>

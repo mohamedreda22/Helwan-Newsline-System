@@ -40,20 +40,23 @@ export default function AddEvent(){
         console.log(date)
     };
 
-    const handleTimeChange =(newTime)=>{
-        setEventTime(newTime);
-        console.log(newTime)
+    const handleTimeChange =(time)=>{
+        setEventTime(time);
+        setFormData({
+            ...formData,
+            event_time: time, // Update event_time in formData
+        });
+        console.log(time)
 
     }
 
     useEffect(() => {
-        // Fetch categories from the server when the component mounts
         fetchCategories();
     }, []);
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:9090/university/categories');
+            const response = await axios.get('http://localhost:9091/university/categories');
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -73,7 +76,7 @@ export default function AddEvent(){
         setIsLoading(true);
         try {
             const response = await axios.post(
-                'http://localhost:9090/university/events',
+                'http://localhost:9091/university/events',
                 {...formData, event_date: formattedDate}
                 );
             console.log('Response:', response);
@@ -146,14 +149,14 @@ const formatDate = (date) => {
         setFormData({
             event_address: "",
             category_id: "", 
-            description: "",
-            source: "", 
+            //description: "",
+            //source: "", 
             event_place: "", 
             event_date: "",
             event_time: "",
             event_broadcast: "", 
             event_link_path: "", 
-            event_image_path: "", 
+            // event_image_path: "", 
         });
         setError('');
         setEventDate(null);
@@ -269,17 +272,18 @@ const formatDate = (date) => {
                             className="form-control"
                             placeholder="HH:mm AM/PM"
                         />
-{/*                         <TimePicker
+{/*                          <TimePicker
                             id="event_time"
+                            name="event_time"
                             value={eventTime}
                             onChange={handleTimeChange}
                             className="form-control"
-                            disableClock={true} 
+                            //disableClock={true} 
                             clearIcon={null} 
-                            ref={timePickerRef}
-                            autoFocus={true}
-                            format="h:mm a" // Set the format to 12-hour with AM/PM
-                            /> */}
+                            clockIcon={null}
+                            //ref={timePickerRef}
+                            format="hh:mm a" 
+                            />  */}
                          <img 
                            src={TimeIcon} 
                            alt="Time" 
