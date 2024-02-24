@@ -1,13 +1,14 @@
-import React, { useState, useEffect,useRef } from "react";
+// Import statements remain unchanged
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import '../styles/EditEvent.css';
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
-import CalendarIcon from '../assets/icons/calendar.svg';
-import TimePicker from 'react-time-picker';
-import Simplert from 'react-simplert';
-import TimeIcon from '../assets/icons/time.svg';
-import 'react-time-picker/dist/TimePicker.css';
+import "react-datepicker/dist/react-datepicker.css";
+import TimePicker from "react-time-picker";
+import "../styles/EditEvent.css";
+import TimeIcon from '../assets/icons/time.svg'
+import CalendarIcon from '../assets/icons/calendar.svg'
+import Simplert from 'react-simplert'
+
 
 export default function EditEvent({ event, onSave, onCancel }) {
     const [formData, setFormData] = useState({
@@ -18,18 +19,12 @@ export default function EditEvent({ event, onSave, onCancel }) {
         event_time: event?.event_time || "",
         event_broadcast: event?.event_broadcast || "",
         event_link_path: event?.event_link_path || "",
-
- /*                    event_address: "",
-                    category_id: "",
-                    event_place: "",
-                    event_broadcast: "",
-                    event_link_path: "", */
-     });
+    });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
-    const [eventDate, setEventDate] = useState(new Date(event.event_date));
-    const [eventTime, setEventTime] = useState(event.event_time);
+    const [eventDate, setEventDate] = useState(event.event_date || new Date());
+    const [eventTime, setEventTime] = useState(event.event_time || "12:00 AM");
     const [categories, setCategories] = useState([]);
     const datePickerRef = useRef(null);
     const timePickerRef = useRef(null);
@@ -56,28 +51,26 @@ export default function EditEvent({ event, onSave, onCancel }) {
     useEffect(() => {
         fetchCategories();
     }, []);
-    
 
     const handleDateChange = (date) => {
-        setEventDate(date);
+        setFormData({ ...formData, event_date: date });
+    };
+
+    const handleTimeChange = (time) => {
+        setFormData({ ...formData, event_time: time });
+    };
+
+    const handleInputChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({ ...formData, [name]: value });
     };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         try {
-            const updatedFormData = {
-                event_address: formData.event_address,
-                category_id: formData.category_id,
-                event_place: formData.event_place,
-                event_date: eventDate, 
-                event_time: eventTime, 
-                event_broadcast: formData.event_broadcast,
-                event_link_path: formData.event_link_path,
-                
-            };
-            await axios.put(`http://localhost:9091/university/events/${event.event_id}`, updatedFormData);
+            await axios.put(`http://localhost:9090/university/events/${event.event_id}`, formData);
             setShowSuccessAlert(true);
-            onSave();
+            onSave(formData);
         } catch (error) {
             console.error('Error updating event:', error);
             setShowErrorAlert(true);
@@ -90,30 +83,29 @@ export default function EditEvent({ event, onSave, onCancel }) {
     };
 
     const handleDateIconClick = () => {
-        // When the icon is clicked, focus on the DatePicker to open the calendar
         if (datePickerRef.current) {
-          datePickerRef.current.setOpen(true);
+            datePickerRef.current.setOpen(true);
         }
-      };
+    };
 
-      const handleTimeIconClick =()=>{
+    const handleTimeIconClick = () => {
         if (timePickerRef.current) {
             timePickerRef.current.setOpen(true);
-          
-      }}
+        }
+    };
+
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:9091/university/categories');
+            const response = await axios.get('http://localhost:9090/university/categories');
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
-            
         }
     };
 
     return (
         <div className="add-event-container">
-            <h1 className="header">تعديل الحدث</h1>
+            <h2>تعديل اللقاء</h2>
             <form onSubmit={handleSubmit}>
             <div className="form-row">
                 <div className="form-group">
@@ -123,7 +115,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         id="event_address"
                         name="event_address"
                         value={formData.event_address}
-                        onChange={handleChange}
+                        onChange={handleInputChange}
                         className="form-control"
                         required
                     />
@@ -204,7 +196,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                             id="event_time"
                             name="event_time"
                             value={formData.event_time}
-                            onChange={handleChange}
+                            onChange={handleTimeChange}
                             className="form-control"
                             placeholder="HH:mm AM/PM"
                         />
@@ -263,24 +255,26 @@ export default function EditEvent({ event, onSave, onCancel }) {
                     إلغاء
                 </button>
 
-            </form>
-
+            </form>    
             <Simplert
                 showSimplert={showErrorAlert}
                 type="error"
                 title="Failed"
-                message="An error occurred. Please try again later."
+                message="حدث خطأ ما يرجي اعادة المحاولة"
                 onClose={() => setShowErrorAlert(false)}
-                customClass="custom-error-alert" 
+                customCloseBtnText= 'اغلاق'
+
             />
             <Simplert
                 showSimplert={showSuccessAlert}
                 type="success"
                 title="Success"
-                message="Event updated successfully."
+                message="تم التعديل بنجاح"
                 onClose={() => setShowSuccessAlert(false)}
-                customClass="custom-success-alert" 
+                customCloseBtnText= 'تم '
+
             />
+
         </div>
     );
 }

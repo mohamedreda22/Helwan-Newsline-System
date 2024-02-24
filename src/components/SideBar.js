@@ -51,7 +51,7 @@ export default function SideBar  ()  {
                     <Nav.Link href="#Post" className='active'>
                         <span className="material-icons-outlined">assistant</span> منشور
                     </Nav.Link>
-                    <Nav.Link href="#faq" className='active'>
+                    <Nav.Link href="faq" className='active'>
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
                     {[...Array(2)].map((_, index) => <MenuItem key={index}></MenuItem>)}

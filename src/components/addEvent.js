@@ -4,7 +4,7 @@ import '../styles/AddEvent.css';
 import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import CalendarIcon from '../assets/icons/calendar.svg';
-import TimePicker from 'react-time-picker';
+//import TimePicker from 'react-time-picker';
 import Simplert from 'react-simplert';
 import TimeIcon from '../assets/icons/time.svg';
 import 'react-time-picker/dist/TimePicker.css';
@@ -56,7 +56,7 @@ export default function AddEvent(){
 
     const fetchCategories = async () => {
         try {
-            const response = await axios.get('http://localhost:9091/university/categories');
+            const response = await axios.get('http://localhost:9090/university/categories');
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
@@ -76,7 +76,7 @@ export default function AddEvent(){
         setIsLoading(true);
         try {
             const response = await axios.post(
-                'http://localhost:9091/university/events',
+                'http://localhost:9090/university/events',
                 {...formData, event_date: formattedDate}
                 );
             console.log('Response:', response);
@@ -341,22 +341,23 @@ const formatDate = (date) => {
 
                     {error && <div className="error">{error}</div>}
 
-                <Simplert
+                 <Simplert
                 showSimplert={showErrorAlert}
                 type="error"
                 title="Failed"
-                message="An error occurred. Please try again later."
+                message="حدث خطأ ما يرجي اعادة المحاولة"
                 onClose={() => setShowErrorAlert(false)}
-                customClass="custom-error-alert" 
+                customCloseBtnText= 'اغلاق'
 
             />
-            <Simplert
+                 <Simplert
                 showSimplert={showSuccessAlert}
                 type="success"
                 title="Success"
-                message="Event added successfully."
+                message="تمت الاضافة بنجاح"
                 onClose={() => setShowSuccessAlert(false)}
-                customClass="custom-success-alert" 
+                customCloseBtnText= 'تم '
+
             />
             </form>
 

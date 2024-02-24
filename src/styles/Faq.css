@@ -1,0 +1,53 @@
+/* Faq.css */
+
+/* Styles for the FAQ page container */
+.faq-page {
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 20px;
+    padding-right: 100px;    
+}
+
+
+/* Styles for the main content */
+.faq-content {
+    max-width: 800px;
+    width: 100%;
+    margin-right: 20px;
+    box-sizing: border-box;
+    
+}
+
+/* Styles for the FAQ items container */
+.faq-container {
+    margin-top: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    box-sizing: border-box;
+
+}
+
+/* Styles for individual FAQ items */
+.faq-item {
+    margin-bottom: 20px;
+
+}
+
+/* Styles for FAQ item headings */
+.faq-item h3 {
+    font-size: 1.2rem;
+    font-weight: bold;
+    color: #333; /* Adjust the color as per your design */
+    margin-bottom: 10px;
+
+}
+
+/* Styles for FAQ item paragraphs */
+.faq-item p {
+    font-size: 1rem;
+    color: #666; /* Adjust the color as per your design */
+    
+}

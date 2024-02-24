@@ -1,3 +1,5 @@
+// Your improved Events component
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EventItem from "./eventItem";
@@ -7,7 +9,7 @@ import arrow_left from "../assets/icons/arrow_circle_left.svg";
 import arrow_right from "../assets/icons/arrow_circle_right.svg";
 import SideBar from "./SideBar";
 
-export default function Events() {
+function Events() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
@@ -31,7 +33,7 @@ export default function Events() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:9091/university/events");
+      const response = await axios.get("http://localhost:9090/university/events");
       setEvents(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -43,7 +45,7 @@ export default function Events() {
 
   const handleDeleteEvent = async (eventId) => {
     try {
-      await axios.delete(`http://localhost:9091/university/events/${eventId}`);
+      await axios.delete(`http://localhost:9090/university/events/${eventId}`);
       fetchEvents();
     } catch (error) {
       console.error("Error deleting event:", error);
@@ -101,7 +103,7 @@ export default function Events() {
         event_address: editedEvent.event_address,
       };
 
-      await axios.put(`http://localhost:9091/university/events/${editedEvent.event_id}`, updatedEvent);
+      await axios.put(`http://localhost:9090/university/events/${editedEvent.event_id}`, updatedEvent);
       fetchEvents();
       handleCancelEdit();
     } catch (error) {
@@ -109,47 +111,53 @@ export default function Events() {
     }
   };
 
-  if (!isLoading && !error) {
-    return (
-      <div className="events-page" >
-        <SideBar />
-          <h2>جميع الاحداث</h2>
-          {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
-          {error && <p>{error}</p>}
-          <div className="total-events">
-            عدد الاحداث : <span>{events.length}</span>
+  return (
+    <div className="events-page">
+      <SideBar />
+      <h2>جميع الاحداث</h2>
+      {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
+      {error && <p>{error}</p>}
+      <div className="total-events">
+        عدد الاحداث : <span>{events.length}</span>
+      </div>
+      <div className="events-container">
+        <table id="events-table" className="events-table">
+          <tbody>
+            {currentEvents.map((event) => (
+              <EventItem
+                key={event.event_id}
+                event={event}
+                onDelete={handleDeleteEvent}
+                onEdit={handleEditEvent}
+              />
+            ))}
+          </tbody>
+        </table>
+        {events.length > eventsPerPage && (
+          <div className="pagination">
+            <button
+              className="page-btn"
+              onClick={() => paginate(currentPage - 1)}
+              disabled={currentPage === 1}
+            >
+              <img src={arrow_left} alt="Left Arrow" className="arrow-icon" />
+            </button>
+            {renderPaginationButtons()}
+            <button
+              className="page-btn"
+              onClick={() => paginate(currentPage + 1)}
+              disabled={currentPage === Math.ceil(events.length / eventsPerPage)}
+            >
+              <img src={arrow_right} alt="Right Arrow" className="arrow-icon" />
+            </button>
           </div>
-        <div className="events-container">
-
-          <table id="events-table" className="events-table" >
-            <tbody>
-              {currentEvents.map((event) => (
-                <EventItem key={event.event_id} event={event} onDelete={handleDeleteEvent} onEdit={handleEditEvent} />
-              ))}
-            </tbody>
-          </table>
-
-          {events.length > eventsPerPage && (
-            <div className="pagination">
-              <button className="page-btn" onClick={() => paginate(currentPage - 1)} disabled={currentPage === 1}>
-                <img src={arrow_left} alt="Left Arrow" className="arrow-icon" />
-              </button>
-              {renderPaginationButtons()}
-              <button
-                className="page-btn"
-                onClick={() => paginate(currentPage + 1)}
-                disabled={currentPage === Math.ceil(events.length / eventsPerPage)}
-              >
-                <img src={arrow_right} alt="Right Arrow" className="arrow-icon" />
-              </button>
-            </div>
-          )}
-        </div>
-
-        {isEditing && eventIdToEdit && editedEvent && (
-          <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
         )}
       </div>
-    );
-  }
+      {isEditing && eventIdToEdit && editedEvent && (
+        <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
+      )}
+    </div>
+  );
 }
+
+export default Events;
