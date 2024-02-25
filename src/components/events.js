@@ -1,5 +1,3 @@
-// Your improved Events component
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import EventItem from "./eventItem";
@@ -97,10 +95,11 @@ function Events() {
         event_id: editedEvent.event_id,
         category_id: editedEvent.category_id,
         event_place: editedEvent.event_place,
-        event_time: editedEvent.event_time,
         event_date: editedEvent.event_date,
         event_link_path: editedEvent.event_link_path,
         event_address: editedEvent.event_address,
+        description: editedEvent.description,
+        event_image_path: editedEvent.event_image_path,
       };
 
       await axios.put(`http://localhost:9090/university/events/${editedEvent.event_id}`, updatedEvent);
@@ -129,6 +128,7 @@ function Events() {
                 event={event}
                 onDelete={handleDeleteEvent}
                 onEdit={handleEditEvent}
+                //img={event.event_image_path}
               />
             ))}
           </tbody>

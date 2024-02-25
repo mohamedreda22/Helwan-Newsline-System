@@ -29,6 +29,7 @@ export default function AddEvent() {
     const [eventDate, setEventDate] = useState(null);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
+    const [eventImagePath, setEventImagePath] = useState(null);
 
 
     useEffect(() => {
@@ -45,14 +46,12 @@ export default function AddEvent() {
     };
 
     const handleSubmit = async (e) => {
-                console.log(formData)                
                 e.preventDefault()
-                console.log(formData)
 
 
 
-        if (!formData.event_address || !formData.category_id) {
-            setError('برجاء ملئ كل البيانات');
+           if (!formData.event_address || !formData.category_id  || !formData.event_place) {
+                  setError('برجاء ملئ كل البيانات');
             return;
         }
 
@@ -61,7 +60,7 @@ export default function AddEvent() {
         try {
             const response = await axios.post(
                 'http://localhost:9090/university/events',formData
-                
+
             );
 
             if (response && response.status === 200) {
@@ -112,6 +111,34 @@ export default function AddEvent() {
         });
         console.log(date)
     };
+
+/*     const handleFileChange = (e, data) => {
+        const file = e ? e.target.files[0] : null;
+        const reader = new FileReader();
+        
+        if (file) {
+            reader.onloadend = () => {
+                setEventImagePath(reader.result);
+                if (data) {
+                    data(reader.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else if (data) {
+            data(null);
+        }
+    };
+
+            const handleCombinedFileChange = (e) => {
+                handleFileChange(e, (imageData) => {
+                    setFormData({
+                        ...formData,
+                        event_image_path: imageData,
+                    });
+                });
+            }; */
+
+
 
     return (
         <div className="add-event-page">
@@ -232,18 +259,21 @@ export default function AddEvent() {
                     </div>
                     </div>
                     <div className="form-group">
+{/*                     <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
+                    <br/>
+                    <input 
+                     className="form-control"
+                     type="file" 
+                     id='event_image_path' 
+                     name="event_image_path"
+                     onChange={handleCombinedFileChange}
+                     required /> */}
+                
                         <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
                               <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
                                 </span>
-{/*                         <input
-                            type="file"
-                            id="event_image_path"
-                            name="event_image_path"
-                            value={formData.event_image_path}
-                            onChange={(e) => handleFileChange(e)}
-                            className="form-control"
-                        /> */}
+
                     </div>
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
