@@ -1,28 +1,31 @@
-import React ,{ useState,useEffect,useRef } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import '../styles/AddEvent.css';
-import "react-datepicker/dist/react-datepicker.css";
 import DatePicker from "react-datepicker";
 import CalendarIcon from '../assets/icons/calendar.svg';
-//import TimePicker from 'react-time-picker';
 import Simplert from 'react-simplert';
 import TimeIcon from '../assets/icons/time.svg';
-import 'react-time-picker/dist/TimePicker.css';
-import 'react-clock/dist/Clock.css';
-import Sidebar from "./SideBar"; 
+import Sidebar from "./SideBar";
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { DateTime } from 'luxon';
+import TextField from '@mui/material/TextField';
+import '../styles/AddEvent.css';
 
-export default function AddEvent(){
+
+
+export default function AddEvent() {
     const [formData, setFormData] = useState({
         event_address: "",
-        category_id: "", 
-        description: "",
-        source: "", 
-        event_place: "", 
-        event_date: "",
-        event_time: "",
-        event_broadcast: "", 
-        event_link_path: "", 
-        event_image_path: "", 
+        category_id: "",
+       // description: "",
+       // source: "",
+        event_place: "",
+        event_date: DateTime.fromISO(null, { zone: 'Africa/Cairo' }),
+        //event_time: "",
+        //event_broadcast: "",
+        //event_link_path: "",
+       // event_image_path: "",
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -30,25 +33,7 @@ export default function AddEvent(){
     const [eventDate, setEventDate] = useState(null);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
-    const datePickerRef = useRef(null);
-    const [eventTime, setEventTime] = useState('12:00'); // Initial time
-    const timePickerRef = useRef(null);
-    
 
-    const handleDateChange = (date) => {
-        setEventDate(date);
-        console.log(date)
-    };
-
-    const handleTimeChange =(time)=>{
-        setEventTime(time);
-        setFormData({
-            ...formData,
-            event_time: time, // Update event_time in formData
-        });
-        console.log(time)
-
-    }
 
     useEffect(() => {
         fetchCategories();
@@ -60,35 +45,40 @@ export default function AddEvent(){
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
-            
         }
     };
 
-    // Submit form handler
     const handleSubmit = async (e) => {
-        e.preventDefault();
+                console.log(formData)                
+                e.preventDefault()
+                //formData.event_date = formData.event_date.toISO();
+                console.log(formData)
 
-        if (!formData.event_address || !formData.category_id ) {
+
+
+        if (!formData.event_address || !formData.category_id) {
             setError('برجاء ملئ كل البيانات');
             return;
         }
-        const formattedDate = eventDate ? formatDate(eventDate) : ''; // Check if eventDate is set
+        // Converting the event_date from string to Date object
+        // formData.event_date = new Date(formData.event_date);
+        // formData.event_date = formData.event_date.toISOString();
+
         setIsLoading(true);
+
         try {
             const response = await axios.post(
-                'http://localhost:9090/university/events',
-                {...formData, event_date: formattedDate}
-                );
-            console.log('Response:', response);
+                'http://localhost:9090/university/events',formData
+                
+            );
+
             if (response && response.status === 200) {
-                console.log('Form data submitted:', response.data);
                 setShowSuccessAlert(true);
                 resetForm();
-            } else {
-                alert('فشل إضافة الحدث');
-                console.log('Response data:', response.data);
-                setShowErrorAlert(true);
+                console.log(formData)
 
+            } else {
+                setShowErrorAlert(true);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -98,79 +88,49 @@ export default function AddEvent(){
             setIsLoading(false);
         }
     };
-    // Function to format date as dd-MM-yyyy
-const formatDate = (date) => {
-    const day = date.getDate().toString().padStart(2, '0');
-    const month = (date.getMonth() + 1).toString().padStart(2, '0');
-    const year = date.getFullYear();
-    return `${day}-${month}-${year}`;
-};
-    // Handle form input changes
+
+    const resetForm = () => {
+        setFormData({
+            event_address: "",
+            category_id: "",
+            //description: "",
+           // source: "",
+            event_place: "",
+            event_date: null,
+            ///event_time: "",
+            //event_broadcast: "",
+            //event_link_path: "",
+            //event_image_path: "",
+        });
+        setError('');
+        setEventDate(null);
+    };
+
     const handleChange = (e) => {
         const { name, value } = e.target;
-        
         setFormData({
             ...formData,
             [name]: value,
         });
     };
-  /*   const handleFileChange = (e) => {
-        const file = e.target.files[0]; // Get the first file from the input
-    
-        const reader = new FileReader();
-    
-        reader.onloadend = () => {
-            const base64String = reader.result;
-            
-            setFormData({
-                ...formData,
-                event_image_path: base64String,
-            });
-        };
-    
-        reader.readAsDataURL(file);
-    }; */
 
-    const handleDateIconClick = () => {
-        // When the icon is clicked, focus on the DatePicker to open the calendar
-        if (datePickerRef.current) {
-          datePickerRef.current.setOpen(true);
-        }
-      };
-
-      const handleTimeIconClick =()=>{
-        if (timePickerRef.current) {
-            timePickerRef.current.setOpen(true);
-          
-      }}
-
-    // Reset form
-    const resetForm = () => {
+    const handleStartDateChange = (date) => {
         setFormData({
-            event_address: "",
-            category_id: "", 
-            //description: "",
-            //source: "", 
-            event_place: "", 
-            event_date: "",
-            event_time: "",
-            event_broadcast: "", 
-            event_link_path: "", 
-            // event_image_path: "", 
+            ...formData,
+            event_date: date,
         });
-        setError('');
-        setEventDate(null);
+        console.log(date)
     };
-        //base64 for images or videos
 
-    return(
+    return (
         <div className="add-event-page">
             <Sidebar />
             <h3>اهم الاحداث</h3>
             <div className="add-event-container">
                 <h1 className="header">إضافة حدث</h1>
                 <form onSubmit={handleSubmit}>
-                <div className="form-row">
+                    {/* Your form inputs */}
+                    <div className="form-row">
                         <div className="form-group">
                         <label className="lable" htmlFor="event_address">العنوان</label>
                         <input
@@ -204,7 +164,6 @@ const formatDate = (date) => {
 
                     </div> 
                     </div>
-                 
                     <div className="form-group">
                         <label className="lable" htmlFor="description">الوصف</label>
                         <textarea
@@ -240,28 +199,27 @@ const formatDate = (date) => {
                         />
                         </div>
                      </div>
-                <div className="form-row"> 
+                    {/*  <div className="form-row"> 
                     <div className="form-group">
                         <label className="lable" htmlFor="event_date">التاريخ</label>
-                           <DatePicker
+                        <DatePicker
                             ref={datePickerRef}
-                            selected={eventDate}
+                            selected={formData.event_date}
                             onChange={handleDateChange}
                             dateFormat="dd/MM/yyyy"
                             className="form-control"
                             name="event_date"
                             id="event_date"
                             calendarClassName="calendar-container"
-                            />
-                           <img 
-                           src={CalendarIcon} 
-                           alt="Calendar" 
-                           className="calendar-icon" 
-                           onClick={handleDateIconClick}
-                           />
-
+                        />
+                        <img
+                            src={CalendarIcon}
+                            alt="Calendar"
+                            className="calendar-icon"
+                            onClick={handleDateIconClick}
+                        />
                     </div>
-                        <div className="form-group">
+                    <div className="form-group">
                         <label className="lable" htmlFor="event_time">الساعة</label>
                         <input
                             type="text"
@@ -272,27 +230,27 @@ const formatDate = (date) => {
                             className="form-control"
                             placeholder="HH:mm AM/PM"
                         />
-{/*                          <TimePicker
-                            id="event_time"
-                            name="event_time"
-                            value={eventTime}
-                            onChange={handleTimeChange}
-                            className="form-control"
-                            //disableClock={true} 
-                            clearIcon={null} 
-                            clockIcon={null}
-                            //ref={timePickerRef}
-                            format="hh:mm a" 
-                            />  */}
-                         <img 
-                           src={TimeIcon} 
-                           alt="Time" 
-                           className="time-icon" 
-                           onClick={handleTimeIconClick}
-                           />
-                        
+                        <img
+                            src={TimeIcon}
+                            alt="Time"
+                            className="time-icon"
+                            onClick={handleTimeIconClick}
+                        />
                     </div>
-                    </div> 
+                    </div> */}
+                    <LocalizationProvider dateAdapter={AdapterLuxon}>
+                        <div className="form-group" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                            <DateTimePicker
+                                label="اختر الوقت والتاريخ "
+                                value={formData.event_date}
+                                onChange={handleStartDateChange}
+                                textField={(params) => <TextField {...params} />}
+                                disablePast
+                                timeZone="Africa/Cairo"
+                            />
+                        </div>
+                    </LocalizationProvider>
+                    {/* Your remaining form inputs */}
                     <div className="form-row">
                     <div className="form-group">
                         <label className="lable" htmlFor="event_broadcast">سيتم بثه؟</label>
@@ -338,31 +296,25 @@ const formatDate = (date) => {
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
-
                     {error && <div className="error">{error}</div>}
-
-                 <Simplert
-                showSimplert={showErrorAlert}
-                type="error"
-                title="Failed"
-                message="حدث خطأ ما يرجي اعادة المحاولة"
-                onClose={() => setShowErrorAlert(false)}
-                customCloseBtnText= 'اغلاق'
-
-            />
-                 <Simplert
-                showSimplert={showSuccessAlert}
-                type="success"
-                title="Success"
-                message="تمت الاضافة بنجاح"
-                onClose={() => setShowSuccessAlert(false)}
-                customCloseBtnText= 'تم '
-
-            />
-            </form>
-
+                    <Simplert
+                        showSimplert={showErrorAlert}
+                        type="error"
+                        title="Failed"
+                        message="حدث خطأ ما يرجي اعادة المحاولة"
+                        onClose={() => setShowErrorAlert(false)}
+                        customCloseBtnText='اغلاق'
+                    />
+                    <Simplert
+                        showSimplert={showSuccessAlert}
+                        type="success"
+                        title="Success"
+                        message="تمت الاضافة بنجاح"
+                        onClose={() => setShowSuccessAlert(false)}
+                        customCloseBtnText='تم '
+                    />
+                </form>
             </div>
-
         </div>
-    )
+    );
 }

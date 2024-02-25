@@ -1,21 +1,20 @@
-// Import statements remain unchanged
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
-import TimePicker from "react-time-picker";
 import "../styles/EditEvent.css";
-import TimeIcon from '../assets/icons/time.svg'
-import CalendarIcon from '../assets/icons/calendar.svg'
 import Simplert from 'react-simplert'
-
+import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
+import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
+import { DateTime } from 'luxon';
+import TextField from '@mui/material/TextField';
 
 export default function EditEvent({ event, onSave, onCancel }) {
     const [formData, setFormData] = useState({
         event_address: event?.event_address || "",
         category_id: event?.category_id || "",
         event_place: event?.event_place || "",
-        event_date: event?.event_date || "",
+        event_date: event ? DateTime.fromISO(event.event_date, { zone: 'Africa/Cairo' }) : null,
         event_time: event?.event_time || "",
         event_broadcast: event?.event_broadcast || "",
         event_link_path: event?.event_link_path || "",
@@ -23,11 +22,16 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
-    const [eventDate, setEventDate] = useState(event.event_date || new Date());
-    const [eventTime, setEventTime] = useState(event.event_time || "12:00 AM");
     const [categories, setCategories] = useState([]);
-    const datePickerRef = useRef(null);
-    const timePickerRef = useRef(null);
+
+
+    const handleStartDateChange = (date) => {
+        setFormData({
+            ...formData,
+            event_date: date,
+        });
+        console.log(date)
+    };
 
     useEffect(() => {
         setFormData({
@@ -37,28 +41,13 @@ export default function EditEvent({ event, onSave, onCancel }) {
             event_place: event?.event_place || "",
             event_broadcast: event?.event_broadcast || "",
             event_link_path: event?.event_link_path || "",
+
         });
     }, [event]);
 
     useEffect(() => {
-        setFormData((prevData) => ({
-            ...prevData,
-            event_date: eventDate,
-            event_time: eventTime,
-        }));
-    }, [eventDate, eventTime]);
-
-    useEffect(() => {
         fetchCategories();
     }, []);
-
-    const handleDateChange = (date) => {
-        setFormData({ ...formData, event_date: date });
-    };
-
-    const handleTimeChange = (time) => {
-        setFormData({ ...formData, event_time: time });
-    };
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -67,10 +56,20 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.event_address || !formData.category_id) {
+            setShowErrorAlert(true);
+            return;
+        }
+
         try {
-            await axios.put(`http://localhost:9090/university/events/${event.event_id}`, formData);
+            const response = await axios.put(`http://localhost:9090/university/events/${event.event_id}`, formData);
+            if (response.status === 200) {
+
             setShowSuccessAlert(true);
-            onSave(formData);
+            onSave(formData);}
+            else{
+                setShowErrorAlert(true);
+            }
         } catch (error) {
             console.error('Error updating event:', error);
             setShowErrorAlert(true);
@@ -79,19 +78,10 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setFormData({ ...formData, [name]: value });
-    };
-
-    const handleDateIconClick = () => {
-        if (datePickerRef.current) {
-            datePickerRef.current.setOpen(true);
-        }
-    };
-
-    const handleTimeIconClick = () => {
-        if (timePickerRef.current) {
-            timePickerRef.current.setOpen(true);
-        }
+        setFormData({
+            ...formData,
+            [name]: value,
+        });
     };
 
     const fetchCategories = async () => {
@@ -104,10 +94,11 @@ export default function EditEvent({ event, onSave, onCancel }) {
     };
 
     return (
-        <div className="add-event-container">
+        <div className="add-event-container" style={{marginLeft:"100px"}}>
             <h2>تعديل اللقاء</h2>
-            <form onSubmit={handleSubmit}>
-            <div className="form-row">
+            <form onSubmit={handleSubmit} >
+                {/* Form inputs */}
+                <div className="form-row">
                 <div className="form-group">
                     <label className="lable" htmlFor="event_address">العنوان</label>
                     <input
@@ -171,39 +162,19 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         className="form-control"
                     />
                 </div></div>
-                <div className="form-row">
-                <div className="form-group">
-                    <label className="lable" htmlFor="event_date">التاريخ</label>
-                    <div className="date-time-container">
-                        <DatePicker
-                           ref={datePickerRef}
-                           selected={eventDate}
-                           onChange={handleDateChange}
-                           dateFormat="dd/MM/yyyy"
-                           className="form-control"
-                           name="event_date"
-                           id="event_date"
-                           calendarClassName="calendar-container"
+                <LocalizationProvider dateAdapter={AdapterLuxon}>
+                    <div className="form-group" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+                        <DateTimePicker
+                            label="اختر الوقت والتاريخ "
+                            value={formData.event_date}
+                            onChange={handleStartDateChange}
+                            textField={(params) => <TextField {...params} />}
+                            disablePast
+                            timeZone="Africa/Cairo"
                         />
-                        <img src={CalendarIcon} alt="calendar" className="calendar-icon" onClick={handleDateIconClick} />
                     </div>
-                </div>
-                <div className="form-group">
-                    <label className="lable" htmlFor="event_time">الساعة</label>
-                    <div className="date-time-container">
-                    <input
-                            type="text"
-                            id="event_time"
-                            name="event_time"
-                            value={formData.event_time}
-                            onChange={handleTimeChange}
-                            className="form-control"
-                            placeholder="HH:mm AM/PM"
-                        />
-                        <img src={TimeIcon} alt="time" className="time-icon" onClick={handleTimeIconClick} />
-                    </div>
-                </div>
-                </div>
+                </LocalizationProvider>
+                {/* Remaining form inputs */}
                 <div className="form-row">
                 <div className="form-group">
                     <label className="lable" htmlFor="event_broadcast">سيتم بثه؟</label>
@@ -237,25 +208,15 @@ export default function EditEvent({ event, onSave, onCancel }) {
                     <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
                                 </span>
-{/*                     <input
-                        type="text"
-                        id="event_image_path"
-                        name="event_image_path"
-                        value={formData.event_image_path}
-                        onChange={handleChange}
-                        className="form-control"
-                    /> */}
                 </div>
-                
-
                 <button type="submit" className="btn-submit" style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
                 <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>
                     إلغاء
                 </button>
-
             </form>    
+            {/* Success and error alerts */}
             <Simplert
                 showSimplert={showErrorAlert}
                 type="error"
@@ -263,7 +224,6 @@ export default function EditEvent({ event, onSave, onCancel }) {
                 message="حدث خطأ ما يرجي اعادة المحاولة"
                 onClose={() => setShowErrorAlert(false)}
                 customCloseBtnText= 'اغلاق'
-
             />
             <Simplert
                 showSimplert={showSuccessAlert}
@@ -272,9 +232,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                 message="تم التعديل بنجاح"
                 onClose={() => setShowSuccessAlert(false)}
                 customCloseBtnText= 'تم '
-
             />
-
         </div>
     );
 }
