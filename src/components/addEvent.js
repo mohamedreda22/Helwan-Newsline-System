@@ -1,9 +1,6 @@
 import React, { useState, useEffect, useRef } from "react";
 import axios from "axios";
-import DatePicker from "react-datepicker";
-import CalendarIcon from '../assets/icons/calendar.svg';
 import Simplert from 'react-simplert';
-import TimeIcon from '../assets/icons/time.svg';
 import Sidebar from "./SideBar";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
@@ -18,14 +15,13 @@ export default function AddEvent() {
     const [formData, setFormData] = useState({
         event_address: "",
         category_id: "",
-       // description: "",
-       // source: "",
+        description: "",
+        source: "",
         event_place: "",
         event_date: DateTime.fromISO(null, { zone: 'Africa/Cairo' }),
-        //event_time: "",
-        //event_broadcast: "",
-        //event_link_path: "",
-       // event_image_path: "",
+        event_broadcast: "",
+        event_link_path: "",
+        event_image_path: "",
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -51,7 +47,6 @@ export default function AddEvent() {
     const handleSubmit = async (e) => {
                 console.log(formData)                
                 e.preventDefault()
-                //formData.event_date = formData.event_date.toISO();
                 console.log(formData)
 
 
@@ -60,9 +55,6 @@ export default function AddEvent() {
             setError('برجاء ملئ كل البيانات');
             return;
         }
-        // Converting the event_date from string to Date object
-        // formData.event_date = new Date(formData.event_date);
-        // formData.event_date = formData.event_date.toISOString();
 
         setIsLoading(true);
 
@@ -93,14 +85,13 @@ export default function AddEvent() {
         setFormData({
             event_address: "",
             category_id: "",
-            //description: "",
-           // source: "",
+            description: "",
+            source: "",
             event_place: "",
             event_date: null,
-            ///event_time: "",
-            //event_broadcast: "",
-            //event_link_path: "",
-            //event_image_path: "",
+            event_broadcast: "",
+            event_link_path: "",
+            event_image_path: "",
         });
         setError('');
         setEventDate(null);
@@ -199,45 +190,6 @@ export default function AddEvent() {
                         />
                         </div>
                      </div>
-                    {/*  <div className="form-row"> 
-                    <div className="form-group">
-                        <label className="lable" htmlFor="event_date">التاريخ</label>
-                        <DatePicker
-                            ref={datePickerRef}
-                            selected={formData.event_date}
-                            onChange={handleDateChange}
-                            dateFormat="dd/MM/yyyy"
-                            className="form-control"
-                            name="event_date"
-                            id="event_date"
-                            calendarClassName="calendar-container"
-                        />
-                        <img
-                            src={CalendarIcon}
-                            alt="Calendar"
-                            className="calendar-icon"
-                            onClick={handleDateIconClick}
-                        />
-                    </div>
-                    <div className="form-group">
-                        <label className="lable" htmlFor="event_time">الساعة</label>
-                        <input
-                            type="text"
-                            id="event_time"
-                            name="event_time"
-                            value={formData.event_time}
-                            onChange={handleChange}
-                            className="form-control"
-                            placeholder="HH:mm AM/PM"
-                        />
-                        <img
-                            src={TimeIcon}
-                            alt="Time"
-                            className="time-icon"
-                            onClick={handleTimeIconClick}
-                        />
-                    </div>
-                    </div> */}
                     <LocalizationProvider dateAdapter={AdapterLuxon}>
                         <div className="form-group" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                             <DateTimePicker
