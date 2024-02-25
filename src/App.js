@@ -5,6 +5,7 @@ import "./App.css";
 //import Loading from "./components/loading";
 import Collages from "./pages/Collages";
 import Notifications from "./pages/Notifications";
+import Emails from "./pages/Emails";
 
 function App() {
   return (
@@ -13,6 +14,7 @@ function App() {
       <Loading /> */}
       {/* <Collages /> */}
       <Notifications />
+      <Emails />
     </>
   );
 }

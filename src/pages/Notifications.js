@@ -5,6 +5,7 @@ import SearchBar from "../layouts/SearchBar";
 import "../styles/Notifications.css";
 import Button from "react-bootstrap/Button";
 import AddNotificationForm from "../components/AddNotificationForm";
+import { Link } from 'react-router-dom';
 
 
 function Notifications() {
@@ -15,8 +16,12 @@ function Notifications() {
           <SearchBar />
           <h1 dir="rtl">الإشعارات</h1>
           <div dir="rtl" className="links ">
-            <Button variant="link">الإشعارات</Button>
-            <Button variant="link">الإيميلات</Button>
+            <Link to="/notifications">
+              <Button variant="link">الإشعارات</Button>
+            </Link>{" "}
+            <Link to="/emails">
+              <Button variant="link">الإيميلات</Button>
+            </Link>{" "}
           </div>
           <div className="container-2">
             <AddNotificationForm />
