@@ -1,0 +1,15 @@
+.form-container {
+  margin-right: 50px;
+}
+.addpost {
+  color: #000;
+  font-size: 40px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+margin-right: 25%;}
+.divider{
+    width: 100%;
+    border-bottom: 1px ;
+    background: var(--Background-Dividers, rgba(0, 0, 0, 0.10));
+}

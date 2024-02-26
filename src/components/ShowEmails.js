@@ -1,8 +1,6 @@
 import axios from "axios";
 import React, { useState } from "react";
 import delete_icon from "../assets/icons/delete.svg";
-import "../styles/ShowNotifications.css";
-import { FaPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 
 const handleDeleteEmail = (email) => {

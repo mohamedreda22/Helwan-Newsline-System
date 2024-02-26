@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-
 import "./App.css";
 //import HomePage from "./components/homePage";
 //import Loading from "./components/loading";
 import Collages from "./pages/Collages";
 import Notifications from "./pages/Notifications";
 import Emails from "./pages/Emails";
+import AddPost from "./pages/AddPost";
 
 function App() {
   return (
@@ -15,6 +15,7 @@ function App() {
       {/* <Collages /> */}
       <Notifications />
       <Emails />
+      <AddPost />
     </>
   );
 }
