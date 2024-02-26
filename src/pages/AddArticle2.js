@@ -1,4 +1,5 @@
-import React ,{ useState} from 'react';
+import React ,{ useState, useCallback } from 'react';
+import { useDropzone } from 'react-dropzone';
 import SideBar from '../components/SideBar';
 import '../styles/AddArticle2.css'
 
@@ -34,7 +35,14 @@ const AddArticle2 = () => {
             [name]: value,
         });
     };
-
+    const onDrop = useCallback(acceptedFiles => {
+        // هنا يمكنك التعامل مع الملفات المقبولة (acceptedFiles)
+        // مثلاً، يمكنك إجراء إرسال الصورة إلى الخادم أو عرضها مباشرة في التطبيق
+        console.log(acceptedFiles);
+      }, []);
+    
+      const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
+    
     
    
 
@@ -42,13 +50,13 @@ const AddArticle2 = () => {
     return ( 
         <div className="addArticle">
             <SideBar/>
-            <form className= 'search'>
+            {/* <form className= 'search'>
             
               < input   dir='rtl' type='text'  placeholder='....بحث' className='search2'/>
-               {/* <span className='search3' class="material-icons-outlined">search</span>  */}
+               {/* <span className='search3' class="material-icons-outlined">search</span>  
             
 
-          </form> 
+          </form>  */}
             
             <h3  > المقالات  </h3>
         <hr/>
@@ -80,10 +88,37 @@ const AddArticle2 = () => {
                         />
                 </div> 
                 <div className="form-group3">
-                        <label className="lable3" htmlFor="event_image_path">رفع الصورة</label>
+                        <label className="lable3" htmlFor="event_image_path" ></label>
                               {/* <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
                                 </span> */}
+                    <div {...getRootProps()} style={ {
+                                border: 'none',
+                                borderRadius: '4px',
+                                padding: '20px',
+                                 textAlign: 'center',
+                                  cursor: 'pointer',
+                                  width:'750px',
+                                  height:'79px',
+                                  marginRight:'-220px',
+
+        }}>
+      <input {...getInputProps()} />
+      {isDragActive ? (
+        <p>قم بإسقاط الملف هنا...</p>
+      ) : (
+                                    <p>       
+                                        <span className="material-icons-outlined">file_upload</span>    
+                                        رفع الصورة  
+                                        
+                                            </p>
+      )}
+    </div>
+
+     
+                                          
+
+ 
  
                  </div>
 
