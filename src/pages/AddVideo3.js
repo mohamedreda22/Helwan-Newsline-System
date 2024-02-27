@@ -41,13 +41,13 @@ const AddVideo3 = () => {
 
       const { getRootProps, getInputProps } = useDropzone({ onDrop, accept: 'video/*' });
     return ( 
-        <div className="add-event-page">
+        <div className="add-video-page">
              <SideBar />
-             <h3>اهم الاحداث</h3>
-             <div className="add-event-container">
-             <h1 className="header">إضافة حدث</h1>
+             <h3> الفيديوهات  </h3>
+             <div className="add-video-container">
+             <h1 className="header">إضافة  فيديو</h1>
              <form onSubmit={handleSubmit}>
-             <div className="form-row" dir='rtl'>
+               <div className="form-row" dir='rtl'>
                         <div className="form-group1">
                         <label className="lable" htmlFor="event_address">العنوان</label>
                         <input

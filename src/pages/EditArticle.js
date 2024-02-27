@@ -1,5 +1,6 @@
 // import React from 'react';
-import React, { Component } from 'react'
+import React, { Component , useCallback } from 'react'
+import { useDropzone } from 'react-dropzone';
 
 import '../styles/EditArticle.css'
 
@@ -16,6 +17,15 @@ class EditArticle extends Component {
         Name:'Child',
         Age:22,
      } 
+
+
+    //  const onDrop = useCallback(acceptedFiles => {
+    //     // هنا يمكنك التعامل مع الملفات المقبولة (acceptedFiles)
+    //     // مثلاً، يمكنك إجراء إرسال الصورة إلى الخادم أو عرضها مباشرة في التطبيق
+    //     console.log(acceptedFiles);
+    //   }, []);
+    
+    //   const { getRootProps, getInputProps, isDragActive } = useDropzone({ onDrop });
     render() { 
         return (
             <div>

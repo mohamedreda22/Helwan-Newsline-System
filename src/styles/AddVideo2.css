@@ -1,4 +1,4 @@
-.add-event-page {
+.add-video-page {
     padding: 20px;
     background-color: #f4f4f4;
     min-height: 100vh;
@@ -9,7 +9,7 @@
     padding-right: 140px;
 }
 
-.add-event-container {
+.add-video-container {
     background-color: #D9D9D94D;
     padding: 50px;
     border-radius: 10px;
@@ -23,8 +23,9 @@
 .header {
     font-size: 28px;
     margin-bottom: 30px;
-    color: #091160;
+    color:black;
     text-align: center;
+    background-color: gray;
 }
 
 @keyframes addEvent {
