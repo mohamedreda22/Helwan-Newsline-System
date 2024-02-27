@@ -1,15 +1,32 @@
-p{
+ 
+ 
+h1{
+    font-size: 78px;
+    margin-bottom: 30px;
     color: #000;
-
+    text-align: center;
+    background-color: white;
+    color: #000;
 font-family: Inder;
 font-size: 40px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
-text-align: center;
- }
-
-.add2{
+}
+.mb3{
+    width: 300px;
+    margin-right: 200px;
+    margin-bottom: 100px;
+    
+}
+.mb4{
+    width: 300px;
+    margin-right:800px ;
+    margin-top: -195px;
+    margin-bottom: 10px;
+     
+}
+.fl{
     color: #000;
 
 font-family: Inder;
@@ -17,77 +34,43 @@ font-size: 30px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
- margin-right: 250px;
- margin-left: 777px;
-  
- }
- .txt{
-    width: 282px;
-height: 50px;
-/* ;
-margin-top: -140px; */
-background-color:  rgb(221, 221, 221);
-margin-left: 765px;
-border: none;
- }
- .add3{
- color: #000;
+}
+.fc{
+    background-color: rgb(218, 212, 212);
+     height: 50px;
+}
+.fp{
+    margin-right: 500px;
+    width: 600px;
+}
+.fl2{
+    color: #000;
+
 font-family: Inder;
 font-size: 30px;
 font-style: normal;
 font-weight: 400;
 line-height: normal;
- margin-left: 450px;
- margin-top: -90px;
-  
- } 
- 
- .txt2{
-    width: 282px;
-height: 50px;
- /* 
-margin-top: -50px; */
-background-color:  rgb(221, 221, 221);
-margin-left: 250px;
-border: none;
- }
+background-color: rgb(218, 212, 212);
+}
+.mb5{
+    margin-right: 200px;
+}
+.fcc{
+    background-color:rgb(218, 212, 212) ;
+    width:80%;
+    height: 200px;
+    margin-bottom: 50px;
+}
+.b1{
+    width: 200px;
+    margin-right:400px ;
+}
 
- .subject{
-        
-    background-color: rgb(221, 221, 221);
-    margin-left: 250px;
-    border: none;
-    width:800px ;
-    margin-top: 200px;
-     }
-     .btn{
-        background-color: rgb(51, 51, 143) !important; 
-        
-        color: white !important;
-        width:200px;
-        height: 50px;
-        margin-left: 800px !important;
-        border-radius:10%;
-        /* margin-top: 80px; */
-     }
-
-     .btn2{
-         
-        background-color: white !important;
-        color: black !important;
-        width:100px;
-        height: 50px;
-        
-        border: #000 !important;
-     }
-     .btn3{
-        background-color: white;
-        color: black;
-        width: 200px;
-        height:50px ;
-        border-radius:10%;
-        margin-left: -700px;
-        /* margin-top: 80px; */
-       
-
-     }
+.b2{
+    width: 200px;
+    margin-right: 700px;
+    margin-top: -70px;
+    border: #000;
+    background-color:rgb(218, 212, 212) ;
+}
