@@ -6,12 +6,13 @@ import SideBar from "../components/SideBar";
 import AddArticle2 from "../pages/AddArticle2";
 import Message from '../pages/Message';
  
-//import AddVideo2 from "../pages/AddVideo2";
+ 
 import AddVideo3 from "../pages/AddVideo3";
  
 import EditArticle from "../pages/EditArticle";
+import EditVideo from "../pages/EditVideo";
  
-//import AddVideo2 from "../pages/AddVideo2"
+ 
  
 
 export const RouterComponent = () => {
@@ -20,9 +21,9 @@ export const RouterComponent = () => {
       <Routes>
         
         <Route path="/" element={< SideBar />} />
-        <Route path="/sidebar" element={<SideBar  />} />
+        {/* <Route path="/sidebar" element={<SideBar  />} /> */}
         <Route path="/message" element={< Message />} />
-         
+        <Route path="/editvideo" element={<EditVideo/>} />
         <Route path="/addarticle " element={<AddArticle2/>} />
         <Route path="/edit" element={<EditArticle/>} />
         <Route path="/addvideo" element={< AddVideo3  />} />
