@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import FAQItem from './faqItem';
+import FaqItem from './faqItem';
 
 const FAQ = ({ currentFAQs, handleDeleteFAQ, handleEditFAQ }) => (
   <div className="container">
@@ -13,7 +13,7 @@ const FAQ = ({ currentFAQs, handleDeleteFAQ, handleEditFAQ }) => (
     </div>
     <tbody>
       {currentFAQs.map((faq) => (
-        <FAQItem
+        <FaqItem
           key={faq.faq_id}
           faq={faq}
           onDelete={handleDeleteFAQ}

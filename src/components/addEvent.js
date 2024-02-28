@@ -15,8 +15,8 @@ export default function AddEvent() {
     const [formData, setFormData] = useState({
         event_address: "",
         category_id: "",
-        description: "",
-        source: "",
+        event_description: "",
+        source_id: "",
         event_place: "",
         event_date: DateTime.fromISO(null, { zone: 'Africa/Cairo' }),
         event_broadcast: "",
@@ -26,15 +26,19 @@ export default function AddEvent() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [categories, setCategories] = useState([]);
-    const [eventDate, setEventDate] = useState(null);
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [eventImagePath, setEventImagePath] = useState(null);
+    const [sources, setSources] = useState([]);
 
 
     useEffect(() => {
         fetchCategories();
     }, []);
+
+    useEffect(()=>{
+        fetchSources();
+    },[]);
 
     const fetchCategories = async () => {
         try {
@@ -42,6 +46,16 @@ export default function AddEvent() {
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
+        }
+    };
+
+    const fetchSources = async () =>{
+        try {
+            const response = await axios.get('http://localhost:9090/university/sources');
+            setSources(response.data)
+        }
+        catch(error){
+            console.error('Error fetching sources:', error);
         }
     };
 
@@ -70,6 +84,8 @@ export default function AddEvent() {
 
             } else {
                 setShowErrorAlert(true);
+                setError('حدث خطأ أثناء إضافة الحدث');
+               
             }
         } catch (error) {
             console.error('Error:', error);
@@ -84,8 +100,8 @@ export default function AddEvent() {
         setFormData({
             event_address: "",
             category_id: "",
-            description: "",
-            source: "",
+            event_description: "",
+            source_id: "",
             event_place: "",
             event_date: null,
             event_broadcast: "",
@@ -93,7 +109,6 @@ export default function AddEvent() {
             event_image_path: "",
         });
         setError('');
-        setEventDate(null);
     };
 
     const handleChange = (e) => {
@@ -183,27 +198,34 @@ export default function AddEvent() {
                     </div> 
                     </div>
                     <div className="form-group">
-                        <label className="lable" htmlFor="description">الوصف</label>
+                        <label className="lable" htmlFor="event_description">الوصف</label>
                         <textarea
-                            type="text"
-                            id="description"
-                            name="description"
-                            value={formData.description}
+                            id="event_description"
+                            name="event_description"
+                            value={formData.event_description}
                             onChange={handleChange}
                             className="form-control"
                         />
                     </div>
                     <div className="form-row">
                      <div className="form-group">
-                        <label className="lable" htmlFor="source">المصدر</label>
-                        <input
-                            type="text"
-                            id="source"
-                            name="source"
-                            value={formData.source}
-                            onChange={handleChange}
-                            className="form-control"
-                        />
+                        <label className="lable" htmlFor="source_id">المصدر</label>
+                        <select
+                                id="source_id"
+                                name="source_id"
+                                value={formData.source_id}
+                                onChange={handleChange}
+                                className="form-control"
+                                required
+                        >
+                                <option value="">اختر المصدر</option>
+                                {sources.map(source => (
+                                    <option key={source.id} 
+                                    value={source.id}>
+                                        {source.full_name}
+                                        </option>
+                                ))}
+                            </select>
                         </div> 
                     <div className="form-group">
                         <label className="lable" htmlFor="event_place">المكان</label>
@@ -214,6 +236,7 @@ export default function AddEvent() {
                             value={formData.event_place}
                             onChange={handleChange}
                             className="form-control"
+                            required
                         />
                         </div>
                      </div>

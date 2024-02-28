@@ -32,7 +32,7 @@ function EventItem({ event, onDelete, onEdit }) {
 
     return (
         <tr> 
-            <td>
+            <td >
                 <div className="event-item-container" >
                     <img src={edit_icon} alt="Edit Event" className="edit-icon" onClick={handleEdit} />
                     <img src={delete_icon} alt="Delete Event" className="delete-icon" onClick={handleDelete} />
@@ -47,7 +47,7 @@ function EventItem({ event, onDelete, onEdit }) {
                     </a>
                  <div>
                     <div className="event-item-address" >{event.event_address}</div>
-                    <div className="event-item-description">{event.description}محاضرة حول أحدث التطورات في مجال تقنية المعلومات والذكاء الاصطناعي وتأثيرها على مستقبل الصناعة والتكنولوجيا.</div> 
+                    <div className="event-item-description">{event.event_description}</div> 
                     </div>    
                     <ImageComponent/>
                 </div>

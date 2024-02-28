@@ -18,11 +18,16 @@ export default function EditEvent({ event, onSave, onCancel }) {
         event_time: event?.event_time || "",
         event_broadcast: event?.event_broadcast || "",
         event_link_path: event?.event_link_path || "",
+        source_id: event?.source_id || "",
+        event_description: event?.event_description || "",
     });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [categories, setCategories] = useState([]);
+    const [sources, setSources] = useState([]);
+
+
 
 
     const handleStartDateChange = (date) => {
@@ -41,6 +46,8 @@ export default function EditEvent({ event, onSave, onCancel }) {
             event_place: event?.event_place || "",
             event_broadcast: event?.event_broadcast || "",
             event_link_path: event?.event_link_path || "",
+            source_id:event?.source_id || "",
+            event_description: event?.event_description || "",
 
         });
     }, [event]);
@@ -48,6 +55,19 @@ export default function EditEvent({ event, onSave, onCancel }) {
     useEffect(() => {
         fetchCategories();
     }, []);
+    useEffect(()=>{
+        fetchSources();
+    },[]);
+
+    const fetchSources = async () => {
+        try {
+            const response = await axios.get('http://localhost:9090/university/sources');
+            setSources(response.data);
+        } catch (error) {
+            console.error('Error fetching sources:', error);
+        }
+    };
+
 
     const handleInputChange = (e) => {
         const { name, value } = e.target;
@@ -130,26 +150,32 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         </select>
             </div></div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="description">الوصف</label>
+                    <label className="lable" htmlFor="event_description">الوصف</label>
                     <textarea
-                        id="description"
-                        name="description"
-                        value={formData.description}
+                        id="event_description"
+                        name="event_description"
+                        value={formData.event_description}
                         onChange={handleChange}
                         className="form-control"
                     />
                 </div>
                 <div className="form-row">
                 <div className="form-group">
-                    <label className="lable" htmlFor="source">المصدر</label>
-                    <input
-                        type="text"
-                        id="source"
-                        name="source"
-                        value={formData.source}
-                        onChange={handleChange}
-                        className="form-control"
-                    />
+                    <label className="lable" htmlFor="source_id">المصدر</label>
+                    <select
+                            id="source_id"
+                            name="source_id"
+                            value={formData.source_id}
+                            onChange={handleChange}
+                            className="form-control"
+                        >
+                            <option value="">اختر المصدر</option>
+                            {sources.map(source => (
+                                <option key={source.id} value={source.id}>
+                                    {source.full_name}
+                                </option>
+                            ))}
+                        </select>
                 </div>
                 <div className="form-group">
                     <label className="lable" htmlFor="event_place">المكان</label>
@@ -208,13 +234,13 @@ export default function EditEvent({ event, onSave, onCancel }) {
                     <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
                                 </span>
-                </div><div className="btns">
+                </div>
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
                 <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>
                     إلغاء
-                </button></div>
+                </button>
             </form>    
             {/* Success and error alerts */}
             <Simplert

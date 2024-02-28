@@ -3,7 +3,7 @@ import delete_icon from "../assets/icons/delete.svg";
 import "../styles/FAQItem.css";
 import editIcon from "../assets/icons/edit.svg";
 
-const FAQItem = ({ question, answer, onDelete ,onEdit}) => {
+const FaqItem = ({ question, answer, onDelete ,onEdit}) => {
     
   const handleDelete = () => {
     onDelete(question); 
@@ -13,13 +13,13 @@ const FAQItem = ({ question, answer, onDelete ,onEdit}) => {
     };
 
   return (
-    <div className="faq-item">
+    <div className="faq-item" dir="rtl">
       <div className="faq-details">
         <h3 className="faq-question">{question}</h3>
         <p className="faq-answer">{answer}</p>
       </div>
       <div className="faq-actions">
-        <img
+        <img 
           src={delete_icon}
           alt="Delete FAQ"
           className="delete-icon"
@@ -37,4 +37,4 @@ const FAQItem = ({ question, answer, onDelete ,onEdit}) => {
   );
 };
 
-export default FAQItem;
+export default FaqItem;

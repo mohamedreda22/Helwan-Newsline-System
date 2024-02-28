@@ -98,7 +98,7 @@ function Events() {
         event_date: editedEvent.event_date,
         event_link_path: editedEvent.event_link_path,
         event_address: editedEvent.event_address,
-        description: editedEvent.description,
+        event_description: editedEvent.event_description,
         event_image_path: editedEvent.event_image_path,
       };
 
