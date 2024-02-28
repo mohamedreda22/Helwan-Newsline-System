@@ -111,11 +111,17 @@ function Events() {
   };
 
   return (
-    <div className="events-page">
-      <SideBar />
+    <div className={`events-page ${isEditing && eventIdToEdit && editedEvent ? 'blur-background' : ''}`}>
+    <SideBar />
+      {isEditing && eventIdToEdit && editedEvent ? (
+      <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
+      ):(
+        <>
+      
       <h2>جميع الاحداث</h2>
       {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
-      {error && <p>{error}</p>}
+      {error && <p>{error}</p>}      
+
       <div className="total-events">
         عدد الاحداث : <span>{events.length}</span>
       </div>
@@ -128,7 +134,6 @@ function Events() {
                 event={event}
                 onDelete={handleDeleteEvent}
                 onEdit={handleEditEvent}
-                //img={event.event_image_path}
               />
             ))}
           </tbody>
@@ -153,8 +158,7 @@ function Events() {
           </div>
         )}
       </div>
-      {isEditing && eventIdToEdit && editedEvent && (
-        <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
+      </>
       )}
     </div>
   );

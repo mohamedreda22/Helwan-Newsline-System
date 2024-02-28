@@ -94,11 +94,11 @@ export default function EditEvent({ event, onSave, onCancel }) {
     };
 
     return (
-        <div className="add-event-container" style={{marginLeft:"100px"}}>
-            <h2>تعديل اللقاء</h2>
+        <div className="edit-event-container" dir="rtl">
+            <h2 className="header" style={{paddingRight:"10px"}}>تعديل الحدث</h2>
             <form onSubmit={handleSubmit} >
                 {/* Form inputs */}
-                <div className="form-row">
+                <div className="form-row" >
                 <div className="form-group">
                     <label className="lable" htmlFor="event_address">العنوان</label>
                     <input
@@ -208,13 +208,13 @@ export default function EditEvent({ event, onSave, onCancel }) {
                     <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
                                 </span>
-                </div>
-                <button type="submit" className="btn-submit" style={{width:"30%"}}>
+                </div><div className="btns">
+                <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
                 <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>
                     إلغاء
-                </button>
+                </button></div>
             </form>    
             {/* Success and error alerts */}
             <Simplert

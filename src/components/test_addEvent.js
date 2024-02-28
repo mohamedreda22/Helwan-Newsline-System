@@ -30,6 +30,7 @@ export default function AddEvent() {
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [eventImagePath, setEventImagePath] = useState(null);
+    const image =useRef(null);
 
 
     useEffect(() => {
@@ -42,32 +43,50 @@ export default function AddEvent() {
             setCategories(response.data);
         } catch (error) {
             console.error('Error fetching categories:', error);
+            showErrorAlert(true)
         }
     };
 
     const handleSubmit = async (e) => {
-                e.preventDefault()
-
-
-
-           if (!formData.event_address || !formData.category_id  || !formData.event_place) {
-                  setError('برجاء ملئ كل البيانات');
+        e.preventDefault();
+    
+        if (!formData.event_address || !formData.category_id || !formData.event_place) {
+            setError('برجاء ملئ كل البيانات');
             return;
         }
-
+    
         setIsLoading(true);
+    
+        const formDataToSend = new FormData();
+    
+        // Append form data to formDataToSend
+        formDataToSend.append('event_address', formData.event_address);
+        formDataToSend.append('category_id', formData.category_id);
+        formDataToSend.append('description', formData.description);
+        formDataToSend.append('source', formData.source);
+        formDataToSend.append('event_place', formData.event_place);
+        formDataToSend.append('event_date', formData.event_date.toISO());
+        formDataToSend.append('event_broadcast', formData.event_broadcast);
+        formDataToSend.append('event_link_path', formData.event_link_path);
 
+    
+        // Append image if available
+        if (image.current.files && image.current.files[0]) {
+            formDataToSend.append('event_image_path', image.current.files[0]);
+        }
+        else
+        return
+    
         try {
             const response = await axios.post(
-                'http://localhost:9090/university/events',formData
-
+                'http://localhost:9090/university/events',
+                formDataToSend
             );
-
+    
             if (response && response.status === 200) {
                 setShowSuccessAlert(true);
                 resetForm();
-                console.log(formData)
-
+                console.log(formDataToSend);
             } else {
                 setShowErrorAlert(true);
             }
@@ -79,6 +98,8 @@ export default function AddEvent() {
             setIsLoading(false);
         }
     };
+    
+
 
     const resetForm = () => {
         setFormData({
@@ -112,36 +133,8 @@ export default function AddEvent() {
         console.log(date)
     };
 
-/*     const handleFileChange = (e, data) => {
-        const file = e ? e.target.files[0] : null;
-        const reader = new FileReader();
-        
-        if (file) {
-            reader.onloadend = () => {
-                setEventImagePath(reader.result);
-                if (data) {
-                    data(reader.result);
-                }
-            };
-            reader.readAsDataURL(file);
-        } else if (data) {
-            data(null);
-        }
-    };
-
-            const handleCombinedFileChange = (e) => {
-                handleFileChange(e, (imageData) => {
-                    setFormData({
-                        ...formData,
-                        event_image_path: imageData,
-                    });
-                });
-            }; */
-
-
-
     return (
-        <div className="add-event-page" dir="rtl">
+        <div className="add-event-page">
             <Sidebar />
             <h3>اهم الاحداث</h3>
             <div className="add-event-container">
@@ -259,23 +252,23 @@ export default function AddEvent() {
                     </div>
                     </div>
                     <div className="form-group">
-{/*                     <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
+                    <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
                     <br/>
                     <input 
                      className="form-control"
                      type="file" 
                      id='event_image_path' 
                      name="event_image_path"
-                     onChange={handleCombinedFileChange}
-                     required /> */}
+                     ref={image}
+                     required />
                 
-                        <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
+{/*                        <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
                               <br></br>  <span style={{color: 'red'}}>
                                     disabled cause of backend API handle
-                                </span>
+                                </span> */}
 
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"65%"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
                     {error && <div className="error">{error}</div>}

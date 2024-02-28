@@ -16,6 +16,19 @@ function EventItem({ event, onDelete, onEdit }) {
     const handleEdit = () => {
         onEdit(event.event_id);
     };
+        // Function to format the date and time
+        const formatDateTime = (dateTimeString) => {
+            const dateTime = new Date(dateTimeString);
+    
+            const hours = dateTime.getHours() % 12 || 12;
+            const minutes = dateTime.getMinutes();
+            const amPm = dateTime.getHours() >= 12 ? 'pm' : 'am';
+            const day = dateTime.getDate();
+            const month = dateTime.toLocaleString('default', { month: 'short' });
+            const year = dateTime.getFullYear();
+    
+            return `${hours}:${minutes < 10 ? '0' + minutes : minutes} ${amPm}, ${day} ${month} ${year}`;
+        };
 
     return (
         <tr> 
@@ -27,8 +40,7 @@ function EventItem({ event, onDelete, onEdit }) {
                         <span>{event.event_place}</span>
                         <img src={location} alt="Location" className="location-icon" />
                     </div>
-                    <div className="event-item-time">{event.event_time}</div>
-                    <div className="event-item-date">{event.event_date}</div>
+                    <div className="event-item-date">{formatDateTime(event.event_date)}</div>
                     <a href={event.event_link_path} target="_blank" rel="noreferrer" className="event-item-link">
                         <span>مشاهدة اللقاء</span>
                         <img src={watch} alt="Watch Event" className="watch-icon" />

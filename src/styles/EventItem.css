@@ -22,13 +22,13 @@
     align-items: center;
     text-decoration: none;
     color: rgb(52, 11, 238);
+
 }
 
 .event-item-container .event-item-link img {
     margin-right: 5px;
 
 }
-
 .event-item-container .location-icon,
 .event-item-container .delete-icon,
 .event-item-container .edit-icon {
@@ -70,5 +70,57 @@
     text-align: right;
     color: #565555;
     overflow: hidden;   
+    text-overflow: ellipsis;
 
 }
+/* EventItem.css */
+
+/* Style for the event item container */
+.event-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  /* Style for the event item table cell */
+  .event-item-container td {
+    width: 150px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border: 1px solid #ccc;
+    overflow: hidden; /* Prevent content overflow */
+    text-overflow: ellipsis; /* Add ellipsis to the text */
+    
+  }
+  
+  /* Style for the edit and delete icons */
+  .edit-icon,
+  .delete-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  /* Style for the location container */
+  .location-container {
+    display: flex;
+    align-items: center;
+    
+  }
+  .location-container span{
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  /* Add blinking animation to empty event item description */
+  @keyframes blink {
+    0% { background-color: #fff; }
+    50% { background-color: #f0f0f0; }
+    100% { background-color: #fff; }
+  }
+  
+  /* Apply blinking animation to empty event item description */
+  .event-item-description:empty {
+    animation: blink 1.5s infinite;
+  }
+  

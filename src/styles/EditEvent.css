@@ -3,7 +3,7 @@
     border-radius: 5px;
     padding: 20px;
     margin-bottom: 20px;
-    background-color: #f9f9f9;
+    background-color: #5e565610;
 }
 
 .edit-event-details {
@@ -35,6 +35,12 @@
 .save-icon:hover,
 .cancel-icon:hover {
     filter: brightness(0.8);
+}
+.btns{
+    display: flex;
+    justify-content: space-evenly;
+    margin-top: 20px;
+    
 }
 
 

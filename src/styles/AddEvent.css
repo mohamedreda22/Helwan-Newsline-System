@@ -143,4 +143,15 @@
 .time-icon {
     top: 72%;
 }
-
+.btn-submit{
+    background-color: #091160;
+    color: #fff;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-size: 18px;
+    margin-top: 20px;
+    margin-right: 75px;
+    }
