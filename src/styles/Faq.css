@@ -1,53 +1,69 @@
-/* Faq.css */
+/* FAQ.css */
 
-/* Styles for the FAQ page container */
-.faq-page {
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    padding: 20px;
-    padding-right: 100px;    
-}
-
-
-/* Styles for the main content */
-.faq-content {
+.faqs-page {
     max-width: 800px;
-    width: 100%;
-    margin-right: 20px;
-    box-sizing: border-box;
-    
-}
-
-/* Styles for the FAQ items container */
-.faq-container {
-    margin-top: 20px;
+    margin: 0 auto;
     padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    background-color: #f9f9f9;
-    box-sizing: border-box;
-
-}
-
-/* Styles for individual FAQ items */
-.faq-item {
+  }
+  
+  .faqs-page h2 {
+    font-size: 24px;
     margin-bottom: 20px;
-
-}
-
-/* Styles for FAQ item headings */
-.faq-item h3 {
-    font-size: 1.2rem;
-    font-weight: bold;
-    color: #333; /* Adjust the color as per your design */
-    margin-bottom: 10px;
-
-}
-
-/* Styles for FAQ item paragraphs */
-.faq-item p {
-    font-size: 1rem;
-    color: #666; /* Adjust the color as per your design */
-    
-}
+  }
+  
+  .total-faqs {
+    margin-bottom: 20px;
+  }
+  
+  .total-faqs h3 {
+    font-size: 18px;
+  }
+  
+  .loading-text,
+  .error-text {
+    font-size: 16px;
+    color: #ff0000;
+  }
+  
+  .faqs-container {
+    border: 1px solid #ccc;
+    padding: 10px;
+  }
+  
+  .faqs-container .faq-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+  }
+  
+  .faqs-container .faq-item:last-child {
+    border-bottom: none;
+  }
+  
+  .faqs-container .faq-item p {
+    font-size: 16px;
+    line-height: 1.6;
+  }
+  
+  .pagination {
+    margin-top: 20px;
+  }
+  
+  .pagination li {
+    display: inline-block;
+    margin-right: 5px;
+    cursor: pointer;
+    background-color: #eee;
+    padding: 5px 10px;
+    border-radius: 5px;
+  }
+  
+  .pagination li.active {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
+  .pagination li:hover {
+    background-color: #007bff;
+    color: #fff;
+  }
+  
