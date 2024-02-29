@@ -8,7 +8,7 @@ import Swal from "sweetalert2";
 import SideBar from "../components/SideBar";
 const handleDeleteNotification = (notification) => {
   Swal.fire({
-    title: "هل أنت متأكد من حذف هذا الإشعار؟",
+    title: "هل أنت متأكد من حذف هذا  المقال",
     icon: "warning",
     showCancelButton: true,
     confirmButtonColor: "#3085d6",
