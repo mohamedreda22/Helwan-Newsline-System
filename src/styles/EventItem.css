@@ -1,0 +1,126 @@
+.event-item-container {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+    border-bottom: 1px solid #000000;
+    padding-bottom: 12px;
+    margin-right: 200px;
+}
+
+.event-item-container .event-item-address,
+.event-item-container .event-item-description,
+.event-item-container .event-item-link {
+    flex: 1;
+    min-width: 100px; 
+    padding: 0 10px;
+}
+
+.event-item-container .event-item-link {
+    display: flex;
+    align-items: center;
+    text-decoration: none;
+    color: rgb(52, 11, 238);
+
+}
+
+.event-item-container .event-item-link img {
+    margin-right: 5px;
+
+}
+.event-item-container .location-icon,
+.event-item-container .delete-icon,
+.event-item-container .edit-icon {
+    cursor: pointer;
+    width: 25px;
+    height: 25px;
+    margin-left: 30px;
+}
+
+.event-item-container .event-item-image {
+    width: 77px;
+    height: 76px;
+    border-radius: 10%;
+    object-fit: cover;
+}
+
+.event-item-container .watch-icon {
+    width: 32px;
+    height: auto;
+    margin-top: 5px;
+    border: none;
+}
+
+.event-item-container .event-item-address {
+    font-family: Inder;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: right;
+}
+
+.event-item-container .event-item-description {
+    font-family: Inder;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    text-align: right;
+    color: #565555;
+    overflow: hidden;   
+    text-overflow: ellipsis;
+
+}
+/* EventItem.css */
+
+/* Style for the event item container */
+.event-item-container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  /* Style for the event item table cell */
+  .event-item-container td {
+    width: 150px; /* Adjust the width as needed */
+    height: 100px; /* Adjust the height as needed */
+    border: 1px solid #ccc;
+    overflow: hidden; /* Prevent content overflow */
+    text-overflow: ellipsis; /* Add ellipsis to the text */
+    
+  }
+  
+  /* Style for the edit and delete icons */
+  .edit-icon,
+  .delete-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  
+  /* Style for the location container */
+  .location-container {
+    display: flex;
+    align-items: center;
+    
+  }
+  .location-container span{
+    font-size: 14px;
+    white-space: nowrap;
+  }
+  
+  /* Add blinking animation to empty event item description */
+  @keyframes blink {
+    0% { background-color: #fff; }
+    50% { background-color: #f0f0f0; }
+    100% { background-color: #fff; }
+  }
+  
+  /* Apply blinking animation to empty event item description */
+  .event-item-description:empty {
+    animation: blink 1.5s infinite;
+  }
+  
