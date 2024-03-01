@@ -7,7 +7,7 @@ import AddPost from "../pages/AddPost";
 
 export const router = createBrowserRouter([
   {
-    path: "/notifications",
+    path: "/",
     element: <Notifications />,
   },
   {

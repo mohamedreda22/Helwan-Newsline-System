@@ -1,84 +1,145 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
-import "../styles/AddNotificationForm.css";
-import { MdClose } from "react-icons/md";
-import { FaPlus } from "react-icons/fa";
-import "../styles/AddPostForm.css"
-function AddNotificationForm() {
-  const [validated, setValidated] = useState(false);
-  const [source, setSource] = useState("");
-  const [description, setDescription] = useState("");
+import axios from "axios";
+import "../styles/AddPostForm.css";
+
+function AddPostForm() {
+  const [PostContent, setPostContent] = useState("");
   const [image, setImage] = useState(null);
+  const [sourceId, setSourceId] = useState([]);
+  const [categoryId, setCategoryId] = useState([]);
+  const [selectedCategory, setSelectedCategory] = useState("");
+  const [selectedSource, setSelectedSource] = useState("");
 
-  const handleSubmit = (event) => {
+  useEffect(() => {
+    fetchCategories();
+    fetchSources();
+  }, []);
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/categories"
+      );
+      setCategoryId(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
+
+  const fetchSources = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/sources"
+      );
+      setSourceId(response.data);
+    } catch (error) {
+      console.error("Error fetching sources:", error);
+    }
+  };
+
+  const handleCategoryChange = (event) => {
+    setSelectedCategory(event.target.value);
+  };
+
+  const handleSourceChange = (event) => {
+    setSelectedSource(event.target.value);
+  };
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      // Submit data (source, description, and image) to the backend
-      submitDataToBackend({ source, description, image });
+    event.stopPropagation();
+
+    try {
+      const response = await axios.post(
+        "http://localhost:9090/university/posts",
+        {
+          post_content: PostContent,
+          post_image_path: image,
+          category_id: selectedCategory,
+          source_id: selectedSource,
+        }
+      );
+      if (response && response.status === 200) {
+        console.log("Post added successfully:", response.data);
+        alert("Added successfuly!");
+        resetForm();
+      } else {
+        alert("حدث خطأ أثناء إضافة المنشور");
+      }
+    } catch (error) {
+      console.error("Error adding post:", error);
+      alert("error: ", error);
     }
-    setValidated(true);
   };
 
-  const handleImageChange = (event) => {
-    const file = event.target.files[0];
-    setImage(file);
-  };
-
-  const submitDataToBackend = ({ source, description, image }) => {
-    // Here, you can make your API call to send data to the backend
-    // For example, you can use Fetch API or Axios to make the POST request
-    const formData = new FormData();
-    formData.append("source", source);
-    formData.append("description", description);
-    if (image) {
-      formData.append("image", image);
-    }
-
-    fetch("", {
-      method: "POST",
-      body: formData,
-    })
-      .then((response) => {
-        // Handle response
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
+  const resetForm = () => {
+    setPostContent("");
+    setImage(null);
+    setSourceId([]);
+    setCategoryId([]);
+    setSelectedCategory("");
+    setSelectedSource("");
   };
 
   return (
     <div>
-        <h1 className="addpost" dir="rtl">إضافة منشور</h1>
+      <h1 className="addpost" dir="rtl">
+        إضافة منشور
+      </h1>
       <div dir="rtl" className="form-container">
-        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+        <Form onSubmit={handleSubmit}>
           <Row className="mb-3 mt-4">
-            <Form.Group as={Col} md="8" controlId="validationCustom01">
-              <Form.Label>المصدر</Form.Label>
-              <Form.Control
-                required
-                type="text"
-                onChange={(event) => setSource(event.target.value)}
-              />
+            <Form.Group as={Col} md="8" controlId="categorySelect">
+              <Form.Select
+                aria-label="Default select example"
+                onChange={handleCategoryChange} // Handle category change
+                value={selectedCategory} // Set the selected value
+              >
+                <option value="">اختر التصنيف</option>
+                {categoryId.map((category) => (
+                  <option
+                    key={category.category_id}
+                    value={category.category_id}
+                  >
+                    {category.category_name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
           </Row>
-          <Row>
-            <Form.Group as={Col} md="8" controlId="validationCustom02">
-              <Form.Label>كتابة منشور</Form.Label>
-              <Form.Control
-                as="textarea"
-                rows={10}
-                required
-                type="text"
-                onChange={(event) => setDescription(event.target.value)}
-              />
+          <Row className="mb-3 mt-4">
+            <Form.Group as={Col} md="8" controlId="sourceSelect">
+              <Form.Select
+                aria-label="Default select example"
+                onChange={handleSourceChange} // Handle source change
+                value={selectedSource} // Set the selected value
+              >
+                <option value="">اختر المصدر</option>
+                {sourceId.map((source) => (
+                  <option key={source.id} value={source.id}>
+                    {source.full_name}
+                  </option>
+                ))}
+              </Form.Select>
             </Form.Group>
           </Row>
+          <Form.Group as={Col} md="8" controlId="validationCustom04">
+            <Form.Label>كتابة منشور</Form.Label>
+            <Form.Control
+              as="textarea"
+              rows={10}
+              required
+              value={PostContent}
+              onChange={(event) => setPostContent(event.target.value)}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please provide a description.
+            </Form.Control.Feedback>
+          </Form.Group>
           <Form.Group
             as={Col}
             md="8"
@@ -86,7 +147,10 @@ function AddNotificationForm() {
             className="mb-4"
           >
             <Form.Label>إضافة صورة (اختياري)</Form.Label>
-            <Form.Control type="file" onChange={handleImageChange} />
+            <Form.Control
+              type="file"
+              onChange={(event) => setImage(event.target.files[0])}
+            />
           </Form.Group>
           <Button
             className="d-flex justify-content-center submitbtn"
@@ -100,4 +164,4 @@ function AddNotificationForm() {
   );
 }
 
-export default AddNotificationForm;
+export default AddPostForm;
