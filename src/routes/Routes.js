@@ -4,6 +4,8 @@ import Collages from "../pages/Collages";
 import Notifications from "../pages/Notifications";
 import Emails from "../pages/Emails"; // Import your Emails component
 import AddPost from "../pages/AddPost";
+import Posts from "../pages/Posts";
+
 
 export const router = createBrowserRouter([
   {
@@ -11,11 +13,15 @@ export const router = createBrowserRouter([
     element: <Notifications />,
   },
   {
-    path: "/emails", // Add a new path for emails
-    element: <Emails />, // Specify the component for the emails page
+    path: "/emails",
+    element: <Emails />,
   },
   {
-    path: "/addpost", // Add a new path for emails
-    element: <AddPost />, // Specify the component for the emails page
+    path: "/addpost",
+    element: <AddPost />,
+  },
+  {
+    path: "/posts",
+    element: <Posts />,
   },
 ]);

@@ -1,0 +1,32 @@
+
+  .postsNum {
+    width: 150px;
+    text-align: right;
+    height: 50px;
+  }
+  
+  .delete-icon{
+    cursor: pointer;
+  }
+
+  
+.post {
+    display: flex;
+    align-items: center;
+  }
+  
+  .post-image {
+    width: 60px; 
+    height: 60px;
+    margin-right: 10px; 
+    margin-left: 20px;
+  }
+  
+  .post-content {
+    /* Add styles for the post content */
+  }
+  
+  .icon {
+    cursor: pointer; /* Add pointer cursor for icons */
+    margin-right: 5px; /* Add some margin between icons */
+  }
