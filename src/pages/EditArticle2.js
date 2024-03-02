@@ -1,13 +1,13 @@
 import React , { useState } from 'react';
-import SideBar from '../components/SideBar';
-import '../styles/AddArticle3.css' ;
+ 
+import '../styles/EditArticle2.css' ;
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 
 
-const AddArticle4 = () => {  
+const  EditArticle2 = () => {  
     const [validated, setValidated] = useState(false);
     const [title, setTitle] = useState("");
     const [source , setSource] = useState("");
@@ -37,19 +37,19 @@ const AddArticle4 = () => {
 
     return (  
         <div >
-             <SideBar/>
-             <div className='AddArticle'>
-             <p className='p1'>المقالات</p>
-             <hr className='hr1'/>
+            
+             <div className='EditArticle'>
+            
+             
              <Form noValidate validated={validated} onSubmit={handleSubmit} className='form'>
-                <h1 className='h1'>اضافة مقال</h1>
-              <Row className="r1">
+                <h1 className='hhh1'> تعديل مقال</h1>
+              <Row className="rrr1">
               <Col>
                 
-                <Form.Group as={Col} md="3" controlId="validationCustom01" className='f1'dir='rtl'>
-                  <Form.Label className='l1' > المصدر</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom01" className='fff1'dir='rtl'>
+                  <Form.Label className='lll1' > المصدر</Form.Label>
                   <Form.Control
-                    className='c1'
+                    className='ccc1'
                     required
                     type="text"
                     onChange={(event) => setSource(event.target.value)}
@@ -59,8 +59,8 @@ const AddArticle4 = () => {
                 </Col>
                 <Col>
                 
-                <Form.Group as={Col} md="3" controlId="validationCustom01" className='f2' dir='rtl'>
-                  <Form.Label  className='l2'>العنوان</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom01" className='fff2' dir='rtl'>
+                  <Form.Label  className='lll2'>العنوان</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -71,14 +71,14 @@ const AddArticle4 = () => {
                 
               </Row>
               <Row>
-              <Form.Group controlId="formFileLg" className="f3" as={Col} md="6" dir='rtl'>
-                <Form.Label  className='l3'>رفع الصورة</Form.Label>
+              <Form.Group controlId="formFileLg" className="fff3" as={Col} md="6" dir='rtl'>
+                <Form.Label  className='lll3'>رفع الصورة</Form.Label>
                 <Form.Control type="file" size="lg" />
              </Form.Group>
               </Row>
               <Row>
-                <Form.Group as={Col} md="6" controlId="validationCustom02" className="f4" dir='rtl'>
-                  <Form.Label  className='l4'> المقال</Form.Label>
+                <Form.Group as={Col} md="6" controlId="validationCustom02" className="fff4" dir='rtl'>
+                  <Form.Label  className='lll4'> المقال</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
@@ -89,7 +89,7 @@ const AddArticle4 = () => {
                 </Form.Group>
               </Row>
               <Button
-                className="d-flex justify-content-center submitbtn2 ml-100"
+                className="d-flex justify-content-center submitbtn3"
                 type="submit"
               >
                  حفظ  
@@ -100,4 +100,4 @@ const AddArticle4 = () => {
     );
 }
  
-export default AddArticle4;
+export default  EditArticle2;

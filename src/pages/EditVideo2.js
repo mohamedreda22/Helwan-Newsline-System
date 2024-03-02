@@ -1,6 +1,6 @@
 import React , { useState, useCallback } from 'react';
 import SideBar from '../components/SideBar';
-import '../styles/AddVideo4.css' ;
+import '../styles/EditVideo2.css' ;
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -8,7 +8,7 @@ import Row from "react-bootstrap/Row";
 import { useDropzone } from 'react-dropzone';
 
 
-const AddVideo4 = () => {  
+const  EditVideo2 = () => {  
     const [validated, setValidated] = useState(false);
     const [title, setTitle] = useState("");
     const [source , setSource] = useState("");
@@ -47,18 +47,17 @@ const AddVideo4 = () => {
     return (  
         <div >
              <SideBar/>
-             <div className='AddVideo'>
-             <p className='pp1'> الفيديوهات</p>
-             <hr className='hhr1'/>
+             <div className='EditVideo'>
+             
              <Form noValidate validated={validated} onSubmit={handleSubmit} className='form'>
-                <h1 className='hh1'>اضافة  فيديو</h1>
-              <Row className="rr1">
+                <h1 className='hhhh1'> تعديل  فيديو</h1>
+              <Row className="rrrr1">
               <Col>
                 
-                <Form.Group as={Col} md="3" controlId="validationCustom01" className='ff1'dir='rtl'>
-                  <Form.Label className='ll1' > المصدر</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom01" className='ffff1'dir='rtl'>
+                  <Form.Label className='llll1' > المصدر</Form.Label>
                   <Form.Control
-                    className='cc1'
+                    className='cccc1'
                     required
                     type="text"
                     onChange={(event) => setSource(event.target.value)}
@@ -68,8 +67,8 @@ const AddVideo4 = () => {
                 </Col>
                 <Col>
                 
-                <Form.Group as={Col} md="3" controlId="validationCustom01" className='ff2' dir='rtl'>
-                  <Form.Label  className='ll2'>العنوان</Form.Label>
+                <Form.Group as={Col} md="3" controlId="validationCustom01" className='ffff2' dir='rtl'>
+                  <Form.Label  className='llll2'>العنوان</Form.Label>
                   <Form.Control
                     required
                     type="text"
@@ -80,7 +79,7 @@ const AddVideo4 = () => {
                 
               </Row>
               <Row>
-                 <Form.Group  as={Col} md="6"  controlId="exampleForm.SelectCustom"className="ff3" dir='rtl'>
+                 <Form.Group  as={Col} md="6"  controlId="exampleForm.SelectCustom"className="ffff3" dir='rtl'>
                     <Form.Label>   التصنيف</Form.Label>
                     <Form.Select custom>
                       <option value="1">Option 1</option>
@@ -92,8 +91,8 @@ const AddVideo4 = () => {
                   </Form.Group>
               </Row>
               <Row>
-                <Form.Group as={Col} md="6" controlId="validationCustom02" className="ff4" dir='rtl'>
-                  <Form.Label  className='ll4'>   الوصف</Form.Label>
+                <Form.Group as={Col} md="6" controlId="validationCustom02" className="ffff4" dir='rtl'>
+                  <Form.Label  className='llll4'>   الوصف</Form.Label>
                   <Form.Control
                     as="textarea"
                     rows={3}
@@ -128,7 +127,7 @@ const AddVideo4 = () => {
               </Row>
               
               <Button
-                className="d-flex justify-content-center submitbtnn1"
+                className="d-flex justify-content-center submitbtnn4"
                 type="submit"
               >
                  حفظ  
@@ -140,4 +139,4 @@ const AddVideo4 = () => {
     );
 }
  
-export default AddVideo4;
+export default  EditVideo2;

@@ -1,12 +1,17 @@
 import axios from "axios";
 import React, { useState } from "react";
 import delete_icon from "../assets/icons/delete.svg";
+import edit_icon from "../assets/icons/edit.svg";
 import "../styles/AllArticles.css";
 import { FaPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
- import AddArticle4 from "./AddArticle3";
+import AddArticle4 from "./AddArticle3";
 import SideBar from "../components/SideBar";
-const handleDeleteNotification = (notification) => {
+import { useEffect } from "react";
+
+
+
+const handleDeleteArticle = ( Article) => {
   Swal.fire({
     title: "هل أنت متأكد من حذف هذا  المقال",
     icon: "warning",
@@ -33,21 +38,55 @@ const handleDeleteNotification = (notification) => {
       });
     }
   });
+
+  
 };
+
+
+const handleEditArticle =(event)=>{
+  // event.preventDefault();
+  // يتم توجيه المستخدم إلى صفحة تحرير المقال
+  window.location.href = '/editarticle2';
+ }
 const renderDeleteIcon = () => {
   return (
     <div>
       <img
         src={delete_icon}
-        alt="Delete notification"
+        alt="Delete  article"
         className="delete-icon"
-        onClick={handleDeleteNotification} 
+        onClick={handleDeleteArticle} 
       />
     </div>
   );
 };
 
+
+const renderEditIcon = () => {
+  return (
+    <div>
+      <img
+        src={edit_icon}
+        alt="Edit  article"
+        className="edit-icon"
+        onClick={ handleEditArticle} 
+      />
+    </div>
+  );
+};
+
+
 const AllArticles = () => {
+  const [articles,setArticles]=useState({
+
+    loding:true,
+    results:[],
+    err:null,
+    reload:0
+  })
+  useEffect(()=>{
+
+  },{ } )
   return (
     <>
       <div className="mt-2">
@@ -58,6 +97,7 @@ const AllArticles = () => {
           <tbody>
             <tr>
               <td>{renderDeleteIcon()}</td>
+              <td>{renderEditIcon()}</td>
               <td>التاريخ</td>
 
               <td dir="rtl">

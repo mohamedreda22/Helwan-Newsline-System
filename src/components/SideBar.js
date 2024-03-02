@@ -29,18 +29,18 @@ export default function SideBar  ()  {
                         <span className="material-icons-outlined">sports_football</span> الرياضة
                     </Nav.Link>
                     <SubMenu label="المقالات">
-                        <Nav.Link href="#AddArtical" className='active'>
+                        <Nav.Link href="/" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="#showArticals" className='active'>
+                        <Nav.Link href="allart" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>
                     <SubMenu label="كل الفيديوهات">
-                        <Nav.Link href="#AddVideo" className='active'>
+                        <Nav.Link href="addVideo" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة فيديو
                         </Nav.Link>
-                        <Nav.Link href="#showVideos" className='active'>
+                        <Nav.Link href="# " className='active'>
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>
