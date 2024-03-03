@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/EditFaq.css"; // Add your CSS file for styling
 import Simplert from 'react-simplert'
+import SideBar from "./SideBar";
 
 function EditFaq({ faq, onSave, onCancel }) {
   const [formData, setFormData] = useState({
@@ -76,11 +77,12 @@ const fetchSources = async () => {
 
 
   return (
-    <div className="edit-faq-container" dir="rtl">
+
+    <div className="edit-faq-container" dir="rtl">    <SideBar/>
       <h2 className="header">تعديل السؤال الشائع</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="question">السؤال</label>
+          <label className="lable" htmlFor="question">السؤال</label>
           <input
             type="text"
             id="question"
@@ -109,7 +111,7 @@ const fetchSources = async () => {
                         </select>
                 </div>
         <div className="form-group">
-          <label htmlFor="answer">الإجابة</label>
+          <label className="lable" htmlFor="answer">الإجابة</label>
           <textarea
             id="answer"
             name="answer"

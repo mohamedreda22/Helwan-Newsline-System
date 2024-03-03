@@ -2,17 +2,21 @@
 
 .faqs-page {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 calc(10%);
     padding: 20px;
+    border: 1px solid #ccc;
   }
   
   .faqs-page h2 {
-    font-size: 24px;
+    text-align: center;
+    font-size: 28px;
     margin-bottom: 20px;
+    padding-left: 200px;
   }
   
   .total-faqs {
     margin-bottom: 20px;
+    color: #ff0000;
   }
   
   .total-faqs h3 {
@@ -28,6 +32,7 @@
   .faqs-container {
     border: 1px solid #ccc;
     padding: 10px;
+    
   }
   
   .faqs-container .faq-item {
