@@ -5,38 +5,75 @@ import Simplert from 'react-simplert'
 
 function EditFaq({ faq, onSave, onCancel }) {
   const [formData, setFormData] = useState({
-    question: faq.question || "",
-    answer: faq.answer || "",
+    question: faq?.question || "",
+    answer: faq?.answer || "",
+    source_id: faq?.source_id || "",
+
   });
 
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [isLoading, setIsLoading] = useState(false);
+  const [sources, setSources] = useState([]);
+
+
+
+  useEffect(() => {
+    setFormData({
+      ...formData,
+      question: faq?.question || "",
+      answer: faq?.answer || "",
+      source_id: faq?.source_id || "",
+
+    });
+  }, [faq]);
+
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
-  };
+};
 
-  const handleSubmit = async (e) => {
+
+const handleSubmit = async (e) => {
     e.preventDefault();
-    if (!formData.question || !formData.answer) {
+    if (!formData.question || !formData.answer || !formData.source_id) {
       setShowErrorAlert(true);
-      return;
+        return;
     }
 
     try {
-      const response = await axios.put(`http://localhost:9090/university/faqs/${faq.id}`, formData);
-      if (response.status === 200) {
-        setShowSuccessAlert(true);
-        onSave(formData);
-      } else {
-        setShowErrorAlert(true);
-      }
+        setIsLoading(true);
+        await axios.put(`http://localhost:9090/university/faqs/${faq.id}`, formData);
+         setShowSuccessAlert(true);
     } catch (error) {
-      console.error('Error updating FAQ:', error);
-      setShowErrorAlert(true);
+        console.error('Error updating FAQ:', error);
+        setShowErrorAlert(true);
+    }finally{
+      setIsLoading(false)
     }
-  };
+
+};
+
+
+const handleCancel = () => {
+  onCancel();
+};
+
+useEffect(()=>{
+  fetchSources();
+},[]);
+
+const fetchSources = async () => {
+  try {
+      const response = await axios.get('http://localhost:9090/university/sources');
+      setSources(response.data);
+  } catch (error) {
+      console.error('Error fetching sources:', error);
+      setShowErrorAlert(true);
+  }
+};
+
 
   return (
     <div className="edit-faq-container" dir="rtl">
@@ -55,6 +92,23 @@ function EditFaq({ faq, onSave, onCancel }) {
           />
         </div>
         <div className="form-group">
+                    <label className="lable" htmlFor="source_id">المصدر</label>
+                    <select
+                            id="source_id"
+                            name="source_id"
+                            value={formData.source_id}
+                            onChange={handleInputChange}
+                            className="form-control"
+                        >
+                            <option key="default" value="">اختر المصدر</option>
+                            {sources.map(source => (
+                                <option key={source.source_id} value={source.source_id}>
+                                    {source.full_name}
+                                </option>
+                            ))}
+                        </select>
+                </div>
+        <div className="form-group">
           <label htmlFor="answer">الإجابة</label>
           <textarea
             id="answer"
@@ -65,34 +119,32 @@ function EditFaq({ faq, onSave, onCancel }) {
             required
           />
         </div>
-        <button type="submit" className="btn-submit">
-          حفظ التغييرات
+        <div className="btn-container">
+        <button type="submit" className="btn-submit" disabled={isLoading} style={{width:"30%"}} >
+        {isLoading ? 'جاري التحديث...' : 'حفظ التغييرات'}
         </button>
-        <button type="button" className="btn-cancel" onClick={onCancel}>
+        <button type="button" className="btn-submit" onClick={handleCancel} disabled={isLoading} style={{width:"30%"}}> 
           إلغاء
         </button>
+        </div>
       </form>
       {/* Success and error alerts */}
-      <div>
-        <p className={showSuccessAlert ? "success-message" : "hidden"}>تم التعديل بنجاح</p>
-        <p className={showErrorAlert ? "error-message" : "hidden"}>حدث خطأ ما يرجي اعادة المحاولة</p>
-      </div>
       <Simplert
-                showSimplert={showErrorAlert}
-                type="error"
-                title="Failed"
-                message="حدث خطأ ما يرجي اعادة المحاولة"
-                onClose={() => setShowErrorAlert(false)}
-                customCloseBtnText= 'اغلاق'
-            />
-            <Simplert
-                showSimplert={showSuccessAlert}
-                type="success"
-                title="Success"
-                message="تم التعديل بنجاح"
-                onClose={() => setShowSuccessAlert(false)}
-                customCloseBtnText= 'تم '
-            />
+        showSimplert={showErrorAlert}
+        type="error"
+        title="Failed"
+        message="حدث خطأ ما يرجي اعادة المحاولة"
+        onClose={() => setShowErrorAlert(false)}
+        customCloseBtnText="اغلاق"
+      />
+      <Simplert
+        showSimplert={showSuccessAlert}
+        type="success"
+        title="Success"
+        message="تم التعديل بنجاح"
+        onClose={() => setShowSuccessAlert(false)}
+        customCloseBtnText="تم "
+      />
     </div>
   );
 }

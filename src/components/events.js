@@ -3,20 +3,40 @@ import axios from "axios";
 import EventItem from "./eventItem";
 import EditEvent from "./editEvent";
 import "../styles/Events.css";
-import arrow_left from "../assets/icons/arrow_circle_left.svg";
-import arrow_right from "../assets/icons/arrow_circle_right.svg";
+import usePagination from '../hooks/usePagination';
+import arrow_left from '../assets/icons/arrow_circle_left.svg';
+import arrow_right from '../assets/icons/arrow_circle_right.svg';
 import SideBar from "./SideBar";
+
 
 function Events() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [currentPage, setCurrentPage] = useState(1);
   const [isEditing, setIsEditing] = useState(false);
   const [eventIdToEdit, setEventIdToEdit] = useState(null);
   const [editedEvent, setEditedEvent] = useState(null);
+  const [totalEvents, setTotalEvents] = useState(0);
 
   const eventsPerPage = 9;
+
+    // Pagination hook
+    const {
+      currentPage,
+      totalPages,
+      goToPage,
+      goToFirstPage,
+      goToLastPage,
+    } = usePagination(totalEvents, eventsPerPage);
+  
+    const startIndex = (currentPage - 1) * eventsPerPage;
+    const endIndex = startIndex + eventsPerPage - 1;
+
+    const renderEvents = () => {
+      return events.slice(startIndex, endIndex + 1).map((event) => (
+        <EventItem key={event.event_id} event={event} onDelete={handleDeleteEvent} onEdit={handleEditEvent} />
+      ));
+    };
 
   useEffect(() => {
     fetchEvents();
@@ -32,6 +52,7 @@ function Events() {
   const fetchEvents = async () => {
     try {
       const response = await axios.get("http://localhost:9090/university/events");
+      setTotalEvents(response.data.length); 
       setEvents(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -60,34 +81,6 @@ function Events() {
     setIsEditing(false);
     setEventIdToEdit(null);
   };
-
-  const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
-  };
-
-  const renderPaginationButtons = () => {
-    const totalPages = Math.ceil(events.length / eventsPerPage);
-    const paginationButtons = [];
-    for (let i = 1; i <= totalPages; i++) {
-      paginationButtons.push(
-        <button
-          key={i}
-          className={`page-btn ${currentPage === i ? "active" : ""}`}
-          onClick={() => handlePageChange(i)}
-        >
-          {i}
-        </button>
-      );
-    }
-    return paginationButtons;
-  };
-
-  // Logic to get current events to display
-  const indexOfLastEvent = currentPage * eventsPerPage;
-  const indexOfFirstEvent = indexOfLastEvent - eventsPerPage;
-  const currentEvents = events.slice(indexOfFirstEvent, indexOfLastEvent);
-
-  const paginate = (pageNumber) => setCurrentPage(pageNumber);
 
   const handleSave = async () => {
     try {
@@ -128,35 +121,30 @@ function Events() {
       <div className="events-container">
         <table id="events-table" className="events-table">
           <tbody>
-            {currentEvents.map((event) => (
-              <EventItem
-                key={event.event_id}
-                event={event}
-                onDelete={handleDeleteEvent}
-                onEdit={handleEditEvent}
-              />
-            ))}
+            {renderEvents()}
           </tbody>
         </table>
-        {events.length > eventsPerPage && (
-          <div className="pagination">
-            <button
-              className="page-btn"
-              onClick={() => paginate(currentPage - 1)}
-              disabled={currentPage === 1}
-            >
-              <img src={arrow_left} alt="Left Arrow" className="arrow-icon" />
-            </button>
-            {renderPaginationButtons()}
-            <button
-              className="page-btn"
-              onClick={() => paginate(currentPage + 1)}
-              disabled={currentPage === Math.ceil(events.length / eventsPerPage)}
-            >
-              <img src={arrow_right} alt="Right Arrow" className="arrow-icon" />
-            </button>
-          </div>
-        )}
+
+        {totalEvents > eventsPerPage && (
+              <div className="pagination">
+                  <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
+                  <div className="page-numbers">
+                      {Array.from({ length: totalPages }, (_, index) => (
+                          <span
+                              key={index + 1}
+                              className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                              onClick={() => goToPage(index + 1)}
+                              disabled={currentPage === index + 1}
+
+                          >
+                              {index + 1}
+                          </span>
+                      ))}
+                     </div>
+              <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
+                            </div>
+
+                                     )}
       </div>
       </>
       )}

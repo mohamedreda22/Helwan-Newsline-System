@@ -1,0 +1,77 @@
+.add-faq-page {
+    padding: 20px;
+}
+
+.add-faq-container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+}
+
+.header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.form-control {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* .btn-submit {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.btn-submit:hover {
+    background-color: #0056b3;
+} */
+
+.error {
+    color: red;
+    margin-top: 10px;
+}
+
+.simplert-container {
+    margin-top: 20px;
+}
+
+/* Additional styles for Simplert alerts */
+.simplert-text {
+    font-size: 16px;
+    text-align: right;
+}
+
+.simplert-close {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    padding: 8px 15px;
+}
+
+.simplert-close:hover {
+    background-color: #0056b3;
+}
