@@ -1,39 +1,35 @@
 import React from "react";
-import delete_icon from "../assets/icons/delete.svg";
-import "../styles/FAQItem.css";
-import editIcon from "../assets/icons/edit.svg";
+import edit_icon from '../assets/icons/edit.svg';
+import delete_icon from '../assets/icons/delete.svg';
+import '../styles/FAQItem.css'; // Add your CSS file for styling
 
-const FaqItem = ({ question, answer, onDelete ,onEdit}) => {
-    
+const FaqItem = ({ faq, onDelete, onEdit }) => {
+  const handleEdit = () => {
+    onEdit(faq.id);
+}
+
+
   const handleDelete = () => {
-    onDelete(question); 
-  };
-    const handelEdit = () => {  
-        onEdit(question, answer);
-    };
+    onDelete(faq.id);
+}
 
   return (
-    <div className="faq-item" dir="rtl">
-      <div className="faq-details">
-        <h3 className="faq-question">{question}</h3>
-        <p className="faq-answer">{answer}</p>
-      </div>
-      <div className="faq-actions">
-        <img 
-          src={delete_icon}
-          alt="Delete FAQ"
-          className="delete-icon"
-          onClick={handleDelete}
+    <tr>
+      <td >
+      <div className="faq-item-container" dir="rtl" >
+        <div>
+            <div className="faq-item-question" >{faq.question}</div>
+            <div className="faq-item-answer">{faq.answer}</div>         
+      </div>  
+      <div > 
+        <img src={edit_icon} alt="Edit" className="edit-icon" onClick={handleEdit}
         />
-        <img 
-            src={editIcon}
-            alt="Edit FAQ"
-            className="edit-icon"
-            onClick={handelEdit}
-        
+        <img src={delete_icon} alt="Delete" className="delete-icon" onClick={handleDelete}
         />
-      </div>
-    </div>
+
+</div>   </div>
+       </td>
+    </tr>
   );
 };
 

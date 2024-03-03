@@ -76,15 +76,14 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (!formData.event_address || !formData.category_id) {
+/*         if (!formData.event_address || !formData.category_id) {
             setShowErrorAlert(true);
             return;
-        }
+        } */
 
         try {
             const response = await axios.put(`http://localhost:9090/university/events/${event.event_id}`, formData);
             if (response.status === 200) {
-
             setShowSuccessAlert(true);
             onSave(formData);}
             else{
@@ -171,7 +170,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                         >
                             <option value="">اختر المصدر</option>
                             {sources.map(source => (
-                                <option key={source.id} value={source.id}>
+                                <option key={source.source_id} value={source.source_id}>
                                     {source.full_name}
                                 </option>
                             ))}
@@ -235,12 +234,15 @@ export default function EditEvent({ event, onSave, onCancel }) {
                                     disabled cause of backend API handle
                                 </span>
                 </div>
+                <div className="btn-container">
+                
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
                 <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>
                     إلغاء
                 </button>
+                </div>
             </form>    
             {/* Success and error alerts */}
             <Simplert

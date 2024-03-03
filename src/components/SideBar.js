@@ -27,28 +27,28 @@ export default function SideBar  ()  {
                         <span className="material-icons-outlined">sports_football</span> الرياضة
                     </Nav.Link>
                     <SubMenu label="المقالات">
-                        <Nav.Link href="#addArtical" className='active'>
+                        <Nav.Link href="addArtical" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="#showArticals" className='active'>
+                        <Nav.Link href="showArticals" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>
                     <SubMenu label="كل الفيديوهات">
-                        <Nav.Link href="#addVideo" className='active'>
+                        <Nav.Link href="addVideo" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة فيديو
                         </Nav.Link>
-                        <Nav.Link href="#showVideos" className='active'>
+                        <Nav.Link href="showVideos" className='active'>
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>
-                    <Nav.Link href="#notifications" className='active'>
+                    <Nav.Link href="notifications" className='active'>
                         <span className="material-icons-outlined">add_alert</span> الاشعارات
                     </Nav.Link>
-                    <Nav.Link href="#topNews" className='active'>
+                    <Nav.Link href="topNews" className='active'>
                         <span className="material-icons-outlined">newspaper</span> اهم الاخبار
                     </Nav.Link>
-                    <Nav.Link href="#Post" className='active'>
+                    <Nav.Link href="Post" className='active'>
                         <span className="material-icons-outlined">assistant</span> منشور
                     </Nav.Link>
                     <Nav.Link href="faq" className='active'>

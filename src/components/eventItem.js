@@ -6,7 +6,7 @@ import watch from '../assets/icons/watch.png';
 import location from '../assets/icons/location.svg';
 import '../styles/EventItem.css'; 
 import imageTest from "../assets/images/imageTest.jpeg";
-import ImageComponent from './imageComponent';
+//import ImageComponent from './imageComponent';
 
 function EventItem({ event, onDelete, onEdit }) {
     const handleDelete = () => {
@@ -48,8 +48,8 @@ function EventItem({ event, onDelete, onEdit }) {
                  <div>
                     <div className="event-item-address" >{event.event_address}</div>
                     <div className="event-item-description">{event.event_description}</div> 
-                    </div>    
-                    <ImageComponent/>
+                    </div> 
+                    <img src={imageTest} className='event-item-image' alt='image_test'/>                    
                 </div>
             </td>
         </tr>

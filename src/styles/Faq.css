@@ -2,17 +2,21 @@
 
 .faqs-page {
     max-width: 800px;
-    margin: 0 auto;
+    margin: 0 calc(10%);
     padding: 20px;
+    border: 1px solid #ccc;
   }
   
   .faqs-page h2 {
-    font-size: 24px;
+    text-align: center;
+    font-size: 28px;
     margin-bottom: 20px;
+    padding-left: 200px;
   }
   
   .total-faqs {
     margin-bottom: 20px;
+    color: #ff0000;
   }
   
   .total-faqs h3 {
@@ -28,6 +32,7 @@
   .faqs-container {
     border: 1px solid #ccc;
     padding: 10px;
+    
   }
   
   .faqs-container .faq-item {
@@ -66,4 +71,36 @@
     background-color: #007bff;
     color: #fff;
   }
-  
+
+  /* AddFaq.css */
+
+.add-faq-btn-container {
+  margin-bottom: 10px; 
+}
+
+.add-faq-btn {
+  background-color: #091260db;
+  color: #fff;
+  padding: 5px 15px;
+  border: none;
+  border-radius: 110px;
+  cursor: pointer;
+  transition: background-color 0.3s, color 0.3s;
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.add-faq-btn:hover {
+  background-color: #0056b3; 
+}
+.faq-table{
+  width: 100%;
+  border-collapse: collapse;
+  margin-top: 20px;
+}
+.faq-table td{
+  border: 1px solid #ccc;
+  text-align: center;
+  width: 150px;
+  height: 50px;
+}

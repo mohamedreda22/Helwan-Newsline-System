@@ -5,7 +5,7 @@ import SideBar from "../components/SideBar";
 import AddEvent from "../components/addEvent";
 import Events from "../components/events";
 import LogIn from "../pages/LogIn";
-import Faq from "../components/faq";
+import FAQs from "../components/faq";
 
 export const RouterComponent = () => {
   return (
@@ -17,7 +17,8 @@ export const RouterComponent = () => {
         <Route path="/sideBar" element={<SideBar />} />
         <Route path="/addEvent" element={<AddEvent />} />
         <Route path="/showEvents" element={<Events />} />
-        <Route path="/faq" element={<Faq />} />
+        <Route path="/faq" element={<FAQs />} />
+        <Route path="/addFaq" element={<AddEvent/>}/>
       </Routes>
     </Router>
   );

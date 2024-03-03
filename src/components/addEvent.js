@@ -220,8 +220,8 @@ export default function AddEvent() {
                         >
                                 <option value="">اختر المصدر</option>
                                 {sources.map(source => (
-                                    <option key={source.id} 
-                                    value={source.id}>
+                                    <option key={source.source_id} 
+                                    value={source.source_id}>
                                         {source.full_name}
                                         </option>
                                 ))}
