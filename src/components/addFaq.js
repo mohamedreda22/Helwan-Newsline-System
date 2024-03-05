@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Simplert from 'react-simplert';
-import Sidebar from './SideBar';
+//import Sidebar from './SideBar';
 import '../styles/AddFaq.css';
+import useAlert from '../hooks/useAlert';
 
 function AddFaq() {
     const [formData, setFormData] = useState({
@@ -12,9 +13,8 @@ function AddFaq() {
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [sources, setSources] = useState([]);
+    const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
     
 
     useEffect(() => {
@@ -43,7 +43,7 @@ function AddFaq() {
         e.preventDefault();
 
         if (!formData.question || !formData.answer || !formData.source_id) {
-            setError('برجاء ملئ كل البيانات');
+            showAlertHandler('error', 'Failed', 'برجاء ملئ كل البيانات', 'اغلاق');
             return;
         }
 
@@ -53,15 +53,14 @@ function AddFaq() {
             const response = await axios.post('http://localhost:9090/university/faqs', formData);
 
             if (response && response.status === 201) {
-                setShowSuccessAlert(true);
+                showAlertHandler('success', 'Success', 'تم اضافة السؤال بنجاح', 'تم');
                 resetForm();
             } else {
-                throw new Error('حدث خطأ أثناء إضافة السؤال');
+                showAlertHandler('error', 'Failed', 'للاسف فشل اضافة السؤال ', 'اغلاق');
             }
         } catch (error) {
             console.error('Error:', error);
             setError('حدث خطأ أثناء إضافة السؤال');
-            setShowErrorAlert(true);
             let errorMessage = 'حدث خطأ أثناء إضافة السؤال';
             if (error.response) {
                 if (error.response.status === 400) {
@@ -78,9 +77,7 @@ function AddFaq() {
                 // Something happened in setting up the request that triggered an Error
                 errorMessage = 'An unexpected error occurred. Please try again later.';
             }
-            setError(errorMessage);
-            setShowErrorAlert(true)
-
+            showAlertHandler('error', 'Failed', errorMessage, 'اغلاق');
         } finally {
             setIsLoading(false);
         }
@@ -154,23 +151,15 @@ function AddFaq() {
                     </button>
 
                     {error && <div className="error">{error}</div>}
-                    <Simplert
-                        showSimplert={showErrorAlert}
-                        type="error"
-                        title="Failed"
-                        message="حدث خطأ ما يرجي اعادة المحاولة"
-                        onClose={() => setShowErrorAlert(false)}
-                        customCloseBtnText="اغلاق"
-                    />
-                    <Simplert
-                        showSimplert={showSuccessAlert}
-                        type="success"
-                        title="Success"
-                        message="تمت الاضافة بنجاح"
-                        onClose={() => setShowSuccessAlert(false)}
-                        customCloseBtnText="تم "
-                    />
                 </form>
+                <Simplert
+                showSimplert={showAlert}
+                type={alertType}
+                title={alertTitle}
+                message={alertMessage}
+                onClose={hideAlertHandler}
+                customCloseBtnText={customCloseBtnText}
+            />                
             </div>
         </div>
     );
