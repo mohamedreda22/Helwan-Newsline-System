@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Simplert from 'react-simplert';
 import Sidebar from "./SideBar";
@@ -8,7 +8,7 @@ import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
 import { DateTime } from 'luxon';
 import TextField from '@mui/material/TextField';
 import '../styles/AddEvent.css';
-
+import useAlert from "../hooks/useAlert";
 
 
 export default function AddEvent() {
@@ -26,10 +26,9 @@ export default function AddEvent() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [categories, setCategories] = useState([]);
-    const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    const [showErrorAlert, setShowErrorAlert] = useState(false);
-    const [eventImagePath, setEventImagePath] = useState(null);
+    //const [eventImagePath, setEventImagePath] = useState(null);
     const [sources, setSources] = useState([]);
+    const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
 
 
     useEffect(() => {
@@ -65,7 +64,7 @@ export default function AddEvent() {
 
 
            if (!formData.event_address || !formData.category_id  || !formData.event_place) {
-                  setError('برجاء ملئ كل البيانات');
+            showAlertHandler('error', 'Failed', 'برجاء ملئ كل البيانات', 'اغلاق');
             return;
         }
 
@@ -78,19 +77,22 @@ export default function AddEvent() {
             );
 
             if (response && response.status === 200) {
-                setShowSuccessAlert(true);
+                showAlertHandler('success', 'Success', 'تم اضافة الحدث بنجاح', 'تم');
                 resetForm();
                 console.log(formData)
 
             } else {
-                setShowErrorAlert(true);
+                showAlertHandler('error', 'Failed', 'للاسف فشل اضافة الحدث ', 'اغلاق');
                 setError('حدث خطأ أثناء إضافة الحدث');
                
             }
         } catch (error) {
             console.error('Error:', error);
-            setError('حدث خطأ أثناء إضافة الحدث');
-            setShowErrorAlert(true);
+            if (error.response) {
+                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
+            } else {
+                showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
+            }
         } finally {
             setIsLoading(false);
         }
@@ -302,23 +304,15 @@ export default function AddEvent() {
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
                     {error && <div className="error">{error}</div>}
-                    <Simplert
-                        showSimplert={showErrorAlert}
-                        type="error"
-                        title="Failed"
-                        message="حدث خطأ ما يرجي اعادة المحاولة"
-                        onClose={() => setShowErrorAlert(false)}
-                        customCloseBtnText='اغلاق'
-                    />
-                    <Simplert
-                        showSimplert={showSuccessAlert}
-                        type="success"
-                        title="Success"
-                        message="تمت الاضافة بنجاح"
-                        onClose={() => setShowSuccessAlert(false)}
-                        customCloseBtnText='تم '
-                    />
                 </form>
+                <Simplert
+                showSimplert={showAlert}
+                type={alertType}
+                title={alertTitle}
+                message={alertMessage}
+                onClose={hideAlertHandler}
+                customCloseBtnText={customCloseBtnText}
+            />               
             </div>
         </div>
     );

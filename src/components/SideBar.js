@@ -3,6 +3,7 @@ import { Sidebar, Menu, MenuItem, SubMenu } from 'react-pro-sidebar';
 import logo from "../assets/images/logo.png";
 import '../styles/SideBar.css';
 import { Nav } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 export default function SideBar  ()  {
     return ( 
@@ -14,10 +15,10 @@ export default function SideBar  ()  {
             <Sidebar className='side2'>
                 <Menu>
                   <SubMenu label=" اهم الاحداث">
-                     <Nav.Link href="addEvent" className='active'>
+                     <Nav.Link as={Link} to="/addEvent" className='active'>
                         <span className="material-icons-outlined">add</span> اضافة حدث
                      </Nav.Link>
-                     <Nav.Link href="showEvents" className='active'>
+                     <Nav.Link as={Link} to="/showEvents" className='active'>
                         <span className="material-icons-outlined">calendar_month</span> كل الاحداث
                     </Nav.Link>
 
@@ -51,13 +52,14 @@ export default function SideBar  ()  {
                     <Nav.Link href="Post" className='active'>
                         <span className="material-icons-outlined">assistant</span> منشور
                     </Nav.Link>
-                    <Nav.Link href="faq" className='active'>
+                    <Nav.Link as={Link} to="/faq" className='active'>
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
                     {[...Array(2)].map((_, index) => <MenuItem key={index}></MenuItem>)}
-                    <Nav.Link href="logInTop"  className='active'>
+                    <Nav.Link  as={Link} to="/logout"  className='active'>
                         <span className="material-icons-outlined">logout</span> تسجيل الخروج
                     </Nav.Link>
+
                 </Menu>
             </Sidebar>
             </div>

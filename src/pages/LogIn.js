@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 import logo from '../assets/images/logo.png';
 import '../styles/LogIn.css';
 import axios from 'axios';
+import useAlert from '../hooks/useAlert';
+import Simplert from 'react-simplert';
+import { useNavigate } from 'react-router-dom';
+
+
 
 function LogIn() {
     const [formData, setFormData] = useState({
@@ -11,6 +16,9 @@ function LogIn() {
     });
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
+    const navigate = useNavigate();
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -22,23 +30,29 @@ function LogIn() {
         setIsLoading(true);
 
         try {
-            const response = await axios.post(`http://localhost:9090//auth/login?email=${formData.email}&password=${formData.password}`);
+            const response = await axios.post('http://localhost:9090/university/auth/login', formData);
             console.log('Response:', response);
-            if (response && response.status === 202) {
-                alert('تم تسجيل الدخول بنجاح');
+            if (response && (response.status === 200 ||response.status === 201 || response.status === 202)) {
+                showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 console.log('Form data submitted:', response.data);
                 setFormData({
                     email: '',
                     password: '',
                 });
+                navigate('/showEvents');
+                localStorage.setItem('token', response.data.token);
             } else {
-                alert('فشل تسجيل الدخول بنجاح');
+                showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
                 console.log('Response data:', response.data);
             }
         } catch (error) {
             console.error('Error:', error);
-            console.log('Response data:', error.response ? error.response.data : '');
-            alert('An error occurred. Please try again later.');
+            if (error.response) {
+                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
+            } else {
+                showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
+            }
+                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
         } finally {
             setIsLoading(false);
         }
@@ -69,6 +83,7 @@ function LogIn() {
                             value={formData.email}
                             onChange={handleChange}
                             className="form-control"
+                            required
                         />
                     </div>
                     <div className="form-group">
@@ -80,10 +95,11 @@ function LogIn() {
                             value={formData.password}
                             onChange={handleChange}
                             className="form-control"
+                            required
                         />
                     </div>
                     <div className="form-group">
-                        <label  htmlFor="rememberMe">تذكرني دائما</label>
+                        <label className='remember-me'  htmlFor="remember-me">تذكرني دائما</label>
                         <input
                             type="checkbox"
                             id="rememberMe"
@@ -97,7 +113,19 @@ function LogIn() {
                     </button>
                     {error && <div className="error">{error}</div>}
                 </form>
+                <div className="links-container">
+                         <a href="/forgotPassword" className="link forgot-password">نسيت كلمة المرور؟</a>
+                         <a href="/signUp" className="link register">ليس لديك حساب؟ سجل الان</a>
+                     </div>
             </div>
+            <Simplert
+                showSimplert={showAlert}
+                type={alertType}
+                title={alertTitle}
+                message={alertMessage}
+                onClose={hideAlertHandler}
+                customCloseBtnText={customCloseBtnText}
+            />
         </div>
     );
 }
