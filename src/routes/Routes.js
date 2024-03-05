@@ -5,6 +5,7 @@ import Notifications from "../pages/Notifications";
 import Emails from "../pages/Emails"; // Import your Emails component
 import AddPost from "../pages/AddPost";
 import Posts from "../pages/Posts";
+import EditPost from "../components/EditPost";
 
 
 export const router = createBrowserRouter([
@@ -23,5 +24,9 @@ export const router = createBrowserRouter([
   {
     path: "/posts",
     element: <Posts />,
+  },
+  {
+    path: "/editpost",
+    element: <EditPost />,
   },
 ]);

@@ -17,16 +17,12 @@
   
   .post-image {
     width: 60px; 
-    height: 60px;
+    height: 100%px;
     margin-right: 10px; 
     margin-left: 20px;
   }
   
-  .post-content {
-    /* Add styles for the post content */
-  }
-  
   .icon {
-    cursor: pointer; /* Add pointer cursor for icons */
-    margin-right: 5px; /* Add some margin between icons */
+    cursor: pointer; 
+    margin-right: 2px; 
   }

@@ -7,6 +7,7 @@ import Notifications from "./pages/Notifications";
 import Emails from "./pages/Emails";
 import AddPost from "./pages/AddPost";
 import Posts from "./pages/Posts";
+import EditPost from "./components/EditPost";
 
 function App() {
   return (
@@ -18,6 +19,7 @@ function App() {
       <Emails />
       <AddPost />
       <Posts />
+      <EditPost />
     </>
   );
 }
