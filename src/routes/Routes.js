@@ -6,6 +6,8 @@ import Emails from "../pages/Emails"; // Import your Emails component
 import AddPost from "../pages/AddPost";
 import Posts from "../pages/Posts";
 import EditPost from "../components/EditPost";
+import AddDepartmentForm from "../components/AddDepartmentForm";
+import Departments from "../pages/Departments";
 
 
 export const router = createBrowserRouter([
@@ -28,5 +30,13 @@ export const router = createBrowserRouter([
   {
     path: "/editpost",
     element: <EditPost />,
+  },
+  {
+    path: "/adddepartment",
+    element: <AddDepartmentForm />,
+  },
+  {
+    path: "/departments",
+    element: <Departments />,
   },
 ]);

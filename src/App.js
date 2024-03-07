@@ -8,6 +8,9 @@ import Emails from "./pages/Emails";
 import AddPost from "./pages/AddPost";
 import Posts from "./pages/Posts";
 import EditPost from "./components/EditPost";
+import AddDepartmentForm from "./components/AddDepartmentForm";
+import ShowDepartment from "./components/ShowDepartments";
+import Departments from "./pages/Departments";
 
 function App() {
   return (
@@ -20,6 +23,8 @@ function App() {
       <AddPost />
       <Posts />
       <EditPost />
+      <AddDepartmentForm />
+      <Departments />
     </>
   );
 }

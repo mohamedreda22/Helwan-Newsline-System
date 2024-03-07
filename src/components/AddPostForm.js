@@ -67,14 +67,14 @@ function AddPostForm() {
       );
       if (response && response.status === 201) {
         console.log("Post added successfully:", response.data);
-        alert("Added successfuly!");
+        alert("Added successfully!");
         resetForm();
       } else {
-        alert("حدث خطأ أثناء إضافة المنشور");
+        alert("An error occurred while adding the post");
       }
     } catch (error) {
       console.error("Error adding post:", error);
-      alert("error: ", error);
+      alert("Error: " + error.message);
     }
   };
 
@@ -97,6 +97,7 @@ function AddPostForm() {
             <Form.Control
               required
               type="text"
+              value={source}
               onChange={(event) => setSource(event.target.value)}
             />
           </Form.Group>
