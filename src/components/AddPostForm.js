@@ -53,8 +53,16 @@ function AddPostForm() {
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
+  
     try {
+      console.log("Data to be sent to backend:", {
+        post_content: PostContent,
+        post_image_path: image ? image.name : null,
+        category_id: selectedCategory,
+        source_string: source,
+        source_id: selectedSource,
+      });
+  
       const response = await axios.post(
         "http://localhost:9090/university/posts",
         {
@@ -65,7 +73,7 @@ function AddPostForm() {
           source_id: selectedSource,
         }
       );
-      if (response && response.status === 201) {
+      if (response && response.status === 200) {
         console.log("Post added successfully:", response.data);
         alert("Added successfully!");
         resetForm();
@@ -77,7 +85,7 @@ function AddPostForm() {
       alert("Error: " + error.message);
     }
   };
-
+  
   const resetForm = () => {
     setPostContent("");
     setImage(null);
@@ -129,7 +137,7 @@ function AddPostForm() {
               >
                 <option value="">اختر المصدر</option>
                 {sourceId.map((source) => (
-                  <option key={source.id} value={source.id}>
+                  <option key={source.source_id} value={source.source_id}>
                     {source.full_name}
                   </option>
                 ))}
