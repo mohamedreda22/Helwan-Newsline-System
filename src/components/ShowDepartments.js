@@ -298,7 +298,7 @@ const ShowDepartments = () => {
   };
 
   return (
-    <div className="mt-2">
+    <div className="mt-2 container">
       <button type="button" className="AddDep" onClick={handleShowAddModal}>
         إضافة <FaPlus />
       </button>

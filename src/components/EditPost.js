@@ -252,6 +252,10 @@ const EditPost = ({ post, onClose }) => {
     if (selectedFile) {
       formData.append("post_image", selectedFile);
     }
+  
+    // Log the data being sent to the backend
+    console.log("Data to be sent to backend:", formData);
+  
     try {
       await axios.put(
         `http://localhost:9090/university/posts/${post.post_id}`,
@@ -269,7 +273,7 @@ const EditPost = ({ post, onClose }) => {
       setShowErrorAlert(true);
     }
   };
-
+  
   return (
     <div dir="rtl">
       <Form  onSubmit={handleSubmit}>
@@ -309,7 +313,7 @@ const EditPost = ({ post, onClose }) => {
             >
               <option value="">اختر المصدر</option>
               {sourceId.map((source) => (
-                <option key={source.id} value={source.id}>
+                <option key={source.source_id} value={source.source_id}>
                   {source.full_name}
                 </option>
               ))}

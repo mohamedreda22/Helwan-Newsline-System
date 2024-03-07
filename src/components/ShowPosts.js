@@ -80,15 +80,7 @@
 //         <tbody>
 //           {posts.map((post) => (
 //             <tr key={post.post_id}>
-//               <td className="post-image ">
-//                 {post.post_image_path && (
-//                   <img
-//                     className="post-image"
-//                     src={post.post_image_path}
-//                     alt="Post Image"
-//                   />
-//                 )}
-//               </td>
+//               
 //               <td>{post.post_content.slice(0, 20)}...</td>
 //               <td>{post.date}</td>
 //               <td> {post.source_string}</td>
@@ -207,6 +199,15 @@ const ShowPosts = () => {
         <tbody>
           {posts.map((post) => (
             <tr key={post.post_id}>
+              <td className="post-image ">
+                {post.post_image_path && (
+                   <img
+                     className="post-image"
+                     src={post.post_image_path}
+                    alt="Post Image"
+                   />
+                 )}
+               </td>
               <td>{post.post_content.slice(0, 20)}...</td>
               <td>{post.date}</td>
               <td>{post.source_string}</td>

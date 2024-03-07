@@ -5,12 +5,12 @@ import Simplert from "react-simplert";
 
 const AddDepartmentForm = () => {
   const [departmentName, setDepartmentName] = useState("");
-  const [collegeName, setCollegeName] = useState("");
+  // const [collegeName, setCollegeName] = useState("");
   const [colleges, setColleges] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [validated, setValidated] = useState(false);
-
+  // const [validated, setValidated] = useState(false);
+  const [selectedcollege, setSelectedcollege] = useState("");
   useEffect(() => {
     fetchColleges();
   }, []);
@@ -25,34 +25,61 @@ const AddDepartmentForm = () => {
       console.error("Error fetching colleges:", error);
     }
   };
-
+  const handleCollegeChange = (event) => {
+    setSelectedcollege(event.target.value);
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
-    const form = event.currentTarget;
-    if (form.checkValidity() === false) {
-      event.stopPropagation();
-    } else {
-      try {
-        await axios.post("http://localhost:9090/university/departments", {
+    event.stopPropagation();
+    // const form = event.currentTarget;
+    // if (form.checkValidity() === false) {
+    //   event.stopPropagation();
+    // }
+    // else {
+    try {
+      // Log the data being sent to the backend
+      console.log("Data to be sent to backend:", {
+        department_name: departmentName,
+        college_id: selectedcollege,
+      });
+      const response = await axios.post(
+        "http://localhost:9090/university/departments",
+        {
           department_name: departmentName,
-          college_name: collegeName,
-        });
-        setShowSuccessAlert(true);
-        // Reset form fields after successful submission
-        setDepartmentName("");
-        setCollegeName("");
-        setValidated(false);
-      } catch (error) {
-        console.error("Error adding department:", error);
-        setShowErrorAlert(true);
+          college_id: selectedcollege,
+        }
+      );
+      if (response && response.status === 200) {
+        console.log("department added successfully:", response.data);
+        alert("Added successfully!");
+        resetForm();
+      } else {
+        alert("حدث خطأ اثناء إضافة القسم");
       }
+    } catch (error) {
+      console.error("Error adding department:", error);
+      alert("Error: " + error.message);
     }
-    setValidated(true);
-  };
 
+    // setValidated(true);
+  };
+  const resetForm = () => {
+    setDepartmentName("");
+    setSelectedcollege("");
+  };
   return (
     <div dir="rtl">
-      <Form noValidate validated={validated} onSubmit={handleSubmit}>
+      {/* <Form noValidate validated={validated} onSubmit={handleSubmit}> */}
+      {/* <Form.Group as={Col} md="8" controlId="validationCustom01">
+            <Form.Label>المصدر</Form.Label>
+            <Form.Control
+              required
+              type="text"
+              value={source}
+              onChange={(event) => setSource(event.target.value)}
+            />
+          </Form.Group> */}
+      <Form onSubmit={handleSubmit}>
         <Form.Group controlId="departmentName">
           <Form.Label>اسم القسم</Form.Label>
           <Form.Control
@@ -60,7 +87,6 @@ const AddDepartmentForm = () => {
             value={departmentName}
             onChange={(e) => setDepartmentName(e.target.value)}
             required
-            isInvalid={validated && departmentName.trim() === ""}
           />
           <Form.Control.Feedback type="invalid">
             الرجاء إدخال اسم القسم
@@ -70,14 +96,14 @@ const AddDepartmentForm = () => {
           <Form.Label>اسم الكلية</Form.Label>
           <Form.Select
             aria-label="Default select example"
-            value={collegeName}
-            onChange={(e) => setCollegeName(e.target.value)}
+            value={selectedcollege}
+            onChange={handleCollegeChange}
             required
-            isInvalid={validated && collegeName.trim() === ""}
+            // isInvalid={validated && collegeName.trim() === ""}
           >
             <option>اختر الكلية</option>
             {colleges.map((college) => (
-              <option key={college.college_name} value={college.college_name}>
+              <option key={college.college_id} value={college.college_id}>
                 {college.college_name}
               </option>
             ))}

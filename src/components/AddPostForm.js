@@ -50,11 +50,40 @@ function AddPostForm() {
     setSelectedSource(event.target.value);
   };
 
+  // const handleSubmit = async (event) => {
+  //   event.preventDefault();
+  //   event.stopPropagation();
+
+  //   try {
+  //     const response = await axios.post(
+  //       "http://localhost:9090/university/posts",
+  //       {
+  //         post_content: PostContent,
+  //         post_image_path: image ? image.name : null,
+  //         category_id: selectedCategory,
+  //         source_string: source,
+  //         source_id: selectedSource,
+  //       }
+  //     );
+  //     if (response && response.status === 201) {
+  //       console.log("Post added successfully:", response.data);
+  //       alert("Added successfully!");
+  //       resetForm();
+  //     } else {
+  //       alert("An error occurred while adding the post");
+  //     }
+  //   } catch (error) {
+  //     console.error("Error adding post:", error);
+  //     alert("Error: " + error.message);
+  //   }
+  // };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-  
+
     try {
+      // Log the data being sent to the backend
       console.log("Data to be sent to backend:", {
         post_content: PostContent,
         post_image_path: image ? image.name : null,
@@ -62,7 +91,7 @@ function AddPostForm() {
         source_string: source,
         source_id: selectedSource,
       });
-  
+
       const response = await axios.post(
         "http://localhost:9090/university/posts",
         {
@@ -85,7 +114,7 @@ function AddPostForm() {
       alert("Error: " + error.message);
     }
   };
-  
+
   const resetForm = () => {
     setPostContent("");
     setImage(null);
