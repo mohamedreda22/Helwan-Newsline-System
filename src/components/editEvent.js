@@ -20,12 +20,18 @@ export default function EditEvent({ event, onSave, onCancel }) {
         event_link_path: event?.event_link_path || "",
         source_id: event?.source_id || "",
         event_description: event?.event_description || "",
+        event_image_path: event?.event_image_path || "",
     });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [categories, setCategories] = useState([]);
     const [sources, setSources] = useState([]);
+    const [eventImagePath, setEventImagePath] = useState(null);
+    const [previewImage, setPreviewImage] = useState(null);
+
+    
+    const imageRef = useRef(null);
 
 
 
@@ -48,6 +54,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
             event_link_path: event?.event_link_path || "",
             source_id:event?.source_id || "",
             event_description: event?.event_description || "",
+            event_image_path: event?.event_image_path || "",
 
         });
     }, [event]);
@@ -76,10 +83,6 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-/*         if (!formData.event_address || !formData.category_id) {
-            setShowErrorAlert(true);
-            return;
-        } */
 
         try {
             const response = await axios.put(`http://localhost:9090/university/events/${event.event_id}`, formData);
@@ -111,6 +114,32 @@ export default function EditEvent({ event, onSave, onCancel }) {
             console.error('Error fetching categories:', error);
         }
     };
+    const handleFileChange = (e, data) => {
+        const file = e ? e.target.files[0] : null;
+        const reader = new FileReader();
+        
+        if (file) {
+            reader.onloadend = () => {
+                setEventImagePath(reader.result);
+                if (data) {
+                    data(reader.result);
+                }
+            };
+            reader.readAsDataURL(file);
+        } else if (data) {
+            data(null);
+        }
+    };
+
+            const handleCombinedFileChange = (e) => {
+                handleFileChange(e, (imageData) => {
+                    setFormData({
+                        ...formData,
+                        event_image_path: imageData,
+                    });
+                    setPreviewImage(imageData); 
+                });
+            };
 
     return (
         <div className="edit-event-container" dir="rtl">
@@ -229,11 +258,30 @@ export default function EditEvent({ event, onSave, onCancel }) {
                 </div>
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="event_image_path">صورة الحدث</label>
-                    <br></br>  <span style={{color: 'red'}}>
-                                    disabled cause of backend API handle
-                                </span>
-                </div>
+                     <label className="lable" htmlFor="event_image_path">تعديل الصورة</label>
+                    <br/>
+                    <input 
+                     className="form-control"
+                     type="file" 
+                     id='event_image_path' 
+                     name="event_image_path"
+                     onChange={handleCombinedFileChange}
+                      /> 
+                                <table className="image-table">
+                                    <tbody>
+                                        <tr>
+                                            <td>
+                                                <label className="image-label">الصورة القديمة:</label><br />
+                                                {event.event_image_path && <img src={event.event_image_path} alt="Old Event" className="image-preview" />}
+                                            </td>
+                                            <td>
+                                                <label className="image-label">الصورة الجديدة:</label><br />
+                                                {previewImage && <img src={previewImage} alt="New Event" className="image-preview" />}
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                    </div>
                 <div className="btn-container">
                 
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>

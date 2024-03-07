@@ -17,6 +17,7 @@ function SignUp() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
+    const [studentImagePath, setStudentImagePath] = useState(null);
 
 
     const handleSubmit = async (e) => {
@@ -65,45 +66,31 @@ function SignUp() {
         });
     };
 
-/*     const handleImageChange = (e) => {
-        const file = e.target.files[0];
+    const handleFileChange = (e, data) => {
+        const file = e ? e.target.files[0] : null;
         const reader = new FileReader();
-    
-        reader.onloadend = () => {
-            setFormData({
-                ...formData,
-                student_image_path: reader.result  
-            });
-        };
-    
-        reader.readAsDataURL(file);
-    }; */
-/* 
-    const handleImageChange = (e) => {
-        const file = e.target.files[0];
-
+        
         if (file) {
-            // Validate file type
-            if (!file.type.startsWith('image/')) {
-                alert('Please select an image file.');
-                e.target.value = null; // Clear the input field
-                return;
-            }
-
-            // Read the selected image file and update formData
-            const reader = new FileReader();
             reader.onloadend = () => {
-                setFormData({
-                    ...formData,
-                    student_image_path: reader.result
-                });
+                setStudentImagePath(reader.result);
+                if (data) {
+                    data(reader.result);
+                }
             };
             reader.readAsDataURL(file);
+        } else if (data) {
+            data(null);
         }
-    }; */
-    
-    
-    
+    };
+    const handleCombinedFileChange = (e) => {
+        handleFileChange(e, (imageData) => {
+            setFormData({
+                ...formData,
+                student_image_path: imageData,
+            });
+        });
+    };
+
     
     return (
         <div className="signup-page">
@@ -159,28 +146,24 @@ function SignUp() {
                             required
                         />
                     </div>
-{/*                      <div className="form-group">
-                        <label htmlFor="student_image_path">Select Image</label>
-                        <input
-                            type="file"
-                            accept="image/*"      
-                            id="student_image_path"
-                            name="student_image_path"
-                            onChange={handleImageChange}
-                            className="form-control"
-                            required
-                        />
-                                    {formData.student_image_path && (
-                                    <div>
-                                        <img src={formData.student_image_path} alt="Selected Image" 
-                                            style={{ maxWidth: '100%', maxHeight: '200px' }} />
-                                    </div>
-                                )}
-                    </div>  */}
+                    <div className="form-group">
+                     <label className="lable" htmlFor="student_image_path">رفع الصورة</label>
+                    <br/>
+                    <input 
+                     className="form-control"
+                     type="file" 
+                     id='student_image_path' 
+                     name="student_image_path"
+                     onChange={handleCombinedFileChange}
+                     required /> 
+                    </div>
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                     {error && <div className="error">{error}</div>}
+                    <div className="links-container">
+                         <a href="/logIn" className="link register"> العودة الي تسجيل الدخول</a>
+                     </div>
                 </form>
                 <Simplert
                     showSimplert={showAlert}

@@ -26,7 +26,7 @@ export default function AddEvent() {
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
     const [categories, setCategories] = useState([]);
-    //const [eventImagePath, setEventImagePath] = useState(null);
+    const [eventImagePath, setEventImagePath] = useState(null);
     const [sources, setSources] = useState([]);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
 
@@ -129,7 +129,7 @@ export default function AddEvent() {
         console.log(date)
     };
 
-/*     const handleFileChange = (e, data) => {
+    const handleFileChange = (e, data) => {
         const file = e ? e.target.files[0] : null;
         const reader = new FileReader();
         
@@ -153,7 +153,7 @@ export default function AddEvent() {
                         event_image_path: imageData,
                     });
                 });
-            }; */
+            };
 
 
 
@@ -284,7 +284,7 @@ export default function AddEvent() {
                     </div>
                     </div>
                     <div className="form-group">
-{/*                     <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
+                     <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
                     <br/>
                     <input 
                      className="form-control"
@@ -292,13 +292,7 @@ export default function AddEvent() {
                      id='event_image_path' 
                      name="event_image_path"
                      onChange={handleCombinedFileChange}
-                     required /> */}
-                
-                        <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
-                              <br></br>  <span style={{color: 'red'}}>
-                                    disabled cause of backend API handle
-                                </span>
-
+                     required /> 
                     </div>
                     <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"65%"}}>
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}

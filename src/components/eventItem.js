@@ -49,7 +49,7 @@ function EventItem({ event, onDelete, onEdit }) {
                     <div className="event-item-address" >{event.event_address}</div>
                     <div className="event-item-description">{event.event_description}</div> 
                     </div> 
-                    <img src={imageTest} className='event-item-image' alt='image_test'/>                    
+                    <img src={event.event_image_path} className='event-item-image' alt='image_test'/>                    
                 </div>
             </td>
         </tr>
