@@ -133,7 +133,6 @@ const ShowPosts = () => {
         showSimplert={successAlert}
         type="success"
         title="Success"
-        message="تم التعديل بنجاح"
         onClose={() => setSuccessAlert(false)}
         customCloseBtnText="تم "
       />
