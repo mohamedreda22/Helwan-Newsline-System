@@ -22,9 +22,9 @@ const AdminNavBar = () => {
               height="60"
             />
           </Link>
-            <Nav.Link href="#home">إضافة ناشر</Nav.Link>
-            <Nav.Link href="#features">كل الناشرين</Nav.Link>
-            <Nav.Link href="#pricing">الاقسام</Nav.Link>
+            <Nav.Link Link to="/" >إضافة ناشر</Nav.Link>
+            <Nav.Link Link to="/" >كل الناشرين</Nav.Link>
+            <Nav.Link Link to="/" >الاقسام</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

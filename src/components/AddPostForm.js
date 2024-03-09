@@ -75,6 +75,15 @@ function AddPostForm() {
   //   event.stopPropagation();
 
   //   try {
+  //     // Log the data being sent to the backend
+  //     console.log("Data to be sent to backend:", {
+  //       post_content: PostContent,
+  //       post_image_path: image ? image.name : null,
+  //       category_id: selectedCategory,
+  //       source_string: source,
+  //       source_id: selectedSource,
+  //     });
+
   //     const response = await axios.post(
   //       "http://localhost:9090/university/posts",
   //       {
@@ -85,7 +94,7 @@ function AddPostForm() {
   //         source_id: selectedSource,
   //       }
   //     );
-  //     if (response && response.status === 201) {
+  //     if (response && response.status === 200) {
   //       console.log("Post added successfully:", response.data);
   //       alert("Added successfully!");
   //       resetForm();
@@ -97,21 +106,16 @@ function AddPostForm() {
   //     alert("Error: " + error.message);
   //   }
   // };
-
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
-
+  
     try {
-      // Log the data being sent to the backend
-      console.log("Data to be sent to backend:", {
-        post_content: PostContent,
-        post_image_path: image ? image.name : null,
-        category_id: selectedCategory,
-        source_string: source,
-        source_id: selectedSource,
+      // Get the current date and time in Egyptian timezone
+      const currentDate = new Date().toLocaleString("en-US", {
+        timeZone: "Africa/Cairo",
       });
-
+  
       const response = await axios.post(
         "http://localhost:9090/university/posts",
         {
@@ -120,6 +124,7 @@ function AddPostForm() {
           category_id: selectedCategory,
           source_string: source,
           source_id: selectedSource,
+          date: currentDate, // Include the current date and time
         }
       );
       if (response && response.status === 200) {
@@ -134,12 +139,13 @@ function AddPostForm() {
       alert("Error: " + error.message);
     }
   };
-
+  
   const resetForm = () => {
     setPostContent("");
     setImage(null);
     setSelectedCategory("");
     setSelectedSource("");
+    setSource ("");
   };
 
   return (
