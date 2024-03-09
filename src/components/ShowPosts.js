@@ -106,19 +106,22 @@
 // };
 
 // export default ShowPosts;
+
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Modal, CloseButton } from "react-bootstrap";
 import delete_icon from "../assets/icons/delete.svg";
 import edit_icon from "../assets/icons/edit.svg";
 import "../styles/ShowPosts.css";
-import Swal from "sweetalert2";
 import EditPostForm from "./EditPost";
+import Simplert from "react-simplert";
 
 const ShowPosts = () => {
   const [posts, setPosts] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedPost, setEditedPost] = useState(null);
+  const [showSuccessAlert, setSuccessAlert] = useState(false);
+  const [showErrorAlert, setErrorAlert] = useState(false);
 
   const fetchPosts = async () => {
     try {
@@ -128,11 +131,7 @@ const ShowPosts = () => {
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      Swal.fire({
-        title: "Error",
-        text: "An error occurred while fetching posts.",
-        icon: "error",
-      });
+      setErrorAlert(true);
     }
   };
 
@@ -141,44 +140,16 @@ const ShowPosts = () => {
   }, []);
 
   const handleDeletePost = async (postId) => {
-    Swal.fire({
-      title: "هل أنت متأكد من حذف هذا المنشور؟",
-      text: "لن تستطيع استرجاعه مرة أخرى",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonText: "إلغاء",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "حذف",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await axios.delete(
-            `http://localhost:9090/university/posts/${postId}`
-          );
-          fetchPosts();
-          if (response && response.status === 200) {
-            Swal.fire({
-              title: "تم الحذف",
-              icon: "success",
-            });
-          } else {
-            Swal.fire({
-              title: "Error",
-              text: "An error occurred while deleting the post.",
-              icon: "error",
-            });
-          }
-        } catch (error) {
-          console.error("Error deleting post:", error);
-          Swal.fire({
-            title: "Error",
-            text: "An error occurred while deleting the post.",
-            icon: "error",
-          });
-        }
-      }
-    });
+    try {
+      const response = await axios.delete(
+        `http://localhost:9090/university/posts/${postId}`
+      );
+      fetchPosts();
+        setSuccessAlert(true);
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      setErrorAlert(true);
+    }
   };
 
   const handleEditPost = (postId) => {
@@ -201,13 +172,13 @@ const ShowPosts = () => {
             <tr key={post.post_id}>
               <td className="post-image ">
                 {post.post_image_path && (
-                   <img
-                     className="post-image"
-                     src={post.post_image_path}
+                  <img
+                    className="post-image"
+                    src={post.post_image_path}
                     alt="Post Image"
-                   />
-                 )}
-               </td>
+                  />
+                )}
+              </td>
               <td>{post.post_content.slice(0, 20)}...</td>
               <td>{post.date}</td>
               <td>{post.source_string}</td>
@@ -243,6 +214,22 @@ const ShowPosts = () => {
           )}
         </Modal.Body>
       </Modal>
+      <Simplert
+        showSimplert={showErrorAlert}
+        type="error"
+        title="Failed"
+        message="حدث خطأ ما يرجي اعادة المحاولة"
+        onClose={() => setErrorAlert(false)}
+        customCloseBtnText="اغلاق"
+      />
+      <Simplert
+        showSimplert={showSuccessAlert}
+        type="success"
+        title="Success"
+        message="تم الحذف بنجاح"
+        onClose={() => setSuccessAlert(false)}
+        customCloseBtnText="تم"
+      />
     </div>
   );
 };

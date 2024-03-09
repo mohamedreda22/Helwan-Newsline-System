@@ -1,17 +1,31 @@
-import React, { useState } from "react";
-import { Button, Form } from "react-bootstrap";
+import React, { useState, useEffect } from "react";
+import { Button, Form, Dropdown } from "react-bootstrap";
 import axios from "axios";
 import Simplert from "react-simplert";
 
-const EditDepartment = ({ department, onClose }) => {
-  const [formData, setFormData] = useState({
-    department_name: department ? department.department_name : "",
-    college_id: department ? department.college_id : 0,
-    url: department ? `http://localhost:9090/university/departments/${department.department_id}` : null,
-  });
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
+const EditDepartment = ({ onClose }) => {
+  const [departments, setDepartments] = useState([]);
+  const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [showSuccessAlert, setSuccessAlert] = useState(false);
+  const [showErrorAlert, setErrorAlert] = useState(false);
   const [validated, setValidated] = useState(false);
+
+  useEffect(() => {
+    fetchDepartments();
+  }, []);
+
+  const fetchDepartments = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/departments");
+      setDepartments(response.data);
+    } catch (error) {
+      console.error("Error fetching departments:", error);
+    }
+  };
+
+  const handleDepartmentChange = (department) => {
+    setSelectedDepartment(department);
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -21,54 +35,83 @@ const EditDepartment = ({ department, onClose }) => {
       setValidated(true);
       return;
     }
-
-    // Log the data being sent
-    console.log("Data to be sent:", formData);
-
+  
+    if (!selectedDepartment) {
+      return;
+    }
+  
     try {
-      const response = await axios.put(formData.url, {
-        department_name: formData.department_name,
-        college_id: formData.college_id,
-      });
-      if (response && (response.status === 201 || response.status === 200)) {
-        setShowSuccessAlert(true);
+      const response = await axios.put(
+        `http://localhost:9090/university/departments/${selectedDepartment.department_id}`,
+        {
+          department_name: selectedDepartment.department_name,
+          college_id: selectedDepartment.college_id,
+        }
+      );
+      if (response &&  (response.status === 201 ||response.status === 202)) {
+        setSuccessAlert(true);
+        fetchDepartments();
       } else {
-        setShowErrorAlert(true);
+        setErrorAlert(true);
       }
     } catch (error) {
       console.error("Error updating department:", error);
-      setShowErrorAlert(true);
+      setErrorAlert(true);
     }
   };
+  
 
   return (
     <div className="container" dir="rtl">
       <Form noValidate validated={validated} onSubmit={handleSubmit}>
-        <Form.Group controlId="department_name">
-          <Form.Label>اسم القسم</Form.Label>
-          <Form.Control
-            type="text"
-            name="department_name"
-            value={formData.department_name}
-            onChange={(e) =>
-              setFormData({ ...formData, department_name: e.target.value })
-            }
-            required
-          />
-          <Form.Control.Feedback type="invalid">
-            الرجاء إدخال اسم القسم
-          </Form.Control.Feedback>
-        </Form.Group>
-        <Button variant="primary" type="submit">
-          حفظ التغييرات
-        </Button>
+        <Dropdown>
+          <Dropdown.Toggle variant="primary">
+            اختر القسم للتعديل
+          </Dropdown.Toggle>
+          <Dropdown.Menu>
+            {departments.map((department) => (
+              <Dropdown.Item
+                key={department.department_id}
+                onClick={() => handleDepartmentChange(department)}
+              >
+                {department.department_name}
+              </Dropdown.Item>
+            ))}
+          </Dropdown.Menu>
+        </Dropdown>
+        {selectedDepartment && (
+          <>
+            <Form.Group controlId="department_name">
+              <Form.Label>اسم القسم</Form.Label>
+              <Form.Control
+                type="text"
+                name="department_name"
+                value={selectedDepartment.department_name}
+                onChange={(e) =>
+                  setSelectedDepartment({
+                    ...selectedDepartment,
+                    department_name: e.target.value
+                  })
+                }
+                required
+              />
+              <Form.Control.Feedback type="invalid">
+                الرجاء إدخال اسم القسم
+              </Form.Control.Feedback>
+            </Form.Group>
+            <Button variant="primary" type="submit">
+              حفظ التغييرات
+            </Button>            
+
+          </>
+        )}
       </Form>
       <Simplert
         showSimplert={showErrorAlert}
         type="error"
         title="Failed"
         message="حدث خطأ ما يرجي اعادة المحاولة"
-        onClose={() => setShowErrorAlert(false)}
+        onClose={() => setErrorAlert(false)}
         customCloseBtnText="اغلاق"
       />
       <Simplert
@@ -76,7 +119,7 @@ const EditDepartment = ({ department, onClose }) => {
         type="success"
         title="Success"
         message="تم التعديل بنجاح"
-        onClose={() => setShowSuccessAlert(false)}
+        onClose={() => setSuccessAlert(false)}
         customCloseBtnText="تم"
       />
     </div>

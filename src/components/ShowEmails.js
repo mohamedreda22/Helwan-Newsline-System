@@ -1,36 +1,25 @@
 import axios from "axios";
 import React, { useState } from "react";
 import delete_icon from "../assets/icons/delete.svg";
-import Swal from "sweetalert2";
+import Simplert from "react-simplert";
 
-const handleDeleteEmail = (email) => {
-    Swal.fire({
-      title: "هل أنت متأكد من حذف هذا الإيميل",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonColor: "#d33",
-      cancelButtonText: "إلغاء",
-      confirmButtonText: "حذف",
-    }).then((result) => {
-      if (result.isConfirmed) {
-        // try {
-        //     await axios.delete(
-        //       `http://localhost:9090/university/notifications/${notification_id}`
-        //     );
-        //     // After deletion, fetch emails again to update the list
-        //     // fetchEmails_id();
-        //   } catch (error) {
-        //     // console.error('Error deleting email:', error);
-        //     // setError('An error occurred while deleting the email.');
-        //   }
-        Swal.fire({
-          title: "تم الحذف",
-          icon: "success",
-        });
-      }
-    });
+const ShowEmails = () => {
+  const [showSuccessAlert, setSuccessAlert] = useState(false);
+  const [showErrorAlert, setShowErrorAlert] = useState(false);
+
+  const handleDeleteEmail = () => {
+    setShowErrorAlert(true); // Show error alert initially for demo purposes
+
+    // Perform deletion logic here
+    // axios.delete(...)
+    // .then(() => {
+    //    setSuccessAlert(true);
+    // })
+    // .catch(() => {
+    //    setShowErrorAlert(true);
+    // });
   };
+
   const renderDeleteIcon = () => {
     return (
       <div>
@@ -38,36 +27,50 @@ const handleDeleteEmail = (email) => {
           src={delete_icon}
           alt="Delete email"
           className="delete-icon"
-          onClick={handleDeleteEmail} 
+          onClick={handleDeleteEmail}
         />
       </div>
     );
   };
-  
-const ShowEmails = () => {
-    return (
-      <>
-        <div className="mt-2">
-          <div className="notifNum"> :عدد الإيميلات </div>
-          <table className="table">
-            <tbody>
-              <tr>
-                <td>{renderDeleteIcon()}</td>
-                <td>التاريخ</td>
-  
-                <td dir="rtl">
-                  <div>
-                    <strong>الإيميلات</strong>
-                  </div>
-                  <div>التفاصيل التفاصيل التفاصيل التفاصيل </div>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </>
-    );
-  };
-  
-  export default ShowEmails;
-  
+
+  return (
+    <>
+      <div className="mt-2">
+        <div className="notifNum"> :عدد الإيميلات </div>
+        <table className="table">
+          <tbody>
+            <tr>
+              <td>{renderDeleteIcon()}</td>
+              <td>التاريخ</td>
+
+              <td dir="rtl">
+                <div>
+                  <strong>الإيميلات</strong>
+                </div>
+                <div>التفاصيل التفاصيل التفاصيل التفاصيل </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <Simplert
+        showSimplert={showErrorAlert}
+        type="error"
+        title="خطأ"
+        message="حدث خطأ أثناء حذف الإيميل."
+        onClose={() => setShowErrorAlert(false)}
+        customCloseBtnText="إغلاق"
+      />
+      <Simplert
+        showSimplert={showSuccessAlert}
+        type="success"
+        title="تم الحذف"
+        message="تم حذف الإيميل بنجاح."
+        onClose={() => setSuccessAlert(false)}
+        customCloseBtnText="تم"
+      />
+    </>
+  );
+};
+
+export default ShowEmails;

@@ -1,21 +1,22 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Spinner } from "react-bootstrap";
 import axios from "axios";
 import Simplert from "react-simplert";
 
 const AddDepartmentForm = () => {
   const [departmentName, setDepartmentName] = useState("");
-  // const [collegeName, setCollegeName] = useState("");
   const [colleges, setColleges] = useState([]);
-  const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-  const [showErrorAlert, setShowErrorAlert] = useState(false);
-  // const [validated, setValidated] = useState(false);
-  const [selectedcollege, setSelectedcollege] = useState("");
+  const [showSuccessAlert, setSuccessAlert] = useState(false);
+  const [showErrorAlert, setErrorAlert] = useState(false);
+  const [selectedCollege, setSelectedCollege] = useState("");
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     fetchColleges();
   }, []);
 
   const fetchColleges = async () => {
+    setLoading(true);
     try {
       const response = await axios.get(
         "http://localhost:9090/university/colleges"
@@ -23,60 +24,50 @@ const AddDepartmentForm = () => {
       setColleges(response.data);
     } catch (error) {
       console.error("Error fetching colleges:", error);
+      setErrorAlert(true);
+    } finally {
+      setLoading(false);
     }
   };
+
   const handleCollegeChange = (event) => {
-    setSelectedcollege(event.target.value);
+    setSelectedCollege(event.target.value);
   };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
-    event.stopPropagation();
-    // const form = event.currentTarget;
-    // if (form.checkValidity() === false) {
-    //   event.stopPropagation();
-    // }
-    // else {
     try {
-      // Log the data being sent to the backend
-      console.log("Data to be sent to backend:", {
-        department_name: departmentName,
-        college_id: selectedcollege,
-      });
+      setLoading(true);
       const response = await axios.post(
         "http://localhost:9090/university/departments",
         {
           department_name: departmentName,
-          college_id: selectedcollege,
+          college_id: selectedCollege,
         }
       );
       if (response && (response.status === 201 || response.status === 200)) {
-        console.log("department added successfully:", response.data);
-        setShowSuccessAlert();
+        console.log("Department added successfully:", response.data);
+        setSuccessAlert(true);
         resetForm();
-      }
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
+      }      
     } catch (error) {
       console.error("Error adding department:", error);
-      alert("Error: " + error.message);
+      setErrorAlert(true);
+    } finally {
+      setLoading(false);
     }
-
-    // setValidated(true);
   };
+
   const resetForm = () => {
     setDepartmentName("");
-    setSelectedcollege("");
+    setSelectedCollege("");
   };
+
   return (
     <div dir="rtl">
-      {/* <Form noValidate validated={validated} onSubmit={handleSubmit}> */}
-      {/* <Form.Group as={Col} md="8" controlId="validationCustom01">
-            <Form.Label>المصدر</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              value={source}
-              onChange={(event) => setSource(event.target.value)}
-            />
-          </Form.Group> */}
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="departmentName">
           <Form.Label>اسم القسم</Form.Label>
@@ -94,10 +85,9 @@ const AddDepartmentForm = () => {
           <Form.Label>اسم الكلية</Form.Label>
           <Form.Select
             aria-label="Default select example"
-            value={selectedcollege}
+            value={selectedCollege}
             onChange={handleCollegeChange}
             required
-            // isInvalid={validated && collegeName.trim() === ""}
           >
             <option>اختر الكلية</option>
             {colleges.map((college) => (
@@ -110,8 +100,14 @@ const AddDepartmentForm = () => {
             الرجاء اختيار اسم الكلية
           </Form.Control.Feedback>
         </Form.Group>
-        <Button variant="primary" type="submit">
-          إضافة القسم
+        <Button variant="primary" type="submit" disabled={loading}>
+          {loading ? (
+            <Spinner animation="border" role="status">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+          ) : (
+            "إضافة القسم"
+          )}
         </Button>
       </Form>
       <Simplert
@@ -119,7 +115,7 @@ const AddDepartmentForm = () => {
         type="error"
         title="Failed"
         message="حدث خطأ ما يرجي اعادة المحاولة"
-        onClose={() => setShowErrorAlert(false)}
+        onClose={() => setErrorAlert(false)}
         customCloseBtnText="اغلاق"
       />
       <Simplert
@@ -127,7 +123,7 @@ const AddDepartmentForm = () => {
         type="success"
         title="Success"
         message="تمت إضافة القسم بنجاح"
-        onClose={() => setShowSuccessAlert(false)}
+        onClose={() => setSuccessAlert(false)}
         customCloseBtnText="تم"
       />
     </div>
