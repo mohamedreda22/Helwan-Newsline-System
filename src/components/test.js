@@ -1,3 +1,113 @@
+// import React, { useState, useEffect } from 'react';
+
+// const UpdateItemPage = ({ itemId }) => {
+//   const [item, setItem] = useState({});
+//   const [formData, setFormData] = useState({});
+
+//   useEffect(() => {
+//     // Fetch item data from the server using itemId
+//     // Update state with fetched item data
+//   }, [itemId]);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     // Send formData to the server to update the item
+//     // Provide feedback to the user
+//   };
+
+//   return (
+//     <div>
+//       <h2>Update Item</h2>
+//       <form onSubmit={handleSubmit}>
+//         <label>
+//           Name:
+//           <input
+//             type="text"
+//             name="name"
+//             value={formData.name || item.name || ''}
+//             onChange={handleChange}
+//           />
+//         </label>
+//         {/* Other input fields for item properties */}
+//         <button type="submit">Update</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default UpdateItemPage;
+// ////////////////
+// import React, { useState, useEffect } from 'react';
+// import axios from 'axios';
+
+// const UpdateItemPage = ({ itemId }) => {
+//   const [department, setDepartment] = useState({});
+//   const [formData, setFormData] = useState({ department_name: '' });
+//   const [error, setError] = useState(null);
+//   const [success, setSuccess] = useState(false);
+
+//   useEffect(() => {
+//     // Fetch department data from the server using itemId
+//     const fetchDepartment = async () => {
+//       try {
+//         const response = await axios.get(`http://localhost:9090/university/departments/${itemId}`);
+//         setDepartment(response.data);
+//         setFormData({ department_name: response.data.department_name });
+//       } catch (error) {
+//         setError(error.message);
+//       }
+//     };
+//     fetchDepartment();
+//   }, [itemId]);
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData({ ...formData, [name]: value });
+//   };
+
+//   const handleSubmit = async (e) => {
+//     e.preventDefault();
+//     try {
+//       // Update only department name
+//       await axios.put(`http://localhost:9090/university/departments/${itemId}`, {
+//         department_name: formData.department_name
+//       });
+//       setSuccess(true);
+//       setError(null);
+//     } catch (error) {
+//       setError(error.message);
+//       setSuccess(false);
+//     }
+//   };
+
+//   return (
+//     <div>
+//       <h2>Update Department Name</h2>
+//       {error && <p>Error: {error}</p>}
+//       {success && <p>Department name updated successfully!</p>}
+//       <form onSubmit={handleSubmit}>
+//         <label>
+//           Department Name:
+//           <input
+//             type="text"
+//             name="department_name"
+//             value={formData.department_name}
+//             onChange={handleChange}
+//           />
+//         </label>
+//         <button type="submit">Update</button>
+//       </form>
+//     </div>
+//   );
+// };
+
+// export default UpdateItemPage;
+// 
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "../styles/EditFaq.css"; // Add your CSS file for styling

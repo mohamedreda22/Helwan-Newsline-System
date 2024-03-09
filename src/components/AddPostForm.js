@@ -49,6 +49,26 @@ function AddPostForm() {
   const handleSourceChange = (event) => {
     setSelectedSource(event.target.value);
   };
+  const handleFileChange = (event, data) => {
+    const file = event ? event.target.files[0] : null; 
+    const reader = new FileReader();
+    if (file) {
+      reader.onloadend = () => {
+        setImage(reader.result);
+        if (data) {
+          data(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else if (data) {
+      data(null);
+    }
+};
+  const handleCombinedFileChange = (event) => {
+    handleFileChange(event, (imageData) => {
+      setImage(imageData); // Set the image state with the base64 encoded image data
+    });
+  };
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -192,7 +212,8 @@ function AddPostForm() {
             <Form.Label>إضافة صورة (اختياري)</Form.Label>
             <Form.Control
               type="file"
-              onChange={(event) => setImage(event.target.files[0])}
+              // onChange={(event) => setImage(event.target.files[0])}
+  onChange={(event) => handleCombinedFileChange(event)}
             />
           </Form.Group>
           <Button
