@@ -3,24 +3,20 @@ import { BrowserRouter as Router, Routes, Route, Outlet } from "react-router-dom
 import React from "react";
 
 import SideBar from "../components/SideBar";
-//import AddArticle2 from "../pages/AddArticle2";
+ 
 import Message from '../pages/Message'; 
-// import EditArticle from "../pages/EditArticle";
-import EditVideo from "../pages/EditVideo";
-//import Article from "../components/Article";
-//import AddNotificationForm from "../pages/AddArticle";
+
 import AddArticle4 from "../pages/AddArticle3";
-//import ShowNotifications from "../pages/tgrba";
-//import EventItem from "../components/eventItem";
-//import Events from "../components/events";
+ 
 import AddVideo4 from "../pages/AddVideo4";
  
 import EditArticle2 from "../pages/EditArticle2";
 import EditVideo2 from "../pages/EditVideo2";
  
 import AllVideos from "../pages/AllVideos";
-import Notifications from "../pages/AllArticles";
+ 
 import AllArticles from "../pages/AllArticles";
+import AddSource from "../pages/AddSource";
  
  
  
@@ -40,14 +36,14 @@ export const RouterComponent = () => {
         <Route path="/editarticle2"  element={<EditArticle2/>} />
         <Route path="/editvideo2"    element={<EditVideo2/>} />
         <Route path="/articles"    element={<AllArticles/>} />
-         
+        <Route path="/source"    element={< AddSource/>} />
         <Route path="/allvids"    element={< AllVideos/>} />
         {/* <Route path="/ed"    element={< Outlet/>} /> */}
        {/* ع لو عايزه صفحتين بينهم مسافات */}
         {/* <Route path="/ee"    element={<  Events/>} /> */}
 
         
-        {/* <Route path="/article"      element={< Article />} /> */}
+        
        
       </Routes>
     </Router>

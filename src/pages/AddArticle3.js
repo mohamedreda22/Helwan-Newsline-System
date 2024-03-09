@@ -8,115 +8,13 @@ import Row from "react-bootstrap/Row";
 import  axios  from 'axios';
 
 const AddArticle4 = () => {  
-  // const [article,setArticle]=useState({
-  //   article_address: "",
-  //   article_image_path: "",
-  //   source_id: '',
-  //   err:[],
-  //   loading:false,
-
-  // })
+  
+  
  
   // const article_image_path=useRef(null);
 
 
-  //   const [validated, setValidated] = useState(false);
-  //   const [isLoading, setIsLoading] = useState(false);
-  //   const [error, setError] = useState('');
-  //   const [source, setSource] = useState([]);
-     
   
-    
-
-
-  //   useEffect(() => {
-      
-  //     fetchSources();
-  //   }, []);
-
-
-  //   const fetchSources = async () => {
-  //     try {
-  //       const response = await axios.get(
-  //         "http://localhost:9090/university/sources"
-  //       );
-  //       setSource(response.data);
-  //     } catch (error) {
-  //       console.error("Error fetching sources:", error);
-  //     }
-  //   };
-
-
-
-  //   const createArticle=async (e)=>{
-  //     e.preventDefault();
-  //     const form = e.currentTarget;
-  //        if (form.checkValidity() === false) {
-  //        e.stopPropagation();
-  //      }
-  //        setValidated(true);
-  //        setArticle({...article,loading:true});
-  //        setIsLoading(true);
-  
-  
-         
-  //        try {
-  //            const response = await axios.post(
-  //                'http://localhost:9090/university/events',article
-  
-  //            );
-  
-  //            if (response && response.status === 200) {
-                 
-  //                console.log(article)
-  
-  //            } else {
-                 
-  //                setError('حدث خطأ أثناء إضافة  المقال');
-                
-  //            }
-  //        } catch (error) {
-  //            console.error('Error:', error);
-  //            setError('حدث خطأ أثناء إضافة المقال');
-              
-  //        } finally {
-  //            setIsLoading(false);
-  //        }
-  
-  //   }
-
-     
-    //   try {
-    //     const response = await axios.post(
-    //       "http://localhost:9090/university/posts",
-    //       {
-    //         post_content: PostContent,
-    //         post_image_path: image ? image.name : null,
-    //         category_id: selectedCategory,
-    //         source_id: selectedSource,
-    //       }
-    //     );
-    //     if (response && response.status === 200) {
-    //       console.log("Post added successfully:", response.data);
-    //       alert("Added successfuly!");
-    //       resetForm();
-    //     } else {
-    //       alert("حدث خطأ أثناء إضافة المنشور");
-    //     }
-    //   } catch (error) {
-    //     console.error("Error adding post:", error);
-    //     alert("error: ", error);
-    //   }
-    // };
-  
-    // const resetForm = () => {
-    //   setPostContent("");
-    //   setImage(null);
-    //   setSelectedCategory("");
-    //   setSelectedSource("");
-    // };
-//onSubmit={handleSubmit}
-
 
 
 
@@ -152,21 +50,56 @@ const AddArticle4 = () => {
     setSelectedSource(event.target.value);
   };
 
+
+
+
+
+  const handleFileChange = (event, data) => {
+    const file = event ? event.target.files[0] : null; 
+    const reader = new FileReader();
+    if (file) {
+      reader.onloadend = () => {
+        setImage(reader.result);
+        if (data) {
+          data(reader.result);
+        }
+      };
+      reader.readAsDataURL(file);
+    } else if (data) {
+      data(null);
+    }
+};
+  const handleCombinedFileChange = (event) => {
+    handleFileChange(event, (imageData) => {
+      setImage(imageData); 
+    });
+  };
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     event.stopPropagation();
 
     try {
-      const response = await axios.post(
-        "http://localhost:9090/university/articles",
-        {
+      console.log("Data to be sent to backend:", {
           article_address:Address,
           source_string: source,
           article_content:  ArticleContent,
           article_image_path: image ? image.name : null,
           source_id: selectedSource,
-        }
-      );
+      });
+
+      const response = await axios.post(
+        'http://localhost:9090/university/articles',
+        {
+          article_address:Address,
+          source_string: source,
+          article_content:  ArticleContent,
+          article_image_path: image ?  image.article_image_path : null,
+          source_id: selectedSource,
+      });
+
+
+      
       if (response && response.status === 200) {
         console.log(" Article added successfully:", response.data);
         alert("Added successfully!");
@@ -184,7 +117,8 @@ const AddArticle4 = () => {
     setArticleContent("");
     setImage(null);
     setAddress("");
-    setSource("");
+    //setSource("");
+    setSelectedSource("");
   };
     return (  
         <div >
@@ -192,8 +126,9 @@ const AddArticle4 = () => {
              <div className='AddArticle'>
              <p className='p1'>المقالات</p>
              <hr className='hr1'/>
+             <h1 className='h1'>اضافة مقال</h1>
              <Form   className='form' onSubmit={handleSubmit}>
-                <h1 className='h1'>اضافة مقال</h1>
+                
               <Row className="r1">
               <Col>
                 
@@ -225,16 +160,12 @@ const AddArticle4 = () => {
                 
               </Row>
               <Row>
-              {/* <Form.Group controlId="formFileLg" className="f3" as={Col} md="6" dir='rtl'>
-                <Form.Label  className='l3'>رفع الصورة</Form.Label>
-                <Form.Control type="file" size="lg" ref={article_image_path} />
-                {/* <input  type="file" className='form.control'/> 
-             </Form.Group> */}
+              
              <Form.Group  as={Col} md="6" controlId="formFileMultiple" className="f3"  dir='rtl' >
             <Form.Label> اختر صورة </Form.Label>
             <Form.Control
               type="file"
-              onChange={(event) => setImage(event.target.files[0])}
+              onChange={(event) => handleCombinedFileChange(event)}
             />
           </Form.Group>
               </Row>
@@ -252,7 +183,7 @@ const AddArticle4 = () => {
                 </Form.Group>
               </Row>
               <Button
-                className="d-flex justify-content-center submitbtn2 ml-100"
+                className="btn1"
                 type="submit"
               >
                  حفظ  

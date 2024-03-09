@@ -32,3 +32,11 @@
 /* .l2{
     margin-right: 400px;
 } */
+
+.h1{
+  text-align: center;
+}
+.btn{
+  margin-left: 400px;
+  width: 20%;
+}
