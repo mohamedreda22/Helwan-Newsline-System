@@ -14,9 +14,14 @@ import AddArticle4 from "../pages/AddArticle3";
 //import EventItem from "../components/eventItem";
 //import Events from "../components/events";
 import AddVideo4 from "../pages/AddVideo4";
-import AllArticles from "../pages/AllArticles";
+ 
 import EditArticle2 from "../pages/EditArticle2";
 import EditVideo2 from "../pages/EditVideo2";
+ 
+import AllVideos from "../pages/AllVideos";
+import Notifications from "../pages/AllArticles";
+import AllArticles from "../pages/AllArticles";
+ 
  
  
  
@@ -34,7 +39,9 @@ export const RouterComponent = () => {
         
         <Route path="/editarticle2"  element={<EditArticle2/>} />
         <Route path="/editvideo2"    element={<EditVideo2/>} />
-        <Route path="/allart"    element={< AllArticles/>} />
+        <Route path="/articles"    element={<AllArticles/>} />
+         
+        <Route path="/allvids"    element={< AllVideos/>} />
         {/* <Route path="/ed"    element={< Outlet/>} /> */}
        {/* ع لو عايزه صفحتين بينهم مسافات */}
         {/* <Route path="/ee"    element={<  Events/>} /> */}

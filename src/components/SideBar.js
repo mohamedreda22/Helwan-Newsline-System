@@ -32,7 +32,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="/" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="allart" className='active'>
+                        <Nav.Link href="articles" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>
@@ -40,7 +40,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="addVideo" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة فيديو
                         </Nav.Link>
-                        <Nav.Link href="# " className='active'>
+                        <Nav.Link href="allvids" className='active'>
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>

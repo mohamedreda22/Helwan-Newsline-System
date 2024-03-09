@@ -1,26 +1,23 @@
-.plus-icon {
-    width: 16px;
-    height: 16 px;
-    color: white;
-  }
-  .notifNum {
-    width: 150px;
-    text-align: right;
-    height: 50px;
-  }
-  .AddNotifbtn {
-    width: 180px;
-    height: 35px;
-    border-radius: 25px;
-    margin-bottom: 25px;
-    background: #091160;
-    color: white;
-  }
-  .delete-icon{
-    cursor: pointer;
-  }
+.bg-gray {
+  background: linear-gradient(
+      0deg,
+      rgba(217, 217, 217, 0.3) 0%,
+      rgba(217, 217, 217, 0.3) 100%
+    ),
+    var(--White, #fff);
+}
+h1 {
+  margin: 50px;
+  background-color:  rgba(217, 217, 217, 0.3) 0%,
+}
 
-  .all{
-    margin-top: 200px;
-    width: 76%;
-  }
+.container-2 {
+  width: 90%;
+  margin: auto;
+  height: auto;
+  min-height: 750px;
+  background: var(--White, #fff);
+  flex-shrink: 0;
+  padding: 5px 60px;
+}
+ 
