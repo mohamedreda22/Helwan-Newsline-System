@@ -12,7 +12,7 @@ function SignUp() {
         student_email: '',
         student_password: '',
         student_phone: '',
-        student_image_path: ''
+        imagePath: ''
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -41,8 +41,9 @@ function SignUp() {
                     student_email: '',
                     student_password: '',
                     student_phone: '',
-                    student_image_path: ''
+                    imagePath: ''
                 });
+                setStudentImagePath(null)
             } else {
                 showAlertHandler('error', 'Failed', 'Failed to create account', 'Close');
             }
@@ -86,7 +87,7 @@ function SignUp() {
         handleFileChange(e, (imageData) => {
             setFormData({
                 ...formData,
-                student_image_path: imageData,
+                imagePath: imageData,
             });
         });
     };
@@ -147,16 +148,27 @@ function SignUp() {
                         />
                     </div>
                     <div className="form-group">
-                     <label className="lable" htmlFor="student_image_path">رفع الصورة</label>
+                     <label className="lable" htmlFor="imagePath">رفع الصورة</label>
                     <br/>
                     <input 
                      className="form-control"
                      type="file" 
-                     id='student_image_path' 
-                     name="student_image_path"
+                     id='imagePath' 
+                     name="imagePath"
                      onChange={handleCombinedFileChange}
                      required /> 
                     </div>
+                    <table className="image-table">
+                                    <tbody>
+                                    <tr>
+                                        <td>
+                                            <label className="image-label"> : عرض الصورة </label><br />
+                                            {studentImagePath && <img src={studentImagePath} alt="Old Event" className="image-preview" />}
+                                        </td>
+                                    </tr>
+
+                                    </tbody>
+                                </table>
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>

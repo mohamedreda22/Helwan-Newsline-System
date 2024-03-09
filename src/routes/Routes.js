@@ -56,7 +56,8 @@ export const RouterComponent = () => {
 
             </Route>
             {/* Public route for login */}
-                <Route path="/" element={isAuthenticated ? <Navigate to="/showEvents" /> : <LogIn />} />
+                <Route path="/" element={!isAuthenticated ?  <LogIn /> : <Events />} />
+
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
