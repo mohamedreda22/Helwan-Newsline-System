@@ -30,7 +30,7 @@ const EditDepartment = ({ department, onClose }) => {
         department_name: formData.department_name,
         college_id: formData.college_id,
       });
-      if (response && response.status === 200) {
+      if (response && (response.status === 201 || response.status === 200)) {
         setShowSuccessAlert(true);
       } else {
         setShowErrorAlert(true);

@@ -49,12 +49,10 @@ const AddDepartmentForm = () => {
           college_id: selectedcollege,
         }
       );
-      if (response && response.status === 200) {
+      if (response && (response.status === 201 || response.status === 200)) {
         console.log("department added successfully:", response.data);
-        alert("Added successfully!");
+        setShowSuccessAlert();
         resetForm();
-      } else {
-        alert("حدث خطأ اثناء إضافة القسم");
       }
     } catch (error) {
       console.error("Error adding department:", error);
