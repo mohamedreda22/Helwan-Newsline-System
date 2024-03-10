@@ -12,6 +12,8 @@ import ForgotPassword from "../pages/ForgotPassword";
 import UpdatePassword from "../pages/UpdatePassword";
 import Logout from "../pages/Logout";
 import StudentDashboard from "../pages/StudentsDashboard";
+import ShowDepartments from "../components/ShowDepartments"
+
 
 export const RouterComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,6 +55,7 @@ export const RouterComponent = () => {
           <Route path="/addFaq" element={<AddEvent />} />
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/showDepartments" element={<ShowDepartments />} />
 
             </Route>
             {/* Public route for login */}

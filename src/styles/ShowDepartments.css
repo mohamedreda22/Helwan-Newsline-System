@@ -1,0 +1,109 @@
+/* Common styles */
+.AddDep {
+    width: 200px;
+    height: 40px;
+    border-radius: 25px;
+    background: #091160;
+    color: white;
+    margin-bottom: 25px;
+    margin-top: 30px;
+    margin-left: 100px;
+    font-family: Inder;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+  }
+  
+  .AddDep:hover {
+    background-color: rgb(13, 26, 146);
+  }
+  
+  .edit-btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    background: #091160;
+    color: white;
+    margin-right: 500px;
+  }
+  
+  .edit-btn:hover {
+    background-color: rgb(13, 26, 146);
+  }
+  
+  .delete-btn {
+    width: 150px;
+    height: 40px;
+    border-radius: 25px;
+    background-color: white;
+    margin-right: 150px;
+  }
+  
+  .dataContainer {
+    background-color: white;
+    border-radius: 25px;
+    width: 90%;
+    height: 80px;
+    margin: 20px auto;
+    display: flex;
+    text-align: center;
+    align-items: center;
+    padding: 10px 80px;
+  }
+  
+  .depName {
+    width: 20%;
+  }
+  
+  .depName p {
+    line-height: 30px;
+    color: #000;
+    font-family: Inder;
+    font-size: 28px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin: 0;
+  }
+  
+  .collagesSelector {
+    border-radius: 25px;
+    background: var(--White, #fff);
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    width: 200px;
+    height: 40px;
+    border-radius: 25px;
+    font-family: Inder;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 400;
+    margin-left: 350px;
+    text-align: center;
+  }
+  
+  .collagesSelector:hover {
+    background-color: rgb(240, 238, 238);
+  }
+  
+  /* Media queries for responsiveness */
+  @media (max-width: 768px) {
+    .edit-btn {
+      margin-right: 50px;
+    }
+  
+    .delete-btn {
+      margin-right: 30px;
+    }
+    .collagesSelector {
+      width: 150px;
+      margin-left: 0;
+      margin-top: 10px;
+    }
+  
+    .AddDep {
+      margin-left: 0;
+    }
+    .dataContainer {
+      width: 85%;
+    }
+  }
