@@ -17,6 +17,7 @@ import AllVideos from "../pages/AllVideos";
  
 import AllArticles from "../pages/AllArticles";
 import AddSource from "../pages/AddSource";
+import EditSource from "../pages/EditSource";
  
  
  
@@ -38,6 +39,7 @@ export const RouterComponent = () => {
         <Route path="/articles"    element={<AllArticles/>} />
         <Route path="/source"    element={< AddSource/>} />
         <Route path="/allvids"    element={< AllVideos/>} />
+        <Route path="/editsource"    element={<  EditSource/>} />
         {/* <Route path="/ed"    element={< Outlet/>} /> */}
        {/* ع لو عايزه صفحتين بينهم مسافات */}
         {/* <Route path="/ee"    element={<  Events/>} /> */}

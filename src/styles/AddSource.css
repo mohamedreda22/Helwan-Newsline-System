@@ -1,14 +1,37 @@
-.ff7{
+.s1{
     margin-left: 300px;
-    margin-bottom: 60px;
+    margin-bottom: 40px;
 }
 *{
     background-color: beige;
 }
-.h{
+.s{
     text-align: center;
+    
 }
-.submitbtn1{
+.btn1{
     margin-left: 280px;
     width: 50%;
+    border-radius: 20px;
+}
+.s3{
+    margin-left: 300px;
+    margin-bottom: 40px;
+}
+.s6{
+    margin-left: 120px;
+    margin-bottom: 40px;
+}
+.s8{
+    margin-left: 300px;
+    margin-bottom: 40px;
+    width: 50%;
+}
+.s10{
+    margin-left: 120px;
+    margin-bottom: 40px;
+}
+.s9{
+    margin-left: 300px;
+    margin-bottom: 40px;
 }

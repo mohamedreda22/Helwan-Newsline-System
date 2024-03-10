@@ -146,7 +146,7 @@ const handleCloseEditModal = () => {
               <td>
                 <img
                   src={delete_icon}
-                  alt="Delete post"
+                  alt="Delete article"
                   className="icon"
                   onClick={() => handleDeleteArticle(article.article_id)}
                 />
@@ -155,7 +155,7 @@ const handleCloseEditModal = () => {
               <td>
                 <img
                   src={edit_icon}
-                  alt="Edit post"
+                  alt="Edit article"
                   className="icon"
                   onClick={() => handleEditArticle(article.article_id)}
                 />
