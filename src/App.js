@@ -7,9 +7,6 @@ import Collages from "./pages/Collages";
 function App() {
   return (
     <>
-{/*       <HomePage />
-      <Loading /> */}
-      <Collages />
     </>
   );
 }
