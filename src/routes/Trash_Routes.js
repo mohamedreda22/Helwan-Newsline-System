@@ -11,14 +11,10 @@ import SignUp from "../pages/SignUp";
 import ForgotPassword from "../pages/ForgotPassword";
 import UpdatePassword from "../pages/UpdatePassword";
 import Logout from "../pages/Logout";
-import StudentDashboard from "../pages/StudentsDashboard";
-import ShowDepartments from "../components/ShowDepartments"
-
 
 export const RouterComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
-  const [loading, setLoading] = useState(true);
-
+  const [lastVisitedPage, setLastVisitedPage] = useState("/");
 
 
 
@@ -28,19 +24,20 @@ export const RouterComponent = () => {
     if (token) {
       // Validate token here (e.g., check expiration)
       setIsAuthenticated(true);
+      const lastPage = localStorage.getItem("lastVisitedPage");
+      if (lastPage) {
+        setLastVisitedPage(lastPage);
     }
-    setLoading(false);
+  }
   }, []);
 
   const logout = () => {
     // Clear authentication token and set isAuthenticated to false
     localStorage.removeItem("token");
     setIsAuthenticated(false);
+    setLastVisitedPage("/");
   };
 
-    if (loading) {
-        return <p>Loading...</p>;
-    }
 
   return (
     <Router>
@@ -53,22 +50,14 @@ export const RouterComponent = () => {
           <Route path="/showEvents" element={<Events />} />
           <Route path="/faq" element={<FAQs />} />
           <Route path="/addFaq" element={<AddEvent />} />
+          <Route path="/updatePassword" element={<UpdatePassword />} />
+          <Route path="/forgotPassword" element={<ForgotPassword />} />
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
-          <Route path="/dashboard" element={<StudentDashboard />} />
-          <Route path="/showDepartments" element={<ShowDepartments />} />
-
             </Route>
             {/* Public route for login */}
-                <Route path="/" element={isAuthenticated ? <Navigate to="/showEvents" /> : <LogIn />} />
-                <Route path="/login" element={<LogIn />} />
-                <Route path="/signup" element={<SignUp />} />
-                <Route path="/forgotPassword" element={<ForgotPassword />} />
-                <Route path="/updatePassword" element={<UpdatePassword />} />
-                <Route path="/colages" element={<Collages />} />
-                
-
-
-
+            <Route path="/" element={isAuthenticated ? <Navigate to={lastVisitedPage} /> : <LogIn />} />
+            <Route path="/login" element={<LogIn />} />
+            <Route path="/signup" element={<SignUp />} />
 
       </Routes>
     </Router>

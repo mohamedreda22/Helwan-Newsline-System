@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Modal, Button } from "react-bootstrap";
-import delete_icon from "../assets/icons/delete (1).svg";
+import delete_icon from "../assets/icons/delete.svg";
 import Simplert from "react-simplert";
 import { FaPlus } from "react-icons/fa";
 import AddDepartment from "./AddDepartmentForm";
@@ -17,9 +17,13 @@ const ShowDepartments = () => {
   const [editedDepartment, setEditedDepartment] = useState(null);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const [userRole, setUserRole] = useState(""); 
+
 
   useEffect(() => {
     fetchColleges();
+    const role = localStorage.getItem("userRole");
+    setUserRole(role);
   }, []);
 
   useEffect(() => {
@@ -94,6 +98,7 @@ const ShowDepartments = () => {
 
   return (
     <div className="mt-2 container">
+      
       <button type="button" className="AddDep" onClick={handleShowAddModal}>
         إضافة <FaPlus />
       </button>

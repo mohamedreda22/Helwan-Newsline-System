@@ -1,31 +1,14 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import "./App.css";
 //import HomePage from "./components/homePage";
 //import Loading from "./components/loading";
-import Collages from "./pages/Collages";
-import Notifications from "./pages/Notifications";
-import Emails from "./pages/Emails";
-import AddPost from "./pages/AddPost";
-import Posts from "./pages/Posts";
-import EditPost from "./components/EditPost";
-import AddDepartmentForm from "./components/AddDepartmentForm";
-import ShowDepartment from "./components/ShowDepartments";
-import Departments from "./pages/Departments";
-
+//import SideBar from './components/SideBar'
+//import AddEvent from "./components/addEvent";
 function App() {
   return (
-    <>
-      {/*       <HomePage />
-      <Loading /> */}
-      {/* <Collages /> */}
-      <Notifications />
-      <Emails />
-      <AddPost />
-      <Posts />
-      <EditPost />
-      <AddDepartmentForm />
-      <Departments />
-    </>
+    <div className="App">
+      
+    </div>
   );
 }
 
