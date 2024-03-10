@@ -1,3 +1,4 @@
+/* Common styles */
 .AddDep {
   width: 200px;
   height: 40px;
@@ -6,6 +7,7 @@
   color: white;
   margin-bottom: 25px;
   margin-top: 30px;
+  margin-left: 100px;
   font-family: Inder;
   font-size: 22px;
   font-style: normal;
@@ -15,6 +17,7 @@
 .AddDep:hover {
   background-color: rgb(13, 26, 146);
 }
+
 .edit-btn {
   width: 150px;
   height: 40px;
@@ -23,25 +26,35 @@
   color: white;
   margin-right: 500px;
 }
+
 .edit-btn:hover {
   background-color: rgb(13, 26, 146);
+}
+
+.delete-btn {
+  width: 150px;
+  height: 40px;
+  border-radius: 25px;
+  background-color: white;
+  margin-right: 150px;
 }
 
 .dataContainer {
   background-color: white;
   border-radius: 25px;
-  width: 95%;
-  height: auto;
+  width: 90%;
+  height: 80px;
   margin: 20px auto;
   display: flex;
   text-align: center;
   align-items: center;
   padding: 10px 80px;
 }
-.depName{
-  width: 20%;
 
+.depName {
+  width: 20%;
 }
+
 .depName p {
   line-height: 30px;
   color: #000;
@@ -52,13 +65,7 @@
   line-height: normal;
   margin: 0;
 }
-.delete-btn {
-  width: 150px;
-  height: 40px;
-  margin-right: 100px;
-  border-radius: 25px;
-  background-color: white;
-}
+
 .collagesSelector {
   border-radius: 25px;
   background: var(--White, #fff);
@@ -73,6 +80,30 @@
   margin-left: 350px;
   text-align: center;
 }
+
 .collagesSelector:hover {
   background-color: rgb(240, 238, 238);
+}
+
+/* Media queries for responsiveness */
+@media (max-width: 768px) {
+  .edit-btn {
+    margin-right: 50px;
+  }
+
+  .delete-btn {
+    margin-right: 30px;
+  }
+  .collagesSelector {
+    width: 150px;
+    margin-left: 0;
+    margin-top: 10px;
+  }
+
+  .AddDep {
+    margin-left: 0;
+  }
+  .dataContainer {
+    width: 85%;
+  }
 }

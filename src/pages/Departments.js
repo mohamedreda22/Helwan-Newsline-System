@@ -8,9 +8,10 @@ import AdminNavBar from "../layouts/AdminNavBar";
 function Departments() {
   return (
     <>
-      <AdminNavBar />
       <div className="container-fluid bg-gray">
         <div className="row">
+        <AdminNavBar />
+
           <ShowDepartments />
         </div>
       </div>
