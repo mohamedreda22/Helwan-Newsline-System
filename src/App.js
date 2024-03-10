@@ -2,15 +2,13 @@ import React from "react";
 import "./App.css";
 //import HomePage from "./components/homePage";
 //import Loading from "./components/loading";
-import Collages from "./pages/Collages";
-
+//import SideBar from './components/SideBar'
+//import AddEvent from "./components/addEvent";
 function App() {
   return (
-    <>
-{/*       <HomePage />
-      <Loading /> */}
-      <Collages />
-    </>
+    <div className="App">
+      
+    </div>
   );
 }
 

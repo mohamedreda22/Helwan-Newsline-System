@@ -12,6 +12,9 @@ import ForgotPassword from "../pages/ForgotPassword";
 import UpdatePassword from "../pages/UpdatePassword";
 import Logout from "../pages/Logout";
 import StudentDashboard from "../pages/StudentsDashboard";
+import ShowNotifications from "../components/ShowNotifications";
+import AddPostForm from "../components/AddPostForm";
+import ShowPosts from "../components/ShowPosts";
 
 export const RouterComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
@@ -53,6 +56,16 @@ export const RouterComponent = () => {
           <Route path="/addFaq" element={<AddEvent />} />
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
+          <Route path="/addPost" element={<AddPostForm />} />
+          <Route path="/showPosts" element={<ShowPosts />} />
+          <Route path="/notifications" element={<ShowNotifications />} />
+{/*           <Route path="/addVideo" element={< />} />
+          <Route path="/showVideos" element={< />} /> */}
+{/*           <Route path="/addArticle" element={< />} />
+          <Route path="/showArticles" element={< />} /> */}
+
+
+
 
             </Route>
             {/* Public route for login */}

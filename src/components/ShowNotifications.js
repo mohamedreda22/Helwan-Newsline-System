@@ -3,7 +3,7 @@ import React, { useState } from "react";
 import delete_icon from "../assets/icons/delete.svg";
 import "../styles/ShowNotifications.css";
 import { FaPlus } from "react-icons/fa";
-import AddNotificationForm from "../components/AddNotificationForm";
+import AddNotificationForm from "./AddNotificationForm";
 import Simplert from "react-simplert";
 
 const ShowNotifications = () => {
