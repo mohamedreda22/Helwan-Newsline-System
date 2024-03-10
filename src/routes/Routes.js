@@ -13,6 +13,8 @@ import UpdatePassword from "../pages/UpdatePassword";
 import Logout from "../pages/Logout";
 import StudentDashboard from "../pages/StudentsDashboard";
 import ShowDepartments from "../components/ShowDepartments"
+import Posts from "../pages/Posts";
+import AddPost from "../pages/AddPost";
 
 
 export const RouterComponent = () => {
@@ -56,6 +58,9 @@ export const RouterComponent = () => {
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
           <Route path="/showDepartments" element={<ShowDepartments />} />
+          <Route path="/showPosts" element={<Posts />} />
+          <Route path="/addPost" element={<AddPost />} />
+
 
             </Route>
             {/* Public route for login */}
