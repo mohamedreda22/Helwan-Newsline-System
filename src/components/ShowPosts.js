@@ -6,7 +6,6 @@ import edit_icon from "../assets/icons/edit.svg";
 import "../styles/ShowPosts.css";
 import EditPostForm from "./EditPost";
 import Simplert from "react-simplert";
-import Swal from "sweetalert2";
 
 const ShowPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -32,36 +31,22 @@ const ShowPosts = () => {
   }, []);
 
   const handleDeletePost = async (postId) => {
-    Swal.fire({
-      title: "هل أنت متأكد من حذف هذا المنشور؟",
-      text: "لن تستطيع استرجاعه مرة أخرى",
-      icon: "warning",
-      showCancelButton: true,
-      confirmButtonColor: "#3085d6",
-      cancelButtonText: "إلغاء",
-      cancelButtonColor: "#d33",
-      confirmButtonText: "حذف",
-    }).then(async (result) => {
-      if (result.isConfirmed) {
-        try {
-          const response = await axios.delete(
-            `http://localhost:9090/university/posts/${postId}`
-          );
-          fetchPosts();
-          if (
-            response &&
-            (response.status === 200 || response.status === 201)
-          ) {
-            // Added closing parenthesis here
-            setSuccessAlert(true);
-          }
-        } catch (error) {
-          console.error("Error deleting post:", error);
-          setErrorAlert(true);
-        }
+    try {
+      const response = await axios.delete(
+        `http://localhost:9090/university/posts/${postId}`
+      );
+      if (response.status === 200 || response.status === 201) {
+        setSuccessAlert(true);
+        fetchPosts(); // Fetch posts again to update the list
+      } else {
+        setErrorAlert(true);
       }
-    });
+    } catch (error) {
+      console.error("Error deleting post:", error);
+      setErrorAlert(true);
+    }
   };
+  
 
   const handleEditPost = (postId) => {
     const postToEdit = posts.find((post) => post.post_id === postId);
