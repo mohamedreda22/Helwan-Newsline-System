@@ -1,0 +1,23 @@
+.bg-gray {
+  height: auto;
+  min-height: 1024px;
+  background: linear-gradient(
+      0deg,
+      rgba(217, 217, 217, 0.3) 0%,
+      rgba(217, 217, 217, 0.3) 100%
+    ),
+    var(--White, #fff);
+}
+h1 {
+  margin: 50px;
+}
+
+.container-2 {
+  width: 90%;
+  margin: auto;
+  height: auto;
+  min-height: 750px;
+  background: var(--White, #fff);
+  flex-shrink: 0;
+  padding: 5px 60px;
+}
