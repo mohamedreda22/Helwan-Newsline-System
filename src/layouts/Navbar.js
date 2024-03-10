@@ -1,25 +1,25 @@
 import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/Navbar.css";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const Navbar = () => {
   return (
     <div className="containerxxl">
-      <nav class="navbar navbar-expand-lg bg-color-gray">
-        <div class="container-fluid">
-          <form class="d-flex" role="search">
+      <nav className="navbar navbar-expand-lg bg-color-gray">
+        <div className="container-fluid">
+          <form className="d-flex" role="search">
             <input
-              class="form-control me-2"
+              className="form-control me-2"
               type="search"
-              placeholder="Search "
+              placeholder="Search"
               aria-label="Search"
             />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fas fa-search"></i>
+            <span className="input-group-text border-0" id="search-addon">
+              <i className="fas fa-search"></i>
             </span>
           </form>
           <button
-            class="navbar-toggler"
+            className="navbar-toggler"
             type="button"
             data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent"
@@ -27,44 +27,44 @@ const Navbar = () => {
             aria-expanded="false"
             aria-label="Toggle navigation"
           >
-            <span class="navbar-toggler-icon"></span>
+            <span className="navbar-toggler-icon"></span>
           </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto p-2 justify-content-center ">
-              <li class="nav-item ">
-                <Link to="/" className="nav-link " aria-current="page">
+          <div className="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul className="navbar-nav mx-auto p-2 justify-content-center ">
+              <li className="nav-item">
+                <NavLink to="/" className="nav-link" activeClassName="active" exact>
                   اهم الاحداث
-                </Link>
+                </NavLink>
               </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
+              <li className="nav-item ms-5">
+                <NavLink to="/sports" className="nav-link" activeClassName="active">
                   رياضة
-                </Link>
+                </NavLink>
               </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
+              <li className="nav-item ms-5">
+                <NavLink to="/news" className="nav-link" activeClassName="active">
                   اخر الاخبار
-                </Link>
+                </NavLink>
               </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
+              <li className="nav-item ms-5">
+                <NavLink to="/colleges" className="nav-link" activeClassName="active">
                   الكليات
-                </Link>
+                </NavLink>
               </li>
-              <li class="nav-item ms-5 ">
-                <Link to="/" className="nav-link active ">
+              <li className="nav-item ms-5">
+                <NavLink to="/" className="nav-link" activeClassName="active">
                   الصفحة الرئيسية
-                </Link>
+                </NavLink>
               </li>
-              <li class="nav-item ms-5"></li>
+              <li className="nav-item ms-5"></li>
             </ul>
           </div>
           <span>
-            <Link to="/" className="nav-link me-5 ">
+            <NavLink to="/login" className="nav-link me-5" activeClassName="active">
               تسجيل الدخول
-            </Link>
+            </NavLink>
           </span>
-          <Link to="/" class="navbar-brand" target="_blank" rel="noreferrer">
+          <NavLink to="/" className="navbar-brand" target="_blank" rel="noreferrer">
             <img
               src={universityLogo}
               className="logo navbar-brand"
@@ -72,7 +72,7 @@ const Navbar = () => {
               width="64"
               height="60"
             />
-          </Link>
+          </NavLink>
         </div>
       </nav>
     </div>

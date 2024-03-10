@@ -1,0 +1,28 @@
+/* Navbar.css */
+.containerxxl {
+    background-color: #f8f9fa; /* Background color for the Navbar */
+    padding: 10px 0; /* Add padding to the Navbar */
+  }
+  
+  .navbar-brand img.logo {
+    margin-right: 10px; /* Adjust the logo's margin */
+  }
+  
+  .navbar-nav .nav-link {
+    color: #212529; /* Default color for the navigation links */
+    font-weight: bold; /* Make the font weight bold */
+  }
+  
+  .navbar-nav .nav-link.active {
+    color: #007bff; /* Color for the active link */
+  }
+  
+  .navbar-nav .nav-link:hover {
+    color: #007bff; /* Color for the link on hover */
+  }
+  
+  .navbar-nav .nav-item {
+    margin-right: 10px; /* Add margin between navigation items */
+  }
+  
+  

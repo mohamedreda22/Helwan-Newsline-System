@@ -1,15 +1,20 @@
 .form-container {
-  margin-right: 50px;
+  margin: 0 auto;
+  max-width: 800px;
+  padding: 20px;
 }
+
 .addpost {
   color: #000;
-  font-size: 40px;
-  font-style: normal;
-  font-weight: 400;
-  line-height: normal;
-margin-right: 25%;}
-.divider{
-    width: 100%;
-    border-bottom: 1px ;
-    background: var(--Background-Dividers, rgba(0, 0, 0, 0.10));
+  font-size: 1.5rem;
+  font-weight: 500;
+  text-align: center;
+  margin-bottom: 20px;
+  margin-left: 150px;
+}
+
+.divider {
+  width: 100%;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  margin: 20px 0;
 }

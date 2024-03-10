@@ -6,3 +6,4 @@ const PrivateRoutes = ({ isAuthenticated }) => {
 }
 
 export default PrivateRoutes;
+

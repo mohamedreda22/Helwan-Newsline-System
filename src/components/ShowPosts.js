@@ -1,18 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Table, Modal, CloseButton } from "react-bootstrap";
-import delete_icon from "../assets/icons/delete.svg";
-import edit_icon from "../assets/icons/edit.svg";
+import { Table, Modal, Button } from "react-bootstrap";
 import "../styles/ShowPosts.css";
 import EditPostForm from "./EditPost";
-import Simplert from "react-simplert";
+import PostItem from "./postItem";
 
 const ShowPosts = () => {
   const [posts, setPosts] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false);
   const [editedPost, setEditedPost] = useState(null);
-  const [successAlert, setSuccessAlert] = useState(false);
-  const [errorAlert, setErrorAlert] = useState(false);
+  const [deletePostId, setDeletePostId] = useState(null);
 
   const fetchPosts = async () => {
     try {
@@ -22,7 +19,6 @@ const ShowPosts = () => {
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      setErrorAlert(true);
     }
   };
 
@@ -35,13 +31,10 @@ const ShowPosts = () => {
       const response = await axios.delete(
         `http://localhost:9090/university/posts/${postId}`
       );
-      if (response.status === 200 || response.status === 201) {
-        setSuccessAlert(true);
-        fetchPosts();
-      }
+      fetchPosts();
+      setDeletePostId(null);
     } catch (error) {
       console.error("Error deleting post:", error);
-      setErrorAlert(true);
     }
   };
 
@@ -56,47 +49,21 @@ const ShowPosts = () => {
     setEditedPost(null);
   };
 
+  const handleShowDeleteConfirmation = (postId) => {
+    setDeletePostId(postId);
+  };
+
   return (
     <div className="mt-2">
-      <div className="postsNum">عدد المنشورات : {posts.length}</div>
       <Table dir="rtl" responsive hover>
         <tbody>
           {posts.map((post) => (
-            <tr key={post.post_id}>
-              <td className="post-image ">
-                {post.post_image_path && (
-                  <img
-                    className="post-image"
-                    src={post.post_image_path}
-                    alt="Post Image"
-                  />
-                )}
-              </td>
-              <td>{post.post_content.slice(0, 20)}...</td>
-              <td>{post.date}</td>
-              <td>{post.source_string}</td>
-              <td>
-                <img
-                  src={delete_icon}
-                  alt="Delete post"
-                  className="icon"
-                  onClick={() =>
-                    Simplert.confirm(
-                      "هل أنت متأكد من حذف هذا المنشور؟",
-                      () => handleDeletePost(post.post_id)
-                    )
-                  }
-                />
-              </td>
-              <td>
-                <img
-                  src={edit_icon}
-                  alt="Edit post"
-                  className="icon"
-                  onClick={() => handleEditPost(post.post_id)}
-                />
-              </td>
-            </tr>
+            <PostItem
+              key={post.post_id}
+              post={post}
+              onDelete={handleShowDeleteConfirmation}
+              onEdit={handleEditPost}
+            />
           ))}
         </tbody>
       </Table>
@@ -112,22 +79,25 @@ const ShowPosts = () => {
           )}
         </Modal.Body>
       </Modal>
-      <Simplert
-        showSimplert={errorAlert}
-        type="error"
-        title="Error"
-        message="حدث خطأ ما يرجي اعادة المحاولة"
-        onClose={() => setErrorAlert(false)}
-        customCloseBtnText="اغلاق"
-      />
-      <Simplert
-        showSimplert={successAlert}
-        type="success"
-        title="Success"
-        message="تم حذف المنشور بنجاح"
-        onClose={() => setSuccessAlert(false)}
-        customCloseBtnText="تم "
-      />
+      <Modal
+        show={!!deletePostId}
+        onHide={() => setDeletePostId(null)}
+        backdrop="static"
+        keyboard={false}
+      >
+        <Modal.Header closeButton>
+          <Modal.Title>Confirmation</Modal.Title>
+        </Modal.Header>
+        <Modal.Body>Are you sure you want to delete this post?</Modal.Body>
+        <Modal.Footer>
+          <Button variant="secondary" onClick={() => setDeletePostId(null)}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={() => handleDeletePost(deletePostId)}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
     </div>
   );
 };

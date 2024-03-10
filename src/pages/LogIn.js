@@ -32,31 +32,50 @@ function LogIn() {
         try {
             const response = await axios.post('http://localhost:9090/university/auth/login', formData);
             console.log('Response:', response);
-            if (response && (response.status === 200 ||response.status === 201 || response.status === 202)) {
+            if (response && response.status >= 200 && response.status < 300) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 console.log('Form data submitted:', response.data);
                 setFormData({
                     email: '',
                     password: '',
                 });
-                navigate('/showEvents');
-                localStorage.setItem('token', response.data.token);
+                const userRole = response.data.userRole;
+                console.log('User Role:', userRole); 
+
+                // Set appropriate route based on user role
+                let route = '/';
+                switch (userRole) {
+                    case 'ADMIN':
+                        route = '/showDepartments';
+                        break;
+                    case 'SOURCE':
+                        route = '/showEvents';
+                        break;
+                    case 'STUDENT':
+                        route = '/collages'; 
+                        break;
+                    default:
+                        break;
+                }
+    
+                // Navigate to the determined route
+                navigate(route);
+               localStorage.setItem('token', response.data.token);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
                 console.log('Response data:', response.data);
             }
         } catch (error) {
             console.error('Error:', error);
+            let errorMessage = 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.';
             if (error.response) {
-                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
-            } else {
-                showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
+                errorMessage = error.response.data.message || errorMessage;
             }
-                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
-        } finally {
-            setIsLoading(false);
-        }
-    };
+            showAlertHandler('error', 'Failed', errorMessage, 'اغلاق');
+                } finally {
+                    setIsLoading(false);
+                }
+            };
 
     const handleChange = (e) => {
         const { name, value } = e.target;
