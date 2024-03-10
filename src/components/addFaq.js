@@ -1,0 +1,168 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Simplert from 'react-simplert';
+//import Sidebar from './SideBar';
+import '../styles/AddFaq.css';
+import useAlert from '../hooks/useAlert';
+
+function AddFaq() {
+    const [formData, setFormData] = useState({
+        question: '',
+        answer: '',
+        source_id: ''
+    });
+    const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState('');
+    const [sources, setSources] = useState([]);
+    const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
+    
+
+    useEffect(() => {
+        setFormData({
+            question: "",
+            answer: "",
+            source_id: "",
+        });
+    }, []);
+
+    useEffect(()=>{
+        fetchSources();
+    },[]);    
+    
+    const fetchSources = async () =>{
+        try {
+            const response = await axios.get('http://localhost:9090/university/sources');
+            setSources(response.data)
+        }
+        catch(error){
+            console.error('Error fetching sources:', error);
+        }
+    };
+
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        if (!formData.question || !formData.answer || !formData.source_id) {
+            showAlertHandler('error', 'Failed', 'برجاء ملئ كل البيانات', 'اغلاق');
+            return;
+        }
+
+        setIsLoading(true);
+
+        try {
+            const response = await axios.post('http://localhost:9090/university/faqs', formData);
+
+            if (response && response.status === 201) {
+                showAlertHandler('success', 'Success', 'تم اضافة السؤال بنجاح', 'تم');
+                resetForm();
+            } else {
+                showAlertHandler('error', 'Failed', 'للاسف فشل اضافة السؤال ', 'اغلاق');
+            }
+        } catch (error) {
+            console.error('Error:', error);
+            setError('حدث خطأ أثناء إضافة السؤال');
+            let errorMessage = 'حدث خطأ أثناء إضافة السؤال';
+            if (error.response) {
+                if (error.response.status === 400) {
+                    // Handle specific error codes if needed
+                    errorMessage = 'Bad request: Please check your input data.';
+                } else {
+                    // Handle other status codes
+                    errorMessage = 'An error occurred while processing your request.';
+                }
+            } else if (error.request) {
+                // The request was made but no response was received
+                errorMessage = 'Could not connect to the server. Please try again later.';
+            } else {
+                // Something happened in setting up the request that triggered an Error
+                errorMessage = 'An unexpected error occurred. Please try again later.';
+            }
+            showAlertHandler('error', 'Failed', errorMessage, 'اغلاق');
+        } finally {
+            setIsLoading(false);
+        }
+    };
+
+    const resetForm = () => {
+        setFormData({
+            question: "",
+            answer: "",
+            source_id: "",
+        });
+        setError('');
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setFormData({
+            ...formData,
+            [name]: name === 'source_id' ? parseInt(value, 10) || '' : value
+        });
+    };
+
+    return (
+        <div className="add-faq-page" dir="rtl">
+            <div className="add-faq-container">
+                <h1 className="header">إضافة سؤال شائع</h1>
+                <form onSubmit={handleSubmit}>
+                    <div className="form-group">
+                        <label className="lable" htmlFor="question">السؤال</label>
+                        <input
+                            type="text"
+                            id="question"
+                            name="question"
+                            value={formData.question}
+                            onChange={handleChange}
+                            className="form-control"
+                            required
+                        />
+                    </div>
+                    <div className="form-group">
+                        <label className="lable" htmlFor="source_id">المصدر</label>
+                        <select
+                                id="source_id"
+                                name="source_id"
+                                value={formData.source_id}
+                                onChange={handleChange}
+                                className="form-control"
+                                required
+                        >
+                                <option value="">اختر المصدر</option>
+                                {sources.map(source => (
+                                    <option key={source.source_id} value={source.source_id}>
+                                        {source.full_name}
+                                        </option>
+                                ))}
+                            </select>
+                        </div> 
+                    <div className="form-group">
+                        <label className="lable" htmlFor="answer">الإجابة</label>
+                        <textarea
+                            id="answer"
+                            name="answer"
+                            value={formData.answer}
+                            onChange={handleChange}
+                            className="form-control"
+                            required
+                        />
+                    </div>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"65%"}}>
+                        {isLoading ? 'جاري إضافة السؤال' : 'إضافة السؤال'}
+                    </button>
+
+                    {error && <div className="error">{error}</div>}
+                </form>
+                <Simplert
+                showSimplert={showAlert}
+                type={alertType}
+                title={alertTitle}
+                message={alertMessage}
+                onClose={hideAlertHandler}
+                customCloseBtnText={customCloseBtnText}
+            />                
+            </div>
+        </div>
+    );
+}
+
+export default AddFaq;

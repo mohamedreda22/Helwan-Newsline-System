@@ -1,0 +1,118 @@
+.edit-event-container {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    padding: 20px;
+    margin-bottom: 20px;
+    background-color: #5e565610;
+}
+
+.edit-event-details {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+}
+
+.edit-event-label {
+    font-weight: bold;
+}
+
+.edit-event-input {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.save-icon,
+.cancel-icon {
+    cursor: pointer;
+    width: 24px;
+    height: 24px;
+    margin-right: 10px;
+}
+
+.save-icon:hover,
+.cancel-icon:hover {
+    filter: brightness(0.8);
+}
+
+.image-table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    
+}
+
+.image-table td {
+    padding: 10px;
+    border: 1px solid #ddd;
+    text-align: center;
+}
+
+.image-label {
+    font-size: 14px;
+    font-weight: bold;
+    margin-bottom: 5px;    
+    position: relative;
+    display: inline-block;
+    cursor: pointer;
+}
+
+.image-preview {
+    width: 100px;
+    height: 120px;
+    border: 2px solid #040101;
+    border-radius: 5px;
+    object-fit: cover; 
+    box-shadow: inset 0 0 3px rgba(0, 0, 0, 0.7), 0 0 6px rgba(0,0, 0, 0.7);
+    vertical-align: middle;
+    transition: transform 0.3s ease-in-out;
+    overflow: hidden; 
+    position: relative; 
+}
+  
+  .image-table .image-label img {
+    width: 100px; 
+    height: auto;
+    transition: transform 0.3s ease-in-out;
+  }
+
+ 
+
+  
+
+
+.image-table img:hover {
+    transform: scale(1.5); 
+    z-index: 9999;
+    position: relative;
+/*     top: 50%;
+    left: 50%;
+    margin-left: -50px; 
+    margin-top: -50px;  */
+    display: block;
+  }
+  
+
+
+/* .btn-container{
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+
+}
+.btn-container .btn-submit{
+    background-color: #4CAF50;
+    color: white;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+ */
+

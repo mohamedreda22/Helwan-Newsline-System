@@ -1,0 +1,69 @@
+.pagination {
+    position: fixed;
+    bottom: 20px;
+    transform: translateX(-50%);
+    display: flex;
+    justify-content: center;
+    z-index: 999;
+    justify-content: space-between;
+}
+
+.page-btn {
+    text-decoration: none;
+    color: #000;
+    padding: 8px 12px;
+    border-radius: 50%;
+    border: 1px solid #000;
+    background-color: #fff;
+    cursor: pointer;
+    transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    align-items: center;
+    margin: 0 5px;
+    font-size: 1.2rem;
+    font-weight: 600;
+    min-width: 35px;
+    height: 35px;
+    justify-content: center;
+
+}
+
+.page-btn:hover {
+    background-color: #b2ea16;
+    color: #fff;
+}
+
+.page-btn.active {
+    background-color: #f80606;
+    color: #fff;
+    cursor: default; /* Change cursor on active button */
+    text-decoration: underline;
+}
+
+.page-btn.disabled {
+    pointer-events: none;
+    background-color: #d3d3d3;
+    color: #777;
+}
+
+.page-btn:active {
+    background-color: #434343;
+    color: #fff;
+}
+
+.page-btn:focus {
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(248, 6, 6, 0.5); /* Add focus ring */
+}
+.arrow-icon{
+    width: 35px;
+    height: auto;
+    margin-right: 5px;
+    border: none;
+    cursor: pointer;
+
+}
+.page-numbers {
+    display: flex; /* Display page numbers horizontally */
+    align-items: center; /* Center align page numbers vertically */
+}
