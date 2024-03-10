@@ -58,6 +58,8 @@ export const RouterComponent = () => {
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />
                 <Route path="/updatePassword" element={<UpdatePassword />} />
+                <Route path="/colages" element={<Collages />} />
+                
 
 
 
