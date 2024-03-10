@@ -60,7 +60,7 @@ const Navbar = () => {
             </ul>
           </div>
           <span>
-            <Link to="/" className="nav-link me-5 ">
+            <Link to="/login" className="nav-link me-5 ">
               تسجيل الدخول
             </Link>
           </span>
