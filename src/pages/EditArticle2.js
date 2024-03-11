@@ -10,12 +10,17 @@ import axios from "axios";
 
 const  EditArticle2 = ({ article, onClose }) => {  
     
-    const [articleAddress,  setArticleAddress] = useState("");
-    const [sourceString, setSourceString] = useState("");
-    const [articleContent, setArticleContent] = useState("" );
-    const [source, setSource] = useState("");
-    const [sourceId, setSourceId] = useState([]);
-    const [selectedSource, setSelectedSource] = useState("");
+  const [formData, setFormData] = useState({
+    article_content : article ? article.article_content : "",
+    // source_string: article ? article.source_string : "",
+    article_address : article ? article.article_address : "",
+    source_id: article ? article.source_id : "",
+    article_image_path:article?article.article_image_path:"",
+    url: article ? `http://localhost:9090/university/articles/${article.article_id}` : null,
+  });
+    
+    
+    
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [sources, setSources] = useState([]);
@@ -24,9 +29,17 @@ const  EditArticle2 = ({ article, onClose }) => {
 
   
     useEffect(() => {
-      
-      fetchSources();
-    }, []);
+      if (!article) {
+         
+        fetchSources();
+      } else {
+        setFormData({
+          ...formData,
+          
+          source_id: article.source_id,
+        });
+      }
+    }, [article]);
   
     
     const fetchSources = async () => {
@@ -34,51 +47,46 @@ const  EditArticle2 = ({ article, onClose }) => {
         const response = await axios.get(
           "http://localhost:9090/university/sources"
         );
-        setSourceId(response.data);
+        setSources(response.data);
       } catch (error) {
         console.error("Error fetching sources:", error);
       }
     };
-  
-    
     const handleSourceChange = (event) => {
-      setSelectedSource(event.target.value);
+      setFormData({
+        ...formData,
+        source_id: event.target.value,
+      });
     };
+    
+    
     const handleFileChange = (event) => {
       setSelectedFile(event.target.files[0]);
     };
   
     const handleSubmit = async (event) => {
       event.preventDefault();
-      const formData = new FormData();
-      formData.append("article_address", articleAddress);
-      formData.append("source_string", sourceString);
-      formData.append("article_content", articleContent);
-      formData.append("source_id", selectedSource);
-     
-      if (selectedFile) {
-        formData.append("article_image_path", selectedFile);
-      }
+      console.log("Data to be sent:", formData); 
       try {
-        await axios.put(
-          `http://localhost:9090/university/articles/${article.article_id}`,
-          formData,
-          {
-            headers: {
-              "Content-Type": "multipart/form-data",
-            },
-          }
-        );
-        setShowSuccessAlert(true);
-        onClose();
+        const response = await axios.put(formData.url, {
+          article_content: formData.article_content,
+          // source_string: formData.source_string,
+          
+          article_address: formData.article_address,
+          article_image_path: formData.article_image_path,
+          source_id: formData.source_id,
+
+        });
+        if ( response && response.status === 200) {
+          setShowSuccessAlert(true);
+        } else {
+          setShowErrorAlert(true);
+        }
       } catch (error) {
         console.error("Error updating article:", error);
         setShowErrorAlert(true);
       }
     };
-     
-
-
 
 
     return (  
@@ -88,58 +96,78 @@ const  EditArticle2 = ({ article, onClose }) => {
             
              
              <Form onSubmit={handleSubmit} className='form'>
-              
-              <Row className="rrr1">
+        {!article && (
+          <div>
+            
+            <Row className="mb-3 mt-4">
+
+            <Col>
+               
+               <Form.Group as={Col} md="3" controlId="address" className='fff2' dir='rtl'>
+                   <Form.Label  className='lll2'>العنوان</Form.Label>
+                   <Form.Control
+                     required
+                     type="text"
+                     value={formData.article_address}
+                     onChange={(e) =>
+                       setFormData({ ...formData, article_address: e.target.value })
+                     }
+                   />
+                 </Form.Group>
+               </Col>
+
+
               <Col>
-                
-                <Form.Group as={Col} md="3" controlId="sourceString " className='fff1'dir='rtl'>
-                  <Form.Label className='lll1' > المصدر</Form.Label>
-                  <Form.Control
-                    className='ccc1'
-                    required
-                    type="text"
-                    value={sourceString}
-                    onChange={(event) => setSourceString(event.target.value)}
-
-                  />
-                </Form.Group>
-                </Col>
-                <Col>
-                
-                <Form.Group as={Col} md="3" controlId="articleAddress" className='fff2' dir='rtl'>
-                  <Form.Label  className='lll2'>العنوان</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    value={articleAddress}
-                    onChange={(event) => setArticleAddress(event.target.value)}
-                  />
-                </Form.Group>
-                </Col>
-                </Row>
-                <Row>
-              <Form.Group controlId="formFileLg" className="fff3" as={Col} md="6" dir='rtl'>
-                <Form.Label  className='lll3'>رفع الصورة</Form.Label>
-                <Form.Control type="file" size="lg" />
-             </Form.Group>
-              </Row>
-
-              <Row>
-                <Form.Group as={Col} md="6" controlId="articleContent" className="fff4" dir='rtl'>
-                  <Form.Label  className='lll4'> المقال</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    rows={3}
-                    required
-                    type="text"
-                    value={articleContent}
-                    onChange={(event) => setArticleContent(event.target.value)}
-                  />
-                </Form.Group>
-              </Row>
-              <Button variant="primary" type="submit">   حفظ التغييرات </Button>{" "}
-             <Button variant="secondary" onClick={onClose}> إلغاء   </Button>
-            </Form>
+              <Form.Group as={Col} md="8" controlId="sourceSelect"  className='fff2'>
+                <Form.Label>اختر المصدر</Form.Label>
+                <Form.Select
+                  aria-label="Default select example"
+                  onChange={handleSourceChange}
+                  value={formData.source_id}
+                >
+                  {sources.map((source) => (
+                    <option key={source.source_id} value={source.source_id}>
+                      {source.full_name}
+                    </option>
+                  ))}
+                </Form.Select>
+              </Form.Group>
+              </Col>
+            
+            </Row>
+          </div>
+        )}
+        <Form.Group controlId="articleContent"  as={Col} md="6" className="fff4" dir='rtl' >
+          <Form.Label> المقال  </Form.Label>
+          <Form.Control
+            as="textarea"
+            rows={10}
+            required
+            value={formData.article_content}
+            onChange={(e) =>
+              setFormData({ ...formData, article_content: e.target.value })
+            }
+          />
+        </Form.Group>
+        <Form.Group controlId="image"  className="fff3" as={Col} md="6" dir='rtl'>
+          <Form.Label>   اختر صورة </Form.Label>
+          <Form.Control type="file" onChange={handleFileChange} />
+        </Form.Group>
+        <Row>
+          <Col>
+        <Button variant="primary" type="submit" className='btn7' >
+          حفظ  
+        </Button>{" "}
+        </Col>
+        <Col>
+        
+        <Button variant="secondary" onClick={onClose} className='btn8'>
+          إلغاء
+        </Button>
+        </Col>
+        </Row>
+      </Form>
+  
 
             <Simplert
         showSimplert={showErrorAlert}

@@ -9,19 +9,15 @@ import { useDropzone } from 'react-dropzone';
 import  axios  from 'axios';
 
 const AddVideo4 = () => {  
-  
-
-  
-    
-  
   const   [ videoTitle  , setVideoTitle  ] = useState("");
   const   [ videoDescription,setVideoDescription     ] = useState("");
   const   [video, setVideo] = useState(null);
-  const   [source, setSource] = useState("");
+ // const   [source, setSource] = useState("");
   const   [sourceId, setSourceId] = useState([]);
   const   [selectedSource, setSelectedSource] = useState("");
   const   [categoryId, setCategoryId] = useState([]);
   const   [selectedCategory, setSelectedCategory] = useState("");
+  const [sources, setSources] = useState([]);
   useEffect(() => {
     fetchCategories();
     fetchSources();
@@ -63,36 +59,40 @@ const AddVideo4 = () => {
     event.stopPropagation();
 
     try {
-      const response = await axios.post(
-        "http://localhost:9090/university/videos",
-        {
+       
+      const data =  {
           video_title:videoTitle,
           video_description:videoDescription,
-          source_string: source,
+          //source_string: source,
           category_id: selectedCategory,
           video_path : video ? video.name : null,
           source_id: selectedSource,
         }
-      );
-      if (response && response.status === 200) {
-        console.log(" Video added successfully:", response.data);
-        alert("Added successfully!");
-        resetForm();
-      } else {
-        alert("An error occurred while adding the  video");
-      }
-    } catch (error) {
-      console.error("Error adding video:", error);
-      alert("Error: " + error.message);
-    }
-  };
+        console.log("Data to be sent to backend:", data);
 
+        const response = await axios.post(
+          'http://localhost:9090/university/videos', data);
+  
+        if (response && (response.status === 200||response.status === 201)) {
+          console.log(" video added successfully:", response.data);
+          alert("Added successfully!");
+          resetForm();
+        } else {
+          alert("An error occurred while adding the  video");
+        }
+      } catch (error) {
+        console.error("Error adding video:", error);
+        alert("Error: " + error.message);
+      }
+    };
+       
   const resetForm = () => {
      setVideoTitle("");
      setVideoDescription("");
-    setVideo(null);
-    setSelectedCategory("");
-    setSource("");
+     setVideo(null);
+     setSelectedCategory("");
+     setSelectedSource("");
+      
   };
      
 
@@ -117,17 +117,22 @@ const AddVideo4 = () => {
               <Row className="rr1">
               <Col>
                 
-                <Form.Group as={Col} md="3" controlId="validationCustom01" className='ff1'dir='rtl'>
-                  <Form.Label className='ll1' > المصدر</Form.Label>
-                  <Form.Control
-                    className='cc1'
-                    required
-                    type="text"
-                    value={source}
-                    onChange={(event) => setSource(event.target.value)}
-                  
-                  />
-                </Form.Group>
+              <Form.Group as={Col} md="3" controlId="validationCustom01" className='ff1' dir='rtl'>
+              <Form.Label className='ll1'>المصدر</Form.Label>
+              <Form.Select
+                className='c1'
+                required
+                value={selectedSource}
+                onChange={handleSourceChange}
+              >
+                <option value="">اختر المصدر</option>
+                {sources.map((source) => (
+                  <option key={source.source_id} value={source.source_id}>
+                    {source.full_name}
+                  </option>
+                ))}
+              </Form.Select>
+            </Form.Group>
                 </Col>
                 <Col>
                 
@@ -185,7 +190,6 @@ const AddVideo4 = () => {
                 <Form.Control
                  type="file"
                   size="lg" 
-                  
                   onChange={(event) => setVideo(event.target.files[0])}
                    />
                 {/* <input  type="file" className='form.control'/> */}

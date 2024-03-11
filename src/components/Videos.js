@@ -37,44 +37,32 @@ const Videos = () => {
     }, []);
     
     const handleDeleteVideo = async (videoId) => {
-      Swal.fire({
-        title: "هل أنت متأكد من حذف هذا  الفيديو",
-         
-        icon: "warning",
-        showCancelButton: true,
-        confirmButtonColor: "#3085d6",
-        cancelButtonText: "إلغاء",
-        cancelButtonColor: "#d33",
-        confirmButtonText: "حذف",
-      }).then(async (result) => {
-        if (result.isConfirmed) {
-          try {
-            const response = await axios.delete(
-              `http://localhost:9090/university/videos/${videoId}`
-            );
-            fetchVideos();
-            if (response && response.status === 200) {
-              Swal.fire({
-                title: "تم الحذف",
-                icon: "success",
-              });
-            } else {
-              Swal.fire({
-                title: "Error",
-                text: "An error occurred while deleting the video.",
-                icon: "error",
-              });
-            }
-          } catch (error) {
-            console.error("Error deleting video:", error);
-            Swal.fire({
-              title: "Error",
-              text: "An error occurred while deleting the video.",
-              icon: "error",
-            });
-          }
+      try {
+        // Optimistically remove the article from the UI
+        setVideos(videos.filter(video => video.video_id !== videoId ));
+    
+        const response = await axios.delete(
+          `http://localhost:9090/university/videos/${videoId }`
+        );
+        if (response && (response.status === 202||response.status === 200)) {
+          Swal.fire({
+            title: "تم الحذف",
+            icon: "success",
+          });
+        } else {
+          throw new Error("An error occurred while deleting the video.");
         }
-      });
+      } catch (error) {
+        console.error("Error deleting video:", error);
+        Swal.fire({
+          title: "Error",
+          text: "An error occurred while deleting the video.",
+          icon: "error",
+        });
+    
+        // Restore the article if the deletion fails
+        fetchVideos();
+      }
     };
     
     const handleEditVideo = (videoId) => {
@@ -90,16 +78,18 @@ const Videos = () => {
       return (
         <>
           <div className="mt-2">
-            <div className="notifNum"> :عدد الفيديوهات </div>
+            <div className="notifNum"> عدد الفيديوهات :{videos.length}</div>
             
-            <Table  responsive hover>
+            <Table  responsive hover dir="rtl">
             <tbody>
             {videos.map((video) => (
               <tr key={video.video_id }>
-                {/* <td>{video.vi.slice(0, 20)}...</td>  */}
-                
-                  <td>{video.date}</td>
-                 <td>{video.source}</td> 
+                  <td>{video.video_title}</td> 
+                 <td>{video.video_description}</td> 
+                 <td>{video.video_path}</td> 
+                 <td>{video.category_id}</td> 
+                 <td>{video.source_id}</td> 
+                 <td>{video.video_id }</td> 
     
                     <td>
                     <img

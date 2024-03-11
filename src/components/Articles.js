@@ -7,51 +7,7 @@ import { FaPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
 import { Table, Modal, CloseButton } from "react-bootstrap";
 import EditArticle2 from "../pages/EditArticle2"
-//import AddNotificationForm from "../components/AddNotificationForm";
-
-// const handleDeleteNotification = (notification) => {
-//   Swal.fire({
-//     title: "هل أنت متأكد من حذف هذا الإشعار؟",
-//     icon: "warning",
-//     showCancelButton: true,
-//     confirmButtonColor: "#3085d6",
-//     cancelButtonColor: "#d33",
-//     cancelButtonText: "إلغاء",
-//     confirmButtonText: "حذف",
-//   }).then((result) => {
-//     if (result.isConfirmed) {
-//       // try {
-//       //     await axios.delete(
-//       //       `http://localhost:9090/university/notifications/${notification_id}`
-//       //     );
-//       //     // After deletion, fetch notifications again to update the list
-//       //     // fetchNotification_id();
-//       //   } catch (error) {
-//       //     // console.error('Error deleting notification:', error);
-//       //     // setError('An error occurred while deleting the notification.');
-//       //   }
-//       Swal.fire({
-//         title: "تم الحذف",
-//         icon: "success",
-//       });
-//     }
-//   });
-// };
-// const renderDeleteIcon = () => {
-//   return (
-//     <div>
-//       <img
-//         src={delete_icon}
-//         alt="Delete notification"
-//         className="delete-icon"
-//         onClick={handleDeleteNotification} 
-//       />
-//     </div>
-//   );
-// };
-
-
-
+ 
 
 const Articles = () => {
 const [articles, setArticles] = useState([]);
@@ -78,46 +34,37 @@ useEffect(() => {
   fetchArticles();
 }, []);
 
+ 
 const handleDeleteArticle = async (articleId) => {
-  Swal.fire({
-    title: "هل أنت متأكد من حذف هذا  المقال؟",
-     
-    icon: "warning",
-    showCancelButton: true,
-    confirmButtonColor: "#3085d6",
-    cancelButtonText: "إلغاء",
-    cancelButtonColor: "#d33",
-    confirmButtonText: "حذف",
-  }).then(async (result) => {
-    if (result.isConfirmed) {
-      try {
-        const response = await axios.delete(
-          `http://localhost:9090/university/articles/${articleId}`
-        );
-        fetchArticles();
-        if (response && response.status === 200) {
-          Swal.fire({
-            title: "تم الحذف",
-            icon: "success",
-          });
-        } else {
-          Swal.fire({
-            title: "Error",
-            text: "An error occurred while deleting the article.",
-            icon: "error",
-          });
-        }
-      } catch (error) {
-        console.error("Error deleting article:", error);
-        Swal.fire({
-          title: "Error",
-          text: "An error occurred while deleting the article.",
-          icon: "error",
-        });
-      }
+  try {
+    // Optimistically remove the article from the UI
+    setArticles(articles.filter(article => article.article_id !== articleId));
+
+    const response = await axios.delete(
+      `http://localhost:9090/university/articles/${articleId}`
+    );
+
+    if (response && (response.status === 202||response.status === 200)) {
+      Swal.fire({
+        title: "تم الحذف",
+        icon: "success",
+      });
+    } else {
+      throw new Error("An error occurred while deleting the article.");
     }
-  });
+  } catch (error) {
+    console.error("Error deleting article:", error);
+    Swal.fire({
+      title: "Error",
+      text: "An error occurred while deleting the article.",
+      icon: "error",
+    });
+
+    // Restore the article if the deletion fails
+    fetchArticles();
+  }
 };
+
 
 const handleEditArticle = (articleId) => {
   const ArticleToEdit = articles.find((article) => article.article_id === articleId);
@@ -132,16 +79,16 @@ const handleCloseEditModal = () => {
   return (
     <>
       <div className="mt-2">
-        <div className="notifNum"> :عدد المقالات </div>
+        <div className="notifNum"> عدد المقالات :{articles.length} </div>
         
-        <Table  responsive hover>
+        <Table  responsive hover dir="rtl">
         <tbody>
         {articles.map((article) => (
           <tr key={article.article_id}>
-            {/* <td>{article.article_content.slice(0, 20)}...</td>  */}
-            
-             <td>{article.date}</td>
-             <td>{article.source_string}</td>
+              <td>{article.article_image_path}</td> 
+              <td>{article.article_address}</td> 
+              <td>{article.article_content}</td> 
+
 
               <td>
                 <img
