@@ -18,7 +18,7 @@ const ShowDepartments = () => {
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [userRole, setUserRole] = useState(""); 
-
+  const [departmentEditId, setDepartmentEditId] = useState (null);
 
   useEffect(() => {
     fetchColleges();
@@ -74,9 +74,10 @@ const ShowDepartments = () => {
     }
   };
 
-  const handleEditDepartment = (department) => {
-    setEditedDepartment(department);
+  const handleEditDepartment = (departmentId) => {
+    // setEditedDepartment(department);
     setShowEditModal(true);
+    setDepartmentEditId(departmentId);
   };
 
   const handleCloseEditModal = () => {
@@ -123,7 +124,7 @@ const ShowDepartments = () => {
             <button
               type="button"
               className="edit-btn"
-              onClick={() => handleEditDepartment(department)}
+              onClick={() => handleEditDepartment(department.id)}
             >
               تعديل
             </button>
@@ -166,6 +167,7 @@ const ShowDepartments = () => {
         <Modal.Body>
           <EditDepartment
             department={editedDepartment}
+            departmentId={departmentEditId}
             onClose={handleCloseEditModal}
           />
         </Modal.Body>

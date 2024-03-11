@@ -49,20 +49,25 @@ function AddPostForm() {
   const handleSourceChange = (event) => {
     setSelectedSource(event.target.value);
   };
-  const handleFileChange = (event, data) => {
+  const handleFileChange = (event) => {
     const file = event ? event.target.files[0] : null; 
+    console.log (file,"file");
     const reader = new FileReader();
-    if (file) {
-      reader.onloadend = () => {
-        setImage(reader.result);
-        if (data) {
-          data(reader.result);
-        }
-      };
-      reader.readAsDataURL(file);
-    } else if (data) {
-      data(null);
-    }
+    reader.readAsDataURL(file);
+    reader.onload = function () {
+      setImage (reader.result);
+    };
+    // if (file) {
+    //   reader.onloadend = () => {
+    //     setImage(reader.result);
+    //     // if (data) {
+    //     //   data(reader.result);
+    //     // }
+    //   };
+    //   reader.readAsDataURL(file);
+    // // } else if (data) {
+    // //   data(null);
+    // // }
 };
   const handleCombinedFileChange = (event) => {
     handleFileChange(event, (imageData) => {
@@ -111,20 +116,20 @@ function AddPostForm() {
     event.stopPropagation();
   
     try {
-      // Get the current date and time in Egyptian timezone
-      const currentDate = new Date().toLocaleString("en-US", {
-        timeZone: "Africa/Cairo",
-      });
+      // // Get the current date and time in Egyptian timezone
+      // const currentDate = new Date().toLocaleString("en-US", {
+      //   timeZone: "Africa/Cairo",
+      // });
   
       const response = await axios.post(
         "http://localhost:9090/university/posts",
         {
           post_content: PostContent,
-          post_image_path: image ? image.name : null,
+          post_image_path: image ? image : null,
           category_id: selectedCategory,
           source_string: source,
           source_id: selectedSource,
-          date: currentDate, // Include the current date and time
+          // date: currentDate, // Include the current date and time
         }
       );
       if (response && response.status === 200) {
