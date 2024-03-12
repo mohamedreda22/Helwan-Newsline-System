@@ -1,6 +1,6 @@
 // usePagination.js
 import { useState } from 'react';
-import '../styles/Pagination.css'; 
+import './Pagination.css'; 
 
 
 const usePagination = (totalItems, itemsPerPage) => {

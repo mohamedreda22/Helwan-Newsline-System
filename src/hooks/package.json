@@ -1,0 +1,21 @@
+{
+  "name": "pagination-alert",
+  "version": "1.6.0",
+  "description": "This is my custom hook to use pagination and alert in your code directly.",
+  "main": "useAlert.js",
+  "keywords": [
+    "pagination",
+    "alert"
+  ],
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "files": [
+    "README.md",
+    "useAlert.js",
+    "usePagination.js",
+    "Pagination.css"
+  ],
+  "author": "mohamed_reda",
+  "license": "ISC"
+}
