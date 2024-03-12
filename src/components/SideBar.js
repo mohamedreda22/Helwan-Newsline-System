@@ -48,10 +48,15 @@ export default function SideBar  ()  {
                     </Nav.Link>
                     <Nav.Link href="topNews" className='active'>
                         <span className="material-icons-outlined">newspaper</span> اهم الاخبار
-                    </Nav.Link>
-                    <Nav.Link href="Post" className='active'>
-                        <span className="material-icons-outlined">assistant</span> منشور
-                    </Nav.Link>
+                    </Nav.Link>                    
+                    <SubMenu label="منشور ">
+                        <Nav.Link href="addPost" className='active'>
+                            <span className="material-icons-outlined">add</span> اضافة منشور
+                        </Nav.Link>
+                        <Nav.Link href="posts" className='active'>
+                            <span className="material-icons-outlined">assistant</span> كل المنشورات
+                        </Nav.Link>
+                    </SubMenu>
                     <Nav.Link as={Link} to="/faq" className='active'>
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>

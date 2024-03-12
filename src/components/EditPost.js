@@ -9,6 +9,7 @@ const EditPost = ({ post, onClose }) => {
     source_string: post ? post.source_string : "",
     category_id: post ? post.category_id : "",
     source_id: post ? post.source_id : "",
+    post_image_path : post?.post_image_path || "",
     url: post ? `http://localhost:9090/university/posts/${post.post_id}` : null,
   });
   const [selectedFile, setSelectedFile] = useState(null);
@@ -66,10 +67,24 @@ const EditPost = ({ post, onClose }) => {
     });
   };
 
-  const handleFileChange = (event) => {
-    setSelectedFile(event.target.files[0]);
-  };
+  // const handleFileChange = (event) => {
+  //   setSelectedFile(event.target.files[0]);
+  // };
 
+  const handleFileChange = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          post_image_path: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     console.log("Data to be sent:", formData); // Log the data to be sent
@@ -79,10 +94,13 @@ const EditPost = ({ post, onClose }) => {
         source_string: formData.source_string,
         category_id: formData.category_id,
         source_id: formData.source_id,
+        post_image_path : formData.post_image_path,
       });
       if (response.status === 200) {
         setShowSuccessAlert(true);
-      } else {
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);      } else {
         setShowErrorAlert(true);
       }
     } catch (error) {
@@ -91,6 +109,15 @@ const EditPost = ({ post, onClose }) => {
     }
   };
 
+  // const resetForm = () => {
+  //   setFormData({
+  //     post_content: "",
+  //     post_image_path: "",
+  //     category_id: "",
+  //     source_id: "",
+  //     source_string: "",
+  //   });
+  // };
   return (
     <div dir="rtl" className="container">
       <Form onSubmit={handleSubmit}>
@@ -158,6 +185,7 @@ const EditPost = ({ post, onClose }) => {
         <Form.Group controlId="postImage">
           <Form.Label>صورة المنشور</Form.Label>
           <Form.Control type="file" onChange={handleFileChange} />
+          
         </Form.Group>
         <Button variant="primary" type="submit">
           حفظ التغييرات

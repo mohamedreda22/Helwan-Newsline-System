@@ -57,14 +57,17 @@ export const RouterComponent = () => {
           <Route path="/addFaq" element={<AddEvent />} />
           <Route path="/logout" element={<Logout setIsAuthenticated={setIsAuthenticated} />} />
           <Route path="/dashboard" element={<StudentDashboard />} />
-          <Route path="/showDepartments" element={<ShowDepartments />} />
-          <Route path="/showPosts" element={<Posts />} />
-          <Route path="/addPost" element={<AddPost />} />
 
+          <Route path="/addPost" element={<AddPost />} />
+          <Route path="/showPosts" element={<Posts />} />
+          <Route path="/showDepartments" element={<ShowDepartments/>}/>
+
+          
 
             </Route>
             {/* Public route for login */}
-                <Route path="/" element={isAuthenticated ? <Navigate to="/showEvents" /> : <LogIn />} />
+                <Route path="/" element={!isAuthenticated ?  <LogIn /> : <Events />} />
+
                 <Route path="/login" element={<LogIn />} />
                 <Route path="/signup" element={<SignUp />} />
                 <Route path="/forgotPassword" element={<ForgotPassword />} />

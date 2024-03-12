@@ -167,7 +167,7 @@ const ShowPosts = () => {
 
   // Pagination hook
   const { currentPage, totalPages, goToPage, goToFirstPage, goToLastPage } =
-    usePagination(posts.length, 6);
+    usePagination(posts.length, 8);
 
   const fetchPosts = async () => {
     try {
@@ -223,21 +223,22 @@ const ShowPosts = () => {
   };
 
   // Calculate the index of the first and last posts to display on the current page
-  const startIndex = (currentPage - 1) * 10;
-  const endIndex = Math.min(startIndex + 10, posts.length);
+  const startIndex = (currentPage - 1) * 8;
+  const endIndex = Math.min(startIndex + 8, posts.length);
 
   // Get the posts for the current page
   const currentPosts = posts.slice(startIndex, endIndex);
 
   return (
     <div className="mt-2">
-      <div className="postsNum">عدد المنشورات : {posts.length}</div>
+      <div className="total_posts">عدد المنشورات : <span>{posts.length}</span></div>
       <Table dir="rtl" responsive hover>
         <tbody>
           {currentPosts.map((post) => (
             <tr key={post.post_id}>
               <td className="post-image ">
                 {post.post_image_path && (
+                  
                   <img
                     className="post-image"
                     src={post.post_image_path}

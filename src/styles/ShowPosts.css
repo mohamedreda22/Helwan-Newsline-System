@@ -1,32 +1,38 @@
+.total_posts {
+  text-align: left;
+    padding: 20px;
+    color: #000;
+    font-size: large;
+    font-style: italic;
+    font-weight: bold;
+    animation: events 0.8s ease-in-out forwards;
+}
+.total_posts span {
+  color: red;
+  font-weight: bold;
+}
 
-  .postsNum {
-    width: 150px;
-    text-align: right;
-    height: 50px;
-  }
-  
-  .delete-icon{
-    cursor: pointer;
-  }
+.delete-icon {
+  cursor: pointer;
+}
 
-  
 .post {
-    display: flex;
-    align-items: center;
-  }
-  
-  .post-image {
-    width: 60px; 
-    height: 100%px;
-    margin-right: 10px; 
-    margin-left: 20px;
-  }
-  
-  .icon {
-    cursor: pointer; 
-    margin-right: 2px; 
-  }
-  /* Pagination */
+  display: flex;
+  align-items: center;
+}
+
+.post-image {
+  width: 60px;
+  height: 100%px;
+  margin-right: 10px;
+  margin-left: 20px;
+}
+
+.icon {
+  cursor: pointer;
+  margin-right: 2px;
+}
+/* Pagination */
 .pagination {
   position: fixed;
   bottom: 20px;
