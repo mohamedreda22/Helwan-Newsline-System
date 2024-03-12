@@ -314,7 +314,7 @@ const EditDepartmentForm = ({ departmentId }) => {
           college_id: selectedCollege,
         }
       );
-      if (response.status === 200) {
+      if (response && (response.status === 200 || response.status === 201||response.status === 202)) {
         console.log("Department updated successfully:", response.data);
         setSuccessAlert(true);
         // setTimeout(() => {
