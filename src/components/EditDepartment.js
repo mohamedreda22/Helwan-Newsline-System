@@ -78,7 +78,7 @@
 //       setLoading(false);
 //     }
 //   };
-  
+
 //   return (
 //     <div dir="rtl">
 //       <Form onSubmit={handleSubmit}>
@@ -164,11 +164,11 @@
 //       setValidated(true);
 //       return;
 //     }
-  
+
 //     if (!selectedDepartment) {
 //       return;
 //     }
-  
+
 //     try {
 //       const response = await axios.put(
 //         `http://localhost:9090/university/departments/${selectedDepartment.department_id}`,
@@ -188,7 +188,6 @@
 //       setErrorAlert(true);
 //     }
 //   };
-  
 
 //   return (
 //     <div className="container" dir="rtl">
@@ -230,7 +229,7 @@
 //             </Form.Group>
 //             <Button variant="primary" type="submit">
 //               حفظ التغييرات
-//             </Button>            
+//             </Button>
 
 //           </>
 //         )}
@@ -263,15 +262,13 @@ import Simplert from "react-simplert";
 
 const EditDepartmentForm = ({ departmentId }) => {
   const [departmentName, setDepartmentName] = useState("");
-  const [colleges, setColleges] = useState([]);
+  const [collegeId, setCollegeId] = useState("");
   const [showSuccessAlert, setSuccessAlert] = useState(false);
   const [showErrorAlert, setErrorAlert] = useState(false);
-  const [selectedCollege, setSelectedCollege] = useState("");
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     fetchDepartment();
-    fetchColleges();
   }, [departmentId]);
 
   const fetchDepartment = async () => {
@@ -281,28 +278,13 @@ const EditDepartmentForm = ({ departmentId }) => {
       );
       const departmentData = response.data;
       setDepartmentName(departmentData.department_name);
-      setSelectedCollege(departmentData.college_id);
+      setCollegeId(departmentData.college_id);
     } catch (error) {
       console.error("Error fetching department:", error);
       setErrorAlert(true);
     }
   };
 
-  const fetchColleges = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9090/university/colleges"
-      );
-      setColleges(response.data);
-    } catch (error) {
-      console.error("Error fetching colleges:", error);
-      setErrorAlert(true);
-    }
-  };
-
-  const handleCollegeChange = (event) => {
-    setSelectedCollege(event.target.value);
-  };
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -311,15 +293,17 @@ const EditDepartmentForm = ({ departmentId }) => {
         `http://localhost:9090/university/departments/${departmentId}`,
         {
           department_name: departmentName,
-          college_id: selectedCollege,
+          college_id: collegeId,
         }
       );
-      if (response && (response.status === 200 || response.status === 201||response.status === 202)) {
+      if (
+        response &&
+        (response.status === 200 ||
+          response.status === 201 ||
+          response.status === 202)
+      ) {
         console.log("Department updated successfully:", response.data);
         setSuccessAlert(true);
-        // setTimeout(() => {
-        //   setSuccessAlert(false);
-        // }, 2000);
       } else {
         setErrorAlert(true);
       }
@@ -330,7 +314,6 @@ const EditDepartmentForm = ({ departmentId }) => {
       setLoading(false);
     }
   };
-  
 
   return (
     <div dir="rtl">
@@ -347,23 +330,6 @@ const EditDepartmentForm = ({ departmentId }) => {
             الرجاء إدخال اسم القسم
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group controlId="collegeName">
-  <div dir="rtl">اسم الكلية</div>
-  <Form.Select
-    aria-label="Default select example"
-    value={selectedCollege}
-    onChange={handleCollegeChange}
-    required
-    disabled 
-  >
-    <option value={selectedCollege}>
-      {colleges.find(college => college.college_id === selectedCollege)?.college_name}
-    </option>
-  </Form.Select>
-  <Form.Control.Feedback type="invalid">
-    الرجاء اختيار اسم الكلية
-  </Form.Control.Feedback>
-</Form.Group>
 
         <Button variant="primary" type="submit" disabled={loading}>
           {loading ? (

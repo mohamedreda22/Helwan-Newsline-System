@@ -15,6 +15,7 @@ import StudentDashboard from "../pages/StudentsDashboard";
 import ShowDepartments from "../components/ShowDepartments"
 import Posts from "../pages/Posts";
 import AddPost from "../pages/AddPost";
+import ShowNotifications from "../pages/Notifications"
 
 
 export const RouterComponent = () => {
@@ -61,6 +62,7 @@ export const RouterComponent = () => {
           <Route path="/addPost" element={<AddPost />} />
           <Route path="/showPosts" element={<Posts />} />
           <Route path="/showDepartments" element={<ShowDepartments/>}/>
+          <Route path="/showNotifications" element={<ShowNotifications/>}/>
 
           
 
