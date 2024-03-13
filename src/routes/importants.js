@@ -14,34 +14,25 @@ import ShowDepartments from "../components/ShowDepartments"
 import Posts from "../pages/Posts";
 import AddPost from "../pages/AddPost";
 import SideBar from "../components/SideBar";
-import {PrivateRoutes} from './PrivateRoutes';
-import NotFound from '../pages/NotFound'
 
 
-export const RouterComponent = () => {
+const RouterComponent = () => {
   const { userRole } = useContext(UserRoleContext);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('token') !== null;
-  });  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    console.log('Attempting to get token from local storage');
-    const token = sessionStorage.getItem('token');
-    console.log('Token from local storage:', token);
+    const token = localStorage.getItem('token');
     if (token) {
       setIsAuthenticated(true);
-      console.log('User is authenticated');
     }
     setLoading(false);
   }, []);
 
-/*   const logout = () => {
-    sessionStorage.removeItem('token');
+  const logout = () => {
+    localStorage.removeItem('token');
     setIsAuthenticated(false);
-    console.log('User logged out');
-
-  }; */
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -50,7 +41,6 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogIn />} />
         <Route path="/login" element={<LogIn />} />
         <Route path="/signup" element={<SignUp />} />
         <Route path="/forgotPassword" element={<ForgotPassword />} />
@@ -58,8 +48,8 @@ export const RouterComponent = () => {
         <Route path="/collages" element={<Collages />} />
 
         {isAuthenticated ? (
-          <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-          {/*             {userRole === 'STUDENT' && (
+          <>
+{/*             {userRole === 'STUDENT' && (
               <Route path="/collages" element={<Collages />} />
             )} */}
             {userRole === 'ADMIN' && (
@@ -77,15 +67,13 @@ export const RouterComponent = () => {
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
-            </Route>
-                    ) : (
+          </>
+        ) : (
           <Navigate to="/collages" />
-
-)}
-                <Route path="*" element={<NotFound />} />
-
+        )}
       </Routes>
     </Router>
   );
 };
 
+export default RouterComponent;
