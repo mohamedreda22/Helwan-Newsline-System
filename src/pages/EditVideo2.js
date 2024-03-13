@@ -214,7 +214,7 @@ const handleFileChange = (event) => {
                    />
                  
              </Form.Group>
-              </Row>
+              </Row> 
               
               <Button className="btnn1"   type="submit">  حفظ  </Button>
               <Button variant="secondary" onClick={onClose}className="btnn2" >إلغاء</Button>
