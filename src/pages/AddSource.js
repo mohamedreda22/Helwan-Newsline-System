@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -7,79 +7,87 @@ import  axios  from 'axios';
 import "../styles/AddSource.css"
 
 
-const AddSource = () => {
-    // const [ sourceName, setSourceName] = useState("");
-    // const [sourceEmail,  setSourceEmail] = useState("");
-    // const [sourcePassword,  setSourcePassword] = useState([]);
-    // const [sourceDepartmentId, setSourceDepartmentId] = useState(false);
-    // const [sourceCollegeId, setsourceCollegeId] = useState(false);
-    // const [showSuccessAlert, setShowSuccessAlert] = useState(false);
-    // const [showErrorAlert, setShowErrorAlert] = useState(false);
-   
+function AddSource  () {
+  const [formData, setFormData] = useState({
+    source_full_name: " ", 
+    source_email: " ",
+    source_password: " ",
+    source_department_id: "",
+    college_id: "",
+});
+
+const [colleges, setColleges] = useState([]);
+const [departments , setDepartments] = useState([]);
+
+useEffect(() => {
+  fetchCollege();
+  fetchDepartment();
+}, []);
+
+
+const fetchCollege = async () => {
+  try {
+      const response = await axios.get('http://localhost:9090/university/colleges');
+      setColleges(response.data);
+  } catch (error) {
+      console.error('Error fetching colleges:', error);
+  }
+};
+
+const fetchDepartment = async () => {
+  try {
+      const response = await axios.get('http://localhost:9090/university/departments');
+      setDepartments(response.data);
+  } catch (error) {
+      console.error('Error fetching departments:', error);
+  }
+};
+
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData({
+      ...formData,
+      [name]: value,
+  });
+};
+
+const handleSubmit = async (event) => {
+  event.preventDefault();
   
-    // useEffect(() => {
-    //   fetchColleges();
-    // }, []);
-  
-    // const fetchColleges = async () => {
-    //   try {
-    //     const response = await axios.get(
-    //       "http://localhost:9090/university/colleges"
-    //     );
-    //     setsourceCollegeId(response.data);
-    //   } catch (error) {
-    //     console.error("Error fetching colleges:", error);
-    //   }
-    // };
 
-
-
-    // useEffect(() => {
-    //     fetchDepartment();
-    //   }, []);
-    
-    //   const fetchDepartment = async () => {
-    //     try {
-    //       const response = await axios.get(
-    //         "http://localhost:9090/university/departsments"
-    //       );
-    //       setsourceCollegeId(response.data);
-    //     } catch (error) {
-    //       console.error("Error fetching colleges:", error);
-    //     }
-    //   };
-  
-    // const handleSubmit = async (event) => {
-    //   event.preventDefault();
-    //   const form = event.currentTarget;
-    //   if (form.checkValidity() === false) {
-    //     event.stopPropagation();
-    //   } else {
-    //     try {
-    //       await axios.post("http://localhost:9090/university/departments", {
-    //         department_name: departmentName,
-    //         college_name: collegeName,
-    //       });
-    //       setShowSuccessAlert(true);
-    //       // Reset form fields after successful submission
-    //       setDepartmentName("");
-    //       setCollegeName("");
-    //       setValidated(false);
-    //     } catch (error) {
-    //       console.error("Error adding department:", error);
-    //       setShowErrorAlert(true);
-    //     }
-    //   }
-    //   setValidated(true);
-    // };
-
-
+  try {
      
-    
+    const response = await axios.post(
+      'http://localhost:9090/university/sources', formData);
+
+    if (response && (response.status === 200||response.status === 201)) {
+      console.log(formData);
+      alert("Added successfully!");
+      resetForm();
+    } else {
+      alert("An error occurred while adding the  source");
+    }
+  } catch (error) {
+    console.error("Error adding source:", error);
+    alert("Error: " + error.message);
+  }
+};
+const resetForm = () => {
+  setFormData({
+    source_full_name: " ", 
+    source_email: " ",
+    source_password: " ",
+    source_department_id: "",
+    college_id: "",
+ 
+});
+};
+
+
     return ( 
         <div className='AddSource'>
                 
-             <Form   className='form'>
+             <Form   className='form' onSubmit={handleSubmit}>
                 <h1 className='s'>اضافة  ناشر</h1>
 
                 <Row>
@@ -89,9 +97,9 @@ const AddSource = () => {
                   <Form.Control
                     required
                     type="text"
-                    // value={videoTitle}
-                    // onChange={(event) => setVideoTitle(event.target.value)}
-                    
+                    value={formData.source_full_name}
+                    onChange={handleChange}
+                    name="source_full_name"
                   />
                 </Form.Group>
               </Row>
@@ -104,9 +112,9 @@ const AddSource = () => {
                     className='s5'
                     required
                     type="text"
-                    // value={source}
-                    // onChange={(event) => setSource(event.target.value)}
-                  
+                    value={formData.source_password}
+                    onChange={handleChange}
+                    name="source_password"
                   />
                 </Form.Group>
                 </Col>
@@ -117,50 +125,33 @@ const AddSource = () => {
                   <Form.Control
                     required
                     type="text"
-                    // value={videoTitle}
-                    // onChange={(event) => setVideoTitle(event.target.value)}
-                    
+                    value={formData.source_email}
+                    onChange={handleChange}
+                    name="source_email"
                   />
                 </Form.Group>
                 </Col>
                 
               </Row>
-              <Row className="mb-3 mt-4 ">
-            <Form.Group as={Col} md="8" controlId="categorySelect" dir='rtl'   className="s8">
-              <Form.Select
-                aria-label="Default select example"
-                // onChange={handleCategoryChange}
-                // value={selectedCategory}
-              >
-                <option value="">اختر التصنيف</option>
-                {/* {categoryId.map((category) => (
-                  <option
-                    key={category.category_id}
-                    value={category.category_id}
-                  >
-                    {category.category_name}
-                  </option>
-                ))} */}
-              </Form.Select>
-            </Form.Group>
-          </Row>
+               
           <Row className="rr1">
               <Col>
               <Form.Group controlId="collegeName"  dir='rtl' className='s9' as={Col} md="3"  >
                    <Form.Label>   قسم</Form.Label>
                      <Form.Select
                       aria-label="Default select example"
-                    //   value={collegeName}
-                    //   onChange={(e) => setCollegeName(e.target.value)}
+                      value={formData.source_department_id}
+                     onChange={handleChange}
+                    name="source_department_id"  
                       required
-                    //  isInvalid={validated && collegeName.trim() === ""}
+                   
                         >
                    <option>اختر قسم</option>
-                  {/* {colleges.map((college) => (
-              <option key={college.college_name} value={college.college_name}>
-                {college.college_name}
+                  {departments.map((department) => (
+              <option key={department.department_name} value={department.department_name}>
+                {department.department_name}
               </option>
-            ))} */}
+            ))}
           </Form.Select>
           <Form.Control.Feedback type="invalid">
             الرجاء اختيار اسم القسم
@@ -173,17 +164,18 @@ const AddSource = () => {
                    <Form.Label>اسم الكلية</Form.Label>
                      <Form.Select
                       aria-label="Default select example"
-                    //   value={collegeName}
-                    //   onChange={(e) => setCollegeName(e.target.value)}
+                      value={formData.college_id}
+                      onChange={handleChange}
+                      name="college_id"  
                       required
-                    //  isInvalid={validated && collegeName.trim() === ""}
+                   
                         >
                    <option>اختر الكلية</option>
-                  {/* {colleges.map((college) => (
+                  {colleges.map((college) => (
               <option key={college.college_name} value={college.college_name}>
                 {college.college_name}
               </option>
-            ))} */}
+            ))}
           </Form.Select>
           <Form.Control.Feedback type="invalid">
             الرجاء اختيار اسم الكلية
