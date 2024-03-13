@@ -7,66 +7,69 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axios from 'axios';
 
-const AddArticle4 = () => {
-  const [articleContent, setArticleContent] = useState("");
-  const [address, setAddress] = useState("");
-  const [image, setImage] = useState(null);
-  //const [source, setSource] = useState("");
-  const [selectedSource, setSelectedSource] = useState("");
-  const [sources, setSources] = useState([]);
+
   
-  useEffect(() => {
-    fetchSources();
-  }, []);
 
-  const fetchSources = async () => {
+function AddArticle4 () {
+  const [formData, setFormData] = useState({
+      article_address : "",
+      article_content : "",
+      source_string:"",
+      source_id: "",
+      article_image_path : "",
+  });
+
+  const [sources, setSources] = useState([]);
+
+  useEffect(()=>{
+      fetchSources();
+  },[]);
+
+  const fetchSources = async () =>{
     try {
-      const response = await axios.get(
-        "http://localhost:9090/university/sources"
-      );
-      setSources(response.data);
-    } catch (error) {
-      console.error("Error fetching sources:", error);
+        const response = await axios.get('http://localhost:9090/university/sources');
+        setSources(response.data)
     }
-  };
-
-  const handleFileChange = (event, dataSetter) => {
-    const file = event ? event.target.files[0] : null;
-    const reader = new FileReader();
-    if (file) {
-      reader.onloadend = () => {
-        dataSetter(reader.result);
-      };
-      reader.readAsDataURL(file);
-    } else {
-      dataSetter(null);
+    catch(error){
+        console.error('Error fetching sources:', error);
     }
-  };
+};
 
-  const handleCombinedFileChange = (event) => {
-    handleFileChange(event, setImage);
-  };
 
-  const handleSubmit = async (event) => {
+const handleChange = (e) => {
+  const { name, value } = e.target;
+  setFormData({
+      ...formData,
+      [name]: value,
+  });
+};
+
+const handleFileChange = (event) => {
+      const file =  event.target.files[0];
+      const reader = new FileReader();
+      if (file) {
+        reader.onloadend = () => {
+           setFormData({
+            ...formData,
+            article_image_path:reader.result,
+           });
+        };
+        reader.readAsDataURL(file);
+      
+      }
+    };
+
+    const handleSubmit = async (event) => {
     event.preventDefault();
-    event.stopPropagation();
+    
 
     try {
-      const data = {
-        article_address: address,
-        source_string: selectedSource,
-        article_content: articleContent,
-        article_image_path: image ? image.name : null,
-        source_id: selectedSource,
-      };
-
-      console.log("Data to be sent to backend:", data);
-
+       
       const response = await axios.post(
-        'http://localhost:9090/university/articles', data);
+        'http://localhost:9090/university/articles', formData);
 
       if (response && (response.status === 200||response.status === 201)) {
-        console.log(" Article added successfully:", response.data);
+        console.log(formData);
         alert("Added successfully!");
         resetForm();
       } else {
@@ -78,15 +81,15 @@ const AddArticle4 = () => {
     }
   };
 
-  const handleSourceChange = (event) => {
-    setSelectedSource(event.target.value);
-  };
-
-  const resetForm = () => {
-    setArticleContent("");
-    setImage(null);
-    setAddress("");
-    setSelectedSource("");
+    const resetForm = () => {
+      setFormData({
+        article_address: "",
+        source_string: "",
+        article_content: "",
+        article_image_path: "",
+        source_id: "",
+     
+    });
   };
 
   return (
@@ -99,13 +102,40 @@ const AddArticle4 = () => {
         <Form className='form' onSubmit={handleSubmit}>
           <Row className="r1">
             <Col>
-            <Form.Group as={Col} md="3" controlId="validationCustom01" className='f1' dir='rtl'>
-              <Form.Label className='l1'>المصدر</Form.Label>
+            
+             <Form.Group as={Col} md="3" controlId="validationCustom01" className='f1' dir='rtl'>
+                <Form.Label className='l1'>المصدر</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  value={formData.source_string}
+                  onChange={handleChange}
+                  name="source_string"
+                />
+              </Form.Group>
+
+            </Col>
+            <Col>
+              <Form.Group as={Col} md="3" controlId="validationCustom01" className='f2' dir='rtl'>
+                <Form.Label className='l2'>العنوان</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  value={formData.article_address}
+                  onChange={handleChange}
+                  name="article_address"
+                />
+              </Form.Group>
+            </Col>
+          </Row>
+          <Row>
+         < Form.Group as={Col} md="3" controlId="sourceSelect" className='f9' dir='rtl'>
               <Form.Select
-                className='c1'
-                required
-                value={selectedSource}
-                onChange={handleSourceChange}
+              aria-label='Default select example'
+                className='c9'
+                value={formData.source_id}
+                onChange={handleChange}
+                name="source_id"   
               >
                 <option value="">اختر المصدر</option>
                 {sources.map((source) => (
@@ -115,39 +145,29 @@ const AddArticle4 = () => {
                 ))}
               </Form.Select>
             </Form.Group>
-
-            </Col>
-            <Col>
-              <Form.Group as={Col} md="3" controlId="validationCustom01" className='f2' dir='rtl'>
-                <Form.Label className='l2'>العنوان</Form.Label>
-                <Form.Control
-                  required
-                  type="text"
-                  value={address}
-                  onChange={(event) => setAddress(event.target.value)}
-                />
-              </Form.Group>
-            </Col>
           </Row>
           <Row>
             <Form.Group as={Col} md="6" controlId="formFileMultiple" className="f3" dir='rtl'>
               <Form.Label> اختر صورة </Form.Label>
               <Form.Control
                 type="file"
-                onChange={handleCombinedFileChange}
+                id="article_image_path"
+                name="article_image_path"   
+                onChange={handleFileChange}
               />
             </Form.Group>
           </Row>
           <Row>
-            <Form.Group as={Col} md="6" controlId="validationCustom02" className="f4" dir='rtl'>
+            <Form.Group as={Col} md="6" controlId="validationCustom01" className="f4" dir='rtl'>
               <Form.Label className='l4'> المقال</Form.Label>
               <Form.Control
                 as="textarea"
                 rows={3}
                 required
-                type="text"
-                value={articleContent}
-                onChange={(event) => setArticleContent(event.target.value)}
+                value={formData.article_content}
+                onChange={handleChange}
+                name="article_content"   
+                
               />
             </Form.Group>
           </Row>
@@ -161,5 +181,6 @@ const AddArticle4 = () => {
     </div>
   );
 }
+
 
 export default AddArticle4;

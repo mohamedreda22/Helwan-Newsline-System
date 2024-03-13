@@ -85,9 +85,11 @@ const handleCloseEditModal = () => {
         <tbody>
         {articles.map((article) => (
           <tr key={article.article_id}>
-              <td>{article.article_image_path}</td> 
               <td>{article.article_address}</td> 
+              <td>{article.source_string}</td> 
               <td>{article.article_content}</td> 
+              <td>{article.article_image_path}</td> 
+              <td>{article.article_id}</td>
 
 
               <td>

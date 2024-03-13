@@ -11,7 +11,7 @@ function AllArticles() {
     <div className="container-fluid bg-gray">
       <div className="row">
         <div className="col-lg-10">
-        <h1 dir="rtl">المقالات</h1>
+        <h1 className="art" dir="rtl">المقالات</h1>
           <div className="container-2">
             
             <Articles />

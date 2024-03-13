@@ -85,11 +85,15 @@ const Videos = () => {
             {videos.map((video) => (
               <tr key={video.video_id }>
                   <td>{video.video_title}</td> 
+                  <td>{video.source_string}</td> 
                  <td>{video.video_description}</td> 
+                 
                  <td>{video.video_path}</td> 
+                 <td>{video.video_id }</td> 
+                  
                  <td>{video.category_id}</td> 
                  <td>{video.source_id}</td> 
-                 <td>{video.video_id }</td> 
+                
     
                     <td>
                     <img
