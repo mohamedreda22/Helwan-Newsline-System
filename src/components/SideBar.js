@@ -53,7 +53,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="addPost" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة منشور
                         </Nav.Link>
-                        <Nav.Link href="posts" className='active'>
+                        <Nav.Link href="showPosts" className='active'>
                             <span className="material-icons-outlined">assistant</span> كل المنشورات
                         </Nav.Link>
                     </SubMenu>
