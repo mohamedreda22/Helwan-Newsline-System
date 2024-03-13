@@ -6,7 +6,7 @@ import SideBar from "../components/SideBar";
  
 import Message from '../pages/Message'; 
 
-import AddArticle4 from "../pages/AddArticle3";
+import AddArticle3 from "../pages/AddArticle3";
  
 import AddVideo4 from "../pages/AddVideo4";
  
@@ -35,7 +35,7 @@ export const RouterComponent = () => {
         <Route path="/sidebar"      element={<SideBar  />} />
         <Route path="/message"      element={< Message />} />
         <Route path="/addVideo"          element={< AddVideo4/>} />
-        <Route path="/addarticle "  element={<AddArticle4/>} />
+        <Route path="/addarticle "  element={<AddArticle3/>} />
         <Route path="/editarticle2"  element={<EditArticle2/>} />
         <Route path="/editvideo2"    element={<EditVideo2/>} />
         <Route path="/articles"    element={<AllArticles/>} />

@@ -10,7 +10,7 @@ import axios from 'axios';
 
   
 
-function AddArticle4 () {
+function AddArticle3 () {
   const [formData, setFormData] = useState({
       article_address : "",
       article_content : "",
@@ -183,4 +183,4 @@ const handleFileChange = (event) => {
 }
 
 
-export default AddArticle4;
+export default AddArticle3;
