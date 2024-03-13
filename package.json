@@ -1,5 +1,5 @@
 {
-  "name": "pagination",
+  "name": "helwan-newsline-system",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -63,20 +63,5 @@
   "devDependencies": {
     "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "react-scripts": "^5.0.1"
-  },
-  "description": "This chapter delves into the overview of the project, its scope, limitations, and key terminologies.",
-  "main": "index.js",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/mohamedreda22/Helwan-Newsline-System.git"
-  },
-  "keywords": [
-    "usePagination"
-  ],
-  "author": "mohamed reda",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/mohamedreda22/Helwan-Newsline-System/issues"
-  },
-  "homepage": "https://github.com/mohamedreda22/Helwan-Newsline-System#readme"
+  }
 }
