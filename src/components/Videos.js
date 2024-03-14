@@ -3,19 +3,19 @@ import React , { useState, useEffect } from "react";
 import edit_icon from "../assets/icons/edit.svg";
 import delete_icon from "../assets/icons/delete.svg";
 import "../styles/Articles.css";
-import { FaPlus } from "react-icons/fa";
-import Swal from "sweetalert2";
-import { Table, Modal, CloseButton } from "react-bootstrap";
+ 
+import { Table, Modal } from "react-bootstrap";
 import EditVideo2 from "../pages/EditVideo2"
 
-
+import Simplert from "react-simplert";
 
 
 const Videos = () => {
     const [videos, setVideos] = useState([]);
     const [showEditModal, setShowEditModal] = useState(false);
     const [editVideo, setEditVideo] = useState(null);
-    
+    const [errorAlert, setErrorAlert] = useState(false); 
+
     const fetchVideos = async () => {
       try {
         const response = await axios.get(  
@@ -24,11 +24,7 @@ const Videos = () => {
         setVideos(response.data);
       } catch (error) {
         console.error("Error fetching videos:", error);
-        Swal.fire({
-          title: "Error",
-          text: "An error occurred while fetching  videos.",
-          icon: "error",
-        });
+        setErrorAlert(true); 
       }
     };
     
@@ -45,20 +41,13 @@ const Videos = () => {
           `http://localhost:9090/university/videos/${videoId }`
         );
         if (response && (response.status === 202||response.status === 200)) {
-          Swal.fire({
-            title: "تم الحذف",
-            icon: "success",
-          });
+          setShowEditModal(false);
         } else {
           throw new Error("An error occurred while deleting the video.");
         }
       } catch (error) {
         console.error("Error deleting video:", error);
-        Swal.fire({
-          title: "Error",
-          text: "An error occurred while deleting the video.",
-          icon: "error",
-        });
+        setErrorAlert(true);
     
         // Restore the article if the deletion fails
         fetchVideos();
@@ -84,13 +73,9 @@ const Videos = () => {
             <tbody>
             {videos.map((video) => (
               <tr key={video.video_id }>
-                  <td>{video.video_title}</td> 
-                  <td>{video.source_string}</td> 
-                 <td>{video.video_description}</td> 
-                 
-                 <td>{video.video_path}</td> 
-                 <td>{video.video_id }</td> 
-                  
+                 <td>{video.video_title}</td> 
+                  <td>{video.video_description}</td> 
+                  <td>{video.video_path}</td> 
                  <td>{video.category_id}</td> 
                  <td>{video.source_id}</td> 
                 
@@ -125,15 +110,24 @@ const Videos = () => {
           <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>
             <Modal.Header closeButton>
               <div className="d-flex justify-content-between align-items-center w-100">
-                <Modal.Title>تعديل المقال</Modal.Title>
+                <Modal.Title>تعديل الفيديو</Modal.Title>
               </div>
             </Modal.Header>
             <Modal.Body>
               { editVideo && (
-                <EditVideo2 post={editVideo} onClose={handleCloseEditModal} />
+                <EditVideo2 videoId={editVideo.video_id} onClose={handleCloseEditModal} />
               )}
             </Modal.Body>
           </Modal>
+
+          <Simplert
+          showSimplert={errorAlert}
+          type="error"
+          title="Error"
+          message="An error occurred while fetching or deleting video."
+          onClose={() => setErrorAlert(false)}
+          customCloseBtnText="Close"
+        />
           </div>
         </>
       );

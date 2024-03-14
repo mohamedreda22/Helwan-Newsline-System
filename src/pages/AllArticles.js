@@ -14,7 +14,7 @@ function AllArticles() {
         <h1 className="art" dir="rtl">المقالات</h1>
           <div className="container-2">
             
-            <Articles />
+            <Articles />  
           </div>
         </div>
         <div className="col-lg-2">

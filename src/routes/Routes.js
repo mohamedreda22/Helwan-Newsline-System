@@ -31,7 +31,7 @@ export const RouterComponent = () => {
     <Router>
       <Routes>
         
-        <Route path="/"             element={<  AllSources />} />
+        <Route path="/"             element={< AllSources />} />
         <Route path="/sidebar"      element={<SideBar  />} />
         <Route path="/message"      element={< Message />} />
         <Route path="/addVideo"          element={< AddVideo4/>} />
@@ -42,7 +42,7 @@ export const RouterComponent = () => {
         <Route path="/source"    element={< AddSource/>} />
         <Route path="/allvids"    element={< AllVideos/>} />
         <Route path="/editsource"    element={<  EditSource/>} />
-        {/* <Route path="/allsources  "  element={< AllSources/>} /> */}
+        <Route path="/allsources  "  element={< AllSources/>} /> 
 
         {/* <Route path="/ed"    element={< Outlet/>} /> */}
        {/* ع لو عايزه صفحتين بينهم مسافات */}

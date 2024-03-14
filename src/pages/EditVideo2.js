@@ -10,14 +10,15 @@ import Simplert from "react-simplert";
 
 
 
-function EditVideo2 ({ video,onClose }) {
+function EditVideo2 ({ videoId,onClose }) {
   const [formData, setFormData] = useState({
-    video_title : video ?.video_title || "",
-    video_description : video ?.video_description || "",
-    source_string: video ?.source_string || "",
-    source_id: video ?.source_id || "",
-    video_path:video?.video_path||"",
-    category_id:video?.category_id||"",
+    video_title :  "",
+    video_description :   "",
+    source_string:   "",
+    source_id:  "",
+    video_path: "",
+    category_id: "",
+    url: `http://localhost:9090/university/videos/${videoId}`
   });
 
 
@@ -29,51 +30,55 @@ function EditVideo2 ({ video,onClose }) {
 
 
   useEffect(() => {
+    fetchCategories();
+    fetchSources();
+    fetchVideos();
+  }, [videoId]);
+  
+  const fetchCategories = async () => {
+  try {
+      const response = await axios.get('http://localhost:9090/university/categories');
+      setCategories(response.data);
+  } catch (error) {
+      console.error('Error fetching categories:', error);
+  }
+  };
+  
+  const fetchSources = async () =>{
+  try {
+      const response = await axios.get('http://localhost:9090/university/sources');
+      setSources(response.data)
+  }
+  catch(error){
+      console.error('Error fetching sources:', error);
+  }
+  };
+
+ 
+
+const fetchVideos = async () => {
+  try {
+    const response = await axios.get(formData.url);
+    const videoData = response.data;
     setFormData({
-        ...formData,
-        video_title : video ?.video_title || "",
-        video_description : video ?.video_description || "",
-       source_string: video ?.source_string || "",
-       source_id: video ?.source_id || "",
-       video_path:video?.video_path||"",
-      category_id:video?.category_id||"",
-        
-
+      ...formData,
+      video_title: videoData.video_title,
+      video_description: videoData.video_description,
+      video_path: videoData.video_path,
+      source_id: videoData.source_id.toString(),
+      source_string: videoData.source_string,
+      category_id: videoData.category_id,
     });
-}, [video]);
-
-
-useEffect(() => {
-  fetchCategories();
-  fetchSources();
-}, []);
-
-const fetchCategories = async () => {
-try {
-    const response = await axios.get('http://localhost:9090/university/categories');
-    setCategories(response.data);
-} catch (error) {
-    console.error('Error fetching categories:', error);
-}
+  } catch (error) {
+    console.error("Error fetching video:", error);
+    setShowErrorAlert(true);
+  }
 };
 
-const fetchSources = async () =>{
-try {
-    const response = await axios.get('http://localhost:9090/university/sources');
-    setSources(response.data)
-}
-catch(error){
-    console.error('Error fetching sources:', error);
-}
-};
 
-const handleChange = (e) => {
-const { name, value } = e.target;
-setFormData({
-    ...formData,
-    [name]: value,
-});
-};
+
+
+ 
 
 const handleFileChange = (event) => {
     const file =  event.target.files[0];
@@ -98,17 +103,30 @@ const handleFileChange = (event) => {
     e.preventDefault();
     
     try {
-        const response = await axios.put(`http://localhost:9090/university/videos/${video.video_id}`, formData);
-        if (response && (response.status === 200||response.status === 201||response.status === 202)) {
-  
+      const response = await axios.put(formData.url, {
+        video_title: formData.video_title,
+        video_description: formData.video_description,
+        video_path: formData.video_path,
+        source_id: formData.source_id.toString(),
+        source_string: formData.source_string,
+        category_id: formData.category_id,
+      });
+      if (
+        response &&
+        (response.status === 200 ||
+          response.status === 201 ||
+          response.status === 202)
+      ) {  
         setShowSuccessAlert(true);
-        }
-        else{
-            setShowErrorAlert(true);
-        }
-    } catch (error) {
-        console.error('Error updating video:', error);
+        setTimeout(() => {
+          onClose();
+        }, 2000);
+      } else {
         setShowErrorAlert(true);
+      }
+    } catch (error) {
+      console.error("Error updating video:", error);
+      setShowErrorAlert(true);
     }
   };
 
@@ -120,14 +138,14 @@ const handleFileChange = (event) => {
              <div className='EditVideo'>
              
              <Form  onSubmit={handleSubmit} className='form'>
-                <h1 className='hhhh1'> تعديل  فيديو</h1>
+                
                
                
 
 
               <Row className="mb-3 mt-4">
             <Col>
-               <Form.Group as={Col} md="3" controlId="article_address" className='ffff1' dir='rtl'>
+               <Form.Group as={Col} md="3" controlId="videoAddress" className='ffff1' dir='rtl'>
                    <Form.Label  className='llll1'>العنوان</Form.Label>
                    <Form.Control
                      required
@@ -140,7 +158,7 @@ const handleFileChange = (event) => {
                </Col>
                <Col>
 
-               <Form.Group as={Col} md="3" controlId="source_string" className='ffff2' dir='rtl'>
+               <Form.Group as={Col} md="3" controlId="sourceString" className='ffff2' dir='rtl'>
                    <Form.Label  className='llll2'> المصدر</Form.Label>
                    <Form.Control
                      required
@@ -154,12 +172,12 @@ const handleFileChange = (event) => {
 
 
               <Col>
-              <Form.Group as={Col} md="8" controlId="source_id"  className='ffff9'>
+              <Form.Group as={Col} md="8" controlId="sourceId"  className='ffff9'>
                 <Form.Label>اختر المصدر</Form.Label>
                 <Form.Select
                   aria-label="Default select example"
                   value={formData.source_id}
-                  onChange={handleChange}
+                  onChange={handleInputChange}
                   name="source_id"  
                 >
                   {sources.map((source) => (
@@ -177,7 +195,7 @@ const handleFileChange = (event) => {
               aria-label="Default select example"
               name="category_id"
               value={formData.category_id}
-              onChange={handleChange}
+              onChange={handleInputChange}
             >
               <option value="">اختر التصنيف</option>
               {categories.map((category) => (
@@ -188,7 +206,7 @@ const handleFileChange = (event) => {
             </Form.Select>
           </Form.Group>
               <Row>
-                <Form.Group as={Col} md="6" controlId="video_description" className="ffff4" dir='rtl'>
+                <Form.Group as={Col} md="6" controlId="videoDescription" className="ffff4" dir='rtl'>
                   <Form.Label  className='llll4'>   الوصف</Form.Label>
                   <Form.Control
                     as="textarea"
@@ -196,7 +214,7 @@ const handleFileChange = (event) => {
                     required
                     name="video_description"
                     value={formData.video_description}
-                    onChange={handleChange}
+                    onChange={handleInputChange}
                   />
                 </Form.Group>
               </Row>

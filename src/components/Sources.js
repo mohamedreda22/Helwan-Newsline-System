@@ -3,10 +3,9 @@ import React , { useState, useEffect } from "react";
 import edit_icon from "../assets/icons/edit.svg";
 import delete_icon from "../assets/icons/delete.svg";
 import "../styles/Articles.css";
-import { FaPlus } from "react-icons/fa";
 import Swal from "sweetalert2";
-import { Table, Modal, CloseButton } from "react-bootstrap";
-import EditArticle2 from "../pages/EditArticle2"
+import Simplert from "react-simplert";
+import { Table, Modal} from "react-bootstrap";
 import EditSource from "../pages/EditSource";
  
 
@@ -14,6 +13,7 @@ const Sources = () => {
 const [sources, setSources] = useState([]);
 const [showEditModal, setShowEditModal] = useState(false);
 const [editSource, setEditSource] = useState(null);
+const [errorAlert, setErrorAlert] = useState(false);
 
 const fetchSources = async () => {
   try {
@@ -23,13 +23,9 @@ const fetchSources = async () => {
     setSources(response.data);
   } catch (error) {
     console.error("Error fetching Sources:", error);
-    Swal.fire({
-      title: "Error",
-      text: "An error occurred while fetching  Sources.",
-      icon: "error",
-    });
+    setErrorAlert(true); 
   }
-};
+}; 
 
 useEffect(() => {
   fetchSources();
@@ -46,21 +42,13 @@ const handleDeleteSource = async (sourceId) => {
     );
 
     if (response && (response.status === 202||response.status === 200)) {
-      Swal.fire({
-        title: "تم الحذف",
-        icon: "success",
-      });
+      setShowEditModal(false); 
     } else {
       throw new Error("An error occurred while deleting the source.");
     }
   } catch (error) {
     console.error("Error deleting source:", error);
-    Swal.fire({
-      title: "Error",
-      text: "An error occurred while deleting the source.",
-      icon: "error",
-    });
-
+    setErrorAlert(true);
     // Restore the article if the deletion fails
     fetchSources();
   }
@@ -86,11 +74,12 @@ const handleCloseEditModal = () => {
         <tbody>
         {sources.map((source) => (
           <tr key={source.source_id}>
-              <td>{source.source_full_name} </td> 
-              <td>{source.source_email}</td> 
-              <td>{source.source_id}</td>
+             <td>{source.source_id}</td>
               <td>{source.source_department_id}</td> 
               <td>{source.college_id}</td>
+              <td>{source.source_full_name} </td> 
+              <td>{source.source_email}</td> 
+             
              
 
 
@@ -126,10 +115,20 @@ const handleCloseEditModal = () => {
         </Modal.Header>
         <Modal.Body>
           {editSource && (
-            <EditSource post={editSource} onClose={handleCloseEditModal} />
+            <EditSource  articleId={editSource.source_id} onClose={handleCloseEditModal} />
           )}
         </Modal.Body>
       </Modal>
+
+
+      <Simplert
+          showSimplert={errorAlert}
+          type="error"
+          title="Error"
+          message="An error occurred while fetching or deleting sources."
+          onClose={() => setErrorAlert(false)}
+          customCloseBtnText="Close"
+        />
       </div>
     </>
   );

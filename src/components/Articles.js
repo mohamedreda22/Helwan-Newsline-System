@@ -151,8 +151,8 @@ import EditArticle2 from "../pages/EditArticle2";
 
 const Articles = () => {
   const [articles, setArticles] = useState([]);
-  const [showEditModal, setShowEditModal] = useState(false);
-  const [editArticle, setEditArticle] = useState(null);
+  const [showEditModal, setShowEditModal] = useState(false); 
+  const [editArticle, setEditArticle] = useState(null);  
   const [errorAlert, setErrorAlert] = useState(false); // State for error alert
 
   const fetchArticles = async () => {
@@ -212,10 +212,19 @@ const Articles = () => {
           <tbody>
             {articles.map((article) => (
               <tr key={article.article_id}>
+                <td className="article-image ">
+                {article.article_image_path && (
+                  <img
+                    className="article-image"
+                    src={article.post_image_path}
+                    alt="article Image"
+                  />
+                )}
+              </td>
                 <td>{article.article_address}</td>
                 <td>{article.source_string}</td>
-                <td>{article.article_content}</td>
-                <td>{article.article_image_path}</td>
+                <td>{article.article_content .slice(0, 20)}</td>
+                
                 <td>{article.article_id}</td>
 
                 <td>

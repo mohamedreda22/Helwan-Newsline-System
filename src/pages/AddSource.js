@@ -5,6 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import  axios  from 'axios';
 import "../styles/AddSource.css"
+import NavbarSource from '../layouts/NavbarSource';
 
 
 function AddSource  () {
@@ -86,7 +87,7 @@ const resetForm = () => {
 
     return ( 
         <div className='AddSource'>
-                
+                <NavbarSource/>
              <Form   className='form' onSubmit={handleSubmit}>
                 <h1 className='s'>اضافة  ناشر</h1>
 
@@ -136,7 +137,7 @@ const resetForm = () => {
                
           <Row className="rr1">
               <Col>
-              <Form.Group controlId="collegeName"  dir='rtl' className='s9' as={Col} md="3"  >
+              <Form.Group controlId="departmentSelect"  dir='rtl' className='s9' as={Col} md="3"  >
                    <Form.Label>   قسم</Form.Label>
                      <Form.Select
                       aria-label="Default select example"
@@ -148,7 +149,7 @@ const resetForm = () => {
                         >
                    <option>اختر قسم</option>
                   {departments.map((department) => (
-              <option key={department.department_name} value={department.department_name}>
+              <option key={department.department_id} value={department.department_id}>
                 {department.department_name}
               </option>
             ))}
@@ -172,7 +173,7 @@ const resetForm = () => {
                         >
                    <option>اختر الكلية</option>
                   {colleges.map((college) => (
-              <option key={college.college_name} value={college.college_name}>
+              <option key={college.college_id} value={college.college_id}>
                 {college.college_name}
               </option>
             ))}
