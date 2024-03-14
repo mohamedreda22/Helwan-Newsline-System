@@ -16,6 +16,7 @@ import AddPost from "../pages/AddPost";
 import SideBar from "../components/SideBar";
 import {PrivateRoutes} from './PrivateRoutes';
 import NotFound from '../pages/NotFound'
+import VideoList from '../components/videoList';
 
 
 export const RouterComponent = () => {
@@ -56,6 +57,8 @@ export const RouterComponent = () => {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/updatePassword" element={<UpdatePassword />} />
         <Route path="/collages" element={<Collages />} />
+        <Route path="/videoList" element={<VideoList />} />
+
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
