@@ -2,6 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./AddVideoForm.css"; // Import the CSS file
 
+
+
 const AddVideoForm = ({ onVideoAdded }) => {
   const [formData,setFormData]=useState({
     video_title:"",
@@ -60,7 +62,6 @@ const AddVideoForm = ({ onVideoAdded }) => {
         category_id: category_id,
         source_id: source_id
       });
-      console.log(formData)
   
       // Submit the form data to the second endpoint
       const createResponse = await axios.post("http://localhost:9090/university/videos", formData);
@@ -146,6 +147,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
         <input
           type="file"
           onChange={(e) => setVideoFile(e.target.files[0])}
+          required
         />
       </label>
       <br />
