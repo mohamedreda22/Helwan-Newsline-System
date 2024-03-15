@@ -1,0 +1,76 @@
+.video-card {
+    width: calc(40% - 10px); 
+    margin: 10px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    display: inline-block; 
+  }
+  
+  .video-item-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .video-player1 {
+    width: 100%;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+  }
+  
+  .video-info {
+    flex: 1;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .video-title {
+    font-family: Inder;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: 30px;
+    letter-spacing: 0em;
+    text-align: center;
+  }
+  
+  .video-description {
+    font-family: Inder;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 23px;
+    letter-spacing: 0em;
+    color: #565555;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  
+  .delete-icon {
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+  }
+  .delete-btn,
+  .edit-btn {
+    background-color: #ff0303;
+    color: white;
+    padding: 14px 50px;
+    margin: 8px 0;
+    cursor: pointer;
+    width: 100%;
+    opacity: 0.9;
+    font-weight: bold;
+  }
+  .edit-btn{
+    background-color: #4CAF50;
+  }
+  
+  .delete-btn:hover,
+  .edit-btn:hover {
+    opacity: 1;
+  }
+  
+  

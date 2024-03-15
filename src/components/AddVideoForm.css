@@ -1,24 +1,38 @@
-/* AddVideoForm.css */
+ /* AddVideoForm.css */
 
 .form-container {
-  max-width: 400px;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
   margin: 0 auto;
-  padding: 20px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background-color: #f9f9f9;
+  background-color: #D9D9D94D; /* Same background color as AddEvent */
+}
+
+.form-container h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #091160;
+  text-align: center;
 }
 
 .form-group {
-  margin-bottom: 15px;
+  margin-bottom: 30px;
 }
 
 .label {
-  margin-bottom: 5px;
+  font-size: 18px;
+  margin-bottom: 10px;
+  color: #091160;
+}
+.header {
+  font-size: 40px;
+  margin-left: 20%;
 }
 
 input[type="text"],
-select {
+select,
+textarea {
   width: 100%;
   padding: 8px;
   border: 1px solid #ccc;
@@ -26,22 +40,22 @@ select {
   box-sizing: border-box;
 }
 
-button[type="submit"] {
-  width: 100%;
+.btn-sub {
+  background-color: #091160; /* Same background color as AddEvent */
+  color: #fff;
   padding: 10px;
   border: none;
-  border-radius: 4px;
-  background-color: #4caf50;
-  color: white;
+  border-radius: 8px;
   cursor: pointer;
-  margin-top: 15px;
+  transition: background-color 0.3s;
+  font-size: 18px;
+  margin-top: 20px;
+  margin-right: 20%;
 }
 
-button[type="submit"]:hover {
-  background-color: #45a049;
+.btn-sub:hover {
+  background-color: #04529e; /* Darker shade for hover effect */
 }
-
-
 
 .video-list-container {
   margin-top: 100px;
@@ -64,7 +78,35 @@ button[type="submit"]:hover {
 }
 
 .video-player {
-  width: 100%;
+  width: 50%;
   border: 1px solid #ccc;
   border-radius: 5px;
+}
+.form-control-video {
+  width: 100%;
+  padding: 15px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s;
+  visibility: inherit;
+}
+.add-video-container {
+  background-color: #D9D9D94D;
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 900px;
+  margin: 0 auto;
+  animation: addEvent 0.8s ease-in-out forwards;
+}
+.add-video-page{
+  padding: 20px;
+  background-color: #f4f4f4;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-right: 140px;
 }

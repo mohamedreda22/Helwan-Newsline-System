@@ -1,17 +1,30 @@
-// VideoList.js
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Player } from "react-html5video";
-import "react-html5video/dist/styles.css";
-import AddVideoForm from "./AddVideoForm";
-import "./AddVideoForm.css";
-import ReactPlayer from 'react-player';
+import VideoItem from "./VideoItem"; 
+import usePagination from '../hooks/usePagination'; 
+import arrow_left from '../assets/icons/arrow_circle_left.svg';
+import arrow_right from '../assets/icons/arrow_circle_right.svg';
+import SideBar from "./SideBar";
 
-
-export default function VideoList() {
+function VideoList() {
   const [videos, setVideos] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [totalVideos, setTotalVideos] = useState(0);
+
+  const videosPerPage = 9;
+
+  // Pagination hook
+  const {
+    currentPage,
+    totalPages,
+    goToPage,
+    goToFirstPage,
+    goToLastPage,
+  } = usePagination(totalVideos, videosPerPage);
+
+  const startIndex = (currentPage - 1) * videosPerPage;
+  const endIndex = startIndex + videosPerPage - 1;
 
   useEffect(() => {
     fetchVideos();
@@ -20,49 +33,67 @@ export default function VideoList() {
   const fetchVideos = async () => {
     try {
       const response = await axios.get("http://localhost:9090/university/videos");
+      setTotalVideos(response.data.length); 
       setVideos(response.data);
-      setLoading(false);
+      setIsLoading(false);
     } catch (error) {
       console.error("Error fetching videos:", error);
       setError("An error occurred while fetching videos.");
-      setLoading(false);
+      setIsLoading(false);
     }
   };
 
-  const handleVideoAdded = (newVideo) => {
-    setVideos([...videos, newVideo]); // Add the new video to the list
+  const handleDelete = async (videoId) => {
+    try {
+      await axios.delete(`http://localhost:9090/university/videos/${videoId}`);
+      fetchVideos();
+    } catch (error) {
+      console.error("Error deleting video:", error);
+      setError("An error occurred while deleting the video.");
+    }
+  }
+  const renderVideos = () => {
+    return videos.slice(startIndex, endIndex + 1).map((video) => (
+      <VideoItem key={video.video_id} video={video} onDelete={handleDelete}/>
+    ));
   };
 
-  if (loading) {
-    return <div className="loading">Loading...</div>;
-  }
-
-  if (error) {
-    return <div className="error">Error: {error}</div>;
-  }
-
   return (
-    <div className="video-list-container">
-      <h2>Video List</h2>
-      <AddVideoForm onVideoAdded={handleVideoAdded} /> {/* Render the form */}
-      <ul className="video-items">
-        {videos.map((video) => (
-          <li key={video.video_id} className="video-item">
-            <h3 className="video-title">{video.video_title}</h3>
-            <p className="video-description">{video.video_description}</p>
-            <p className="video-path">{video.video_path}</p>
-{/*             <ReactPlayer 
-              src={video.video_path}
-              width="320px"
-              height="240px"
-              
-            /> */}
-            <video className="video-player" controls>
-            <source src= {video.video_path} type="video/mp4"  />
-            </video>
-          </li>
-        ))}
-      </ul>
+    <div className="events-page">
+      <SideBar />
+      <h2>جميع الفيديوهات</h2>
+      {isLoading && <p className="loading-text">جاري تحميل الفيديوهات...</p>}
+      {error && <p>{error}</p>}
+      <div className="total-events">
+        عدد الفيديوهات : <span>{videos.length}</span>
+      </div>
+      <div className="events-container">
+        <table id="events-table" className="events-table">
+          <tbody>
+            {renderVideos()}
+          </tbody>
+        </table>
+        {totalVideos > videosPerPage && (
+          <div className="pagination">
+            <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
+            <div className="page-numbers">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <span
+                  key={index + 1}
+                  className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                  onClick={() => goToPage(index + 1)}
+                  disabled={currentPage === index + 1}
+                >
+                  {index + 1}
+                </span>
+              ))}
+            </div>
+            <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
+          </div>
+        )}
+      </div>
     </div>
   );
 }
+
+export default VideoList;

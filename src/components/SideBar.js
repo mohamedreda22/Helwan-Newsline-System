@@ -39,7 +39,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="addVideo" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة فيديو
                         </Nav.Link>
-                        <Nav.Link href="showVideos" className='active'>
+                        <Nav.Link href="videoList" className='active'>
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>
