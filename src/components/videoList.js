@@ -48,7 +48,7 @@ export default function VideoList() {
             <p className="video-description">{video.video_description}</p>
             <p className="video-path">{video.video_path}</p>
             <video className="video-player" controls>
-              <source src={"../uploads/1710427435162.mp4"} type="video/mp4" />
+              <source src={video.video_path} type="video/mp4" />
               Your browser does not support the video tag.
             </video>
           </li>

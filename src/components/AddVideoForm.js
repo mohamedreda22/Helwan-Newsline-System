@@ -3,10 +3,17 @@ import axios from "axios";
 import "./AddVideoForm.css"; // Import the CSS file
 
 const AddVideoForm = ({ onVideoAdded }) => {
+  const [formData,setFormData]=useState({
+    video_title:"",
+    video_description:"",
+    video_path:"",
+    category_id:"",
+    source_id:"",
+  
+  })
   const [videoTitle, setVideoTitle] = useState("");
   const [videoDescription, setVideoDescription] = useState("");
   const [videoFile, setVideoFile] = useState(null);
-  const [video_path, setVideoPath] = useState("");
   const [category_id, setCategoryId] = useState("");
   const [source_id, setSourceId] = useState("");
   const [categories, setCategories] = useState([]);
@@ -38,27 +45,41 @@ const AddVideoForm = ({ onVideoAdded }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const formData = new FormData();
-      formData.append("video", videoFile);
-      const response = await axios.post("http://localhost:5000/upload", formData);
-      const videoPath = response.data.filePath;
-      const videoData = {
+      // First, upload the video file to get the video path
+      const videoFormData = new FormData();
+      videoFormData.append("video", videoFile);
+      const uploadResponse = await axios.post("http://localhost:5000/upload", videoFormData);
+      const videoPath = uploadResponse.data.filePath;
+  
+      // Update formData state with the form data
+      setFormData( {
+        ...formData,
         video_title: videoTitle,
         video_description: videoDescription,
         video_path: videoPath,
         category_id: category_id,
         source_id: source_id
-      };
-      const createResponse = await axios.post("http://localhost:9090/university/videos", videoData);
-
+      });
+      console.log(formData)
+  
+      // Submit the form data to the second endpoint
+      const createResponse = await axios.post("http://localhost:9090/university/videos", formData);
+  
+      // If successful, notify and reset the form
+      if (createResponse && (createResponse.status === 200 || createResponse.status === 201 || createResponse.status === 202)) {
+      alert("The video was successfully added!");
       onVideoAdded(createResponse.data);
       setVideoTitle("");
       setVideoDescription("");
       setVideoFile(null);
-    } catch (error) {
+    } 
+    }
+    catch (error) {
       console.error("Error adding video:", error);
     }
   };
+  
+  
 
   return (
     <form className="form-container" onSubmit={handleSubmit}>
@@ -125,7 +146,6 @@ const AddVideoForm = ({ onVideoAdded }) => {
         <input
           type="file"
           onChange={(e) => setVideoFile(e.target.files[0])}
-          required
         />
       </label>
       <br />
