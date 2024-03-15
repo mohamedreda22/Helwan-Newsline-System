@@ -82,10 +82,11 @@ export const RouterComponent = () => {
             <Route path="/logout" element={<Navigate to="/login" />} />
             </Route>
                     ) : (
-          <Navigate to="/collages" />
+                        <Route path="*" element={<NotFound />} />
 
+/*           <Navigate to="/collages" />
+ */
 )}
-                <Route path="*" element={<NotFound />} />
 
       </Routes>
     </Router>
