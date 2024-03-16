@@ -1,5 +1,4 @@
 import React from "react";
-//import SearchBar from "../layouts/SearchBar";
 import "../styles/AllArticles.css";
 import Sources from "../components/Sources";
 import NavbarSource from "../layouts/NavbarSource";

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/SideBar';
-import '../styles/AddArticle3.css';
+import '../styles/AddArticle.css';
 import Button from "react-bootstrap/Button";
 import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
@@ -10,7 +10,7 @@ import axios from 'axios';
  
   
 
-function AddArticle3 () {
+function AddArticle () {
   const [formData, setFormData] = useState({
       article_address : "",
       article_content : "",
@@ -190,4 +190,4 @@ const handleFileChange = (event) => {
 }
 
 
-export default AddArticle3;
+export default AddArticle;

@@ -1,7 +1,6 @@
 import React from "react";
 import SideBar from "../components/SideBar";
 import Articles from "../components/Articles";
-//import SearchBar from "../layouts/SearchBar";
 import "../styles/AllArticles.css";
  
 

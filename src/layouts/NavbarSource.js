@@ -34,7 +34,7 @@ const NavbarSource = () => {
                   </Link>
                 </li>
                 <li class="nav-item ms-5">
-                  <Link to="/" className="nav-link">
+                  <Link to="/allsources" className="nav-link">
                      كل الناشرين
                   </Link>
                 </li>
@@ -52,8 +52,6 @@ const NavbarSource = () => {
                 src={universityLogo}
                 className="logo navbar-brand"
                 alt="University Logo"
-                // width="64"
-                // height="60"
                 style={{ width: '100px', height: 'auto' }}
               />
             </Link>
