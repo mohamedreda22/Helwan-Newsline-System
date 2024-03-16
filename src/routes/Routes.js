@@ -65,9 +65,9 @@ export const RouterComponent = () => {
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-          {/*             {userRole === 'STUDENT' && (
+                      {userRole === 'STUDENT' && (
               <Route path="/collages" element={<Collages />} />
-            )} */}
+            )}
             {userRole === 'ADMIN' && (
               <Route path="/showDepartments" element={<ShowDepartments />} />
             )}

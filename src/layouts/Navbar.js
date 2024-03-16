@@ -1,82 +1,69 @@
+import {
+  Navbar,
+  Nav,
+  Container,
+  Form,
+  FormControl,
+  Button,
+} from "react-bootstrap";
 import universityLogo from "../assets/images/universityLogo.png";
-import "../styles/Navbar.css";
 import { Link } from "react-router-dom";
+import "../styles/Navbar.css";
 
-const Navbar = () => {
+const CustomNavbar = () => {
   return (
     <div className="containerxxl">
-      <nav class="navbar navbar-expand-lg bg-color-gray">
-        <div class="container-fluid">
-          <form class="d-flex" role="search">
-            <input
-              class="form-control me-2"
-              type="search"
-              placeholder="Search "
-              aria-label="Search"
-            />
-            <span class="input-group-text border-0" id="search-addon">
-              <i class="fas fa-search"></i>
-            </span>
-          </form>
-          <button
-            class="navbar-toggler"
-            type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#navbarSupportedContent"
-            aria-controls="navbarSupportedContent"
-            aria-expanded="false"
-            aria-label="Toggle navigation"
-          >
-            <span class="navbar-toggler-icon"></span>
-          </button>
-          <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mx-auto p-2 justify-content-center ">
-              <li class="nav-item ">
-                <Link to="/" className="nav-link " aria-current="page">
-                  اهم الاحداث
-                </Link>
-              </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
-                  رياضة
-                </Link>
-              </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
-                  اخر الاخبار
-                </Link>
-              </li>
-              <li class="nav-item ms-5">
-                <Link to="/" className="nav-link">
-                  الكليات
-                </Link>
-              </li>
-              <li class="nav-item ms-5 ">
-                <Link to="/" className="nav-link active ">
-                  الصفحة الرئيسية
-                </Link>
-              </li>
-              <li class="nav-item ms-5"></li>
-            </ul>
-          </div>
-          <span>
-            <Link to="/login" className="nav-link me-5 ">
-              تسجيل الدخول
-            </Link>
-          </span>
-          <Link to="/" class="navbar-brand" target="_blank" rel="noreferrer">
+      <Navbar expand="lg" bg="color-gray">
+        <Container fluid>
+          <Navbar.Toggle aria-controls="navbarSupportedContent" />
+          <Navbar.Collapse id="navbarSupportedContent">
+            <Form className="d-flex ms-auto" role="search">
+              <FormControl
+                type="search"
+                placeholder="Search"
+                className="me-2"
+                aria-label="Search"
+              />
+              <Button variant="light">
+                <i className="fas fa-search"></i>
+              </Button>
+            </Form>
+            <Nav className="mx-auto" style={{ fontSize: "22px" }}>
+              <Nav.Link as={Link} to="/" className="nav-link ms-5">
+                اهم الاحداث
+              </Nav.Link>
+              <Nav.Link as={Link} to="/" className="nav-link ms-5">
+                رياضة
+              </Nav.Link>
+              <Nav.Link as={Link} to="/" className="nav-link ms-5">
+                اخر الاخبار
+              </Nav.Link>
+              <Nav.Link as={Link} to="/" className="nav-link ms-5">
+                الكليات
+              </Nav.Link>
+              <Nav.Link as={Link} to="/" className="nav-link ms-5 active">
+                الصفحة الرئيسية
+              </Nav.Link>
+            </Nav>
+            <Nav>
+              <Nav.Link as={Link} to="/login" className="nav-link me-5">
+                تسجيل الدخول
+              </Nav.Link>
+            </Nav>
+          </Navbar.Collapse>
+          <Link to="/" className="navbar-brand">
             <img
               src={universityLogo}
-              className="logo navbar-brand"
+              className="logo"
               alt="University Logo"
               width="64"
               height="60"
             />
           </Link>
-        </div>
-      </nav>
+        </Container>
+      </Navbar>
     </div>
   );
 };
 
-export default Navbar;
+export default CustomNavbar;
