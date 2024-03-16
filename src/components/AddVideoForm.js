@@ -88,6 +88,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
       ) {
         showAlertHandler('success', 'Success', 'تم اضافة الفيديو بنجاح', 'تم');
         //onVideoAdded(createResponse.data);
+        console.log(formData)
 
         setVideoTitle("");
         setVideoDescription("");

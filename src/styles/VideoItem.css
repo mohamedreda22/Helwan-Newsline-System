@@ -48,29 +48,36 @@
     text-overflow: ellipsis;
   }
   
-  .delete-icon {
-    width: 20px;
-    height: 20px;
-    cursor: pointer;
-  }
-  .delete-btn,
-  .edit-btn {
+  .delete-btn1,
+  .edit-btn1 {
     background-color: #ff0303;
     color: white;
     padding: 14px 50px;
-    margin: 8px 0;
+    margin: 8px;
     cursor: pointer;
-    width: 100%;
     opacity: 0.9;
+    width: 150px;
+    height: 50px;
+    border-radius: 20px;
     font-weight: bold;
+    font-size: large;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
   }
-  .edit-btn{
-    background-color: #4CAF50;
+  .edit-btn1{
+    background-color: #039f25;
   }
   
-  .delete-btn:hover,
-  .edit-btn:hover {
+  .delete-btn1:hover,
+  .edit-btn1:hover {
     opacity: 1;
   }
-  
-  
+  .video-card:hover {
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+  }
+  .btns {
+    display: flex;
+    justify-content: space-between; 
+  }
