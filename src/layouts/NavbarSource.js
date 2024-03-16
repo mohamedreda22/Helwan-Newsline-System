@@ -9,7 +9,7 @@ const NavbarSource = () => {
         
     }
     return ( 
-        <div className="containerxxl">
+        <div className="containerxxl" style={{marginBottom:"-10px",marginTop:"-30px"}}>
         <nav class="navbar navbar-expand-lg bg-color-gray">
           <div class="container-fluid">
             

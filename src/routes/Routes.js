@@ -9,6 +9,7 @@ import AddSource from "../pages/AddSource";
 import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
  
+ 
 export const RouterComponent = () => {
   return (
     <Router>
@@ -20,8 +21,10 @@ export const RouterComponent = () => {
         <Route path="/editarticle"  element={<EditArticle/>} />
         <Route path="/articles"    element={<AllArticles/>} />
         <Route path="/source"    element={< AddSource/>} />
+        
         <Route path="/editsource"    element={<  EditSource/>} />
         <Route path="/allsources"  element={< AllSources/>} /> 
+
       </Routes>
     </Router>
   );

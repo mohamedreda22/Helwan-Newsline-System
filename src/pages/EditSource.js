@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Button, Form } from "react-bootstrap";
+import { Button, Form, Row } from "react-bootstrap";
 import axios from "axios";
 import Simplert from "react-simplert";
+import "../styles/EditSource.css"
 
 const EditSource = ({ sourceId, onClose }) => {
   const [formData, setFormData] = useState({
@@ -10,6 +11,7 @@ const EditSource = ({ sourceId, onClose }) => {
     source_password: "",
     source_department_id: "",
     college_id: "",
+    source_responsible:"",
     url: `http://localhost:9090/university/sources/${sourceId}`,
   });
 
@@ -17,7 +19,7 @@ const EditSource = ({ sourceId, onClose }) => {
   const [showErrorAlert, setShowErrorAlert] = useState(false);
   const [colleges, setColleges] = useState([]);
   const [departments, setDepartments] = useState([]);
-
+  
   useEffect(() => {
     fetchColleges();
     fetchDepartments();
@@ -57,6 +59,7 @@ const EditSource = ({ sourceId, onClose }) => {
         source_password: sourceData.source_password,
         source_department_id: sourceData.source_department_id,
         college_id: sourceData.college_id,
+         source_responsible: sourceData.source_responsible,
       });
     } catch (error) {
       console.error("Error fetching source:", error);
@@ -73,6 +76,7 @@ const EditSource = ({ sourceId, onClose }) => {
         source_password: formData.source_password,
         source_department_id: formData.source_department_id,
         college_id: formData.college_id,
+        source_responsible: formData.source_responsible ,
       });
       if (
         response &&
@@ -98,10 +102,14 @@ const EditSource = ({ sourceId, onClose }) => {
     setFormData({ ...formData, [name]: value });
   };
 
+
+  
+
   return (
     <div dir="rtl" className="container">
       <Form onSubmit={handleSubmit}>
         <Form.Group controlId="sourceName">
+          
           <Form.Label>الاسم</Form.Label>
           <Form.Control
             className="rounded-0"
@@ -112,7 +120,8 @@ const EditSource = ({ sourceId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="sourceEmail">
+        <Row>
+        <Form.Group controlId="sourceEmail" className="email">
           <Form.Label> البريد الالكتروني </Form.Label>
           <Form.Control
             className="rounded-0"
@@ -124,7 +133,7 @@ const EditSource = ({ sourceId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="sourcePassword">
+        <Form.Group controlId="sourcePassword" className="pass">
           <Form.Label> كلمة المرور </Form.Label>
           <Form.Control
             className="rounded-0"
@@ -136,8 +145,22 @@ const EditSource = ({ sourceId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
+        </Row>
 
-        <Form.Group controlId="collegeId">
+        <Form.Group controlId="sourceResponsible">
+          
+          <Form.Label>مسئول عن</Form.Label>
+          <Form.Control
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            type="text"
+            name="source_responsible"
+            value={formData.source_responsible}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+        <Row>
+        <Form.Group controlId="collegeId" className="college">
           <Form.Label> الكلية </Form.Label>
           <Form.Select
             className="rounded-0"
@@ -155,7 +178,7 @@ const EditSource = ({ sourceId, onClose }) => {
           </Form.Select>
         </Form.Group>
 
-        <Form.Group controlId="sourceId">
+        <Form.Group controlId="sourceId"className="dep">
           <Form.Label> القسم </Form.Label>
           <Form.Select
             className="rounded-0"
@@ -172,11 +195,11 @@ const EditSource = ({ sourceId, onClose }) => {
             ))}
           </Form.Select>
         </Form.Group>
-
+        </Row>
         <Button
           type="submit"
           className="button2"
-          style={{ backgroundColor: "rgb(8, 8, 24)", marginRight: "130px", width: "200px" }}
+          style={{ backgroundColor: "rgb(8, 8, 24)", marginRight: "130px", width: "200px", marginBottom:"70px"}}
         >
           حفظ التغييرات
         </Button>

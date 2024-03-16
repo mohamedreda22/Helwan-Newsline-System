@@ -64,15 +64,19 @@ const [errorAlert, setErrorAlert] = useState(false);
   return (
     <>
       <div className="mt-2">
-        <div className="notifNum"> عدد المقالات :{sources.length} </div>
+        <div className="notifNum"> عدد الناشرين :{sources.length} </div>
 
-        <Table responsive hover dir="rtl">
+        <Table responsive hover dir="rtl"   style={{marginBottom:"10px"}}>
           <tbody>
             {sources.map((source) => (
-              <tr key={source.source_id}>
+              <React.Fragment key={source.source_id}>
+              <tr>
                 <td>{source.full_name}</td>
                 <td>{source.email}</td>
-               
+                <td>{source.source_responsible}</td>
+                <td></td>
+                <td></td>
+                <td></td>
                 <td>{source.source_id}</td>
 
                 <td>
@@ -85,14 +89,14 @@ const [errorAlert, setErrorAlert] = useState(false);
                 </td>
 
                 <td>
-                  <img
-                    src={edit_icon}
-                    alt="Edit source"
-                    className="icon"
-                    onClick={() => handleEditSource(source.source_id)}
-                  />
+                  
+                  <button className="btnsource" onClick={() => handleEditSource(source.source_id) }>تعديل</button>
                 </td>
               </tr>
+               <tr>
+               <td colSpan="9"></td> {/* هذا العنصر لإنشاء الفاصل بين الصفوف */}
+             </tr>
+             </React.Fragment>
             ))}
           </tbody>
         </Table>

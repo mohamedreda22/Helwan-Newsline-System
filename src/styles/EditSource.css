@@ -36,3 +36,16 @@
     margin-left: 490px;
     margin-bottom: 40px;
 }
+.email{
+    width: 240px;
+}
+.pass{
+    width: 230px;
+    margin-left: -10px;
+}
+.college{
+    width: 240px;
+}
+.dep{
+    width: 220px;
+}

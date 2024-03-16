@@ -1,7 +1,7 @@
  
 
 import React, { useState, useEffect } from "react";
-import { Button, Form, Row, Col } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 import axios from "axios";
 import Simplert from "react-simplert";
 

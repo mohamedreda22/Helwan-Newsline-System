@@ -9,6 +9,7 @@ import NavbarSource from '../layouts/NavbarSource';
 
 function AddSource() {
   const [sourceFullName, setSourceFullName] = useState("");
+  const [responsible, setResponsible] = useState("");
   const [sourceEmail, setSourceEmail] = useState("");
   const [sourcePassword, setSourcePassword] = useState("");
   const [sourceDepartmentId, setSourceDepartmentId] = useState("");
@@ -45,6 +46,9 @@ function AddSource() {
       case "source_full_name":
         setSourceFullName(value.trim());
         break;
+        case "source_responsible":
+          setResponsible(value.trim());
+          break;
       case "source_email":
         setSourceEmail(value.trim());
         break;
@@ -72,6 +76,7 @@ function AddSource() {
         source_password: sourcePassword,
         source_department_id: sourceDepartmentId,
         college_id: collegeId,
+        source_responsible:responsible,
       });
 
       if (response && (response.status === 200 || response.status === 201)) {
@@ -92,11 +97,13 @@ function AddSource() {
     setSourcePassword("");
     setSourceDepartmentId("");
     setCollegeId("");
+    setResponsible("");
   };
 
   return (
     <div className='AddSource'>
-      <NavbarSource />
+     <NavbarSource/>
+      <div className='page'>
       <Form className='form' onSubmit={handleSubmit}>
         <h1 className='s'>اضافة ناشر</h1>
         <Row>
@@ -142,6 +149,21 @@ function AddSource() {
               />
             </Form.Group>
           </Col>
+        </Row>
+
+        <Row>
+          <Form.Group as={Col} md="6" controlId="validationCustom01" className='s0' dir='rtl'>
+            <Form.Label className='s2'>مسئول عن</Form.Label>
+            <Form.Control
+              required
+              className='rounded-0'
+              type="text"
+              value={responsible}
+              onChange={handleChange}
+              name="source_responsible"
+              style={{ backgroundColor: "rgb(247, 243, 243)" }}
+            />
+          </Form.Group>
         </Row>
         <Row className="rr1">
           <Col>
@@ -201,6 +223,7 @@ function AddSource() {
           تسجيل
         </Button>
       </Form>
+      </div>
     </div>
   );
 }
