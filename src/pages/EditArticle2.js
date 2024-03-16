@@ -7,7 +7,7 @@ import Simplert from "react-simplert";
 
 const EditArticle2 = ({ articleId, onClose }) => {
   const [formData, setFormData] = useState({
-    article_address: "",
+    article_address: "", 
     article_image_path: "",
     article_content: "",
     source_id: "",
@@ -107,15 +107,20 @@ const EditArticle2 = ({ articleId, onClose }) => {
         <Form.Group controlId="sourceString">
           <Form.Label>المصدر</Form.Label>
           <Form.Control
+              className='rounded-0'
+              style={{backgroundColor:"rgb(247, 243, 243)"}}
             type="text"
             name="source_string"
             value={formData.source_string}
             onChange={handleInputChange}
+           
           />
         </Form.Group>
         <Form.Group controlId="articleAddress">
           <Form.Label>عنوان المقال</Form.Label>
           <Form.Control
+           className='rounded-0'
+           style={{backgroundColor:"rgb(247, 243, 243)"}}
             type="text"
             required
             name="article_address"
@@ -126,6 +131,8 @@ const EditArticle2 = ({ articleId, onClose }) => {
         <Form.Group controlId="articleContent">
           <Form.Label>محتوى المقال</Form.Label>
           <Form.Control
+           className='rounded-0'
+           style={{backgroundColor:"rgb(247, 243, 243)"}}
             as="textarea"
             rows={10}
             required
@@ -137,6 +144,8 @@ const EditArticle2 = ({ articleId, onClose }) => {
         <Form.Group controlId="sourceId">
           <Form.Label>اختر المصدر</Form.Label>
           <Form.Select
+           className='rounded-0'
+           style={{backgroundColor:"rgb(247, 243, 243)"}}
             aria-label="Default select example"
             name="source_id"
             value={formData.source_id}
@@ -151,11 +160,20 @@ const EditArticle2 = ({ articleId, onClose }) => {
         </Form.Group>
         <Form.Group controlId="articleImage">
           <Form.Label>صورة المقال</Form.Label>
-          <Form.Control type="file" onChange={handleFileChange} />
+          <Form.Control
+           className='rounded-0'
+           style={{backgroundColor:"rgb(247, 243, 243)",marginBottom:"50px"}}
+           type="file" 
+           onChange={handleFileChange} />
         </Form.Group>
-        <Button variant="primary" type="submit">
+        <Button 
+         
+        type="submit"
+        className="button2"
+        style={{backgroundColor:"rgb(8, 8, 24)",marginRight:"130px",width:"200px"}}
+        >
           حفظ التغييرات
-        </Button>{" "}
+        </Button>
       </Form>
       <Simplert
         showSimplert={showErrorAlert}

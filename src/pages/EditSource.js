@@ -1,13 +1,7 @@
-import React , { useState, useEffect }from 'react';
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import  axios  from 'axios';
-import "../styles/EditSource.css"
- 
+import React, { useState, useEffect } from "react";
+import { Button, Form } from "react-bootstrap";
+import axios from "axios";
 import Simplert from "react-simplert";
-
 
 const EditSource = ({ sourceId, onClose }) => {
   const [formData, setFormData] = useState({
@@ -19,38 +13,40 @@ const EditSource = ({ sourceId, onClose }) => {
     url: `http://localhost:9090/university/sources/${sourceId}`,
   });
 
-  const [colleges, setColleges] = useState([]);
-  const [departments , setDepartments] = useState([]);
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
+  const [colleges, setColleges] = useState([]);
+  const [departments, setDepartments] = useState([]);
 
   useEffect(() => {
-    fetchCollege();
-    fetchDepartment();
-    fetchSources();
+    fetchColleges();
+    fetchDepartments();
+    fetchSource();
   }, [sourceId]);
-  
-  
-  const fetchCollege = async () => {
+
+  const fetchColleges = async () => {
     try {
-        const response = await axios.get
-        ('http://localhost:9090/university/colleges');
-        setColleges(response.data);
+      const response = await axios.get(
+        "http://localhost:9090/university/colleges"
+      );
+      setColleges(response.data);
     } catch (error) {
-        console.error('Error fetching colleges:', error);
+      console.error("Error fetching colleges:", error);
     }
   };
-  
-  const fetchDepartment = async () => {
+
+  const fetchDepartments = async () => {
     try {
-        const response = await axios.get
-        ('http://localhost:9090/university/departments');
-        setDepartments(response.data);
+      const response = await axios.get(
+        "http://localhost:9090/university/departments"
+      );
+      setDepartments(response.data);
     } catch (error) {
-        console.error('Error fetching departments:', error);
+      console.error("Error fetching departments:", error);
     }
   };
-  const fetchSources = async () => {
+
+  const fetchSource = async () => {
     try {
       const response = await axios.get(formData.url);
       const sourceData = response.data;
@@ -59,15 +55,15 @@ const EditSource = ({ sourceId, onClose }) => {
         source_full_name: sourceData.source_full_name,
         source_email: sourceData.source_email,
         source_password: sourceData.source_password,
-        source_department_id: sourceData.source_department_id.toString(),
-        college_id: sourceData.college_id.toString(),
+        source_department_id: sourceData.source_department_id,
+        college_id: sourceData.college_id,
       });
     } catch (error) {
       console.error("Error fetching source:", error);
       setShowErrorAlert(true);
     }
   };
-  
+
   const handleSubmit = async (event) => {
     event.preventDefault();
     try {
@@ -75,8 +71,8 @@ const EditSource = ({ sourceId, onClose }) => {
         source_full_name: formData.source_full_name,
         source_email: formData.source_email,
         source_password: formData.source_password,
-        source_department_id: formData.source_department_id.toString(),
-        college_id: formData.college_id.toString(),
+        source_department_id: formData.source_department_id,
+        college_id: formData.college_id,
       });
       if (
         response &&
@@ -96,131 +92,100 @@ const EditSource = ({ sourceId, onClose }) => {
       setShowErrorAlert(true);
     }
   };
-   
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
 
+  return (
+    <div dir="rtl" className="container">
+      <Form onSubmit={handleSubmit}>
+        <Form.Group controlId="sourceName">
+          <Form.Label>الاسم</Form.Label>
+          <Form.Control
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            type="text"
+            name="source_full_name"
+            value={formData.source_full_name}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="sourceEmail">
+          <Form.Label> البريد الالكتروني </Form.Label>
+          <Form.Control
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            type="text"
+            required
+            name="source_email"
+            value={formData.source_email}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
+        <Form.Group controlId="sourcePassword">
+          <Form.Label> كلمة المرور </Form.Label>
+          <Form.Control
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            type="text"
+            required
+            name="source_password"
+            value={formData.source_password}
+            onChange={handleInputChange}
+          />
+        </Form.Group>
 
-  
-    return (  
-
-        <div className='EditSource'>
-            <Form   className='form' onSubmit={handleSubmit}>
-                <Row>
-                  <Form.Group as={Col} md="10" controlId="sourcefullname" className='ss1' dir='rtl'>
-                  <Form.Label  className='ss2'>الاسم</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="source_full_name"
-                    value={formData.source_full_name}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-              </Row>
-              <Row className="rr1">
-              <Col>
-                
-                <Form.Group as={Col} md="6" controlId="sourcepassword" className='ss3'dir='rtl'>
-                  <Form.Label className='s4' > كلمة المرور</Form.Label>
-                  <Form.Control
-                    className='ss5'
-                    required
-                    type="text"
-                    name="source_password"
-                    value={formData.source_password}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                </Col>
-                <Col>
-                
-                <Form.Group as={Col} md="6" controlId="sourceemail" className='ss6' dir='rtl'>
-                  <Form.Label  className='ss7'>البريد الالكتروني</Form.Label>
-                  <Form.Control
-                    required
-                    type="text"
-                    name="source_email"
-                    value={formData.source_email}
-                    onChange={handleInputChange}
-                  />
-                </Form.Group>
-                </Col>
-                
-              </Row>
-              
-          <Row className="rr1">
-              <Col>
-              <Form.Group controlId="sourcedepartmentid"  dir='rtl' className='ss9' as={Col} md="6"  >
-                   <Form.Label>   قسم</Form.Label>
-                     <Form.Select
-                      aria-label="Default select example"
-                      name="source_department_id"
-                      value={formData.source_department_id}
-                      onChange={handleInputChange}
-                      required
-                        >
-                     {departments.map((department) => (
-                      <option key={department.department_id} value={department.department_id}>
-                           {department.department_name}
-                     </option>
+        <Form.Group controlId="collegeId">
+          <Form.Label> الكلية </Form.Label>
+          <Form.Select
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            aria-label="Default select example"
+            name="college_id"
+            value={formData.college_id}
+            onChange={handleInputChange}
+          >
+            {colleges.map((college) => (
+              <option key={college.college_id} value={college.college_id}>
+                {college.college_name}
+              </option>
             ))}
           </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            الرجاء اختيار اسم القسم
-          </Form.Control.Feedback>
         </Form.Group>
-                </Col>
-                <Col>
-                
-                 <Form.Group controlId="collegeid"  dir='rtl' className='ss10' as={Col} md="6"  >
-                   <Form.Label>اسم الكلية</Form.Label>
-                     <Form.Select
-                      aria-label="Default select example"
-                      name="college_id"
-                      value={formData.college_id}
-                      onChange={handleInputChange}
-                      required
-                    
-                        >
-                            {colleges.map((college) => (
-                      <option key={college.college_id} value={college.college_id}>
-                           {college.college_name}
-                     </option>
-                            ))}
-                   
+
+        <Form.Group controlId="sourceId">
+          <Form.Label> القسم </Form.Label>
+          <Form.Select
+            className="rounded-0"
+            style={{ backgroundColor: "rgb(247, 243, 243)", marginBottom: "40px" }}
+            aria-label="Default select example"
+            name="source_department_id"
+            value={formData.source_department_id}
+            onChange={handleInputChange}
+          >
+            {departments.map((department) => (
+              <option key={department.department_id} value={department.department_id}>
+                {department.department_name}
+              </option>
+            ))}
           </Form.Select>
-          <Form.Control.Feedback type="invalid">
-            الرجاء اختيار اسم الكلية
-          </Form.Control.Feedback>
         </Form.Group>
-                </Col>
-                
-              </Row>
-              
-               
-             
-               
-              
-              <Button
-                className="btn2"
-                type="submit"
-                variant='primary'
-              >
-                  حفظ  
-              </Button>
-              
-            </Form>
 
-
-            <Simplert
+        <Button
+          type="submit"
+          className="button2"
+          style={{ backgroundColor: "rgb(8, 8, 24)", marginRight: "130px", width: "200px" }}
+        >
+          حفظ التغييرات
+        </Button>
+      </Form>
+      <Simplert
         showSimplert={showErrorAlert}
         type="error"
         title="فشل"
-        message="حدث خطأ أثناء تحديث الناشر. يرجى المحاولة مرة أخرى."
+        message="حدث خطأ أثناء تحديث الناشر."
         onClose={() => setShowErrorAlert(false)}
         customCloseBtnText="اغلاق"
       />
@@ -232,8 +197,8 @@ const EditSource = ({ sourceId, onClose }) => {
         onClose={() => setShowSuccessAlert(false)}
         customCloseBtnText="تم"
       />
-        </div>
-    );
-}
- 
+    </div>
+  );
+};
+
 export default EditSource;

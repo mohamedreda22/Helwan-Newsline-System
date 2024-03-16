@@ -2,17 +2,18 @@
     margin-left: 300px;
     margin-bottom: 40px;
 }
-*{
+/* *{
     background-color: beige;
-}
+} */
 .s{
     text-align: center;
     
 }
 .btn1{
-    margin-left: 280px;
-    width: 50%;
+    margin-left: 350px;
+    width: 45%;
     border-radius: 20px;
+    background-color: rgb(16, 16, 39);
 }
 .s3{
     margin-left: 300px;

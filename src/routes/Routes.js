@@ -31,7 +31,7 @@ export const RouterComponent = () => {
     <Router>
       <Routes>
         
-        <Route path="/"             element={< AllSources />} />
+        <Route path="/"             element={< AddArticle3 />} />
         <Route path="/sidebar"      element={<SideBar  />} />
         <Route path="/message"      element={< Message />} />
         <Route path="/addVideo"          element={< AddVideo4/>} />

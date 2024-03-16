@@ -1,11 +1,15 @@
+/* *{
+  background-color: #FFF;
+} */
+
+
 .sideBar {
   display: flex;
   flex-direction: column;
   background-color: #ffffff;
-  width: 296px;
+  width: 296px; 
   height: 100%; /* Set height to 100% to cover the entire height of the viewport */
   padding: 15px;
-  box-shadow: 4px 4px 15px rgba(0.25, 0, 0, 0.25);
   position: fixed;
   top: 0;
   right: 0;

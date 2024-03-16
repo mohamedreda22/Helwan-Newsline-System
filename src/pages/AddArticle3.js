@@ -7,7 +7,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import axios from 'axios';
 
-
+ 
   
 
 function AddArticle3 () {
@@ -27,7 +27,8 @@ function AddArticle3 () {
 
   const fetchSources = async () =>{
     try {
-        const response = await axios.get('http://localhost:9090/university/sources');
+        const response = await axios.get
+        ('http://localhost:9090/university/sources');
         setSources(response.data)
     }
     catch(error){
@@ -93,10 +94,10 @@ const handleFileChange = (event) => {
   };
 
   return (
-    <div>
-      <SideBar />
+    <div className='allpage'>
+      <SideBar /> 
       <div className='AddArticle'>
-        <p className='p1'>المقالات</p>
+        <p className='pp1'>المقالات</p>
         <hr className='hr1' />
         <h1 className='h1'>اضافة مقال</h1>
         <Form className='form' onSubmit={handleSubmit}>
@@ -104,8 +105,9 @@ const handleFileChange = (event) => {
             <Col>
             
              <Form.Group as={Col} md="3" controlId="validationCustom01" className='f1' dir='rtl'>
-                <Form.Label className='l1'>المصدر</Form.Label>
+                <Form.Label className='a'>المصدر</Form.Label>
                 <Form.Control
+                className='rounded-0'
                   required
                   type="text"
                   value={formData.source_string}
@@ -117,13 +119,15 @@ const handleFileChange = (event) => {
             </Col>
             <Col>
               <Form.Group as={Col} md="3" controlId="validationCustom01" className='f2' dir='rtl'>
-                <Form.Label className='l2'>العنوان</Form.Label>
+                <Form.Label className='a'>العنوان</Form.Label>
                 <Form.Control
+                className='rounded-0'
                   required
                   type="text"
                   value={formData.article_address}
                   onChange={handleChange}
                   name="article_address"
+                  style={{width:"200px"}}
                 />
               </Form.Group>
             </Col>
@@ -132,7 +136,7 @@ const handleFileChange = (event) => {
          < Form.Group as={Col} md="3" controlId="sourceSelect" className='f9' dir='rtl'>
               <Form.Select
               aria-label='Default select example'
-                className='c9'
+              className='rounded-0'
                 value={formData.source_id}
                 onChange={handleChange}
                 name="source_id"   
@@ -147,32 +151,35 @@ const handleFileChange = (event) => {
             </Form.Group>
           </Row>
           <Row>
-            <Form.Group as={Col} md="6" controlId="formFileMultiple" className="f3" dir='rtl'>
-              <Form.Label> اختر صورة </Form.Label>
+            <Form.Group as={Col} md="6" controlId="formFileMultiple" className="f3" dir='rtl' >
+              <Form.Label  className='a' > اختر صورة </Form.Label>
               <Form.Control
+              className='rounded-0'
                 type="file"
                 id="article_image_path"
                 name="article_image_path"   
                 onChange={handleFileChange}
+                
               />
             </Form.Group>
           </Row>
           <Row>
-            <Form.Group as={Col} md="6" controlId="validationCustom01" className="f4" dir='rtl'>
-              <Form.Label className='l4'> المقال</Form.Label>
+            <Form.Group as={Col} md="6" controlId="validationCustom01" className="f4" dir='rtl' >
+              <Form.Label className='a'> المقال</Form.Label>
               <Form.Control
+              className='rounded-0'
                 as="textarea"
                 rows={3}
                 required
                 value={formData.article_content}
                 onChange={handleChange}
                 name="article_content"   
-                
+                style={{  height: '300px'}}
               />
             </Form.Group>
           </Row>
           <Button
-            className="btn1"
+            className="button"
             type="submit">
             حفظ
           </Button>

@@ -15,7 +15,7 @@ const NavbarSource = () => {
             
             <button  
             style={{ color:"white", 
-                    backgroundColor:"blue",
+                    backgroundColor:"rgb(16, 16, 39)",
                    borderRadius:"15px",
                    borderBlock:"white",
                    width:"150px",
@@ -34,7 +34,7 @@ const NavbarSource = () => {
                   </Link>
                 </li>
                 <li class="nav-item ms-5">
-                  <Link to="/ " className="nav-link">
+                  <Link to="/" className="nav-link">
                      كل الناشرين
                   </Link>
                 </li>

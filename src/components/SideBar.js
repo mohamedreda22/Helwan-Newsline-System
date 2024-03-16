@@ -9,11 +9,11 @@ export default function SideBar  ()  {
         <div className='sideBar' dir="rtl">
 
             
-            <div className="logo">
-            <img src={logo} alt="logo" style={{ width: '100px', height: 'auto' }} />
+            <div className="logo"   style={{ width: '100px', height: 'auto' ,background:"white"}} >
+            <img src={logo} alt="logo" style={{ width: '100px', height: 'auto' ,background:"white"}} />
             </div>
-            <div className="menuItemWrapper">
-            <Sidebar className='side2'>
+            <div className="menuItemWrapper"   style={{ width: '100px', height: 'auto' ,background:"white"}} >
+            <Sidebar className='side2'   style={{ width: '100px', height: 'auto' ,background:"white"}}>
                 <Menu>
                   <SubMenu label=" اهم الاحداث">
                      <Nav.Link href="addEvent" className='active'>
