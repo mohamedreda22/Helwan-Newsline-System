@@ -1,7 +1,7 @@
 .edit-event-container {
     border: 1px solid #ccc;
     border-radius: 5px;
-    padding: 20px;
+    padding: 50px;
     margin-bottom: 20px;
     background-color: #5e565610;
 }
@@ -10,6 +10,7 @@
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    
 }
 
 .edit-event-label {
@@ -24,24 +25,11 @@
     box-sizing: border-box;
 }
 
-.save-icon,
-.cancel-icon {
-    cursor: pointer;
-    width: 24px;
-    height: 24px;
-    margin-right: 10px;
-}
-
-.save-icon:hover,
-.cancel-icon:hover {
-    filter: brightness(0.8);
-}
 
 .image-table {
     width: 100%;
     border-collapse: collapse;
     margin-top: 20px;
-    
 }
 
 .image-table td {
@@ -78,11 +66,6 @@
     transition: transform 0.3s ease-in-out;
   }
 
- 
-
-  
-
-
 .image-table img:hover {
     transform: scale(1.5); 
     z-index: 9999;
@@ -93,26 +76,12 @@
     margin-top: -50px;  */
     display: block;
   }
-  
 
-
-/* .btn-container{
+ .btn-container1{
     display: flex;
     justify-content: space-between;
-    margin-top: 20px;
-
-}
-.btn-container .btn-submit{
-    background-color: #4CAF50;
-    color: white;
+    margin-top: 10px;
     padding: 10px 20px;
-    text-align: center;
-    text-decoration: none;
-    display: inline-block;
-    font-size: 16px;
-    margin: 4px 2px;
-    cursor: pointer;
-    border-radius: 4px;
 }
- */
+
 

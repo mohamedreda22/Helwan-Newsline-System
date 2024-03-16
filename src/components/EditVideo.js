@@ -255,7 +255,7 @@ const fetchSources = async () => {
               //onChange={(e) => setVideoFile(e.target.files[0])}
               />
           </div>
-          <div className="btn-container">
+          <div className="btn-container2">
                 <button type="submit" className="btn-submit" style={{ width: "30%" }}>
                     حفظ التغييرات
                 </button>

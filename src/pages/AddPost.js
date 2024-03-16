@@ -1,7 +1,5 @@
 import React from "react";
 import SideBar from "../components/SideBar";
-import "../styles/Notifications.css";
-import { Link } from "react-router-dom";
 import AddPostForm from "../components/AddPostForm";
 
 function AddPost() {

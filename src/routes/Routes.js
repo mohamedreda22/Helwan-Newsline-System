@@ -58,9 +58,9 @@ export const RouterComponent = () => {
         <Route path="/forgotPassword" element={<ForgotPassword />} />
         <Route path="/updatePassword" element={<UpdatePassword />} />
         <Route path="/collages" element={<Collages />} />
-        <Route path="/videoList" element={<VideoList />} />
-        <Route path="/addVideo" element={<AddVideoForm />} />
-        <Route path="/sideBar" element={<SideBar />} />
+        <Route path="/showPosts" element={<Posts />} />
+        <Route path="/addPost" element={<AddPost />} />
+
 
 
         {isAuthenticated ? (
@@ -77,8 +77,9 @@ export const RouterComponent = () => {
             <Route path="/showEvents" element={<Events />} />
             <Route path="/faq" element={<FAQs />} />
             <Route path="/dashboard" element={<StudentDashboard />} />
-            <Route path="/showPosts" element={<Posts />} />
-            <Route path="/addPost" element={<AddPost />} />
+            <Route path="/videoList" element={<VideoList />} />
+            <Route path="/addVideo" element={<AddVideoForm />} />
+            <Route path="/sideBar" element={<SideBar />} />
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
