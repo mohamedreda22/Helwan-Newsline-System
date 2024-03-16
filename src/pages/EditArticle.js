@@ -104,7 +104,7 @@ const EditArticle2 = ({ articleId, onClose }) => {
   return (
     <div dir="rtl" className="container">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="sourceString">
+        <Form.Group /* controlId="sourceString" */>
           <Form.Label>المصدر</Form.Label>
           <Form.Control
               className='rounded-0'
@@ -116,7 +116,7 @@ const EditArticle2 = ({ articleId, onClose }) => {
            
           />
         </Form.Group>
-        <Form.Group controlId="articleAddress">
+        <Form.Group /* controlId="articleAddress" */>
           <Form.Label>عنوان المقال</Form.Label>
           <Form.Control
            className='rounded-0'
@@ -128,7 +128,7 @@ const EditArticle2 = ({ articleId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="articleContent">
+        <Form.Group /* controlId="articleContent" */>
           <Form.Label>محتوى المقال</Form.Label>
           <Form.Control
            className='rounded-0'
@@ -141,7 +141,7 @@ const EditArticle2 = ({ articleId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="sourceId">
+        <Form.Group /* controlId="sourceId" */>
           <Form.Label>اختر المصدر</Form.Label>
           <Form.Select
            className='rounded-0'
@@ -158,7 +158,7 @@ const EditArticle2 = ({ articleId, onClose }) => {
             ))}
           </Form.Select>
         </Form.Group>
-        <Form.Group controlId="articleImage">
+        <Form.Group /* controlId="articleImage" */>
           <Form.Label>صورة المقال</Form.Label>
           <Form.Control
            className='rounded-0'

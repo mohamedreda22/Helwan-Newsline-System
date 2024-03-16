@@ -121,7 +121,7 @@ const EditPost = ({ post, onClose }) => {
   return (
     <div dir="rtl" className="container">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="sourceString">
+        <Form.Group /* controlId="sourceString" */>
           <Form.Label>المصدر</Form.Label>
           <Form.Control
             type="text"
@@ -134,7 +134,7 @@ const EditPost = ({ post, onClose }) => {
         {!post && (
           <div>
             <Row>
-              <Form.Group as={Col} md="8" controlId="categorySelect">
+              <Form.Group as={Col} md="8" /* controlId="categorySelect" */>
                 <Form.Label>اختر التصنيف</Form.Label>
                 <Form.Select
                   aria-label="Default select example"
@@ -153,7 +153,7 @@ const EditPost = ({ post, onClose }) => {
               </Form.Group>
             </Row>
             <Row className="mb-3 mt-4">
-              <Form.Group as={Col} md="8" controlId="sourceSelect">
+              <Form.Group as={Col} md="8" /* controlId="sourceSelect" */>
                 <Form.Label>اختر المصدر</Form.Label>
                 <Form.Select
                   aria-label="Default select example"
@@ -170,7 +170,7 @@ const EditPost = ({ post, onClose }) => {
             </Row>
           </div>
         )}
-        <Form.Group controlId="postContent">
+        <Form.Group /* controlId="postContent" */>
           <Form.Label>محتوى المنشور</Form.Label>
           <Form.Control
             as="textarea"
@@ -182,7 +182,7 @@ const EditPost = ({ post, onClose }) => {
             }
           />
         </Form.Group>
-        <Form.Group controlId="postImage">
+        <Form.Group /* controlId="postImage" */>
           <Form.Label>صورة المنشور</Form.Label>
           <Form.Control type="file" onChange={handleFileChange} />
           

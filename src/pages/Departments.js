@@ -11,7 +11,6 @@ function Departments() {
       <div className="container-fluid bg-gray">
         <div className="row">
         <AdminNavBar />
-
           <ShowDepartments />
         </div>
       </div>

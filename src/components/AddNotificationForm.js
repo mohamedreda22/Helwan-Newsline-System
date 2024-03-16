@@ -47,7 +47,7 @@ function AddNotificationForm() {
             <Form noValidate validated={validated} onSubmit={handleSubmit}>
               <Row className="mb-3 mt-4">
                 <h3 dir="إضافة إشعار جديد"></h3>
-                <Form.Group as={Col} md="12" controlId="validationCustom01">
+                <Form.Group as={Col} md="12" /* controlId="validationCustom01" */>
                   <Form.Label>العنوان</Form.Label>
                   <Form.Control
                     required
@@ -57,7 +57,7 @@ function AddNotificationForm() {
                 </Form.Group>
               </Row>
               <Row>
-                <Form.Group as={Col} md="12" controlId="validationCustom02">
+                <Form.Group as={Col} md="12" /* controlId="validationCustom02" */>
                   <Form.Label>الوصف</Form.Label>
                   <Form.Control
                     as="textarea"

@@ -108,7 +108,7 @@ const EditSource = ({ sourceId, onClose }) => {
   return (
     <div dir="rtl" className="container">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="sourceName">
+        <Form.Group /* controlId="sourceName" */>
           
           <Form.Label>الاسم</Form.Label>
           <Form.Control
@@ -121,7 +121,7 @@ const EditSource = ({ sourceId, onClose }) => {
           />
         </Form.Group>
         <Row>
-        <Form.Group controlId="sourceEmail" className="email">
+        <Form.Group /* controlId="sourceEmail" */ className="email">
           <Form.Label> البريد الالكتروني </Form.Label>
           <Form.Control
             className="rounded-0"
@@ -133,7 +133,7 @@ const EditSource = ({ sourceId, onClose }) => {
             onChange={handleInputChange}
           />
         </Form.Group>
-        <Form.Group controlId="sourcePassword" className="pass">
+        <Form.Group /* controlId="sourcePassword" */ className="pass">
           <Form.Label> كلمة المرور </Form.Label>
           <Form.Control
             className="rounded-0"
@@ -147,7 +147,7 @@ const EditSource = ({ sourceId, onClose }) => {
         </Form.Group>
         </Row>
 
-        <Form.Group controlId="sourceResponsible">
+        <Form.Group /* controlId="sourceResponsible" */>
           
           <Form.Label>مسئول عن</Form.Label>
           <Form.Control
@@ -160,7 +160,7 @@ const EditSource = ({ sourceId, onClose }) => {
           />
         </Form.Group>
         <Row>
-        <Form.Group controlId="collegeId" className="college">
+        <Form.Group /* controlId="collegeId" */ className="college">
           <Form.Label> الكلية </Form.Label>
           <Form.Select
             className="rounded-0"
@@ -178,7 +178,7 @@ const EditSource = ({ sourceId, onClose }) => {
           </Form.Select>
         </Form.Group>
 
-        <Form.Group controlId="sourceId"className="dep">
+        <Form.Group /* controlId="sourceId" */ className="dep">
           <Form.Label> القسم </Form.Label>
           <Form.Select
             className="rounded-0"

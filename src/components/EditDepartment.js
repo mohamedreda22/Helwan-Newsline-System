@@ -318,7 +318,7 @@ const EditDepartmentForm = ({ departmentId }) => {
   return (
     <div dir="rtl">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="departmentName">
+        <Form.Group /* controlId="departmentName" */>
           <Form.Label>اسم القسم</Form.Label>
           <Form.Control
             type="text"

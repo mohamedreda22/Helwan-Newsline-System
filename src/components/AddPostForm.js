@@ -106,7 +106,7 @@ function AddPostForm() {
       </h1>
       <div dir="rtl" className="form-container">
         <Form onSubmit={handleSubmit}>
-          <Form.Group as={Col} md="8" controlId="validationCustom01">
+          <Form.Group as={Col} md="8" /* controlId="validationCustom01" */>
             <Form.Label className="lable">المصدر</Form.Label>
             <Form.Control
               required
@@ -117,7 +117,7 @@ function AddPostForm() {
             />
           </Form.Group>
           <Row className="mb-3 mt-4">
-            <Form.Group as={Col} md="8" controlId="categorySelect">
+            <Form.Group as={Col} md="8" /* controlId="categorySelect" */>
               <Form.Select
                 aria-label="Default select example"
                 onChange={handleChange}
@@ -137,7 +137,7 @@ function AddPostForm() {
             </Form.Group>
           </Row>
           <Row className="mb-3 mt-4">
-            <Form.Group as={Col} md="8" controlId="sourceSelect">
+            <Form.Group as={Col} md="8" /* controlId="sourceSelect" */>
               <Form.Select
                 aria-label="Default select example"
                 onChange={handleChange}
@@ -153,7 +153,7 @@ function AddPostForm() {
               </Form.Select>
             </Form.Group>
           </Row>
-          <Form.Group as={Col} md="8" controlId="validationCustom04">
+          <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
             <Form.Label className="lable">كتابة منشور</Form.Label>
             <Form.Control
               as="textarea"
@@ -167,7 +167,7 @@ function AddPostForm() {
           <Form.Group
             as={Col}
             md="8"
-            controlId="formFileMultiple"
+            /* controlId="formFileMultiple" */
             className="mb-4"
           >
             <Form.Label className="lable">إضافة صورة (اختياري)</Form.Label>

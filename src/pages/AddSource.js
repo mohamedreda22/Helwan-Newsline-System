@@ -106,9 +106,9 @@ function AddSource() {
       <div className='page'>
       <Form className='form' onSubmit={handleSubmit}>
         <h1 className='s'>اضافة ناشر</h1>
-        <Row>
-          <Form.Group as={Col} md="6" controlId="validationCustom01" className='s1' dir='rtl'>
-            <Form.Label className='s2'>الاسم</Form.Label>
+        <Row >
+          <Form.Group as={Col} md="3" /* controlId="validationCustom01" */ className='s0' dir='rtl' style={{marginLeft:"620px"}}>
+            <Form.Label className='lable'>الاسم</Form.Label>
             <Form.Control
               required
               className='rounded-0'
@@ -122,13 +122,13 @@ function AddSource() {
         </Row>
         <Row className="rr1">
           <Col>
-            <Form.Group as={Col} md="3" controlId="validationCustom01" className='s3' dir='rtl'>
-              <Form.Label className='s4'> كلمة المرور</Form.Label>
+            <Form.Group as={Col} md="5" /* controlId="validationCustom01" */ className='s3' dir='rtl' /* style={{marginLeft:"50px"}} */>
+              <Form.Label className='lable'> كلمة المرور</Form.Label>
               <Form.Control
                 className='rounded-0'
                 style={{ backgroundColor: "rgb(247, 243, 243)" }}
                 required
-                type="text"
+                type="password"
                 value={sourcePassword}
                 onChange={handleChange}
                 name="source_password"
@@ -136,12 +136,12 @@ function AddSource() {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group as={Col} md="3" controlId="validationCustom01" className='s6' dir='rtl'>
-              <Form.Label className='s7'>البريد الالكتروني</Form.Label>
+            <Form.Group as={Col} md="5" /* controlId="validationCustom01" */ className='s2' dir='rtl' style={{marginLeft:"15px"}}>
+              <Form.Label className='lable'>البريد الالكتروني</Form.Label>
               <Form.Control
                 required
                 className='rounded-0'
-                type="text"
+                type="email"
                 value={sourceEmail}
                 onChange={handleChange}
                 name="source_email"
@@ -152,8 +152,8 @@ function AddSource() {
         </Row>
 
         <Row>
-          <Form.Group as={Col} md="6" controlId="validationCustom01" className='s0' dir='rtl'>
-            <Form.Label className='s2'>مسئول عن</Form.Label>
+          <Form.Group as={Col} md="3" /* controlId="validationCustom01" */ className='s0' dir='rtl' style={{marginLeft:"620px"}}>
+            <Form.Label className='lable'>مسئول عن</Form.Label>
             <Form.Control
               required
               className='rounded-0'
@@ -167,8 +167,8 @@ function AddSource() {
         </Row>
         <Row className="rr1">
           <Col>
-            <Form.Group controlId="departmentSelect" dir='rtl' className='s9' as={Col} md="3">
-              <Form.Label> قسم</Form.Label>
+            <Form.Group /* controlId="departmentSelect" */ dir='rtl' className='s9' as={Col} md="3">
+              <Form.Label className='lable'> قسم</Form.Label>
               <Form.Select
                 className='rounded-0'
                 aria-label="Default select example"
@@ -191,8 +191,8 @@ function AddSource() {
             </Form.Group>
           </Col>
           <Col>
-            <Form.Group controlId="collegeName" dir='rtl' className='s10' as={Col} md="3">
-              <Form.Label>اسم الكلية</Form.Label>
+            <Form.Group /* controlId="collegeName" */ dir='rtl' className='s10' as={Col} md="3">
+              <Form.Label className='lable'>اسم الكلية</Form.Label>
               <Form.Select
                 className='rounded-0'
                 aria-label="Default select example"

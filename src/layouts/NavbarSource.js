@@ -6,7 +6,8 @@ import { Link } from "react-router-dom";
 const NavbarSource = () => {
 
     const handleExit=()=>{
-        
+        sessionStorage.removeItem('token');
+        window.location.href = '/';
     }
     return ( 
         <div className="containerxxl" style={{marginBottom:"-10px",marginTop:"-30px"}}>
@@ -29,7 +30,7 @@ const NavbarSource = () => {
               <ul class="navbar-nav mx-auto p-2 justify-content-center ">
                  
                 <li class="nav-item ms-5">
-                  <Link to="/" className="nav-link">
+                  <Link to="/showDepartments" className="nav-link">
                     الاقسام  
                   </Link>
                 </li>

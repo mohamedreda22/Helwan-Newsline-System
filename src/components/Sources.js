@@ -1,6 +1,5 @@
 import axios from "axios";
 import React, { useState, useEffect } from "react";
-import edit_icon from "../assets/icons/edit.svg";
 import delete_icon from "../assets/icons/delete.svg";
 import "../styles/Articles.css";
 import Simplert from "react-simplert";

@@ -7,6 +7,7 @@ import { FaPlus } from "react-icons/fa";
 import AddDepartment from "./AddDepartmentForm";
 import EditDepartment from "./EditDepartment";
 import "../styles/ShowDepartments.css";
+import NavbarSource from "../layouts/NavbarSource";
 
 const ShowDepartments = () => {
   const [departments, setDepartments] = useState([]);
@@ -99,7 +100,8 @@ const ShowDepartments = () => {
 
   return (
     <div className="mt-2 container">
-      
+           <NavbarSource/>
+
       <button type="button" className="AddDep" onClick={handleShowAddModal}>
         إضافة <FaPlus />
       </button>
