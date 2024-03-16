@@ -1,19 +1,72 @@
- 
-.Search{   
-position:absolute;
-width: 100%;
-margin-top: 0px;
-top: 30px;
-height: 70px;
-text-align: right;
-display: grid;
-top: 0%;
-background-color: gray;
-color: blue;
+  
+  
+  .AddArticle{
+    background-color: rgb(247, 243, 243);
+  }
+  .p1{
+    margin-left: 850px;
+  } 
+  .pp1{
+    color: #000;
+ text-align:  right;
+font-size:  30px;
+font-style: normal;
+font-weight: 500;
+line-height: normal;
+margin-right: 300px;
+  }
 
+  .a{
+    color: #000;
 
+font-family: Inder;
+font-size: 25px;
+font-style: normal;
+font-weight: 200;
+line-height: normal;
+  }
+  .hr1{
+    width: 77.5%;
+  }
+/* .h1{
+    background-color: beige;
+} */
+.f1{
+    margin-left: 300px;
+    margin-bottom: 50px;  
 }
-::placeholder {
-    text-align: right; 
-    font-size: large;
- }
+.f2{
+    margin-left: 100px;
+    margin-bottom: 50px;
+}
+
+.f3{
+    margin-left: 300px;
+    margin-bottom: 50px;
+}
+
+.f4{
+    margin-left: 300px;
+    margin-bottom: 50px;
+}
+/* .l2{
+    margin-right: 400px;
+} */
+
+.h1{
+  text-align: center;
+}
+.button{
+  margin-left: 400px;
+  width: 30%;
+  background-color: rgb(16, 16, 39);
+}
+
+.f9{
+  margin-left: 300px;
+  margin-bottom: 50px;
+  width: 50%;
+}
+.a2{
+  border-style: solid
+}

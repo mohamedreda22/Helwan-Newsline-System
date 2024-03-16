@@ -18,7 +18,13 @@ import {PrivateRoutes} from './PrivateRoutes';
 import NotFound from '../pages/NotFound'
 import VideoList from '../components/videoList';
 import AddVideoForm from '../components/AddVideoForm';
-
+import Message from '../pages/Message'; 
+import AddArticle from "../pages/AddArticle";
+import EditArticle from "../pages/EditArticle";
+import AllArticles from "../pages/AllArticles";
+import AddSource from "../pages/AddSource";
+import EditSource from "../pages/EditSource";
+import AllSources from "../pages/AllSources";
 
 export const RouterComponent = () => {
   const { userRole } = useContext(UserRoleContext);
@@ -60,8 +66,21 @@ export const RouterComponent = () => {
         <Route path="/collages" element={<Collages />} />
         <Route path="/showPosts" element={<Posts />} />
         <Route path="/addPost" element={<AddPost />} />
-
-
+        <Route path="/message"      element={<Message />} />
+        <Route path="/addarticle"  element={<AddArticle/>} />
+        <Route path="/editarticle"  element={<EditArticle/>} />
+        <Route path="/articles"    element={<AllArticles/>} />
+        <Route path="/showDepartments" element={<ShowDepartments />} />
+        <Route path="/source"    element={< AddSource/>} />
+        <Route path="/editsource"    element={<  EditSource/>} />
+        <Route path="/allsources"  element={< AllSources/>} /> 
+        <Route path="/dashboard" element={<StudentDashboard />} />
+        <Route path="/videoList" element={<VideoList />} />
+        <Route path="/addVideo" element={<AddVideoForm />} />
+        <Route path="/addEvent" element={<AddEvent />} />
+        <Route path="/showEvents" element={<Events />} />
+        <Route path="/faq" element={<FAQs />} /> 
+        <Route path="/sideBar" element={<SideBar />} />
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
@@ -69,17 +88,26 @@ export const RouterComponent = () => {
               <Route path="/collages" element={<Collages />} />
             )}
             {userRole === 'ADMIN' && (
-              <Route path="/showDepartments" element={<ShowDepartments />} />
+              <>
+{/*               <Route path="/showDepartments" element={<ShowDepartments />} />
+              <Route path="/source"    element={< AddSource/>} />
+              <Route path="/editsource"    element={<  EditSource/>} />
+              <Route path="/allsources"  element={< AllSources/>} />  */}
+            </>
             )}
             {userRole === 'SOURCE' && (
               <>
-            <Route path="/addEvent" element={<AddEvent />} />
+{/*             <Route path="/addEvent" element={<AddEvent />} />
             <Route path="/showEvents" element={<Events />} />
-            <Route path="/faq" element={<FAQs />} />
-            <Route path="/dashboard" element={<StudentDashboard />} />
+            <Route path="/faq" element={<FAQs />} /> */}
+{/*             <Route path="/dashboard" element={<StudentDashboard />} />
             <Route path="/videoList" element={<VideoList />} />
-            <Route path="/addVideo" element={<AddVideoForm />} />
-            <Route path="/sideBar" element={<SideBar />} />
+            <Route path="/addVideo" element={<AddVideoForm />} /> */}
+{/*             <Route path="/sideBar" element={<SideBar />} />
+ */}{/*             <Route path="/message"      element={<Message />} />
+            <Route path="/addarticle"  element={<AddArticle/>} />
+            <Route path="/editarticle"  element={<EditArticle/>} />
+            <Route path="/articles"    element={<AllArticles/>} /> */}
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />

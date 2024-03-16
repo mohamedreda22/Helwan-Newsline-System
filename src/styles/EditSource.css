@@ -1,0 +1,51 @@
+.ss1{
+    margin-left: 490px;
+    margin-bottom: 40px;
+    border-radius: none;
+}
+/* *{
+    background-color: beige;
+} */
+.ss{
+    /* text-align: center; */
+    margin-bottom: 20px;
+}
+.btn2{
+    margin-left: 480px;
+    width: 50%;
+    border-radius: 20px;
+}
+.ss3{
+    margin-left: 490px;
+    margin-bottom: 40px;
+}
+.ss6{
+    margin-left: 310px;
+    margin-bottom: 40px;
+}
+.ss8{
+    margin-left: 490px;
+    margin-bottom: 40px;
+    width: 50%;
+}
+.ss10{
+    margin-left: 310px;
+    margin-bottom: 40px;
+}
+.ss9{
+    margin-left: 490px;
+    margin-bottom: 40px;
+}
+.email{
+    width: 240px;
+}
+.pass{
+    width: 230px;
+    margin-left: -10px;
+}
+.college{
+    width: 240px;
+}
+.dep{
+    width: 220px;
+}

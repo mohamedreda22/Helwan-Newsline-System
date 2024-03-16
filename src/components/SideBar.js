@@ -28,10 +28,10 @@ export default function SideBar  ()  {
                         <span className="material-icons-outlined">sports_football</span> الرياضة
                     </Nav.Link>
                     <SubMenu label="المقالات">
-                        <Nav.Link href="addArtical" className='active'>
+                        <Nav.Link href="addarticle" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="showArticals" className='active'>
+                        <Nav.Link href="articles" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>
