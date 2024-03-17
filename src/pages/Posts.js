@@ -12,7 +12,7 @@ function Posts() {
       <div className="row">
         <div className="col-lg-10">
           <SearchBar />
-          <h1 dir="rtl">المنشورات</h1>
+          <h1 className="header" dir="rtl" style={{fontSize:"50px"}}>المنشورات</h1>
           <div className="container-2">
             <ShowPosts />
           </div>
