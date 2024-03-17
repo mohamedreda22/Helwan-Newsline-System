@@ -1,0 +1,35 @@
+.plus-icon {
+    width: 16px;
+    height: 16 px;
+    color: white;
+  }
+  .notifNum {
+    width: 150px;
+    text-align: right;
+    height: 50px;
+  }
+  .AddNotifbtn {
+    width: 180px;
+    height: 35px;
+    border-radius: 25px;
+    margin-bottom: 25px;
+    background: #091160;
+    color: white;
+  }
+  .delete-icon{
+    cursor: pointer;
+  }
+  
+   
+  .article-image  {
+    width: 60px; 
+    height: 100%px;
+    margin-right: 10px; 
+    margin-left: 20px;
+  }
+  .btnsource{
+    width: 100px;
+    background-color: #091160;
+    color: white;
+    border-radius: 10px;
+  }

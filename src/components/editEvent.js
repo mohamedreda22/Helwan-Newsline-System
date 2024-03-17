@@ -143,7 +143,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
 
     return (
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"10px"}}>تعديل الحدث</h2>
+            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الحدث</h2>
             <form onSubmit={handleSubmit} >
                 {/* Form inputs */}
                 <div className="form-row" >
@@ -282,7 +282,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                                     </tbody>
                                 </table>
                     </div>
-                <div className="btn-container">
+                <div className="btn-container1">
                 
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                     حفظ التغييرات

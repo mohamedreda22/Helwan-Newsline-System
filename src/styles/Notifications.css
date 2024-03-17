@@ -1,0 +1,38 @@
+.bg-gray {
+  background: linear-gradient(
+      0deg,
+      rgba(217, 217, 217, 0.3) 0%,
+      rgba(217, 217, 217, 0.3) 100%
+    ),
+    var(--White, #fff);
+}
+h1 {
+  margin: 50px;
+}
+
+.container-2 {
+  width: 90%;
+  margin: auto;
+  height: auto;
+  min-height: 750px;
+  background: var(--White, #fff);
+  flex-shrink: 0;
+  padding: 5px 60px;
+}
+.links {
+  margin: 20px 50px;
+}
+.links button {
+  border: "none";
+  background-color: "none";
+  color: black;
+  text-decoration: none;
+  font-style: normal;
+  line-height: normal;
+  border: none;
+}
+.links button:hover {
+  text-decoration: none;
+  color: #091160;
+  border-bottom: 2px solid #091160;
+}

@@ -7,6 +7,7 @@ import { FaPlus } from "react-icons/fa";
 import AddDepartment from "./AddDepartmentForm";
 import EditDepartment from "./EditDepartment";
 import "../styles/ShowDepartments.css";
+import NavbarSource from "../layouts/NavbarSource";
 
 const ShowDepartments = () => {
   const [departments, setDepartments] = useState([]);
@@ -18,7 +19,7 @@ const ShowDepartments = () => {
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
   const [userRole, setUserRole] = useState(""); 
-
+  const [departmentEditId, setDepartmentEditId] = useState (null);
 
   useEffect(() => {
     fetchColleges();
@@ -74,9 +75,10 @@ const ShowDepartments = () => {
     }
   };
 
-  const handleEditDepartment = (department) => {
-    setEditedDepartment(department);
+  const handleEditDepartment = (departmentId) => {
+    // setEditedDepartment(department);
     setShowEditModal(true);
+    setDepartmentEditId(departmentId);
   };
 
   const handleCloseEditModal = () => {
@@ -98,7 +100,8 @@ const ShowDepartments = () => {
 
   return (
     <div className="mt-2 container">
-      
+           <NavbarSource/>
+
       <button type="button" className="AddDep" onClick={handleShowAddModal}>
         إضافة <FaPlus />
       </button>
@@ -123,7 +126,7 @@ const ShowDepartments = () => {
             <button
               type="button"
               className="edit-btn"
-              onClick={() => handleEditDepartment(department)}
+              onClick={() => handleEditDepartment(department.id)}
             >
               تعديل
             </button>
@@ -166,6 +169,7 @@ const ShowDepartments = () => {
         <Modal.Body>
           <EditDepartment
             department={editedDepartment}
+            departmentId={departmentEditId}
             onClose={handleCloseEditModal}
           />
         </Modal.Body>

@@ -69,7 +69,7 @@ const AddDepartmentForm = () => {
   return (
     <div dir="rtl">
       <Form onSubmit={handleSubmit}>
-        <Form.Group controlId="departmentName">
+        <Form.Group /* controlId="departmentName" */>
           <Form.Label>اسم القسم</Form.Label>
           <Form.Control
             type="text"
@@ -81,7 +81,7 @@ const AddDepartmentForm = () => {
             الرجاء إدخال اسم القسم
           </Form.Control.Feedback>
         </Form.Group>
-        <Form.Group controlId="collegeName">
+        <Form.Group /* controlId="collegeName" */>
           <Form.Label>اسم الكلية</Form.Label>
           <Form.Select
             aria-label="Default select example"

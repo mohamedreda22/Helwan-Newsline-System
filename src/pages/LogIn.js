@@ -1,11 +1,11 @@
-//it's ready to go live but we need to apply API when they finsh it
-import React, { useState } from 'react';
+import React, { useState,useContext } from 'react';
 import logo from '../assets/images/logo.png';
 import '../styles/LogIn.css';
 import axios from 'axios';
 import useAlert from '../hooks/useAlert';
 import Simplert from 'react-simplert';
 import { useNavigate } from 'react-router-dom';
+import UserRoleContext  from '../hooks/UserRoleContext'
 
 
 
@@ -14,6 +14,7 @@ function LogIn() {
         email: '',
         password: '',
     });
+    const { setUserRole } = useContext(UserRoleContext);
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
@@ -32,16 +33,20 @@ function LogIn() {
         try {
             const response = await axios.post('http://localhost:9090/university/auth/login', formData);
             console.log('Response:', response);
-            if (response && response.status >= 200 && response.status < 300) {
+            if (response && response.status === 202 ) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 console.log('Form data submitted:', response.data);
+                console.log('Token from response:', response.data.token);
+                sessionStorage.setItem('token', response.data.token);
+                
+
                 setFormData({
                     email: '',
                     password: '',
                 });
                 const userRole = response.data.userRole;
                 console.log('User Role:', userRole); 
-
+                setUserRole(userRole);
                 // Set appropriate route based on user role
                 let route = '/';
                 switch (userRole) {
@@ -60,7 +65,7 @@ function LogIn() {
     
                 // Navigate to the determined route
                 navigate(route);
-               localStorage.setItem('token', response.data.token);
+               //localStorage.setItem('token', response.data.token);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
                 console.log('Response data:', response.data);

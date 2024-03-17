@@ -28,10 +28,10 @@ export default function SideBar  ()  {
                         <span className="material-icons-outlined">sports_football</span> الرياضة
                     </Nav.Link>
                     <SubMenu label="المقالات">
-                        <Nav.Link href="addArtical" className='active'>
+                        <Nav.Link href="addarticle" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="showArticals" className='active'>
+                        <Nav.Link href="articles" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>
@@ -39,7 +39,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="addVideo" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة فيديو
                         </Nav.Link>
-                        <Nav.Link href="showVideos" className='active'>
+                        <Nav.Link href="videoList" className='active'>
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>
@@ -48,10 +48,15 @@ export default function SideBar  ()  {
                     </Nav.Link>
                     <Nav.Link href="topNews" className='active'>
                         <span className="material-icons-outlined">newspaper</span> اهم الاخبار
-                    </Nav.Link>
-                    <Nav.Link href="Post" className='active'>
-                        <span className="material-icons-outlined">assistant</span> منشور
-                    </Nav.Link>
+                    </Nav.Link>                    
+                    <SubMenu label="منشور ">
+                        <Nav.Link href="addPost" className='active'>
+                            <span className="material-icons-outlined">add</span> اضافة منشور
+                        </Nav.Link>
+                        <Nav.Link href="showPosts" className='active'>
+                            <span className="material-icons-outlined">assistant</span> كل المنشورات
+                        </Nav.Link>
+                    </SubMenu>
                     <Nav.Link as={Link} to="/faq" className='active'>
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
