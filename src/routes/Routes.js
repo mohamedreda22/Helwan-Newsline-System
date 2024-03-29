@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import  UserRoleContext  from '../hooks/UserRoleContext';
+//import  UserRoleContext  from '../hooks/UserRoleContext';
 import LogIn from '../pages/LogIn';
 import Collages from '../pages/Collages';
 import Events from '../components/events';
@@ -27,29 +27,31 @@ import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
 
 export const RouterComponent = () => {
-  const { userRole } = useContext(UserRoleContext);
-  const [isAuthenticated, setIsAuthenticated] = useState(() => {
-    return localStorage.getItem('token') !== null;
-  });  
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
+  const [userRole, setUserRole] = useState('');
+
 
   useEffect(() => {
-    console.log('Attempting to get token from local storage');
+    console.log('Attempting to get token from session storage');
     const token = sessionStorage.getItem('token');
-    console.log('Token from local storage:', token);
+    console.log('Token from session storage:', token);
     if (token) {
       setIsAuthenticated(true);
       console.log('User is authenticated');
+      const userRoleFromSession = sessionStorage.getItem('token');
+      console.log('User role from session storage:', userRoleFromSession);
+      setUserRole(userRoleFromSession);
     }
     setLoading(false);
-  }, []);
+  }, [setIsAuthenticated]);
 
-/*   const logout = () => {
+  const logout = () => {
     sessionStorage.removeItem('token');
     setIsAuthenticated(false);
     console.log('User logged out');
 
-  }; */
+  };
 
   if (loading) {
     return <p>Loading...</p>;
@@ -58,62 +60,46 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogIn />} />
-        <Route path="/login" element={<LogIn />} />
-        <Route path="/signup" element={<SignUp />} />
-        <Route path="/forgotPassword" element={<ForgotPassword />} />
-        <Route path="/updatePassword" element={<UpdatePassword />} />
-        <Route path="/collages" element={<Collages />} />
-        <Route path="/showPosts" element={<Posts />} />
-        <Route path="/addPost" element={<AddPost />} />
-        <Route path="/message"      element={<Message />} />
-        <Route path="/addarticle"  element={<AddArticle/>} />
-        <Route path="/editarticle"  element={<EditArticle/>} />
-        <Route path="/articles"    element={<AllArticles/>} />
-        <Route path="/showDepartments" element={<ShowDepartments />} />
-        <Route path="/source"    element={< AddSource/>} />
-        <Route path="/editsource"    element={<  EditSource/>} />
-        <Route path="/allsources"  element={< AllSources/>} /> 
-        <Route path="/dashboard" element={<StudentDashboard />} />
-        <Route path="/videoList" element={<VideoList />} />
-        <Route path="/addVideo" element={<AddVideoForm />} />
-        <Route path="/addEvent" element={<AddEvent />} />
-        <Route path="/showEvents" element={<Events />} />
-        <Route path="/faq" element={<FAQs />} /> 
-        <Route path="/sideBar" element={<SideBar />} />
+        <Route path="/" element={<LogIn/>} />
+        <Route path="/login" element={<LogIn/>} />
+        <Route path="/signup" element={<SignUp/>} />
+        <Route path="/forgotPassword" element={<ForgotPassword/>} />
+        <Route path="/updatePassword" element={<UpdatePassword/>} />
 
         {isAuthenticated ? (
-          <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} />}>
-                      {userRole === 'STUDENT' && (
-              <Route path="/collages" element={<Collages />} />
+          <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} logout={logout} />}>
+          {userRole === 'STUDENT' && (
+              <Route path="/collages" element={<Collages/>} />
             )}
             {userRole === 'ADMIN' && (
               <>
-{/*               <Route path="/showDepartments" element={<ShowDepartments />} />
+              <Route path="/showDepartments" element={<ShowDepartments/>} />
               <Route path="/source"    element={< AddSource/>} />
               <Route path="/editsource"    element={<  EditSource/>} />
-              <Route path="/allsources"  element={< AllSources/>} />  */}
+              <Route path="/allsources"  element={< AllSources/>} /> 
             </>
             )}
             {userRole === 'SOURCE' && (
               <>
-{/*             <Route path="/addEvent" element={<AddEvent />} />
-            <Route path="/showEvents" element={<Events />} />
-            <Route path="/faq" element={<FAQs />} /> */}
-{/*             <Route path="/dashboard" element={<StudentDashboard />} />
-            <Route path="/videoList" element={<VideoList />} />
-            <Route path="/addVideo" element={<AddVideoForm />} /> */}
-{/*             <Route path="/sideBar" element={<SideBar />} />
- */}{/*             <Route path="/message"      element={<Message />} />
+            <Route path="/addEvent" element={<AddEvent/>} />
+            <Route path="/showEvents" element={<Events/>} />
+            <Route path="/faq" element={<FAQs/>} />
+            <Route path="/dashboard" element={<StudentDashboard/>} />
+            <Route path="/videoList" element={<VideoList/>} />
+            <Route path="/addVideo" element={<AddVideoForm/>} />
+            <Route path="/sideBar" element={<SideBar/>} />
+            <Route path="/message"      element={<Message/>} />
             <Route path="/addarticle"  element={<AddArticle/>} />
             <Route path="/editarticle"  element={<EditArticle/>} />
-            <Route path="/articles"    element={<AllArticles/>} /> */}
+            <Route path="/articles"    element={<AllArticles/>} />
+            <Route path="/showPosts" element={<Posts/>} />
+            <Route path="/addpost" element={<AddPost/>} />
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
             </Route>
                     ) : (
-                        <Route path="*" element={<NotFound />} />
+                        <Route path="*" element={<NotFound/>} />
 
 /*           <Navigate to="/collages" />
  */

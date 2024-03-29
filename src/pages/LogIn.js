@@ -36,8 +36,8 @@ function LogIn() {
             if (response && response.status === 202 ) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 console.log('Form data submitted:', response.data);
-                console.log('Token from response:', response.data.token);
-                sessionStorage.setItem('token', response.data.token);
+                console.log('Token from response:', response.data.userRole);
+                sessionStorage.setItem('token', response.data.userRole);
                 
 
                 setFormData({
@@ -76,11 +76,10 @@ function LogIn() {
                 showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
             } else {
                 showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
-            }
-                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
-        } finally {
+            }            
             setIsLoading(false);
-        }
+
+        } 
     };
 
     const handleChange = (e) => {
@@ -131,6 +130,7 @@ function LogIn() {
                             name="rememberMe"
                             value="rememberMe"
                             className="checkbox"
+                            //checked={formData.rememberMe}
                         />
                     </div>
                     <button type="submit" disabled={isLoading} className="btn-submit">

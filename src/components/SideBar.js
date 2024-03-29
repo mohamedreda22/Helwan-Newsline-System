@@ -6,6 +6,10 @@ import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
 
 export default function SideBar  ()  {
+    const handleExit=()=>{
+        sessionStorage.removeItem('token');
+        window.location.href = '/';
+    }
     return ( 
         <div className='sideBar' dir="rtl">
             <div className="logo">
@@ -61,7 +65,7 @@ export default function SideBar  ()  {
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
                     {[...Array(2)].map((_, index) => <MenuItem key={index}></MenuItem>)}
-                    <Nav.Link  as={Link} to="/logout"  className='active'>
+                    <Nav.Link as={Link} to="/logout" onClick={handleExit} className='active'>
                         <span className="material-icons-outlined">logout</span> تسجيل الخروج
                     </Nav.Link>
 
