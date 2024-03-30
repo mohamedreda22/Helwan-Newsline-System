@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-//import  UserRoleContext  from '../hooks/UserRoleContext';
+import { UserRoleProvider } from '../hooks/UserRoleContext'; 
 import LogIn from '../pages/LogIn';
 import Collages from '../pages/Collages';
 import Events from '../components/events';
@@ -25,11 +25,13 @@ import AllArticles from "../pages/AllArticles";
 import AddSource from "../pages/AddSource";
 import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
+//import { useUserRole } from '../hooks/UserRoleContext';
 
 export const RouterComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState('');
+  //const { userRole } = useUserRole();
 
 
   useEffect(() => {
@@ -45,6 +47,21 @@ export const RouterComponent = () => {
     }
     setLoading(false);
   }, [setIsAuthenticated]);
+
+
+/*   useEffect(() => {
+    console.log("Attempting to get userRole from useContext hook");
+    console.log("User Role from useContext hook:", userRole);
+    if (userRole) {
+      setIsAuthenticated(true);
+      console.log('User is authenticated');
+    } else {
+      // If userRole is not available, it might still be loading or not authenticated
+      setLoading(false);
+    }
+  }, [userRole, setIsAuthenticated]); */
+  
+  
 
   const logout = () => {
     sessionStorage.removeItem('token');

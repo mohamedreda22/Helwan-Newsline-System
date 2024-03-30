@@ -1,9 +1,9 @@
-import React, { createContext, useState } from 'react';
+import React, { createContext,useContext, useState } from 'react';
 
 const UserRoleContext = createContext();
 
 export const UserRoleProvider = ({ children }) => {
-  const [userRole, setUserRole] = useState('');
+  const [userRole, setUserRole] = useState(null);
 
   return (
     <UserRoleContext.Provider value={{ userRole, setUserRole }}>
@@ -11,5 +11,12 @@ export const UserRoleProvider = ({ children }) => {
     </UserRoleContext.Provider>
   );
 };
+export const useUserRole = () => {
+  const context = useContext(UserRoleContext);
+  if (context === undefined) {
+    throw new Error('useUserRole must be used within a UserRoleProvider');
+  }
+  return context;
+}
 
 export default UserRoleContext;

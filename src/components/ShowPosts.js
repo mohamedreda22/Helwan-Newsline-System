@@ -97,37 +97,41 @@ const ShowPosts = () => {
             <th>تعديل</th>
           </tr>
         </thead>
-        <tbody >
-          {currentPosts.map((post) => (
-            <tr key={post.post_id}>
-                  <img
-                    className="post-item-image"
-                    src={post.post_image_path}
-                    alt="Post Image"
-                  />
-              <td>{post.post_content.slice(0, 30)}...</td>
-              <td>{post.source_string}</td>
-              <td>
-                <img
-                  src={delete_icon}
-                  alt="Delete post"
-                  className="icon"
-                  onClick={() => handleDeletePost(post.post_id)}
-                />
-              </td>
-              <td>
-                <img
-                  src={edit_icon}
-                  alt="Edit post"
-                  className="icon"
-                  onClick={() => handleEditPost(post.post_id)}
-                />
-              </td>
-            </tr>
-          ))}
-        </tbody>
+              <tbody>
+                    {currentPosts.map((post) => (
+                      <tr key={post.post_id}>
+                        <td>
+                          <img
+                            className="post-item-image"
+                            src={post.post_image_path}
+                            alt="Post Image"
+                          />
+                        </td>
+                        <td>{post.post_content.slice(0, 30)}...</td>
+                        <td>{post.source_string}</td>
+                        <td>
+                          <img
+                            src={delete_icon}
+                            alt="Delete post"
+                            className="icon"
+                            onClick={() => handleDeletePost(post.post_id)}
+                          />
+                        </td>
+                        <td>
+                          <img
+                            src={edit_icon}
+                            alt="Edit post"
+                            className="icon"
+                            onClick={() => handleEditPost(post.post_id)}
+                          />
+                        </td>
+                      </tr>
+                    ))}
+      </tbody>
+
       </Table>
       {/* Render pagination controls */}
+      {posts.length > 8 && (
       <div className="pagination">
         <img
           src={arrow_left}
@@ -156,6 +160,7 @@ const ShowPosts = () => {
           className="arrow-icon"
         />
       </div>
+      )}
       <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>
         <Modal.Header closeButton>
           <div className="d-flex justify-content-between align-items-center w-100">

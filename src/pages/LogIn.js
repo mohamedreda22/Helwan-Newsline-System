@@ -6,7 +6,7 @@ import useAlert from '../hooks/useAlert';
 import Simplert from 'react-simplert';
 import { useNavigate } from 'react-router-dom';
 import UserRoleContext  from '../hooks/UserRoleContext'
-
+//import { useUserRole } from '../hooks/UserRoleContext'
 
 
 function LogIn() {
@@ -19,6 +19,8 @@ function LogIn() {
     const [isLoading, setIsLoading] = useState(false);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
     const navigate = useNavigate();
+    //const { setUserRole } = useUserRole();
+
 
 
     const handleSubmit = async (e) => {
@@ -62,9 +64,14 @@ function LogIn() {
                     default:
                         break;
                 }
-    
+
+
                 // Navigate to the determined route
-                navigate(route);
+                navigate(route);       
+
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1); 
                //localStorage.setItem('token', response.data.token);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
