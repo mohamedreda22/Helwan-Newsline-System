@@ -11,7 +11,8 @@ const Articles = () => {
   const [articles, setArticles] = useState([]);
   const [showEditModal, setShowEditModal] = useState(false); 
   const [editArticle, setEditArticle] = useState(null);  
-  const [errorAlert, setErrorAlert] = useState(false); // State for error alert
+  const [errorAlert, setErrorAlert] = useState(false); 
+  const [sources, setSources] = useState([]); 
 
   const fetchArticles = async () => {
     try {
@@ -27,6 +28,7 @@ const Articles = () => {
 
   useEffect(() => {
     fetchArticles();
+    fetchSources();
   }, []);
 
   const handleDeleteArticle = async (articleId) => {
@@ -61,30 +63,53 @@ const Articles = () => {
     setEditArticle(null);
   };
 
+  const fetchSources = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/sources"
+      );
+      setSources(response.data);
+    } catch (error) {
+      console.error("Error fetching sources:", error);
+    }
+  };
   return (
     <>
       <div className="mt-2">
-        <div className="notifNum"> عدد المقالات :{articles.length} </div>
-
+        <div className="total-events">عدد المقالات : <span>{articles.length}</span></div>      
         <Table responsive hover dir="rtl">
-          <tbody>
+        <thead>
+          <tr>
+            <th>الصورة</th>
+            <th>العنوان</th>
+            <th>المصدر</th>
+            <th>المحتوى</th>
+            <th>حذف</th>
+            <th>تعديل</th>
+          </tr>
+        </thead>
+        <tbody>
             {articles.map((article) => (
               <tr key={article.article_id}>
-                <td className="article-image ">
-                {article.article_image_path && (
-                  <img
-                    className="article-image"
-                    src={article.article_image_path}
-                    alt="article Image"
-                  />
-                )}
-              </td>
+                <td>
+                  {article.article_image_path && (
+                    <img
+                      className="post-item-image"
+                      src={article.article_image_path}
+                      alt="article Image"
+                    />
+                  )}
+                </td>
                 <td>{article.article_address}</td>
-                <td>{article.source_string}</td>
+                <td>
+                  {sources.map((source) => {
+                    if (source.source_id === article.source_id) {
+                      return <span key={source.source_id}>{source.full_name}</span>;
+                    }
+                    return null; // Add this line to handle the case where source_id doesn't match
+                  })}
+                </td>
                 <td>{article.article_content}</td>
-                
-                <td>{article.article_id}</td>
-
                 <td>
                   <img
                     src={delete_icon}
@@ -93,7 +118,6 @@ const Articles = () => {
                     onClick={() => handleDeleteArticle(article.article_id)}
                   />
                 </td>
-
                 <td>
                   <img
                     src={edit_icon}
@@ -105,6 +129,7 @@ const Articles = () => {
               </tr>
             ))}
           </tbody>
+
         </Table>
 
         <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>

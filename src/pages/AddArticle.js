@@ -105,14 +105,19 @@ function AddArticle() {
             <Col>
               <Form.Group as={Col} md="10" /* controlId="validationCustom01" */ className='article-form-group'>
                 <Form.Label className='label'>المصدر</Form.Label>
-                <Form.Control
-                  className='article-form-control'
-                  required
-                  type="text"
-                  value={formData.source_string}
-                  onChange={handleChange}
-                  name="source_string"
-                />
+                <Form.Select
+                    aria-label="Default select example"
+                    onChange={handleChange}
+                    value={formData.source_id}
+                    name="source_id"
+                  >
+                  <option value="">اختر المصدر</option>
+                  {sources.map((source) => (
+                    <option key={source.source_id} value={source.source_id}>
+                      {source.full_name}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
