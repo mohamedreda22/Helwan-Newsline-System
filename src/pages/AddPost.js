@@ -7,7 +7,6 @@ function AddPost() {
     <div className="container-fluid bg-gray">
       <div className="row">
         <div className="col-lg-10">
-          <h1 dir="rtl">منشور</h1>
           <AddPostForm />
         </div>
         <div className="col-lg-2">

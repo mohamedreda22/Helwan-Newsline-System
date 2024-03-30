@@ -86,13 +86,11 @@ function AddArticle() {
     <div className='add-article-page'>
       <SideBar />
       <div className='add-article-container'>
-        <p className='pp1'>المقالات</p>
-        <hr className='hr1' />
         <h1 className='header'>اضافة مقال</h1>
         <Form className='article-form' onSubmit={handleSubmit} dir='rtl'>
           <Row className="article-form-row">
             <Col>
-              <Form.Group as={Col} md="3" /* controlId="validationCustom01" */ className='article-form-group'>
+              <Form.Group as={Col} md="10" /* controlId="validationCustom01" */ className='article-form-group'>
                 <Form.Label className='label'>العنوان</Form.Label>
                 <Form.Control
                   className='article-form-control'
@@ -105,21 +103,26 @@ function AddArticle() {
               </Form.Group>
             </Col>
             <Col>
-              <Form.Group as={Col} md="3" /* controlId="validationCustom01" */ className='article-form-group'>
+              <Form.Group as={Col} md="10" /* controlId="validationCustom01" */ className='article-form-group'>
                 <Form.Label className='label'>المصدر</Form.Label>
-                <Form.Control
-                  className='article-form-control'
-                  required
-                  type="text"
-                  value={formData.source_string}
-                  onChange={handleChange}
-                  name="source_string"
-                />
+                <Form.Select
+                    aria-label="Default select example"
+                    onChange={handleChange}
+                    value={formData.source_id}
+                    name="source_id"
+                  >
+                  <option value="">اختر المصدر</option>
+                  {sources.map((source) => (
+                    <option key={source.source_id} value={source.source_id}>
+                      {source.full_name}
+                    </option>
+                  ))}
+                </Form.Select>
               </Form.Group>
             </Col>
           </Row>
           <Row>
-            <Form.Group as={Col} md="6" /* controlId="formFileMultiple" */ className="article-form-group">
+            <Form.Group as={Col} md="8" /* controlId="formFileMultiple" */ className="article-form-group">
               <Form.Label className='label'>اختر صورة</Form.Label>
               <Form.Control
                 className='article-form-control-file'
@@ -136,17 +139,21 @@ function AddArticle() {
               <Form.Control
                 className='article-form-control'
                 as="textarea"
-                rows={3}
+                rows={5}
                 required
                 value={formData.article_content}
                 onChange={handleChange}
                 name="article_content"
+                style={{ width: "350px" }} // Set the width inline
+
               />
             </Form.Group>
           </Row>
           <Button
             className="btn-submit"
-            type="submit">
+            type="submit"
+            style={{backgroundColor:"#091160",padding:"10px",width:"200px",marginRight:"90px"}}
+            >
             حفظ
           </Button>
         </Form>

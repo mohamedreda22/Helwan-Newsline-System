@@ -101,68 +101,72 @@ function AddPostForm() {
 
   return (
     <div className="add-event-page">
-      <h1 className="header" dir="rtl">
+      <h1 className="header" dir="rtl" style={{marginLeft:"60px"}}>
         إضافة منشور
       </h1>
-      <div dir="rtl" className="form-container">
+      <div dir="rtl" className="form-container6">
         <Form onSubmit={handleSubmit}>
+
           <Form.Group as={Col} md="8" /* controlId="validationCustom01" */>
-            <Form.Label className="lable">المصدر</Form.Label>
+{/*             <Form.Label className="lable">المصدر</Form.Label>
             <Form.Control
               required
               type="text"
               name="source_string"
               value={formData.source_string}
               onChange={handleChange}
-            />
+            /> */}
           </Form.Group>
+          
           <Row className="mb-3 mt-4">
-            <Form.Group as={Col} md="8" /* controlId="categorySelect" */>
-              <Form.Select
-                aria-label="Default select example"
-                onChange={handleChange}
-                value={formData.category_id}
-                name="category_id"
-              >
-                <option value="">اختر التصنيف</option>
-                {categories.map((category) => (
-                  <option
-                    key={category.category_id}
-                    value={category.category_id}
+                <Form.Group as={Col} md="6">
+                  <Form.Label className="lable"> التصنيف</Form.Label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={handleChange}
+                    value={formData.category_id}
+                    name="category_id"
                   >
-                    {category.category_name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-          </Row>
-          <Row className="mb-3 mt-4">
-            <Form.Group as={Col} md="8" /* controlId="sourceSelect" */>
-              <Form.Select
-                aria-label="Default select example"
-                onChange={handleChange}
-                value={formData.source_id}
-                name="source_id"
-              >
-                <option value="">اختر المصدر</option>
-                {sources.map((source) => (
-                  <option key={source.source_id} value={source.source_id}>
-                    {source.full_name}
-                  </option>
-                ))}
-              </Form.Select>
-            </Form.Group>
-          </Row>
+                    <option value="">اختر التصنيف</option>
+                    {categories.map((category) => (
+                      <option
+                        key={category.category_id}
+                        value={category.category_id}
+                      >
+                        {category.category_name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+  
+                <Form.Group as={Col} md="6">
+                  <Form.Label className="lable">المصدر</Form.Label>
+                  <Form.Select
+                    aria-label="Default select example"
+                    onChange={handleChange}
+                    value={formData.source_id}
+                    name="source_id"
+                  >
+                    <option value="">اختر المصدر</option>
+                    {sources.map((source) => (
+                      <option key={source.source_id} value={source.source_id}>
+                        {source.full_name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Row>
           <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
             <Form.Label className="lable">كتابة منشور</Form.Label>
             <Form.Control
               as="textarea"
-              rows={10}
+              rows={8}
               required
               name="post_content"
               value={formData.post_content}
               onChange={handleChange}
-            />
+              style={{ width: "400px" }} // Set the width inline
+              />
           </Form.Group>
           <Form.Group
             as={Col}
@@ -181,6 +185,7 @@ function AddPostForm() {
           <Button
             className="btn-submit"
             type="submit"
+            style={{backgroundColor:"#091160",padding:"10px",width:"200px",marginRight:"90px"}}
           >
             إضافة المنشور
           </Button>

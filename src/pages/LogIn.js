@@ -6,7 +6,7 @@ import useAlert from '../hooks/useAlert';
 import Simplert from 'react-simplert';
 import { useNavigate } from 'react-router-dom';
 import UserRoleContext  from '../hooks/UserRoleContext'
-
+//import { useUserRole } from '../hooks/UserRoleContext'
 
 
 function LogIn() {
@@ -19,6 +19,8 @@ function LogIn() {
     const [isLoading, setIsLoading] = useState(false);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
     const navigate = useNavigate();
+    //const { setUserRole } = useUserRole();
+
 
 
     const handleSubmit = async (e) => {
@@ -36,8 +38,8 @@ function LogIn() {
             if (response && response.status === 202 ) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 console.log('Form data submitted:', response.data);
-                console.log('Token from response:', response.data.token);
-                sessionStorage.setItem('token', response.data.token);
+                console.log('Token from response:', response.data.userRole);
+                sessionStorage.setItem('token', response.data.userRole);
                 
 
                 setFormData({
@@ -62,9 +64,14 @@ function LogIn() {
                     default:
                         break;
                 }
-    
+
+
                 // Navigate to the determined route
-                navigate(route);
+                navigate(route);       
+
+                setTimeout(function() {
+                    window.location.reload();
+                }, 1); 
                //localStorage.setItem('token', response.data.token);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
@@ -76,11 +83,10 @@ function LogIn() {
                 showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
             } else {
                 showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
-            }
-                showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
-        } finally {
+            }            
             setIsLoading(false);
-        }
+
+        } 
     };
 
     const handleChange = (e) => {
@@ -131,6 +137,7 @@ function LogIn() {
                             name="rememberMe"
                             value="rememberMe"
                             className="checkbox"
+                            //checked={formData.rememberMe}
                         />
                     </div>
                     <button type="submit" disabled={isLoading} className="btn-submit">

@@ -6,7 +6,7 @@ const Logout = ({ setIsAuthenticated }) => {
 
   // Clear authentication token and update isAuthenticated state
   const handleLogout = () => {
-    localStorage.removeItem('token'); 
+    sessionStorage.removeItem('token'); 
     setIsAuthenticated(false); 
     navigate('/login'); 
   };

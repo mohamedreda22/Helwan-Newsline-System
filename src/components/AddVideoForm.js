@@ -118,8 +118,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
     <div className="add-video-page" dir="rtl">
       <SideBar />
       <h2 className="header">اضافة فيديو</h2>
-      <div className="add-video-container">
-        <form className="form-container" onSubmit={handleSubmit}>
+        <form className="form-container5" onSubmit={handleSubmit}>
           <div className="form-row">
             <div className="form-group">
               <label className="lable" htmlFor="videoTitle">
@@ -209,7 +208,6 @@ const AddVideoForm = ({ onVideoAdded }) => {
                 onClose={hideAlertHandler}
                 customCloseBtnText={customCloseBtnText}
             />  
-      </div>
     </div>
   );
 };
