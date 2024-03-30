@@ -59,7 +59,7 @@ function LogIn() {
                         route = '/showEvents';
                         break;
                     case 'STUDENT':
-                        route = '/collages'; 
+                        route = '/landingPage'; 
                         break;
                     default:
                         break;

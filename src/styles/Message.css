@@ -1,23 +1,48 @@
-.h1{
-    color: #000;
+/* Message.css */
 
- 
-/* Text */
-font-family: Inder;
-font-size: 48px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
+/* Styles for heading */
+.h1 {
+    color: #000;
+    font-family: 'Inder', sans-serif;
+    font-size: 48px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center; /* Center align the heading */
+    margin-bottom: 20px; /* Add some space below the heading */
+    
 }
-.p1{
-    /* width: 1528px; */
-    color: #000;
 
- 
-font-family: Inder;
-font-size: 36px;
-font-style: normal;
-font-weight: 400;
-line-height: normal;
-opacity: 0.7;
+/* Styles for main paragraph */
+.p1 {
+    color: #000;
+    font-family: 'Inder', sans-serif;
+    font-size: 36px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center; /* Center align the paragraph */
+    opacity: 0.7;
+    margin-bottom: 30px; /* Add some space below the paragraph */
+}
+
+/* Styles for sub-paragraph */
+.p2 {
+    color: #000;
+    font-family: 'Arial', sans-serif;
+    font-size: 24px;
+    font-weight: 400;
+    line-height: normal;
+    text-align: center; /* Center align the sub-paragraph */
+    opacity: 0.7;
+    margin-bottom: 30px; /* Add some space below the sub-paragraph */
+}
+
+/* Container styles */
+.message-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+    max-width: 95%;
+
 }

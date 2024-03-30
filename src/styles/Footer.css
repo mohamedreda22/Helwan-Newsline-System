@@ -14,7 +14,7 @@ footer {
   margin-top: 20px;
 }
 .footer-links:hover {
-  color: #000000;
+  color: #0910f1;
 }
 .footer-links li {
   display: inline-block;
@@ -26,4 +26,8 @@ footer {
 .footer-social-icons a {
   color: #000000;
   margin-right: 10px;
+}
+.containerxxl{
+  font-family: 'Cairo', sans-serif; 
+  font-weight: bold;
 }

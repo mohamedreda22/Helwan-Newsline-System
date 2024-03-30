@@ -21,12 +21,12 @@ const Footer = () => {
             </Link>{" "}
           </li>
           <li>
-            <Link to="/" className="footer-links">
+            <Link to="/message" className="footer-links">
               عن رؤية الجامعة ورسالتها{" "}
             </Link>
           </li>
           <li>
-            <Link to="/" className="footer-links">
+            <Link to="/landingPage" className="footer-links">
               الصفحة الرئيسية
             </Link>
           </li>

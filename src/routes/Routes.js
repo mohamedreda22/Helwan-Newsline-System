@@ -18,13 +18,14 @@ import {PrivateRoutes} from './PrivateRoutes';
 import NotFound from '../pages/NotFound'
 import VideoList from '../components/videoList';
 import AddVideoForm from '../components/AddVideoForm';
-import Message from '../pages/Message'; 
 import AddArticle from "../pages/AddArticle";
 import EditArticle from "../pages/EditArticle";
 import AllArticles from "../pages/AllArticles";
 import AddSource from "../pages/AddSource";
 import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
+import LandingPage from "../pages/LandingPage";
+import Message from "../pages/Message";
 //import { useUserRole } from '../hooks/UserRoleContext';
 
 export const RouterComponent = () => {
@@ -82,12 +83,15 @@ export const RouterComponent = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
         <Route path="/updatePassword" element={<UpdatePassword/>} />
+        <Route path="/collages" element={<Collages/>} />
+        <Route path="/message" element={<Message/>} />
+        <Route path="/landingPage" element={<LandingPage/>} />
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} logout={logout} />}>
-          {userRole === 'STUDENT' && (
-              <Route path="/collages" element={<Collages/>} />
-            )}
+{/*           {userRole === 'STUDENT' && (
+              <Route path="/landingPage" element={<LandingPage/>} />
+            )} */}
             {userRole === 'ADMIN' && (
               <>
               <Route path="/showDepartments" element={<ShowDepartments/>} />

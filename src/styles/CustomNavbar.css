@@ -1,0 +1,46 @@
+.brand-info {
+    margin-left: 15px;
+    color: #333; 
+  }
+  
+  .brand-title {
+    margin: 0;
+    font-size: 1.2rem; 
+    font-weight: bold;
+  }
+  
+  .brand-subtitle {
+    margin: 0;
+    font-size: 0.9rem;
+  }
+  
+  .location-info {
+    display: flex;
+    align-items: center;
+    margin-top: 5px; 
+    margin-left: 15px
+  }
+  
+  .brand-location {
+    margin: 0;
+    font-size: 0.85rem;
+    margin-left: 5px;
+    text-decoration: none; 
+  }
+  
+  .fa-map-marker-alt {
+    color: #007bff; 
+    font-size: 1rem;
+    margin-right: 5px; 
+  }
+  .custom-nav-links .nav-link {
+    font-size: 16px; /* Adjust font size */
+    margin-right: 20px; /* Adjust spacing */
+  }
+  .nav-link {
+    font-family: 'Cairo', sans-serif; /* Apply Cairo font to Nav.Link elements */
+  }
+  .collapse7{
+    font-weight: bold;
+  }
+  
