@@ -1,6 +1,5 @@
 // Import the CSS file for styling
 import "../styles/ShowPosts.css";
-
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import { Table, Modal } from "react-bootstrap";
@@ -19,6 +18,7 @@ const ShowPosts = () => {
   const [editedPost, setEditedPost] = useState(null);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
+  const [sources, setSources] = useState([]);
 
   // Pagination hook
   const { currentPage, totalPages, goToPage, goToFirstPage, goToLastPage } =
@@ -38,8 +38,21 @@ const ShowPosts = () => {
 
   useEffect(() => {
     fetchPosts();
+    fetchSources();
   }, []);
 
+
+  const fetchSources = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/sources"
+      );
+      setSources(response.data);
+    } catch (error) {
+      console.error("Error fetching sources:", error);
+    }
+  };
+  
   const handleDeletePost = async (postId) => {
     Swal.fire({
       title: "هل أنت متأكد من حذف هذا المنشور؟",
@@ -107,8 +120,12 @@ const ShowPosts = () => {
                             alt="Post Image"
                           />
                         </td>
-                        <td>{post.post_content.slice(0, 30)}...</td>
-                        <td>{post.source_string}</td>
+                        <td>{post.post_content.slice(0, 20)}...</td>
+                {sources.map((source) => {
+                  if (source.source_id === post.source_id) {
+                    return source.full_name;
+                  }
+                })}
                         <td>
                           <img
                             src={delete_icon}
