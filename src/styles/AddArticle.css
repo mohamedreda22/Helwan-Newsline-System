@@ -1,4 +1,3 @@
-/* AddArticle.css */
 .add-article-page {
   padding: 20px;
   background-color: #f4f4f4;
@@ -11,13 +10,12 @@
 }
 
 .add-article-container {
-  background-color: #d9d9d94d;
-  padding: 35px;
-  border-radius: 10px;
-  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
-  max-width: 900px;
-  margin: 0 auto;
-  animation: addArticle 0.8s ease-in-out forwards;
+    padding: 50px;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    max-width: 500px;
+    margin: 0 auto;
+    background-color: #D9D9D94D; 
 }
 
 .article-header {

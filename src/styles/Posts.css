@@ -10,7 +10,7 @@
     margin: 50px;
   }
   
-  .container-2 {
+  .container-3 {
     width: 100%;
     margin: auto;
     height: auto;
@@ -19,3 +19,4 @@
     flex-shrink: 0;
     padding: 5px 60px;
   }
+

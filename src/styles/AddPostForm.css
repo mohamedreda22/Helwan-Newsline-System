@@ -13,7 +13,11 @@
   color: #091160;
   text-align: center;
 }
-.form-container{
-  width: 60%;
-  align-items: center;
-  }
+.form-container6 {
+  padding: 50px;
+  border-radius: 10px;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  margin: 0 auto;
+  background-color: #D9D9D94D; 
+}

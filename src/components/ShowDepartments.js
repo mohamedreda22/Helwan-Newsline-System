@@ -108,7 +108,7 @@ const ShowDepartments = () => {
       <select
         className="collagesSelector"
         onChange={handleCollegeChange}
-        value={selectedCollege}
+        value={selectedCollege || ''}
       >
         <option value="">اختر الكلية</option>
         {colleges.map((college) => (
