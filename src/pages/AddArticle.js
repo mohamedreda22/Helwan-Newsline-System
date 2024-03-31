@@ -122,8 +122,18 @@ function AddArticle() {
             </Col>
           </Row>
           <Row>
+            <Row>
             <Form.Group as={Col} md="8" /* controlId="formFileMultiple" */ className="article-form-group">
-              <Form.Label className='label'>اختر صورة</Form.Label>
+            <Form.Label className='label'> مصدر المقال</Form.Label>
+              <Form.Control
+                className='article-form-control'
+                required
+                type="text"
+                value={formData.source_string}
+                onChange={handleChange}
+                name="source_string"
+              />
+               <Form.Label className='label'>اختر صورة</Form.Label>
               <Form.Control
                 className='article-form-control-file'
                 type="file"
@@ -132,6 +142,7 @@ function AddArticle() {
                 onChange={handleFileChange}
               />
             </Form.Group>
+            </Row>
           </Row>
           <Row>
             <Form.Group as={Col} md="6" /* controlId="validationCustom01" */ className="article-form-group">
