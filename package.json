@@ -34,6 +34,7 @@
     "react-router-dom": "^6.22.3",
     "react-simplert": "^0.0.2",
     "react-slick": "^0.30.2",
+    "react-swipeable": "^7.0.1",
     "react-time-field": "^0.1.2",
     "react-time-picker": "^6.6.0",
     "react-timezone-select": "^3.2.3",

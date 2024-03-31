@@ -5,6 +5,7 @@ import "../styles/landingPage.css";
 import { Link } from "react-router-dom";
 import EventItemStudent from '../components/eventItemStudent';
 import ArticleItemStudent from "../components/articleItemStudent";
+import PostItemStudent from "../components/postItemStudent.js";
 import axios from "axios";
 
 function LandingPage() {
@@ -13,11 +14,15 @@ function LandingPage() {
   const [error, setError] = useState("");
   const [displayedEvents, setDisplayedEvents] = useState(3); // Initial number of events displayed
   const [articles, setArticles] = useState([]);
-  const [displayedArticles, setDisplayedArticles] = useState(3); // Initial number of articles displayed
+  const [displayedArticles, setDisplayedArticles] = useState(3); 
+  const [posts, setPosts] = useState([]);
+  const [displayedPosts, setDisplayedPosts] = useState(3); 
+
 
   useEffect(() => {
     fetchEvents();
     fetchArticles();
+    fetchPosts();
   }, []);
 
   const fetchEvents = async () => {
@@ -49,6 +54,19 @@ function LandingPage() {
     setDisplayedArticles(prevCount => prevCount + 3);
   };
 
+  const fetchPosts =async ()=>{
+    try {
+      const response = await axios.get("http://localhost:9090/university/posts");
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }
+  const loadMorePosts =()=>{
+    setDisplayedPosts(prevCount => prevCount + 3);
+  }
+
+
   return (
     <div className="container-fluid bg-gray">
       <div className="row">
@@ -67,33 +85,39 @@ function LandingPage() {
               {events.length > displayedEvents && (
                 <button className="load-more-button" onClick={loadMoreEvents}>عرض المزيد</button>
               )}
+              
             </div>
           </div>
           <div className="articles-section">
-            <div className="heading">المقالات</div>
+            <div className="heading">اهم المقالات</div>
             <div className="description">
               <div>يتم نشر المقالات الهامة والمفيدة للجامعة بانتظام <br></br>قم بزيارة الصفحة التالية لرؤية جميع المقالات</div>
               <Link className="links" to="/articles">رؤية جميع المقالات</Link>
             </div>
             <div>
               {articles.slice(0, displayedArticles).map(article => (
-                <ArticleItemStudent key={article.id} article={article} />
+                <ArticleItemStudent key={article.article_id} article={article} />
               ))}
               {articles.length > displayedArticles && (
                 <button className="load-more-button" onClick={loadMoreArticles}> عرض المزيد</button>
               )}
             </div>
           </div>
-{/*           <div className="contact-section">
-            <div className="heading">تواصل معنا</div>
+          <div className="posts-section">
+            <div className="heading">آخر المنشورات </div>
             <div className="description">
-              <div>للتواصل معنا يمكنك استخدام البريد الالكتروني او الهاتف <br></br> سوف نكون سعداء بالرد على استفساراتكم</div>
-              <div className="contact-details">
-                <div className="contact-email">البريد الالكتروني: helwan.info@hu.gov</div>
-                <div className="contact-phone">الهاتف:
-                  <a href="tel:+966 55 555 5555">+966 55 555 5555</a>
-                </div>
-              </div> */}
+              <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
+              <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
+            </div>
+            <div>
+              {posts.slice(0, displayedPosts).map(post => (
+                <PostItemStudent key={post.post_id} post={post} />
+              ))}
+              {posts.length > displayedPosts && (
+                <button className="load-more-button" onClick={loadMorePosts}> عرض المزيد</button>
+              )}
+            </div>
+          </div>
               <div className="send-notification-section">
                 <div className="heading">إرسال إشعار</div>
                 <div className="description">

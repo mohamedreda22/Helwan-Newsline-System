@@ -12,26 +12,39 @@
     box-sizing: border-box; /* Include padding and border in element's total width and height */
     background-color: #fff; /* Background color for the card */
     transition: transform 0.2s; /* Smooth transition for hover effect */
+    animation: fadeIn 0.5s ease; /* Animation for fading in */
+}
 
+.event-card-container:hover {
+    transform: translateY(-5px); /* Move card slightly upwards on hover */
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.2); /* Increase box shadow on hover for a subtle elevation effect */
 }
 
 .event-card-container:nth-child(3n) {
     margin-right: 0; /* Removes margin for every third card to ensure alignment */
 }
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px); /* Start animation from slightly above */
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0); /* Move to original position */
+    }
+}
+
 .event-card-item {
     width: 100%; 
     padding: 5px;
-    
-
 }
-
 
 .event-card-address {
     padding: 10px; /* Padding for the address text */
     font-size: 1.2rem; /* Adjust font size for the address */
     font-weight: bold;
 }
-
 
 .location-card-container {
     padding: 10px; 
@@ -50,12 +63,13 @@
     font-weight: bold; /* Make the day bold */
     margin-bottom: 5px; /* Add some space between the day and the month */
     text-align: center; /* Center the date */
-
 }
+
 .day {
     font-size: 2.6rem; /* Adjust font size for the month */
     color: #333; /* Color for the day */
 }
+
 .event-card-month {
     font-size: 1.3rem; /* Adjust font size for the month */
     color: #777; /* Color for the month */
@@ -73,19 +87,37 @@
     max-height: 200px; /* Set maximum height for the image */
     width: auto; /* Let the width adjust automatically to maintain aspect ratio */
     border-radius: 8px 8px 0 0; /* Rounded corners for top of the image */
+    max-width: 100%;
 }
-.event-card-content{
+
+.event-card-content {
     padding: 10px; /* Padding for the content */
-    font-weight:500;
+    font-weight: 500;
     font-size: 1rem; /* Adjust font size for the content */
     color: #333; /* Text color for the content */
 }
-.source-name{
+
+.source-name {
     font-size: 1rem; /* Adjust font size for the source name */
     color: #777; /* Text color for the source name */
     margin-top: 5px; /* Add some space between the content and the source name */
-    font-weight:600;
-
+    font-weight: 600;
 }
 
+.load-more-button1 {
+    display: block;
+    margin: 0 auto;
+    padding: 10px 20px; /* Padding for the button */
+    font-size: 1rem; /* Adjust font size for the button */
+    font-weight: bold; /* Make the button text bold */
+    color: #fff; /* Text color for the button */
+    background-color: #007bff; /* Background color for the button */
+    border: none; /* Remove border */
+    border-radius: 50px; /* Rounded corners for the button */
+    cursor: pointer; /* Change cursor to pointer on hover */
+    transition: background-color 0.2s; /* Smooth transition for hover effect */
+}
 
+.load-more-button1:hover {
+    background-color: #0056b3; /* Darker background color on hover */
+}

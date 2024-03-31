@@ -106,18 +106,6 @@ function AddPostForm() {
       </h1>
       <div dir="rtl" className="form-container6">
         <Form onSubmit={handleSubmit}>
-
-          <Form.Group as={Col} md="8" /* controlId="validationCustom01" */>
-{/*             <Form.Label className="lable">المصدر</Form.Label>
-            <Form.Control
-              required
-              type="text"
-              name="source_string"
-              value={formData.source_string}
-              onChange={handleChange}
-            /> */}
-          </Form.Group>
-          
           <Row className="mb-3 mt-4">
                 <Form.Group as={Col} md="6">
                   <Form.Label className="lable"> التصنيف</Form.Label>
@@ -154,7 +142,18 @@ function AddPostForm() {
                       </option>
                     ))}
                   </Form.Select>
+
                 </Form.Group>
+                <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
+                <Form.Label className="lable"> مصدر المنشور</Form.Label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="source_string"
+                  value={formData.source_string}
+                  onChange={handleChange}
+                />
+              </Form.Group>
               </Row>
           <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
             <Form.Label className="lable">كتابة منشور</Form.Label>
