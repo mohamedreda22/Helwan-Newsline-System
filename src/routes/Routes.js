@@ -26,6 +26,8 @@ import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
 import LandingPage from "../pages/LandingPage";
 import Message from "../pages/Message";
+import ArticlePage from '../pages/ArticlePage';
+import SeeMoreArticles from '../pages/SeeMoreAtricles';
 //import { useUserRole } from '../hooks/UserRoleContext';
 
 export const RouterComponent = () => {
@@ -86,6 +88,9 @@ export const RouterComponent = () => {
         <Route path="/collages" element={<Collages/>} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
+        <Route path="/articlepage" element={<ArticlePage/>} />
+        <Route path="/seemorearticles" element={<SeeMoreArticles/>} />
+        
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} logout={logout} />}>
