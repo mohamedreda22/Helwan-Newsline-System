@@ -14,7 +14,7 @@ const MoreArticlesForm = () => {
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, []); 
 
   const fetchArticles = async () => {
     try {

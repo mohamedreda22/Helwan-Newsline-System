@@ -84,7 +84,7 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogIn/>} />
+        {/* <Route path="/" element={<LogIn/>} /> */}
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
@@ -92,10 +92,13 @@ export const RouterComponent = () => {
         <Route path="/collages" element={<Collages/>} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
-        <Route path="/articlepage" element={<ArticlePage/>} />
-        <Route path="/seemorearticles" element={<SeeMoreArticles/>} />
+        {/* <Route path="/articlepage" element={<ArticlePage/>} /> */}
+        {/* <Route path="/seemorearticles" element={<SeeMoreArticles/>} /> */}
+        
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/allPosts" element={<PostsStdView/>} />
+        <Route exact path="/" element={ <SeeMoreArticles/>} />
+        <Route path="/article/:article_id" element={<ArticlePage/>} />
 
         
         
