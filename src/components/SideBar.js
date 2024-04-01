@@ -25,12 +25,15 @@ export default function SideBar  ()  {
                      <Nav.Link as={Link} to="/showEvents" className='active'>
                         <span className="material-icons-outlined">calendar_month</span> كل الاحداث
                     </Nav.Link>
-
                   </SubMenu>
-
-                    <Nav.Link href="#sports" className='active'>
-                        <span className="material-icons-outlined">sports_football</span> الرياضة
+                  <SubMenu label=" الرياضة" >
+                     <Nav.Link as={Link} to="/addSport" className='active'>
+                        <span className="material-icons-outlined">add</span> اضافة رياضة
+                     </Nav.Link>
+                     <Nav.Link as={Link} to="/showSports" className='active'>
+                        <span className="material-icons-outlined">sports_football</span> كل الرياضات 
                     </Nav.Link>
+                  </SubMenu>
                     <SubMenu label="المقالات">
                         <Nav.Link href="addarticle" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
@@ -47,12 +50,17 @@ export default function SideBar  ()  {
                             <span className="material-icons-outlined">play_circle</span> كل الفيديوهات
                         </Nav.Link>
                     </SubMenu>
-                    <Nav.Link href="notifications" className='active'>
+{/*                     <Nav.Link href="notifications" className='active'>
                         <span className="material-icons-outlined">add_alert</span> الاشعارات
+                    </Nav.Link> */}
+                     <SubMenu label=" اهم الاخبار" >
+                     <Nav.Link as={Link} to="/addNews" className='active'>
+                        <span className="material-icons-outlined">add</span> اضافة خبر
+                     </Nav.Link>
+                     <Nav.Link as={Link} to="/showNews" className='active'>
+                        <span className="material-icons-outlined">newspaper</span> كل الأخبار 
                     </Nav.Link>
-                    <Nav.Link href="topNews" className='active'>
-                        <span className="material-icons-outlined">newspaper</span> اهم الاخبار
-                    </Nav.Link>                    
+                  </SubMenu>               
                     <SubMenu label="منشور ">
                         <Nav.Link href="addPost" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة منشور
@@ -64,7 +72,7 @@ export default function SideBar  ()  {
                     <Nav.Link as={Link} to="/faq" className='active'>
                         <span className="material-icons-outlined">question_mark</span> الاسئلة الشائعة
                     </Nav.Link>
-                    {[...Array(2)].map((_, index) => <MenuItem key={index}></MenuItem>)}
+                    {[...Array(1)].map((_, index) => <MenuItem key={index}></MenuItem>)}
                     <Nav.Link as={Link} to="/logout" onClick={handleExit} className='active'>
                         <span className="material-icons-outlined">logout</span> تسجيل الخروج
                     </Nav.Link>
