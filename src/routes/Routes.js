@@ -84,7 +84,7 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        {/* <Route path="/" element={<LogIn/>} /> */}
+        <Route path="/" element={<LogIn/>} />
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
@@ -97,7 +97,7 @@ export const RouterComponent = () => {
         
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/allPosts" element={<PostsStdView/>} />
-        <Route exact path="/" element={ <SeeMoreArticles/>} />
+        <Route exact path="/see" element={ <SeeMoreArticles/>} />
         <Route path="/article/:article_id" element={<ArticlePage/>} />
 
         
