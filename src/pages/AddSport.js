@@ -8,6 +8,7 @@ import '../styles/AddArticle.css';
 function AddSports() {
   const [sources, setSources] = useState([]);
   const [formData, setFormData] = useState({
+    sport_address:"",
     sport_content: "",
     sport_image: "",
     sport_source_id: "",
@@ -73,6 +74,7 @@ function AddSports() {
       sport_content: "",
       sport_image: "",
       sport_source_id: "",
+      sport_address:"",
     });
   };
 
@@ -82,6 +84,16 @@ function AddSports() {
       <div className='add-article-container'>
         <h1 className='header'>اضافة رياضة</h1>
         <Form className='article-form' onSubmit={handleSubmit} dir='rtl'>
+          <Form.Group controlId="sportAddress">
+            <Form.Label className='label'>عنوان الرياضة</Form.Label>
+            <Form.Control
+              type="text"
+              name="sport_address"
+              value={formData.sport_address}
+              onChange={handleChange}
+              required
+            />
+          </Form.Group>
           <Form.Group controlId="sportContent">
             <Form.Label className='label'>محتوى الرياضة</Form.Label>
             <Form.Control 

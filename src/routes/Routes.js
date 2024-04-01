@@ -33,6 +33,7 @@ import PostsStdView from '../pages/PostsStdView';
 import AddNews from '../pages/AddNews';
 import AddSport from '../pages/AddSport';
 import Sports from '../pages/Sports';
+import News from '../pages/News';
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -137,8 +138,8 @@ export const RouterComponent = () => {
             <Route path="/addNews" element={<AddNews/>} />
             <Route path="/addSport" element={<AddSport/>} />
             <Route path="/showSports" element={<Sports/>} />
-{/*             <Route path="/showNews" element={<AddSport/>} />
- */}
+            <Route path="/showNews" element={<News/>} />
+
             
               </>
             )}

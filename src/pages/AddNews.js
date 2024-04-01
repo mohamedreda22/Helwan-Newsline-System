@@ -9,7 +9,7 @@ function AddNews() {
     
   const [sources, setSources] = useState([]);
   const [formData, setFormData] = useState({
-    sport_content: "",
+    news_content: "",
     news_image: "",
     news_source_id: "",
   });
@@ -72,7 +72,7 @@ function AddNews() {
 
   const resetForm = () => {
     setFormData({
-      sport_content: "",
+      news_content: "",
       news_image: "",
       news_source_id: "",
     });
@@ -89,8 +89,8 @@ function AddNews() {
             <Form.Control 
               as="textarea" 
               rows={4} 
-              name="sport_content" 
-              value={formData.sport_content} 
+              name="news_content" 
+              value={formData.news_content} 
               onChange={handleChange} 
               required 
             />

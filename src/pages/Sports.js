@@ -47,6 +47,7 @@ function Sports() {
       setEditedSport(sportToEdit);
     }
   }, [isEditing, sportIdToEdit, sports]);
+  
 
   const fetchSports = async () => {
     try {
@@ -81,26 +82,22 @@ function Sports() {
     setSportIdToEdit(null);
   };
 
-  const handleSave = async () => {
+  const handleSave = async (updatedSportData) => {
     try {
-      const updatedSport = {
-        sport_id: editedSport.sport_id,
-        sport_content: editedSport.sport_content,
-        sport_image_path: editedSport.sport_image_path,
-        sport_source_id: editedSport.sport_source_id,
-      };
-
-      await axios.put(`http://localhost:9090/university/sports/${editedSport.sport_id}`, updatedSport);
+      await axios.put(`http://localhost:9090/university/sports/${updatedSportData.sport_id}`, updatedSportData);
       fetchSports();
       handleCancelEdit();
+      // Update the sports state with the updated data
+      setSports(prevSports => prevSports.map(sport => sport.sport_id === updatedSportData.sport_id ? updatedSportData : sport));
     } catch (error) {
       console.error("Error updating sport:", error);
     }
   };
+  
 
   return (
     <div className={`events-page ${isEditing && sportIdToEdit && editedSport ? 'blur-background' : ''}`}>
-      <SideBar />
+              <SideBar />
       {isEditing && sportIdToEdit && editedSport ? (
         <EditSport sport={editedSport} onSave={handleSave} onCancel={handleCancelEdit} />
       ) : (

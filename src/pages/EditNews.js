@@ -4,47 +4,39 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../styles/EditEvent.css";
 import Simplert from 'react-simplert'
 
-export default function EditSport({ sport, onSave, onCancel }) {
+export default function EditNews({ news, onSave, onCancel }) {
     const [formData, setFormData] = useState({
-        sport_address: sport?.sport_address || "",
-        sport_content: sport?.sport_content || "",        
-        sport_image: sport?.sport_image || "",
-        sport_source_id: sport?.sport_source_id || "",
+        news_content: news?.news_content || "",
+        news_image: news?.news_image || "",
+        news_source_id: news?.news_source_id || "",
     });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [sources, setSources] = useState([]);
 
-    
-
-
     useEffect(()=>{
         setFormData({
             ...formData,
-            sport_address: sport?.sport_address || "",
-            sport_content: sport?.sport_content || "",
-            sport_source_id: sport?.sport_source_id || "",
+            news_content: news?.news_content || "",
+            news_source_id: news?.news_source_id || "",
         })
-    },[sport])
+    },[news])
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.put(`http://localhost:9090/university/sports/${sport.sport_id}`, formData);
+            const response = await axios.put(`http://localhost:9090/university/news/${news.news_id}`, formData);
             
             if (response &&(response.status === 200 || response.status ===202)) {
                 setShowSuccessAlert(true);
                 onSave(formData);
-                setTimeout(() => {
-                    window.location.reload();
-                  }, 1000);
             } else {
                 setShowErrorAlert(true);
             }
         } catch (error) {
-            console.error('Error updating sport:', error);
+            console.error('Error updating news:', error);
             setShowErrorAlert(true);
         }
     };
@@ -78,7 +70,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
             reader.onloadend = () => {
                 setFormData({
                     ...formData,
-                    sport_image: reader.result,
+                    news_image: reader.result,
                 })
             };
             reader.readAsDataURL(file);
@@ -88,41 +80,30 @@ export default function EditSport({ sport, onSave, onCancel }) {
 
     return (
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الرياضة</h2>
+            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الأخبار</h2>
             <form onSubmit={handleSubmit} >
                 <div className="form-group">
-                    <label className="lable" htmlFor="sport_address">عنوان الرياضة</label>
-                    <input
-                        id="sport_address"
-                        name="sport_address"
-                        value={formData.sport_address}
-                        onChange={handleChange}
-                        className="form-control"
-                        required
-                    />
-                </div>
-                <div className="form-group">
-                    <label className="lable" htmlFor="sport_content">محتوى الرياضة</label>
+                    <label className="lable" htmlFor="news_content">محتوى الخبر</label>
                     <textarea
-                        id="sport_content"
-                        name="sport_content"
-                        value={formData.sport_content}
+                        id="news_content"
+                        name="news_content"
+                        value={formData.news_content}
                         onChange={handleChange}
                         className="form-control"
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="sport_source_id">مصدر الرياضة</label>
+                    <label className="lable" htmlFor="news_source_id">مصدر الخبر</label>
                     <select
-                        id="sport_source_id"
-                        name="sport_source_id"
-                        value={formData.sport_source_id}
+                        id="news_source_id"
+                        name="news_source_id"
+                        value={formData.news_source_id}
                         onChange={handleChange}
                         className="form-control"
                         required
                     >
-                        <option value="">اختر مصدر الرياضة</option>
+                        <option value="">اختر مصدر الخبر</option>
                         {sources.map(source => (
                             <option key={source.source_id} value={source.source_id}>
                                 {source.full_name}
@@ -131,13 +112,13 @@ export default function EditSport({ sport, onSave, onCancel }) {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="sport_image">تعديل الصورة</label>
+                    <label className="lable" htmlFor="news_image">تعديل الصورة</label>
                     <br/>
                     <input 
                         className="form-control"
                         type="file" 
-                        id="sport_image" 
-                        name="sport_image"
+                        id="news_image" 
+                        name="news_image"
                         onChange={handleFileChange}
                     /> 
                 </div>
