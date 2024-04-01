@@ -6,48 +6,45 @@ import axios from "axios";
 const ArticleByDetails = () => {
     const { article_id } = useParams();
 
-    const [articles, setArticles] = useState([]);
+    const [article, setArticle] = useState(null);
 
     useEffect(() => {
-      fetchArticles();
-    }, []);
+      fetchArticle();
+    }, [article_id]);
   
-    const fetchArticles = async () => {
+    const fetchArticle = async () => {
       try {
-        const response = await axios.get('http://localhost:9090/university/articles');
-        setArticles(response.data);
+        const response = await axios.get(`http://localhost:9090/university/articles/${article_id}`);
+        setArticle(response.data);
       } catch (error) {
-        console.error('Error fetching articles:', error);
+        console.error('Error fetching article:', error);
       }
     };
+
+    if (!article) {
+        return <div>Loading...</div>;   
+    }
+
     return ( 
         <div>
-             <h2>مقال #{article_id}</h2>
-      {/* أضف أي معلومات أخرى تريدها لعرضها عند فتح المقال */}
-      {articles.map((article) => (
-    
-      <div>
-        
-          <img 
-            src={article.article_image_path} 
-            alt={article.article_address}
-            style={{
-              filter: "blur(2px)",
-              opacity: "0.7",
-              filter: "brightness(70%)",
-              width: "100%",
-              height:"300px"
-            }}
-          /> 
-        
-        <div>
-          <p>{article.article_address}</p> 
-          <p>{article.article_content}</p>
-           
-        </div>
-      </div>
-   
-  ))}
+             <h2 style={{textAlign:"rigth"}}>مقال #{article_id}</h2>
+             <div>
+                <img 
+                    src={article.article_image_path} 
+                    alt={article.article_address}
+                    style={{
+                         
+                        width: "100%",
+                        height:"400px"
+                    }}
+                /> 
+                <div>
+                    
+                    <p  style={{textAlign:"center"}}> {article.article_address}</p> 
+                   <p>تم النشر بواسطه:{article.source_string}</p> 
+                    <p style={{textAlign:"center"}}>{article.article_content}</p>    
+                </div>
+            </div>
         </div>
      );
 }
