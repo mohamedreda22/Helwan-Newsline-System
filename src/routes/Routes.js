@@ -30,6 +30,8 @@ import ArticlePage from '../pages/ArticlePage';
 import SeeMoreArticles from '../pages/SeeMoreAtricles';
 import ImportantEvents from '../pages/ImportantEvents';
 import PostsStdView from '../pages/PostsStdView';
+import AddNews from '../pages/AddNews';
+import AddSport from '../pages/AddSport';
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -131,6 +133,9 @@ export const RouterComponent = () => {
             <Route path="/articles"    element={<AllArticles/>} />
             <Route path="/showPosts" element={<Posts/>} />
             <Route path="/addpost" element={<AddPost/>} />
+            <Route path="/addNews" element={<AddNews/>} />
+            <Route path="/addSport" element={<AddSport/>} />
+            
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
