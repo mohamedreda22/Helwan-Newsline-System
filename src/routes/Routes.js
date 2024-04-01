@@ -28,6 +28,10 @@ import LandingPage from "../pages/LandingPage";
 import Message from "../pages/Message";
 import ArticlePage from '../pages/ArticlePage';
 import SeeMoreArticles from '../pages/SeeMoreAtricles';
+import ImportantEvents from '../pages/ImportantEvents';
+import PostsStdView from '../pages/PostsStdView';
+
+
 //import { useUserRole } from '../hooks/UserRoleContext';
 
 export const RouterComponent = () => {
@@ -90,6 +94,10 @@ export const RouterComponent = () => {
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/articlepage" element={<ArticlePage/>} />
         <Route path="/seemorearticles" element={<SeeMoreArticles/>} />
+        <Route path="/importantEvents" element={<ImportantEvents/>} />
+        <Route path="/allPosts" element={<PostsStdView/>} />
+
+        
         
 
         {isAuthenticated ? (
