@@ -32,6 +32,7 @@ import ImportantEvents from '../pages/ImportantEvents';
 import PostsStdView from '../pages/PostsStdView';
 import AddNews from '../pages/AddNews';
 import AddSport from '../pages/AddSport';
+import Sports from '../pages/Sports';
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -135,6 +136,9 @@ export const RouterComponent = () => {
             <Route path="/addpost" element={<AddPost/>} />
             <Route path="/addNews" element={<AddNews/>} />
             <Route path="/addSport" element={<AddSport/>} />
+            <Route path="/showSports" element={<Sports/>} />
+{/*             <Route path="/showNews" element={<AddSport/>} />
+ */}
             
               </>
             )}
