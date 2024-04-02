@@ -90,7 +90,7 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LogIn/>} />
+        <Route path="/" element={<LandingPage/>} />
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
