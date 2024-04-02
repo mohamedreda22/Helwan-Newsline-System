@@ -67,7 +67,7 @@
 
 .day {
     font-size: 2.6rem; /* Adjust font size for the month */
-    color: #333; /* Color for the day */
+    color: #d61c1c; /* Color for the day */
 }
 
 .event-card-month {
@@ -121,3 +121,22 @@
 .load-more-button1:hover {
     background-color: #0056b3; /* Darker background color on hover */
 }
+
+
+.event-card-date1 {
+    font-size: 15px; /* Adjust font size as needed */
+    font-weight: bold; /* Make the date bold */
+    margin-bottom: 10px; /* Add some spacing below the date */
+    text-align: left;
+    padding-left: 10px;
+  }
+  
+  .day1 {
+    color: #0f9d3e; /* Set color for the day */
+    margin-right: 5px; /* Add some spacing between day and month */
+  }
+  
+  .event-card-month1 {
+    color: #4b0082; /* Set color for the month */
+  }
+  

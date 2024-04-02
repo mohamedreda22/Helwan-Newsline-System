@@ -23,7 +23,9 @@ function SportItem({ sport, onDelete, onEdit }) {
 
     return (
         <tr> 
+            
             <td >
+                
                 <div className="event-item-container" dir='rtl'>
                     <img src={sport.sport_image} className='event-item-image' alt='image_test' style={{height:"100px",width:"100px",maxWidth:"15%"}}/>                    
                     <div className="event-item-address" >{sport.sport_address}</div>
