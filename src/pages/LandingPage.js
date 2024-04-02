@@ -7,7 +7,8 @@ import EventItemStudent from '../components/eventItemStudent';
 import ArticleItemStudent from "../components/articleItemStudent";
 import PostItemStudent from "../components/postItemStudent";
 import SportItemStudent from "../components/sportItemStudent";
-import NewsItemStudent from "../components/newsItemStudent"; // Import NewsItemStudent component
+import NewsItemStudent from "../components/newsItemStudent"; 
+
 import axios from "axios";
 
 function LandingPage() {
@@ -24,12 +25,14 @@ function LandingPage() {
   const [news, setNews] = useState([]);
   const [displayedNews, setDisplayedNews] = useState(3);
 
+
+
   useEffect(() => {
     fetchEvents();
     fetchArticles();
     fetchPosts();
     fetchSports();
-    fetchNews();    
+    fetchNews();  
   }, []);
 
   const fetchEvents = async () => {

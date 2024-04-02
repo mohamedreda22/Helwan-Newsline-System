@@ -34,6 +34,8 @@ import AddNews from '../pages/AddNews';
 import AddSport from '../pages/AddSport';
 import Sports from '../pages/Sports';
 import News from '../pages/News';
+import StudentVideos from "../pages/VideosForStudents";
+import VideoDetails from "../components/videoDetails";
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -96,6 +98,11 @@ export const RouterComponent = () => {
         <Route path="/collages" element={<Collages/>} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
+        <Route path="/videos" element={<StudentVideos/>} />
+        <Route path="/videos/:id" element={<VideoDetails />} />
+
+
+
         {/* <Route path="/articlepage" element={<ArticlePage/>} /> */}
         {/* <Route path="/seemorearticles" element={<SeeMoreArticles/>} /> */}
         
@@ -140,7 +147,6 @@ export const RouterComponent = () => {
             <Route path="/showSports" element={<Sports/>} />
             <Route path="/showNews" element={<News/>} />
 
-            
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
