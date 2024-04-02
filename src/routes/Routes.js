@@ -20,7 +20,7 @@ import VideoList from '../components/videoList';
 import AddVideoForm from '../components/AddVideoForm';
 import AddArticle from "../pages/AddArticle";
 import EditArticle from "../pages/EditArticle";
-import AllArticles from "../pages/AllArticles";
+import Articles from "../components/Articles";
 import AddSource from "../pages/AddSource";
 import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
@@ -139,7 +139,7 @@ export const RouterComponent = () => {
             <Route path="/message"      element={<Message/>} />
             <Route path="/addarticle"  element={<AddArticle/>} />
             <Route path="/editarticle"  element={<EditArticle/>} />
-            <Route path="/articles"    element={<AllArticles/>} />
+            <Route path="/articles"    element={<Articles/>} />
             <Route path="/showPosts" element={<Posts/>} />
             <Route path="/addpost" element={<AddPost/>} />
             <Route path="/addNews" element={<AddNews/>} />

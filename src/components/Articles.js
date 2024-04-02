@@ -1,162 +1,143 @@
-import axios from "axios";
 import React, { useState, useEffect } from "react";
-import edit_icon from "../assets/icons/edit.svg";
-import delete_icon from "../assets/icons/delete.svg";
-import "../styles/Articles.css";
-import Simplert from "react-simplert";
-import { Table, Modal } from "react-bootstrap";
-import EditArticle from "../pages/EditArticle";
+import axios from "axios";
+import ArticleItem from "./ArticleItem";
+import EditArticle from "./EditArticle";
+import "../styles/Events.css"; 
+import usePagination from '../hooks/usePagination';
+import arrow_left from '../assets/icons/arrow_circle_left.svg';
+import arrow_right from '../assets/icons/arrow_circle_right.svg';
+import SideBar from "../components/SideBar";
 
-const Articles = () => {
+function Articles() {
   const [articles, setArticles] = useState([]);
-  const [showEditModal, setShowEditModal] = useState(false); 
-  const [editArticle, setEditArticle] = useState(null);  
-  const [errorAlert, setErrorAlert] = useState(false); 
-  const [sources, setSources] = useState([]); 
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [isEditing, setIsEditing] = useState(false);
+  const [articleIdToEdit, setArticleIdToEdit] = useState(null);
+  const [editedArticle, setEditedArticle] = useState(null);
+  const [totalArticles, setTotalArticles] = useState(0);
 
-  const fetchArticles = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9090/university/articles"
-      );
-      setArticles(response.data);
-    } catch (error) {
-      console.error("Error fetching articles:", error);
-      setErrorAlert(true); // Set error alert to true if fetching fails
-    }
+  const articlesPerPage = 9;
+
+  // Pagination hook
+  const {
+    currentPage,
+    totalPages,
+    goToPage,
+    goToFirstPage,
+    goToLastPage,
+  } = usePagination(totalArticles, articlesPerPage);
+
+  const startIndex = (currentPage - 1) * articlesPerPage;
+  const endIndex = startIndex + articlesPerPage - 1;
+
+  const renderArticles = () => {
+    return articles.slice(startIndex, endIndex + 1).map((article) => (
+      <ArticleItem key={article.article_id} article={article} onDelete={handleDeleteArticle} onEdit={handleEditArticle} />
+    ));
   };
 
   useEffect(() => {
     fetchArticles();
-    fetchSources();
   }, []);
+
+  useEffect(() => {
+    if (isEditing && articleIdToEdit) {
+      const articleToEdit = articles.find((article) => article.article_id === articleIdToEdit);
+      setEditedArticle(articleToEdit);
+    }
+  }, [isEditing, articleIdToEdit, articles]);
+  
+
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/articles");
+      setTotalArticles(response.data.length);
+      setArticles(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+      setError("An error occurred while fetching articles.");
+      setIsLoading(false);
+    }
+  };
 
   const handleDeleteArticle = async (articleId) => {
     try {
-      // Optimistically remove the article from the UI
-      setArticles(articles.filter((article) => article.article_id !== articleId));
-
-      const response = await axios.delete(
-        `http://localhost:9090/university/articles/${articleId}`
-      );
-
-      if (response && (response.status === 202 || response.status === 200)) {
-        setShowEditModal(false); // Close modal after successful deletion
-      } else {
-        throw new Error("An error occurred while deleting the article.");
-      }
+      await axios.delete(`http://localhost:9090/university/articles/${articleId}`);
+      fetchArticles();
     } catch (error) {
       console.error("Error deleting article:", error);
-      setErrorAlert(true); // Set error alert to true if deletion fails
-      fetchArticles(); // Restore articles if deletion fails
+      setError("An error occurred while deleting the article.");
     }
   };
 
   const handleEditArticle = (articleId) => {
-    const articleToEdit = articles.find((article) => article.article_id === articleId);
-    setEditArticle(articleToEdit);
-    setShowEditModal(true);
+    setIsEditing(true);
+    setArticleIdToEdit(articleId);
   };
 
-  const handleCloseEditModal = () => {
-    setShowEditModal(false);
-    setEditArticle(null);
+  const handleCancelEdit = () => {
+    setIsEditing(false);
+    setArticleIdToEdit(null);
   };
 
-  const fetchSources = async () => {
+  const handleSave = async (updatedArticleData) => {
     try {
-      const response = await axios.get(
-        "http://localhost:9090/university/sources"
-      );
-      setSources(response.data);
+      await axios.put(`http://localhost:9090/university/articles/${updatedArticleData.article_id}`, updatedArticleData);
+      fetchArticles();
+      handleCancelEdit();
+      // Update the articles state with the updated data
+      setArticles(prevArticles => prevArticles.map(article => article.article_id === updatedArticleData.article_id ? updatedArticleData : article));
     } catch (error) {
-      console.error("Error fetching sources:", error);
+      console.error("Error updating article:", error);
     }
   };
+
   return (
-    <>
-      <div className="mt-2">
-        <div className="total-events">عدد المقالات : <span>{articles.length}</span></div>      
-        <Table responsive hover dir="rtl">
-        <thead>
-          <tr>
-            <th>الصورة</th>
-            <th>العنوان</th>
-            <th>المصدر</th>
-            <th>المحتوى</th>
-            <th>حذف</th>
-            <th>تعديل</th>
-          </tr>
-        </thead>
-        <tbody>
-            {articles.map((article) => (
-              <tr key={article.article_id}>
-                <td>
-                  {article.article_image_path && (
-                    <img
-                      className="post-item-image"
-                      src={article.article_image_path}
-                      alt="article Image"
-                    />
-                  )}
-                </td>
-                <td>{article.article_address}</td>
-                <td>
-                  {sources.map((source) => {
-                    if (source.source_id === article.source_id) {
-                      return <span key={source.source_id}>{source.full_name}</span>;
-                    }
-                    return null; // Add this line to handle the case where source_id doesn't match
-                  })}
-                </td>
-                <td>{article.article_content}</td>
-                <td>
-                  <img
-                    src={delete_icon}
-                    alt="Delete article"
-                    className="icon"
-                    onClick={() => handleDeleteArticle(article.article_id)}
-                  />
-                </td>
-                <td>
-                  <img
-                    src={edit_icon}
-                    alt="Edit article"
-                    className="icon"
-                    onClick={() => handleEditArticle(article.article_id)}
-                  />
-                </td>
-              </tr>
-            ))}
-          </tbody>
+    <div className={`events-page ${isEditing && articleIdToEdit && editedArticle ? 'blur-background' : ''}`}>
+      <SideBar />
+      {isEditing && articleIdToEdit && editedArticle ? (
+        <EditArticle article={editedArticle} onSave={handleSave} onCancel={handleCancelEdit} />
+      ) : (
+        <>
+          <h2>جميع المقالات</h2>
+          {isLoading && <p className="loading-text">جاري تحميل المقالات...</p>}
+          {error && <p>{error}</p>}
 
-        </Table>
+          <div className="total-events">
+            عدد المقالات : <span>{articles.length}</span>
+          </div>
+          <div className="events-container">
+            <table id="events-table" className="events-table">
+              <tbody>
+                {renderArticles()}
+              </tbody>
+            </table>
 
-        <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>
-          <Modal.Header closeButton>
-            <div className="d-flex justify-content-between align-items-center w-100">
-              <Modal.Title>تعديل المقال</Modal.Title>
-            </div>
-          </Modal.Header>
-          <Modal.Body>
-            {editArticle && (
-              <EditArticle articleId={editArticle.article_id} onClose={handleCloseEditModal} />
+            {totalArticles > articlesPerPage && (
+              <div className="pagination">
+                <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
+                <div className="page-numbers">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <span
+                      key={index + 1}
+                      className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                      onClick={() => goToPage(index + 1)}
+                      disabled={currentPage === index + 1}
+                    >
+                      {index + 1}
+                    </span>
+                  ))}
+                </div>
+                <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
+              </div>
             )}
-          </Modal.Body>
-        </Modal>
-
-        {/* Error Simplert */}
-        <Simplert
-          showSimplert={errorAlert}
-          type="error"
-          title="Error"
-          message="An error occurred while fetching or deleting articles."
-          onClose={() => setErrorAlert(false)}
-          customCloseBtnText="Close"
-        />
-      </div>
-    </>
+          </div>
+        </>
+      )}
+    </div>
   );
-};
+}
 
 export default Articles;

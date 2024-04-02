@@ -105,11 +105,14 @@
   .location-container {
     display: flex;
     align-items: center;
-    
+        padding: 10px;
+
   }
   .location-container span{
     font-size: 14px;
     white-space: nowrap;
+    padding: 10px;
+
   }
   
   /* Add blinking animation to empty event item description */
@@ -122,5 +125,11 @@
   /* Apply blinking animation to empty event item description */
   .event-item-description:empty {
     animation: blink 1.5s infinite;
+  }
+  .event-source-content{
+    display: inline-flex;
+    align-items: center;
+    padding: 10px;
+    text-align-last: right;
   }
   
