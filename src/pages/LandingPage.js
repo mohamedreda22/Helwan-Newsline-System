@@ -160,6 +160,7 @@ function LandingPage() {
           </div>
           <div className="posts-section">
             <div className="heading">آخر المنشورات </div>
+            
             <div className="description">
               <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
               <Link className="links" to="/posts">رؤية جميع المنشورات</Link>

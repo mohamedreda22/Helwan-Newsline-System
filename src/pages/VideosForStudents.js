@@ -1,15 +1,19 @@
-import VideoItemStudent from '../components/VideoItemStudent'
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
-import { useState, useEffect } from 'react';
+import Navbar from '../layouts/Navbar';
+import VideoItemStudent from '../components/VideoItemStudent';
+import Footer from '../layouts/Footer';
 
 const StudentVideos = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [displayedVideos, setDisplayedVideos] = useState(3); // Initial number of videos displayed
+
     useEffect(() => {
         fetchVideos();
     }, []);
+
     const fetchVideos = async () => {
         try {
             const response = await axios.get("http://localhost:9090/university/videos");
@@ -21,25 +25,40 @@ const StudentVideos = () => {
             setIsLoading(false);
         }
     };
+
     const loadMoreVideos = () => {
-        setDisplayedVideos(prevCount => prevCount + 3);
+        setDisplayedVideos(prevCount => prevCount + 2);
     };
 
-    
     return (
         <div>
-            <h1>Student Videos</h1>
+            <Navbar />
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <div >
-                {videos.slice(0, displayedVideos).map((video) => (
-                    <VideoItemStudent key={video.video_id} video={video} />
-                ))}
+            <div>
+                <div>
+                    {videos.slice(0, 2).map(video => (
+                        <VideoItemStudent key={video.video_id} video={video} />
+                    ))}
+                </div>
             </div>
-            {videos.length > displayedVideos && (
-                <button onClick={loadMoreVideos}>Load More</button>
-            )}
+            <div className="important-videos-section" >
+                <div className="heading">أهم الفيديوهات</div>
+                <div className="description">
+                    <div>تقوم الجامعة بنشر الفيديوهات الهامة والمفيدة للجميع <br />تابعنا للحصول على كل جديد</div>
+                </div>
+            </div>
+            <hr />
+            <div>
+                <div className='flex-container'>
+                    {videos.slice(2).map(video => (
+                        <VideoItemStudent key={video.video_id} video={video} />
+                    ))}
+                </div>
+            </div>
+            <Footer/>
         </div>
     );
 }
+
 export default StudentVideos;

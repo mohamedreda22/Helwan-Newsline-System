@@ -139,4 +139,10 @@
   .event-card-month1 {
     color: #4b0082; /* Set color for the month */
   }
-  
+  .flex-container{
+    display: inline-flex;
+    flex-wrap:unset;
+     width: 60%;
+    height: 50%;
+  }
+ 
