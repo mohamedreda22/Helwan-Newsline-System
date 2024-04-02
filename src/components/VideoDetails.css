@@ -1,0 +1,32 @@
+/* styles.css */
+.video-details-container {
+    margin: 20px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+  }
+  
+  .video-info {
+    margin-bottom: 20px;
+  }
+  
+  .video-title {
+    font-size: 30px;
+    font-weight: bold;
+    text-align: right;
+    
+  }
+  
+  .video-description {
+    font-size: 20px;    
+    text-align: right;
+    padding-right: 10px;
+
+  }
+  
+  .video-player {
+    width: 100%;
+  }
+
+  

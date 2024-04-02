@@ -1,0 +1,173 @@
+import React, { useState, useEffect } from "react";
+import Navbar from '../layouts/Navbar';
+import Footer from '../layouts/Footer';
+import "../styles/landingPage.css";
+import { Link } from "react-router-dom";
+import EventItemStudent from '../components/eventItemStudent';
+import ArticleItemStudent from "../components/articleItemStudent";
+import PostItemStudent from "../components/postItemStudent.js";
+import SportItemStudent from "../components/sportItemStudent.js"
+import axios from "axios";
+
+function LandingPage() {
+  const [events, setEvents] = useState([]);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState("");
+  const [displayedEvents, setDisplayedEvents] = useState(3); // Initial number of events displayed
+  const [articles, setArticles] = useState([]);
+  const [displayedArticles, setDisplayedArticles] = useState(3); 
+  const [posts, setPosts] = useState([]);
+  const [displayedPosts, setDisplayedPosts] = useState(3); 
+  const [sports, setSports] = useState([]);
+  const [displayedSports, setDisplayedSports] = useState(3);
+  const [filterOption, setFilterOption] = useState("all"); // State for tracking selected filter option
+
+  useEffect(() => {
+    fetchEvents();
+    fetchArticles();
+    fetchPosts();
+    fetchSports();
+  }, []);
+
+  const fetchEvents = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/events");
+      setEvents(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching events:", error);
+      setError("An error occurred while fetching events.");
+      setIsLoading(false);
+    }
+  };
+
+  const loadMoreEvents = () => {
+    setDisplayedEvents(prevCount => prevCount + 3);
+  };
+
+  const fetchArticles = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/articles");
+      setArticles(response.data);
+    } catch (error) {
+      console.error("Error fetching articles:", error);
+    }
+  };
+
+  const loadMoreArticles = () => {
+    setDisplayedArticles(prevCount => prevCount + 3);
+  };
+
+  const fetchPosts =async ()=>{
+    try {
+      const response = await axios.get("http://localhost:9090/university/posts");
+      setPosts(response.data);
+    } catch (error) {
+      console.error("Error fetching posts:", error);
+    }
+  }
+  const loadMorePosts =()=>{
+    setDisplayedPosts(prevCount => prevCount + 3);
+  }
+
+  const fetchSports = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/sports");
+      setSports(response.data);
+      setIsLoading(false);
+    } catch (error) {
+      console.error("Error fetching sports:", error);
+      setError("An error occurred while fetching sports.");
+      setIsLoading(false);
+    }
+  };
+
+  const loadMoreSports = () => {
+    setDisplayedSports(prevCount => prevCount + 3);
+  };
+
+  // Function to handle change in filter selection
+  const handleFilterChange = (e) => {
+    setFilterOption(e.target.value);
+  };
+
+  // Function to filter content based on selected option
+  const filterContent = () => {
+    switch (filterOption) {
+      case "events":
+        return (
+          <div>
+            {events.slice(0, displayedEvents).map(event => (
+              <EventItemStudent key={event.event_id} event={event} />
+            ))}
+            {events.length > displayedEvents && (
+              <button className="load-more-button" onClick={loadMoreEvents}>عرض المزيد</button>
+            )}
+          </div>
+        );
+      case "articles":
+        return (
+          <div>
+            {articles.slice(0, displayedArticles).map(article => (
+              <ArticleItemStudent key={article.article_id} article={article} />
+            ))}
+            {articles.length > displayedArticles && (
+              <button className="load-more-button" onClick={loadMoreArticles}> عرض المزيد</button>
+            )}
+          </div>
+        );
+      case "posts":
+        return (
+          <div>
+            {posts.slice(0, displayedPosts).map(post => (
+              <PostItemStudent key={post.post_id} post={post} />
+            ))}
+            {posts.length > displayedPosts && (
+              <button className="load-more-button" onClick={loadMorePosts}> عرض المزيد</button>
+            )}
+          </div>
+        );
+      case "sports":
+        return (
+          <div>
+            {sports.slice(0, displayedSports).map(sport => (
+              <SportItemStudent key={sport.sport_id} sport={sport} />
+            ))}
+            {sports.length > displayedSports && (
+              <button className="load-more-button" onClick={loadMoreSports}> عرض المزيد</button>
+            )}
+          </div>
+        );
+      default:
+        return null;
+    }
+  };
+
+  return (
+    <div className="container-fluid bg-gray">
+      <div className="row">
+        <Navbar />
+        <div className="page-section">
+          <div className="news-filters d-flex justify-content-between align-items-center mb-4">
+            <div className="news-filter">
+              <label htmlFor="news-filter">Filter by:</label>
+              {/* Add onChange event listener to handle filter selection */}
+              <select id="news-filter" onChange={handleFilterChange} value={filterOption}>
+                <option value="all">All</option>
+                <option value="events">Events</option>
+                <option value="articles">Articles</option>
+                <option value="posts">Posts</option>
+                <option value="sports">Sports</option>
+              </select>
+            </div>
+          </div>
+          {/* Display filtered content based on selected option */}
+          {filterContent()}
+        </div>
+        <Footer />
+      </div>
+    </div>
+  );
+}
+
+export default LandingPage;
