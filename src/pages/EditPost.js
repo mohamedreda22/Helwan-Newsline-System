@@ -19,19 +19,31 @@ export default function EditPost({ post, onSave, onCancel }) {
     useEffect(() => {
         setFormData({
             post_content: post?.post_content || "",
-            post_image_path: post?.post_image_path || "",
             category_id: post?.category_id || "",
             source_id: post?.source_id || "",
-            source_string: post?.source_string || ""
+            source_string: post?.source_string || "",
+            post_image_path: post?.post_image_path || "",
         });
     }, [post]);
+
+    useEffect(() => {
+        fetchSources();
+    }, []);
+
+    const fetchSources = async () => {
+        try {
+            const response = await axios.get('http://localhost:9090/university/sources');
+            setSources(response.data);
+        } catch (error) {
+            console.error('Error fetching sources:', error);
+        }
+    };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
 
         try {
-            const response = await axios.post("http://localhost:9090/university/posts", formData);
-            
+            const response = await axios.put(`http://localhost:9090/university/posts/${post.post_id}`, formData);
             if (response && (response.status === 200 || response.status === 201 || response.status === 202)) {
                 setShowSuccessAlert(true);
                 onSave(response.data);
@@ -55,19 +67,6 @@ export default function EditPost({ post, onSave, onCancel }) {
         });
     };
 
-    useEffect(() => {
-        fetchSources();
-    }, []);
-
-    const fetchSources = async () => {
-        try {
-            const response = await axios.get('http://localhost:9090/university/sources');
-            setSources(response.data);
-        } catch (error) {
-            console.error('Error fetching sources:', error);
-        }
-    };
-
     const handleFileChange = (event) => {
         const file = event.target.files[0];
         const reader = new FileReader();
@@ -85,9 +84,9 @@ export default function EditPost({ post, onSave, onCancel }) {
 
     return (
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>إنشاء منشور جديد</h2>
+            <h2 className="header" style={{paddingRight:"25%"}}>تعديل المنشور </h2>
             <form onSubmit={handleSubmit} >
-                <div className="form-group">
+            <div className="form-group">
                     <label className="lable" htmlFor="post_content">محتوى المنشور</label>
                     <textarea
                         id="post_content"
@@ -97,20 +96,20 @@ export default function EditPost({ post, onSave, onCancel }) {
                         className="form-control"
                         required
                     />
-                </div>
+                </div>                
                 <div className="form-group">
-                    <label className="lable" htmlFor="category_id">تصنيف المنشور</label>
-                    <input
-                        id="category_id"
-                        name="category_id"
-                        value={formData.category_id}
+                    <label className="lable" htmlFor="source_string">مصدر المنشور</label>
+                    <textarea
+                        id="source_string"
+                        name="source_string"
+                        value={formData.source_string}
                         onChange={handleChange}
                         className="form-control"
                         required
                     />
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="source_id">مصدر المنشور</label>
+                    <label className="lable" htmlFor="source_id">المصدر </label>
                     <select
                         id="source_id"
                         name="source_id"
@@ -128,7 +127,7 @@ export default function EditPost({ post, onSave, onCancel }) {
                     </select>
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="post_image_path">صورة المنشور</label>
+                    <label className="lable" htmlFor="post_image_path">تعديل صورة المنشور</label>
                     <br/>
                     <input 
                         className="form-control"
@@ -141,7 +140,7 @@ export default function EditPost({ post, onSave, onCancel }) {
                 {/* Submit and cancel buttons */}
                 <div className="btn-container1">
                     <button type="submit" className="btn-submit" style={{width:"30%"}}>
-                        إنشاء المنشور
+                        حفظ التغييرات
                     </button>
                     <button type="button" className="btn-submit" onClick={onCancel} style={{width:"30%"}}>
                         إلغاء
