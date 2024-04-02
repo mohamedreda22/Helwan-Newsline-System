@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import "../styles/PostsStdView.css";
-import { FaArrowRight } from 'react-icons/fa';
+import comment from "../assets/icons/comment-regular.svg";
+import like from "../assets/icons/like.svg";
+import date from "../assets/icons/time.svg";
+import { FaArrowRight } from "react-icons/fa"; // Import FaArrowRight component
 
 const PostsStdView = () => {
   const [posts, setPosts] = useState([]);
@@ -26,54 +30,87 @@ const PostsStdView = () => {
   }, []);
 
   return (
-    <div className="container-fluid bg-gray">
-      <div className="row">
-        <Navbar />
-        {posts.map((post) => (
-          <div className="container mt-5" key={post.post_id}>
-            <div className="row">
-              <div className="col-12">
-                <article className="blog-card">
-                  <div className="blog-card__background">
-                    <div className="card__background--wrapper">
+    <div>
+      <Navbar />
+      <div className="container">
+        <div className="row">
+          {/* Mapping through posts */}
+          {posts.map((post) => (
+            <div className="col-12" key={post.post_id}>
+              <article className="card mb-4">
+                <div className="card-img">
+                  <img
+                    src={post.post_image_path}
+                    alt={post.post_title}
+                    style={{ objectFit: "cover" }} // Ensure image covers the space
+                  />
+                </div>
+
+                <div className="project-info">
+                  <div dir="rtl" className="card-content">
+                  <div className="flex">
+                    <div className="project-title">{post.post_content}</div>
+                    {/* <span className="tag">type</span> */}
+                  </div>
+                  <span className="lighter"> المصدر : {post.source_string}</span>
+                  ,
+                  </div>
+                  <div className="card-footer">
+                    <div className="card-meta card-meta--date post-icons">
                       <img
-                        className="card__background--main"
-                        src={post.post_image_path}
-                        alt="Post Image"
+                        src={date}
+                        alt="comment-icon"
+                        width={20}
+                        height={18}
+                        className="post-icon"
                       />
-                      <div className="card__background--layer"></div>
+                      2,465
                     </div>
-                  </div>
-                  <div className="blog-card__head">
-                    {/* <span className="date__box">
-                      <span className="date__day">11</span>
-                      <span className="date__month">JAN</span>
-                    </span> */}
-                  </div>
-                  <div className="blog-card__info">
-                    <h5>{post.post_content.slice(0, 20)}</h5>
-                    <p>
-                      <a href="#" className="icon-link mr-3">
-                        <i className="fa fa-pencil-square-o"></i> Tony Jahson
-                      </a>
-                      <a href="#" className="icon-link">
-                        <i className="fa fa-comments-o"></i> 150
-                      </a>
-                    </p>
-                    <p>{post.source_string}</p>
-                    <p>{post.category_id}</p>
-
-                    <a href={`/posts/${post.post_id}`} className="btn btn--with-icon" target='blank'>
-                    <div className="btn-icon-arrow"><FaArrowRight /> </div>
-
-                                            تفاصيل اكتر
+                    <div className="card-meta card-meta--date post-icons">
+                      <img
+                        src={like}
+                        alt="comment-icon"
+                        width={20}
+                        height={18}
+                        className="post-icon"
+                      />
+                      2,465
+                    </div>
+                    <div className="comment-card-meta card-meta--date post-icons">
+                      <img
+                        src={comment}
+                        alt="comment-icon"
+                        width={20}
+                        height={18}
+                        className="post-icon"
+                      />
+                      5555
+                    </div>
+                    <a
+                      href={`/posts/${post.post_id}`}
+                      className="btn btn--with-icon"
+                      target="blank"
+                    >
+                      <button class="signupBtn">
+                        تفاصيل اكثر
+                        <span class="arrow">
+                          <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            height="1em"
+                            viewBox="0 0 320 512"
+                            fill="rgb(183, 128, 255)"
+                          >
+                            <path d="M278.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-160 160c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L210.7 256 73.4 118.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l160 160z"></path>
+                          </svg>
+                        </span>
+                      </button>
                     </a>
                   </div>
-                </article>
-              </div>
+                </div>
+              </article>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
       <Footer />
     </div>
@@ -81,25 +118,3 @@ const PostsStdView = () => {
 };
 
 export default PostsStdView;
-
-{
-  /* <div className="projcard-container">
-<div className="projcard projcard-blue">
-  <div className="projcard-innerbox">
-    <img className="projcard-img" src="https://picsum.photos/800/600?image=1041" alt="Project" />
-    <div className="projcard-textbox">
-      <div className="projcard-title">Card Title</div>
-      <div className="projcard-subtitle">This explains the card in more detail</div>
-      <div className="projcard-bar"></div>
-      <div className="projcard-description ellipsis">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</div>
-      <div className="projcard-tagbox">
-        <span className="projcard-tag">HTML</span>
-        <span className="projcard-tag">CSS</span>
-      </div>
-    </div>
-  </div>
-</div>
-</div> 
-
-{/* Repeat the same structure for other projcards */
-}
