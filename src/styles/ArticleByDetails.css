@@ -1,0 +1,28 @@
+.more{
+    color: black;
+    margin-left: 0px;
+    font-family: "Alexandria", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    font-size: 700;
+}
+
+.share{
+    font-family: "Reem Kufi", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    color: midnightblue;
+    margin-bottom: 50px;
+}
+.address{
+    font-family: "Reem Kufi", sans-serif;
+    font-optical-sizing: auto;
+    font-style: normal;
+    margin-bottom: 0px;
+}
+.contant{
+    font-family: "Katibeh", serif;
+    font-weight: 800;
+    font-style: normal;
+    font-size: large;
+}

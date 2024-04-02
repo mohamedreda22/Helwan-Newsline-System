@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
 import "../styles/MoreArticlesForm.css"
+import "../styles/ArticleByDetails.css"
 // imports
 
 
@@ -64,8 +65,8 @@ const MoreArticlesForm = () => {
           /> 
         </Link>
         <div>
-          <p>{article.article_address}</p> 
-          <p>تم النشر بواسطه:{article.source_string}</p>  
+          <p className="address">{article.article_address}</p> 
+          <p className="share">تم النشر بواسطه:{article.source_string}</p>  
           <p>{article.date}</p> 
         </div>
       </div>
