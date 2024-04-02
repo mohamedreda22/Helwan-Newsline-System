@@ -23,6 +23,7 @@
     align-items: center;
     text-decoration: none;
     color: rgb(52, 11, 238);
+    
 
 }
 
@@ -123,7 +124,6 @@
     max-height: 100px;
     overflow: hidden;
     text-overflow: ellipsis;
-    padding: 10px;
   }
   
   /* Add blinking animation to empty event item description */
