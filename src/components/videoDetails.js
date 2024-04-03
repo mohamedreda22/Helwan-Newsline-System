@@ -12,6 +12,7 @@ const VideoDetails = () => {
     const [comments, setComments] = useState([]);
     const [showCommentSection, setShowCommentSection] = useState(false); 
     const [studentsMap, setStudentsMap] = useState({});
+    const [isAuthorized, setIsAuthorized] = useState(false);
     
     const { id } = useParams();
 
@@ -28,9 +29,9 @@ const VideoDetails = () => {
             }
         };
 
-/*         const fetchComments = async () => {
+        const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://localhost:9090/university/comments`);
+                const response = await axios.get(`http://localhost:9090/university/comments/getAllComments/channelType/VIDEO/channelId/${id}`);
                 setComments(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -38,7 +39,8 @@ const VideoDetails = () => {
                 setError("An error occurred while fetching comments.");
                 setIsLoading(false);
             }
-        }; */
+        };
+        
 
         const fetchStudents = async () => {
             try {
@@ -46,7 +48,10 @@ const VideoDetails = () => {
                 const students = response.data;
                 const studentsObj = {};
                 students.forEach(student => {
-                    studentsObj[student.student_id] = student.student_name;
+                    studentsObj[student.student_id] = {
+                        fullName: student.full_name,
+                        avatar: student.student_avatar
+                    };
                 });
                 setStudentsMap(studentsObj);
                 setIsLoading(false);
@@ -57,15 +62,30 @@ const VideoDetails = () => {
             }
         };
 
+        const checkAuthorization = () => {
+            const studentId = sessionStorage.getItem('student_id');
+            if (studentId) {
+                setIsAuthorized(true);
+            }
+        };
+
         fetchVideoDetails();
-        //fetchComments();
+        fetchComments();
         fetchStudents();
+        checkAuthorization();
     }, [id]);
 
     const handleSubmitComment = async () => {
         try {
+            const studentId = sessionStorage.getItem('student_id');
+            if (!studentId) {
+                // Handle the case where student_id is not found in sessionStorage
+                console.error("Student ID not found in sessionStorage.");
+                return;
+            }
+    
             const response = await axios.post('http://localhost:9090/university/comments', {
-                student_id: 21,
+                student_id: parseInt(studentId), // Parse to integer if needed
                 channel_id: id, // Assuming channel_id is equivalent to video_id
                 channel_type: "VIDEO",
                 student_comment: comment
@@ -78,6 +98,7 @@ const VideoDetails = () => {
             // Handle error submission
         }
     };
+    
 
     if (isLoading) {
         return <p>Loading...</p>;
@@ -103,33 +124,44 @@ const VideoDetails = () => {
     };
 
     return (
-                    <>
-              <Navbar />
+        <>
+            <Navbar />
             <div className="video-details-container">
-            <video className="video-player" controls style={{ width: "90%", marginLeft: "5%" }}>
-                <source src={`http://localhost:3000/${modifiedVideoPath}`} type="video/mp4" zoom="50%"/>
-                Your browser does not support the video tag or the file format of this video.
-            </video>
-            <div className="video-info">
-            <div className="event-card-date1" >
-                <span className="day1">{day}</span>
-                <span className="month1">{month}</span> :نشر بتاريخ
-            </div>
-                <h3 className="video-title">{videoData?.video_title} </h3>
-                <p className="video-description">{videoData?.video_description}</p>
-            </div>
-            <div className='video-comments'>
-                <div className="heading">:التعليقات</div>
-                <hr />
-                <div className='comment'>
-                    {comments.map((comment, index) => (
-                        <div key={index}>
-                            <h4>{studentsMap[comment.student_id]}</h4>
-                            <p>{comment.student_comment}</p>
-                        </div>
-                    ))}
+                <video className="video-player" controls style={{ width: "90%", marginLeft: "5%" }}>
+                    <source src={`http://localhost:3000/${modifiedVideoPath}`} type="video/mp4" zoom="50%"/>
+                    Your browser does not support the video tag or the file format of this video.
+                </video>
+                <div className="video-info">
+                    <div className="event-card-date1" >
+                        <span className="day1">{day}</span>
+                        <span className="month1">{month}</span> :نشر بتاريخ
+                    </div>
+                    <h3 className="video-title">{videoData?.video_title} </h3>
+                    <p className="video-description">{videoData?.video_description}</p>
                 </div>
-                {showCommentSection ? (
+                <div className='video-comments'>
+                    <div className="heading">:التعليقات</div>
+                    <hr />
+                    <div className='comment'>
+                        {comments.map((comment, index) => (
+                            <div key={index} className='single-comment'>
+                                <div className="comment-header">
+                                    {studentsMap[comment.student_id] && (
+                                        <>
+                                            <h4>{studentsMap[comment.student_id].fullName}</h4>
+                                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
+                                        </>
+                                    )}
+                                </div>
+                                <li className='comment-content'>{comment.student_comment} ●</li>
+                            </div>
+                        ))}
+                    </div>
+ 
+                <button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
+                    {showCommentSection ? "الغاء" : "أضف تعليقاََ"}
+                </button>
+                {showCommentSection && (
                     <div>
                         <textarea
                             rows="4"
@@ -140,13 +172,16 @@ const VideoDetails = () => {
                             className='comment-box'
                         />
                         <br></br>
-                        <button onClick={handleSubmitComment} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"18%"}}>أضافة التعليق </button>
+                        <button onClick={handleSubmitComment} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"15%"}}>أضافة التعليق </button>
                     </div>
-                ) : (
-                    <button onClick={handleAddComment} className='btn-submit' style={{width:"12%",padding:"10px"}}>أضف تعليقاََ </button>
                 )}
+                    {!isAuthorized && (
+                        <>
+                            <p style={{color:"red"}}>لأضافة تعليقاََ يجب عليك تسجيل الدخول اولاََ </p>
+                        </>
+                    )}
+                </div>
             </div>
-        </div>
         </>
     );
 };
