@@ -36,7 +36,7 @@ const StudentVideos = () => {
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
             <div>
-                <div>
+                <div style={{marginLeft:"8%",width:"106%"}}>
                     {videos.slice(0, 2).map(video => (
                         <VideoItemStudent key={video.video_id} video={video} />
                     ))}
