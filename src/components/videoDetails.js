@@ -3,6 +3,7 @@ import axios from 'axios';
 import { useParams } from 'react-router-dom';
 import './VideoDetails.css';
 import Navbar from '../layouts/Navbar';
+import VideoItemStudent from './VideoItemStudent';
 
 const VideoDetails = () => {
     const [videoData, setVideoData] = useState(null);
@@ -13,6 +14,7 @@ const VideoDetails = () => {
     const [showCommentSection, setShowCommentSection] = useState(false); 
     const [studentsMap, setStudentsMap] = useState({});
     const [isAuthorized, setIsAuthorized] = useState(false);
+    const [videos, setVideos] = useState([]);
     
     const { id } = useParams();
 
@@ -41,6 +43,17 @@ const VideoDetails = () => {
             }
         };
         
+        const fetchVideos = async () => {
+            try {
+                const response = await axios.get('http://localhost:9090/university/videos');
+                setVideos(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching videos:", error);
+                setError("An error occurred while fetching videos.");
+                setIsLoading(false);
+            }
+        };
 
         const fetchStudents = async () => {
             try {
@@ -73,6 +86,7 @@ const VideoDetails = () => {
         fetchComments();
         fetchStudents();
         checkAuthorization();
+        fetchVideos();
     }, [id]);
 
     const handleSubmitComment = async () => {
@@ -122,7 +136,11 @@ const VideoDetails = () => {
     const handleAddComment = () => {
         setShowCommentSection(true);
     };
-
+    
+    const customStyle = {
+        width: '31%', 
+        backgroundColor: 'lightgray', 
+      };
     return (
         <>
             <Navbar />
@@ -182,6 +200,15 @@ const VideoDetails = () => {
                     )}
                 </div>
             </div>
+            <div className="videos-section">
+            <div className="heading" id="topVideos"> المزيد من الفيديوهات</div>
+            <div>
+                {videos.slice(0, 3).map(video => (
+                    <VideoItemStudent key={video.video_id} video={video} style={customStyle}/>
+                ))}
+                </div>
+
+          </div>
         </>
     );
 };
