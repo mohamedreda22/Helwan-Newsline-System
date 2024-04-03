@@ -21,6 +21,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
             article_address: article?.article_address || "",
             article_content: article?.article_content || "",
             source_id: article?.source_id || "",
+            article_image_path: article?.article_image_path || "",
         });
     }, [article]);
 

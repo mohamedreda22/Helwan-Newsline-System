@@ -1,5 +1,5 @@
 .event-item-container {
-    display: flex;
+    display: inline-flex;
     align-items: center;
     flex-direction: row;
     justify-content: space-between;
@@ -15,6 +15,7 @@
     flex: 1;
     min-width: 100px; 
     padding: 0 10px;
+    
 }
 
 .event-item-container .event-item-link {
@@ -22,6 +23,7 @@
     align-items: center;
     text-decoration: none;
     color: rgb(52, 11, 238);
+    
 
 }
 
@@ -59,6 +61,11 @@
     line-height: 30px;
     letter-spacing: 0em;
     text-align: right;
+    width: 300px;
+    height: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;
+
 }
 
 .event-item-container .event-item-description {
@@ -69,7 +76,11 @@
     letter-spacing: 0em;
     text-align: right;
     color: #565555;
-    overflow: hidden;   
+    text-align: right;
+    width: 300px;
+    height: auto;
+    max-height: 100px;
+    overflow: hidden;
     text-overflow: ellipsis;
 
 }
@@ -105,14 +116,14 @@
   .location-container {
     display: flex;
     align-items: center;
-        padding: 10px;
-
   }
   .location-container span{
     font-size: 14px;
-    white-space: nowrap;
-    padding: 10px;
-
+    width: 100px;
+    height: auto;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
   /* Add blinking animation to empty event item description */
@@ -129,7 +140,11 @@
   .event-source-content{
     display: inline-flex;
     align-items: center;
-    padding: 10px;
     text-align-last: right;
+    width: 100px;
+    height: auto;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
   
