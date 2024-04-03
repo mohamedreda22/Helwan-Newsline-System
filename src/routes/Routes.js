@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserRoleProvider } from '../hooks/UserRoleContext'; 
 import LogIn from '../pages/LogIn';
-import Collages from '../pages/Collages';
+import Colleges from '../pages/Colleges';
 import Events from '../components/events';
 import AddEvent from '../components/addEvent';
 import FAQs from "../components/faq";
@@ -94,7 +94,7 @@ export const RouterComponent = () => {
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
         <Route path="/updatePassword" element={<UpdatePassword/>} />
-        <Route path="/collages" element={<Collages/>} />
+        <Route path="/colleges" element={<Colleges/>} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
