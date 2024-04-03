@@ -162,13 +162,12 @@ function AddArticle() {
               />
             </Form.Group>
           </Row>
-          <Button
-            className="btn-submit"
-            type="submit"
-            style={{backgroundColor:"#091160",padding:"10px",width:"200px",marginRight:"90px"}}
-            >
-            حفظ
-          </Button>
+          <button            
+            type="submit" 
+            className='btn-submit'
+            style={{width:"45%",marginRight:"120px"}}>
+            اضافة مقال
+          </button>
         </Form>
       </div>
     </div>

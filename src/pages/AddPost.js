@@ -103,10 +103,11 @@ function AddPostForm() {
   return (
     <div className="add-event-page">
       <SideBar/>
+
+      <div dir="rtl" className="form-container6">
       <h1 className="header" dir="rtl" style={{marginLeft:"60px"}}>
         إضافة منشور
       </h1>
-      <div dir="rtl" className="form-container6">
         <Form onSubmit={handleSubmit}>
           <Row className="mb-3 mt-4">
                 <Form.Group as={Col} md="6">
@@ -183,13 +184,12 @@ function AddPostForm() {
               onChange={handleFileChange}
             />
           </Form.Group>
-          <Button
-            className="btn-submit"
-            type="submit"
-            style={{backgroundColor:"#091160",padding:"10px",width:"200px",marginRight:"90px"}}
-          >
-            إضافة المنشور
-          </Button>
+          <button            
+            type="submit" 
+            className='btn-submit'
+            style={{width:"45%",marginRight:"100px" }}>
+            أضافة خبر
+          </button>
         </Form>
       </div>
     </div>

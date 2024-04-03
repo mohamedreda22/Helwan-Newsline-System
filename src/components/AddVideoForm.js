@@ -117,8 +117,10 @@ const AddVideoForm = ({ onVideoAdded }) => {
   return (
     <div className="add-video-page" dir="rtl">
       <SideBar />
-      <h2 className="header">اضافة فيديو</h2>
-        <form className="form-container5" onSubmit={handleSubmit}>
+        <form className="form-container5" onSubmit={handleSubmit}>      
+        <h1 className="header" dir="rtl">
+        إضافة فيديو
+      </h1>
           <div className="form-row">
             <div className="form-group">
               <label className="lable" htmlFor="videoTitle">
@@ -152,7 +154,6 @@ const AddVideoForm = ({ onVideoAdded }) => {
               </select>
             </div>
           </div>
-          <br />
           <div className="form-group">
             <label className="label" htmlFor="category_id">
               التصنيف:
@@ -196,8 +197,11 @@ const AddVideoForm = ({ onVideoAdded }) => {
             />
           </div>
           <br />
-          <button className="btn-sub" type="submit" style={{ width: "65%" }}>
-            اضافة الفيديو
+          <button            
+            type="submit" 
+            className='btn-submit'
+            style={{width:"45%",marginRight:"110px"}}>
+            أضافة فيديو
           </button>
         </form>
         <Simplert
