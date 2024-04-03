@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import "../styles/PostsStdView.css";
@@ -8,7 +7,7 @@ import comment from "../assets/icons/comment-regular.svg";
 import like from "../assets/icons/like.svg";
 import date from "../assets/icons/time.svg";
 
-const PostsStdView = (post) => {
+const PostsStdView = () => {
   const [posts, setPosts] = useState([]);
   const [errorAlert, setErrorAlert] = useState(false);
   const [categories, setCategories] = useState([]);
@@ -20,8 +19,6 @@ const PostsStdView = (post) => {
     const month = dateTime.toLocaleString("default", { month: "long" });
     return { day, month };
   };
-
-  const { day, month } = formatDateTime(post.post_creation_date);
 
   const fetchPosts = async () => {
     try {
@@ -45,6 +42,7 @@ const PostsStdView = (post) => {
       console.error("Error fetching categories:", error);
     }
   };
+
   useEffect(() => {
     fetchCategories();
     fetchPosts();
@@ -58,20 +56,13 @@ const PostsStdView = (post) => {
       <div className="container">
         <div className="row">
           {/* Mapping through posts */}
-          {posts.map((post) => (
-            <div className="col-12" key={post.post_id}>
+          {posts.map((postItem) => (
+            <div className="col-12" key={postItem.post_id}>
               <article className="card mb-4">
-                {/* <div className="card-img">
-                  <img
-                    src={post.post_image_path}
-                    alt={post.post_title}
-                    style={{ objectFit: "cover" }} // Ensure image covers the space
-                  />
-                </div> */}
-                {post.post_image_path ? (
+                {postItem.post_image_path ? (
                   <div className="card-img">
                     <img
-                      src={post.post_image_path}
+                      src={postItem.post_image_path}
                       alt="post-image"
                       style={{ objectFit: "cover" }}
                     />
@@ -85,20 +76,24 @@ const PostsStdView = (post) => {
                 <div className="project-info">
                   <div dir="rtl" className="card-content">
                     <div className="flex">
-                      <div className="project-title"> {showMore ? post.post_content : `${post.post_content.substring(0, 100)}`}
-                      {post.post_content.length > 50 && (
-                        <button className="see-more-btn1" onClick={() => setShowMore(!showMore)}>
-                          {showMore ? "عرض أقل" : "...عرض المزيد"}
-                        </button>
-                      )}</div>
-                      
-                      {/* <span className="tag">type</span> */}
+                      <div className="project-title">
+                        {showMore
+                          ? postItem.post_content
+                          : `${postItem.post_content.substring(0, 100)}`}
+                        {postItem.post_content.length > 50 && (
+                          <button
+                            className="see-more-btn1"
+                            onClick={() => setShowMore(!showMore)}
+                          >
+                            {showMore ? "عرض أقل" : "...عرض المزيد"}
+                          </button>
+                        )}
+                      </div>
                     </div>
                     <span className="lighter">
                       {" "}
-                      المصدر : {post.source_string}
+                      المصدر : {postItem.source_string}
                     </span>
-                    ,
                   </div>
                   <div className="card-footer">
                     <div className="card-meta card-meta--date post-icons">
@@ -109,9 +104,9 @@ const PostsStdView = (post) => {
                         height={18}
                         className="post-icon"
                       />
-                      <div>
-                        <span className="day1">{day}</span> {/* Display day */}
-                        <span className="event-card-month1">{month}</span>
+                    <div className="event-card-date1" >
+                        <span className="day1">{formatDateTime(postItem.post_creation_date).day}</span> {/* Display day */}
+                        <span className="event-card-month1">{formatDateTime(postItem.post_creation_date).month}</span>
                       </div>
                     </div>
                     <div className="card-meta card-meta--date post-icons">
@@ -135,7 +130,7 @@ const PostsStdView = (post) => {
                       5555
                     </div>
                     <a
-                      href={`/posts/${post.post_id}`}
+                      href={`/posts/${postItem.post_id}`}
                       className="btn btn--with-icon"
                       target="blank"
                     >
