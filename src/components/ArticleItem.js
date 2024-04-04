@@ -27,8 +27,7 @@ function ArticleItem({ article, onDelete, onEdit }) {
                 <div className="event-item-container" dir='rtl'>
                     <img src={article.article_image_path} className='event-item-image' alt='Article Image' style={{ height: "100px", width: "100px", maxWidth: "15%" }}/>
                     <div className="event-item-address" >{article.article_address}</div>
-
-                    <div className="event-item-description">{article.article_content}</div>
+                    <div className="event-item-description">{article.articlel_content}</div>
                     <div className="event-source-content">{article.source_string}</div>
                     
                     <img src={edit_icon} alt="Edit Article" className="edit-icon" onClick={handleEdit} />

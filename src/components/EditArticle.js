@@ -84,7 +84,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
 
     return (
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل المقالة</h2>
+            <h2 className="header" style={{paddingRight:"25%"}}>تعديل  المقال</h2>
             <form onSubmit={handleSubmit} >
                 <div className="form-group">
                     <label className="lable" htmlFor="article_address">عنوان المقالة</label>

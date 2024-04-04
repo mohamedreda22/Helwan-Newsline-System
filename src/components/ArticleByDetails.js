@@ -162,7 +162,7 @@ const ArticleByDetails = () => {
                     }}
                 /> 
                 <div>    
-                                  
+               
                     <p className="share">تم النشر بواسطة: {article.source_string}</p> 
                     <p className="content" style={{textAlign:"center"}}>{article.article_content}</p>    
                 </div>
@@ -228,8 +228,8 @@ const ArticleByDetails = () => {
                            filter: "blur(2px)",
                            opacity: "0.7",
                            filter: "brightness(70%)",
-                           width: "100%", // العرض بنسبة من العرض الأصلي للـ Card
-                           height: " 300px", // للحفاظ على نسبة العرض إلى الارتفاع
+                           width: "100%",  
+                           height: " 300px", 
                             
                        }}
                         />
