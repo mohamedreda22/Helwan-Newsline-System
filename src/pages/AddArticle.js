@@ -133,13 +133,15 @@ function AddArticle() {
                 onChange={handleChange}
                 name="source_string"
               />
+            </Form.Group>
+            <Form.Group as={Col} md="10" /* controlId="formFileMultiple" */ className="article-form-group">
                <Form.Label className='label'>اختر صورة</Form.Label>
               <Form.Control
                 className='article-form-control-file'
                 type="file"
-                id="article_image_path"
                 name="article_image_path"
                 onChange={handleFileChange}
+                required
               />
             </Form.Group>
             </Row>
@@ -160,13 +162,12 @@ function AddArticle() {
               />
             </Form.Group>
           </Row>
-          <Button
-            className="btn-submit"
-            type="submit"
-            style={{backgroundColor:"#091160",padding:"10px",width:"200px",marginRight:"90px"}}
-            >
-            حفظ
-          </Button>
+          <button            
+            type="submit" 
+            className='btn-submit'
+            style={{width:"45%",marginRight:"120px"}}>
+            اضافة مقال
+          </button>
         </Form>
       </div>
     </div>

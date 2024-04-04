@@ -110,7 +110,8 @@ function FAQs() {
       ) : (
         <>
         <SideBar/>
-          <h2>الأسئلة الشائعة</h2>
+          <h2></h2>{/*HIGH IMPORTANT DON'T DARE TO REMOVE IT 💀*/ }
+          <h1 className="header" dir="rtl">إضافة سؤال شائع</h1>
           <div className="total-faqs">
             <h3>إجمالي الأسئلة: {faqs.length}</h3>
           </div>
