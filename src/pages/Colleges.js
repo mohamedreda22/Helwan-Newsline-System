@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import universityImage from "../assets/images/universityImage.jpeg";
 import Footer from "../layouts/Footer";
 import Navbar from "../layouts/Navbar";
 import { Container, Row, Col, Alert } from "react-bootstrap";
@@ -9,6 +8,7 @@ import { Link } from "react-router-dom";
 import artTheater from "../assets/images/art theater.jpeg";
 import mainGate from "../assets/images/main gate.jpeg";
 import university2 from "../assets/images/university2.jpeg";
+import universityImage from "../assets/images/universityImage.jpeg";
 
 function Colleges() {
   const [colleges, setColleges] = useState([]);

@@ -3,25 +3,56 @@
   margin: 0px;
   box-sizing: border-box;
 }
-
 body {
   background: #f1f1f1;
-  display: flex;
+  /* display: flex; */
   flex-direction: column;
   font-size: 1rem;
   justify-content: center;
   align-items: center;
 }
-
+.event-mainImg {
+  height: 70vh;
+  background-image: url(../assets/images/HU.png);
+  background-position: cover;
+  background-repeat: no-repeat;
+  position: relative;
+  background-size: cover;
+}
+.event-mainImg-overlay {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+.calendar2 {
+  width: 100%;
+}
+.mainImg-title {
+  position: absolute;
+  color: #ffffff;
+  font-size: 40px;
+  bottom: 10%;
+  right: 2%;
+  line-height: 2px;
+  text-align: right;
+}
+.event-cards1 {
+  float: right;
+  margin-top: 70p;
+}
 .blog-card {
   display: flex;
   flex-direction: column;
-  margin: 1rem auto;
+  width: 100%;
+  height: 300px;
+  margin: 20px auto;
   box-shadow: 0 3px 7px -1px rgba(0, 0, 0, 0.1);
   margin-bottom: 1.6%;
   background: #fff;
-  line-height: 1.4;
-  font-family: sans-serif;
+  /* line-height: 1.4; */
   border-radius: 5px;
   overflow: hidden;
   z-index: 0;
@@ -117,26 +148,29 @@ body {
   background: #fff;
   position: relative;
   z-index: 1;
+  text-align: right;
 }
 
-.blog-card .impEvents-description h1,
+/* .blog-card .impEvents-description h1,
 .blog-card .impEvents-description h2 {
   font-family: Poppins, sans-serif;
   text-align: right;
-}
+} */
 
 .blog-card .impEvents-description h1 {
   line-height: 1;
   margin: 0;
+  text-align: right;
   font-size: 1.7rem;
 }
 
-.blog-card .impEvents-description h2 {
+.imp-event-Des {
   font-size: 1rem;
   font-weight: 300;
   text-transform: uppercase;
   color: #a2a2a2;
   margin-top: 5px;
+  text-align: right;
 }
 
 .blog-card .impEvents-description .read-more {
@@ -180,6 +214,7 @@ body {
   width: 35px;
   top: -0.75rem;
   border-radius: 3px;
+  right: 0px;
 }
 
 .blog-card:hover .details {
