@@ -2,16 +2,20 @@ import axios from "axios";
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { Container, Row, Col } from 'react-bootstrap';
+import Button from 'react-bootstrap/Button';
+import Card from 'react-bootstrap/Card';
 import "../styles/MoreArticlesForm.css"
 import "../styles/ArticleByDetails.css"
 // imports
 
+ 
 
 
-
-const MoreArticlesForm = () => {
+const MoreArticlesForm = (article) => {
 
     const [articles, setArticles] = useState([]);
+    const [showFullContent, setShowFullContent] = useState(false);
+    const [articleData, setArticleData] = useState(null);
 
   useEffect(() => {
     fetchArticles();
@@ -29,10 +33,22 @@ const MoreArticlesForm = () => {
      
     window.location.href = '/';
 }
+
+  const formatDateTime = (dateTimeString) => {
+  const dateTime = new Date(dateTimeString);
+  const day = dateTime.getDate();
+  const month = dateTime.toLocaleString('default', { month: 'long' });
+  return { day, month };
+};
+
+const { day, month } = formatDateTime(articleData?.createDate);
+
+
     return ( 
-        <div>
-         <h1>قائمة المقالات</h1>
-         <button  
+ 
+    <div>
+       <h1>قائمة المقالات</h1>
+       <button  
           className='rounded-0'
             style={{ color:"white", 
                     backgroundColor:"rgb(16, 16, 39)",
@@ -47,37 +63,45 @@ const MoreArticlesForm = () => {
                    
                    > 
                بعض مقاطع الفيديو </button>
-     
-<Row dir="rtl">
-  {articles.map((article) => (
-    <Col key={article.article_id} xs={12} md={4}>
-      <div>
-        <Link to={`/article/${article.article_id}`}>
-          <img 
-            src={article.article_image_path} 
-            alt={article.article_address}
-            style={{
-              filter: "blur(2px)",
-              opacity: "0.7",
-              filter: "brightness(70%)",
-              width: "70%"
-            }}
-          /> 
-        </Link>
-        <div>
-          <p className="address">{article.article_address}</p> 
-          <p className="share">تم النشر بواسطه:{article.source_string}</p>  
-          <p>{article.date}</p> 
-        </div>
-      </div>
-    </Col>
-  ))}
-  
-</Row>
 
-        </div>
-    
- 
+               <Row dir="rtl">
+                  {articles.map((article) => (
+                  
+                 <Card style={{ width: '18rem' ,marginRight:"90px" ,marginBottom:"100px"}}>
+                   <Link to={`/article/${article.article_id}`}>
+                 <Card.Img    
+                       src={article.article_image_path} 
+                       alt={article.article_address}
+                       style={{
+                           filter: "blur(2px)",
+                           opacity: "0.7",
+                           filter: "brightness(70%)",
+                           width: "100%", // العرض بنسبة من العرض الأصلي للـ Card
+                           height: " 300px", // للحفاظ على نسبة العرض إلى الارتفاع
+                            
+                       }}
+                        />
+                   </Link>
+                 <Card.Body>
+                 <div className="event-card-date1" >
+                        <span className="day1">{day}</span>
+                        <span className="month1">{month}</span> :نشر بتاريخ
+                    </div>
+                   <Card.Title className="address">{article.article_address} </Card.Title>
+                   <p className="share">تم النشر بواسطه:{article.source_string}</p>
+                   
+                    
+                 </Card.Body>
+               </Card>
+     
+                         ))}
+  
+                </Row>
+
+    </div>
+
+
+
     
      );
 }
@@ -90,5 +114,8 @@ export default MoreArticlesForm;
 
 
 
+
+ 
+ 
 
  
