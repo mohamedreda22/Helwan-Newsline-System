@@ -1,106 +1,106 @@
 /* FAQ.css */
 
 .faqs-page {
-    max-width: 800px;
-    margin: 0 calc(10%);
-    padding: 20px;
-    border: 1px solid #ccc;
-  }
-  
-  .faqs-page h2 {
-    text-align: center;
-    font-size: 28px;
-    margin-bottom: 20px;
-    padding-left: 200px;
-  }
-  
-  .total-faqs {
-    margin-bottom: 20px;
-    color: #ff0000;
-  }
-  
-  .total-faqs h3 {
-    font-size: 18px;
-  }
-  
-  .loading-text,
-  .error-text {
-    font-size: 16px;
-    color: #ff0000;
-  }
-  
-  .faqs-container {
-    border: 1px solid #ccc;
-    padding: 10px;
-    
-  }
-  
-  .faqs-container .faq-item {
-    border-bottom: 1px solid #ccc;
-    padding: 10px 0;
-  }
-  
-  .faqs-container .faq-item:last-child {
-    border-bottom: none;
-  }
-  
-  .faqs-container .faq-item p {
-    font-size: 16px;
-    line-height: 1.6;
-  }
-  
-  .pagination {
-    margin-top: 20px;
-  }
-  
-  .pagination li {
-    display: inline-block;
-    margin-right: 5px;
-    cursor: pointer;
-    background-color: #eee;
-    padding: 5px 10px;
-    border-radius: 5px;
-  }
-  
-  .pagination li.active {
-    background-color: #007bff;
-    color: #fff;
-  }
-  
-  .pagination li:hover {
-    background-color: #007bff;
-    color: #fff;
-  }
+  max-width: 1000px;
+  margin: 0 calc(10%);
+  padding: 20px;
+  border: 1px solid #ccc;
+}
 
-  /* AddFaq.css */
+.faqs-page h2 {
+  font-size: 28px;
+  padding-left: 600px;
+  display: inline-flex;
+  white-space: nowrap;
+ }
+
+.total-faqs {
+  margin-bottom: 20px;
+  color: #ff0000;
+}
+
+.total-faqs h3 {
+  font-size: 18px;
+}
+
+.loading-text,
+.error-text {
+  font-size: 16px;
+  color: #ff0000;
+}
+
+.faqs-container {
+  border: 1px solid #ccc;
+  padding: 10px;
+  
+}
+
+.faqs-container .faq-item {
+  border-bottom: 1px solid #ccc;
+  padding: 10px 0;
+}
+
+.faqs-container .faq-item:last-child {
+  border-bottom: none;
+}
+
+.faqs-container .faq-item p {
+  font-size: 16px;
+  line-height: 1.6;
+}
+
+.pagination {
+  margin-top: 20px;
+}
+
+.pagination li {
+  display: inline-block;
+  margin-right: 5px;
+  cursor: pointer;
+  background-color: #eee;
+  padding: 5px 10px;
+  border-radius: 5px;
+}
+
+.pagination li.active {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination li:hover {
+  background-color: #007bff;
+  color: #fff;
+}
+
+/* AddFaq.css */
 
 .add-faq-btn-container {
-  margin-bottom: 10px; 
+margin-bottom: 10px; 
 }
 
 .add-faq-btn {
-  background-color: #091260db;
-  color: #fff;
-  padding: 5px 15px;
-  border: none;
-  border-radius: 110px;
-  cursor: pointer;
-  transition: background-color 0.3s, color 0.3s;
-  font-size: 16px;
-  font-weight: bold;
+background-color: #091260db;
+color: #fff;
+padding: 5px 15px;
+border: none;
+border-radius: 110px;
+cursor: pointer;
+transition: background-color 0.3s, color 0.3s;
+font-size: 16px;
+font-weight: bold;
 }
 
 .add-faq-btn:hover {
-  background-color: #0056b3; 
+background-color: #0056b3; 
 }
 .faq-table{
-  width: 100%;
-  border-collapse: collapse;
-  margin-top: 20px;
+width: 100%;
+border-collapse: collapse;
+margin-top: 20px;
 }
 .faq-table td{
-  border: 1px solid #ccc;
-  text-align: center;
-  width: 150px;
-  height: 50px;
+border: 1px solid #ccc;
+text-align: center;
+width: 150px;
+height: 50px;
 }

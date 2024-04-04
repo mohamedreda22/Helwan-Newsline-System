@@ -44,12 +44,21 @@
     padding: 10px; /* Padding for the address text */
     font-size: 1.2rem; /* Adjust font size for the address */
     font-weight: bold;
+    width: auto;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;    
+    
 }
 
 .location-card-container {
     padding: 10px; 
     font-style: italic;
     font-weight: 500;
+    width: auto;
+    max-height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;  
 }
 
 .location-icon {
@@ -95,6 +104,7 @@
     font-weight: 500;
     font-size: 1rem; /* Adjust font size for the content */
     color: #333; /* Text color for the content */
+    
 }
 
 .source-name {
@@ -139,4 +149,20 @@
   .event-card-month1 {
     color: #4b0082; /* Set color for the month */
   }
-  
+  .flex-container{
+    display: inline-flex;
+    flex-wrap:unset;
+    width: 100%;
+    height: 50%;
+  }
+  .news-item-content{
+    padding: 10px; /* Padding for the content */
+    font-weight: 500;
+    font-size: 1rem; /* Adjust font size for the content */
+    color: #333; /* Text color for the content */
+    text-align: right;
+    width: auto;
+    overflow: hidden;
+    text-overflow: ellipsis;  
+  }
+ 

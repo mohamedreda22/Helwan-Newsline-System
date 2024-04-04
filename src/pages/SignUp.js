@@ -12,7 +12,7 @@ function SignUp() {
         student_email: '',
         student_password: '',
         student_phone: '',
-        imagePath: ''
+        student_image_path: ''
     });
     const [isLoading, setIsLoading] = useState(false);
     const [error, setError] = useState('');
@@ -41,7 +41,7 @@ function SignUp() {
                     student_email: '',
                     student_password: '',
                     student_phone: '',
-                    imagePath: ''
+                    student_image_path: ''
                 });
                 setStudentImagePath(null)
             } else {
@@ -66,33 +66,23 @@ function SignUp() {
             [name]: value,
         });
     };
+    
 
-    const handleFileChange = (e, data) => {
-        const file = e ? e.target.files[0] : null;
+    const handleFileChange = (e) => {
+        const file = e.target.files[0];
         const reader = new FileReader();
-        
         if (file) {
             reader.onloadend = () => {
-                setStudentImagePath(reader.result);
-                if (data) {
-                    data(reader.result);
+                setFormData({
+                    ...formData,
+                    student_image_path: reader.result,
+                });
                 }
-            };
-            reader.readAsDataURL(file);
-        } else if (data) {
-            data(null);
+                reader.readAsDataURL(file);
+
         }
     };
-    const handleCombinedFileChange = (e) => {
-        handleFileChange(e, (imageData) => {
-            setFormData({
-                ...formData,
-                imagePath: imageData,
-            });
-        });
-    };
 
-    
     return (
         <div className="signup-page">
             <div className="signup-container">
@@ -136,11 +126,11 @@ function SignUp() {
                     </div>
                     <div className="form-group">
                         <InputMask
-                            mask="999-999-9999"
+                            mask="9999-999-9999"
                             maskChar=" "
                             type="tel"
                             name="student_phone"
-                            placeholder="Phone (###-###-####)"
+                            placeholder="Phone (####-###-####)"
                             value={formData.student_phone}
                             onChange={handleChange}
                             className="form-control"
@@ -148,17 +138,17 @@ function SignUp() {
                         />
                     </div>
                     <div className="form-group">
-                     <label className="lable" htmlFor="imagePath">رفع الصورة</label>
+                     <label className="lable" htmlFor="student_image_path">رفع الصورة</label>
                     <br/>
                     <input 
                      className="form-control"
                      type="file" 
-                     id='imagePath' 
-                     name="imagePath"
-                     onChange={handleCombinedFileChange}
+                     id='student_image_path' 
+                     name="student_image_path"
+                     onChange={handleFileChange}
                      required /> 
                     </div>
-                    <table className="image-table">
+{/*                     <table className="image-table">
                                     <tbody>
                                     <tr>
                                         <td>
@@ -168,7 +158,7 @@ function SignUp() {
                                     </tr>
 
                                     </tbody>
-                                </table>
+                                </table> */}
                     <button type="submit" disabled={isLoading} className="btn-submit">
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>

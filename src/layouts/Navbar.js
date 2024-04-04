@@ -5,6 +5,12 @@ import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/CustomNavbar.css";
 
 const CustomNavbar = () => {
+  const scrollToSection = (sectionId) => {
+    const section = document.getElementById(sectionId);
+    if (section) {
+      section.scrollIntoView({ behavior: "smooth" });
+    }
+  };
   return (
     <Navbar expand="lg" bg="light" variant="light" className="custom-navbar">
       <Container>
@@ -16,28 +22,14 @@ const CustomNavbar = () => {
           <Nav className="me-auto custom-nav-links" >
             <Nav.Link as={Link} to="/landingPage" className="nav-link">الصفحة الرئيسية</Nav.Link>
             <Nav.Link as={Link} to="/collages" className="nav-link">الكليات</Nav.Link>
-            <Nav.Link as={Link} to="/news" className="nav-link">آخر الأخبار</Nav.Link>
-            <Nav.Link as={Link} to="/sports" className="nav-link">رياضة</Nav.Link>
-            <Nav.Link as={Link} to="/events" className="nav-link">اهم الأحداث</Nav.Link>
+            <Nav.Link className="nav-link" onClick={() => scrollToSection("topNews")}>آخر الأخبار</Nav.Link>
+            <Nav.Link className="nav-link" onClick={() => scrollToSection("topSports")}>رياضة</Nav.Link>
+            <Nav.Link className="nav-link" onClick={() => scrollToSection("topEvents")}>اهم الأحداث</Nav.Link>
+            <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
           </Nav>
           <Form className="d-flex me-3" dir="rtl">
-
-            <div className="search" >
-                <div className="search-box">
-                    <div className="search-field" >
-                        <input placeholder="Search..." className="input" type="text" />
-                        <div className="search-box-icon" dir="rtl">
-                            <button className="btn-icon-content">
-                                <i className="search-icon">
-                                    <svg xmlns="http://www.w3.org/2000/svg" version="1.1" viewBox="0 0 512 512">
-                                        <path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z" fill="#fff"></path>
-                                    </svg>
-                                </i>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <FormControl type="search" placeholder="ابحث هنا" className="me-2" aria-label="Search" />
+            <Button variant="primary"><i className="fas fa-search"></i></Button>
           </Form>
         </Navbar.Collapse>
         <Navbar.Brand  className="navbar-brand">

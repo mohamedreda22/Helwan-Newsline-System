@@ -96,7 +96,9 @@ function Sports() {
   
 
   return (
-    <div className={`events-page ${isEditing && sportIdToEdit && editedSport ? 'blur-background' : ''}`}>
+/*     <div className={`events-page ${isEditing && sportIdToEdit && editedSport ? 'blur-background' : ''}`}>
+ */
+    <div>
               <SideBar />
       {isEditing && sportIdToEdit && editedSport ? (
         <EditSport sport={editedSport} onSave={handleSave} onCancel={handleCancelEdit} />
