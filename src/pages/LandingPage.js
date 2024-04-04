@@ -113,7 +113,7 @@ function LandingPage() {
         <Navbar />
         <div className="page-section">
           <div className="news-section">
-            <div className="heading" id="topNews">آخر الأخبار</div>
+            <div className="heading">آخر الأخبار</div>
             <div className="description">
               <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
               <Link className="links" to="/news">رؤية جميع الأخبار</Link>
@@ -128,7 +128,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="events-section">
-            <div className="heading" id="topEvents">اهم الاحداث</div>
+            <div className="heading">اهم الاحداث</div>
             <div className="description">
               <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
               <Link className="links" to="/events">رؤية جميع الفعاليات</Link>
@@ -144,7 +144,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="articles-section">
-            <div className="heading" id="topArticals">اهم المقالات</div>
+            <div className="heading">اهم المقالات</div>
             <div className="description">
               <div>يتم نشر المقالات الهامة والمفيدة للجامعة بانتظام <br></br>قم بزيارة الصفحة التالية لرؤية جميع المقالات</div>
               <Link className="links" to="/articles">رؤية جميع المقالات</Link>
@@ -159,8 +159,7 @@ function LandingPage() {
             </div>
           </div>
           <div className="posts-section">
-            <div className="heading" id="topPosts">آخر المنشورات </div>
-            
+            <div className="heading">آخر المنشورات </div>
             <div className="description">
               <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
               <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
@@ -175,7 +174,7 @@ function LandingPage() {
 
             </div>
           </div>
-          <div className="sports-section" id="topSports">
+          <div className="sports-section">
             <div className="heading">الرياضة</div>
             <div className="description">
               <div>تقام الأنشطة الرياضية بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>

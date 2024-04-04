@@ -21,7 +21,7 @@ function NewsItemStudent({ news }) {
                     <span className="event-card-month1">{month}</span>
                 </div>
                 <div>
-                    <div className="news-item-content" >{news.news_content}</div>
+                    <div className="description" >{news.news_content}</div>
                 </div>
 
                 </div>

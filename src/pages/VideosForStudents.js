@@ -1,19 +1,15 @@
-import React, { useState, useEffect } from 'react';
+import VideoItemStudent from '../components/VideoItemStudent'
 import axios from 'axios';
-import Navbar from '../layouts/Navbar';
-import VideoItemStudent from '../components/VideoItemStudent';
-import Footer from '../layouts/Footer';
+import { useState, useEffect } from 'react';
 
 const StudentVideos = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
     const [displayedVideos, setDisplayedVideos] = useState(3); // Initial number of videos displayed
-
     useEffect(() => {
         fetchVideos();
     }, []);
-
     const fetchVideos = async () => {
         try {
             const response = await axios.get("http://localhost:9090/university/videos");
@@ -25,40 +21,25 @@ const StudentVideos = () => {
             setIsLoading(false);
         }
     };
-
     const loadMoreVideos = () => {
-        setDisplayedVideos(prevCount => prevCount + 2);
+        setDisplayedVideos(prevCount => prevCount + 3);
     };
 
+    
     return (
         <div>
-            <Navbar />
+            <h1>Student Videos</h1>
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <div>
-                <div style={{marginLeft:"8%",width:"106%"}}>
-                    {videos.slice(0, 2).map(video => (
-                        <VideoItemStudent key={video.video_id} video={video} />
-                    ))}
-                </div>
+            <div >
+                {videos.slice(0, displayedVideos).map((video) => (
+                    <VideoItemStudent key={video.video_id} video={video} />
+                ))}
             </div>
-            <div className="important-videos-section" >
-                <div className="heading">أهم الفيديوهات</div>
-                <div className="description">
-                    <div>تقوم الجامعة بنشر الفيديوهات الهامة والمفيدة للجميع <br />تابعنا للحصول على كل جديد</div>
-                </div>
-            </div>
-            <hr />
-            <div>
-                <div className='flex-container'>
-                    {videos.slice(2).map(video => (
-                        <VideoItemStudent key={video.video_id} video={video} />
-                    ))}
-                </div>
-            </div>
-            <Footer/>
+            {videos.length > displayedVideos && (
+                <button onClick={loadMoreVideos}>Load More</button>
+            )}
         </div>
     );
 }
-
 export default StudentVideos;

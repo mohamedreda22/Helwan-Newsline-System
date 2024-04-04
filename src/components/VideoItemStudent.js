@@ -2,7 +2,7 @@ import {React,useState} from 'react';
 import '../styles/EventItemStudent.css'; 
 import axios from 'axios';
 
-function VideoItemStudent({ video ,style}) {
+function VideoItemStudent({ video }) {
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -37,13 +37,13 @@ function VideoItemStudent({ video ,style}) {
       }
 
     return (
-       <div className="video-card" style={style}>
+       <div className="video-card">
       <div className="video-item-container" dir='rtl'>
-        <video className="video-player1" onClick={showControls} >
+        <video className="video-player1" onClick={showControls}>
           <source src={video.video_path} type="video/mp4" />
         </video>
         <div className="video-info">
-          <h3 className="event-card-address">{video.video_title} </h3>
+          <h3 className="event-card-address">{video.video_title}</h3>
           <p className="event-item-description">{video.video_description}</p>
         </div>
         </div>

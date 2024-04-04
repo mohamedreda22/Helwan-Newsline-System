@@ -160,6 +160,7 @@ export default function AddEvent() {
     return (
         <div className="add-event-page" dir="rtl">
             <Sidebar />
+            <h3>اهم الاحداث</h3>
             <div className="add-event-container">
                 <h1 className="header">إضافة حدث</h1>
                 <form onSubmit={handleSubmit}>
@@ -293,7 +294,7 @@ export default function AddEvent() {
                      onChange={handleCombinedFileChange}
                      required /> 
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"45%",marginRight:"110px"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"65%"}}>
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
                     {error && <div className="error">{error}</div>}

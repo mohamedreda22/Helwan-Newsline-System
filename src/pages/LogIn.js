@@ -40,12 +40,6 @@ function LogIn() {
                 console.log('Form data submitted:', response.data);
                 console.log('Token from response:', response.data.userRole);
                 sessionStorage.setItem('token', response.data.userRole);
-
-                // Store student_id in sessionStorage
-                if(response.data.userRole==="STUDENT"){
-                    sessionStorage.setItem('student_id', response.data.id);
-                    console.log('Student ID:', response.data.id);
-                }
                 
 
                 setFormData({
@@ -77,7 +71,7 @@ function LogIn() {
 
                 setTimeout(function() {
                     window.location.reload();
-                }, 1000); 
+                }, 1); 
                //localStorage.setItem('token', response.data.token);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');

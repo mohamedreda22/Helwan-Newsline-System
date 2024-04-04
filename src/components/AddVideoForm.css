@@ -26,6 +26,7 @@
 }
 .header {
   font-size: 40px;
+  margin-left: 20%;
 }
 
 input[type="text"],

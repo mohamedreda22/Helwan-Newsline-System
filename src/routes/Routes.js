@@ -2,7 +2,7 @@ import React, { useState, useEffect, useContext } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { UserRoleProvider } from '../hooks/UserRoleContext'; 
 import LogIn from '../pages/LogIn';
-import Colleges from '../pages/Colleges';
+import Collages from '../pages/Collages';
 import Events from '../components/events';
 import AddEvent from '../components/addEvent';
 import FAQs from "../components/faq";
@@ -19,7 +19,8 @@ import NotFound from '../pages/NotFound'
 import VideoList from '../components/videoList';
 import AddVideoForm from '../components/AddVideoForm';
 import AddArticle from "../pages/AddArticle";
-import Articles from "../components/Articles";
+import EditArticle from "../pages/EditArticle";
+import AllArticles from "../pages/AllArticles";
 import AddSource from "../pages/AddSource";
 import EditSource from "../pages/EditSource";
 import AllSources from "../pages/AllSources";
@@ -89,12 +90,12 @@ export const RouterComponent = () => {
   return (
     <Router>
       <Routes>
-        <Route path="/" element={<LandingPage/>} />
+        <Route path="/" element={<LogIn/>} />
         <Route path="/login" element={<LogIn/>} />
         <Route path="/signup" element={<SignUp/>} />
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
         <Route path="/updatePassword" element={<UpdatePassword/>} />
-        <Route path="/colleges" element={<Colleges/>} />
+        <Route path="/collages" element={<Collages/>} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
@@ -132,7 +133,8 @@ export const RouterComponent = () => {
             <Route path="/sideBar" element={<SideBar/>} />
             <Route path="/message"      element={<Message/>} />
             <Route path="/addarticle"  element={<AddArticle/>} />
-            <Route path="/articles"    element={<Articles/>} />
+            <Route path="/editarticle"  element={<EditArticle/>} />
+            <Route path="/articles"    element={<AllArticles/>} />
             <Route path="/showPosts" element={<Posts/>} />
             <Route path="/addpost" element={<AddPost/>} />
             <Route path="/addNews" element={<AddNews/>} />

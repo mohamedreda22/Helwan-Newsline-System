@@ -146,7 +146,7 @@ function AddFaq() {
                             required
                         />
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"35%",marginRight:"160px"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"65%"}}>
                         {isLoading ? 'جاري إضافة السؤال' : 'إضافة السؤال'}
                     </button>
 
