@@ -9,7 +9,7 @@ const VideoDetails = () => {
     const [videoData, setVideoData] = useState(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
-    const [comment, setComment] = useState(""); 
+    const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
     const [showCommentSection, setShowCommentSection] = useState(false); 
     const [studentsMap, setStudentsMap] = useState({});
@@ -18,7 +18,7 @@ const VideoDetails = () => {
     
     const { id } = useParams();
 
-    useEffect(() => { 
+    useEffect(() => {
         const fetchVideoDetails = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/videos/${id}`);

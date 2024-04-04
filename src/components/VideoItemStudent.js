@@ -46,7 +46,7 @@ function VideoItemStudent({ video ,style}) {
           <h3 className="event-card-address">{video.video_title} </h3>
           <p className="event-item-description">{video.video_description}</p>
         </div>
-        </div> 
+        </div>
         <button
             className="btn-submit"
             onClick={handleVideoClick}
