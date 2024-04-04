@@ -4,7 +4,7 @@ const ArticleItemStudent = ({ article }) => {
     const [showFullContent, setShowFullContent] = useState(false);
     
   return (
-    <div className="event-card-container">
+    <div className="event-card-container"> 
       <div className="event-card-item">
       <img src={article.article_image_path} className='event-card-image' alt='image_test'/>
         <div className="event-card-header">
