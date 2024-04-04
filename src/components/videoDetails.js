@@ -131,7 +131,7 @@ const VideoDetails = () => {
         return { day, month };
     };
 
-    const { day, month } = formatDateTime(videoData?.createDate);
+    const { day, month } = formatDateTime(videoData?.video_creation_date);
 
     const handleAddComment = () => {
         setShowCommentSection(true);

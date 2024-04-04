@@ -30,7 +30,7 @@ function VideoItemStudent({ video ,style}) {
         return { day, month };
     };
 
-    const { day, month } = formatDateTime(video.createDate);
+    const { day, month } = formatDateTime(video.video_creation_date);
 
     const showControls=()=>{
         document.querySelector('.video-player1').controls = true;
@@ -59,7 +59,6 @@ function VideoItemStudent({ video ,style}) {
         <div className="event-card-date1">
             <span className="day1">{day}</span>
             <span className="event-card-month1">{month}</span>
-            
         </div>
     </div>
     );

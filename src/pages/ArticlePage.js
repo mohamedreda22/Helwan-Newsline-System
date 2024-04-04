@@ -54,7 +54,7 @@ export default ArticlePage;
 //       <img src={article.article_image_path} alt={article.article_address} />
       
 //       <p>{article.date}</p>
-//       <p>{article.article_content}</p>
+//       <p>{article.articlel_content}</p>
 //     </div>
 //   );
 // };

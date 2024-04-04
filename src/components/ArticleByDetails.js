@@ -55,7 +55,7 @@ const ArticleByDetails = () => {
                 /> 
                 <div>                   
                     <p className="share">تم النشر بواسطة: {article.source_string}</p> 
-                    <p className="content" style={{textAlign:"center"}}>{article.article_content}</p>    
+                    <p className="content" style={{textAlign:"center"}}>{article.articlel_content}</p>    
                 </div>
             </div>
 
@@ -80,7 +80,7 @@ const ArticleByDetails = () => {
                                 <div>
                                     <p className="share">تم النشر بواسطة: {article.source_string}</p>  
                                     <p>{article.date}</p> 
-                                    <p className="contant" style={{textAlign:"center"}}>{article.article_content}</p>  
+                                    <p className="contant" style={{textAlign:"center"}}>{article.articlel_content}</p>  
                                 </div>
                             </div>
                         </Col>
