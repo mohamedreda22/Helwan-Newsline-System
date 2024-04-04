@@ -100,11 +100,6 @@ export const RouterComponent = () => {
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
         <Route path="/videos/:id" element={<VideoDetails />} />
-
-
-
-        {/* <Route path="/articlepage" element={<ArticlePage/>} /> */}
-        {/* <Route path="/seemorearticles" element={<SeeMoreArticles/>} /> */}
         
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/allPosts" element={<PostsStdView/>} />
