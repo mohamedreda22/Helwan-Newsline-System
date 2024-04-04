@@ -90,7 +90,6 @@ const { day, month } = formatDateTime(articleData?.createDate);
                    <Card.Title className="address">{article.article_address} </Card.Title>
                    <p className="share">تم النشر بواسطه:{article.source_string}</p>
                    
-                  
                     
                  </Card.Body>
                </Card>
