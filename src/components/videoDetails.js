@@ -176,9 +176,9 @@ const VideoDetails = () => {
                         ))}
                     </div>
  
-                <button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
+                {isAuthorized &&(<button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
                     {showCommentSection ? "الغاء" : "أضف تعليقاََ"}
-                </button>
+                </button>)}
                 {showCommentSection && (
                     <div>
                         <textarea

@@ -179,8 +179,9 @@ const fetchSources = async () => {
   return (
     <div className="edit-video-page">
       <SideBar />
-      <h2 className="header">تعديل الفيديو</h2>
-      <div className="edit-video-container">
+      <div className="edit-video-container">      
+      <h2 className="header"  >تعديل الفيديو</h2>
+
         <form className="form-container" onSubmit={handleSubmit} dir='rtl'>
           <div className="form-row">
             <div className="form-group">
