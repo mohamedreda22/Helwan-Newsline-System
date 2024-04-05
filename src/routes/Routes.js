@@ -35,6 +35,7 @@ import Sports from '../pages/Sports';
 import News from '../pages/News';
 import StudentVideos from "../pages/VideosForStudents";
 import VideoDetails from "../components/videoDetails";
+import AddCollege from "../pages/AddCollege"
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -124,6 +125,7 @@ export const RouterComponent = () => {
               <Route path="/source"    element={< AddSource/>} />
               <Route path="/editsource"    element={<  EditSource/>} />
               <Route path="/allsources"  element={< AllSources/>} /> 
+              <Route path="/addCollege" element={<AddCollege/>} />
             </>
             )}
             {userRole === 'SOURCE' && (

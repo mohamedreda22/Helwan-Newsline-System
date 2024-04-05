@@ -29,6 +29,11 @@ const NavbarSource = () => {
             <div class="collapse navbar-collapse" id="navbarSupportedContent">
               <ul class="navbar-nav mx-auto p-2 justify-content-center ">
                  
+              <li class="nav-item ms-5">
+                  <Link to="/addCollege" className="nav-link">
+                    اضافة كلية  
+                  </Link>
+                </li>                
                 <li class="nav-item ms-5">
                   <Link to="/showDepartments" className="nav-link">
                     الاقسام  
