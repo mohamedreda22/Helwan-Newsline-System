@@ -99,7 +99,7 @@ export const RouterComponent = () => {
         <Route path="/colleges" element={<Colleges/>} />
         <Route path="/colleges/:id" element={<CollegeDetails />} />
         <Route path="/message" element={<Message/>} />
-        <Route path="/Helwan-Newsline-System" element={<LandingPage/>} />
+        <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
         <Route path="/videos/:id" element={<VideoDetails />} />
 
@@ -141,7 +141,7 @@ export const RouterComponent = () => {
             <Route path="/sideBar" element={<SideBar/>} />
             <Route path="/message"      element={<Message/>} />
             <Route path="/addarticle"  element={<AddArticle/>} />
-            <Route path="/articles"    element={<Articles/>} />
+            <Route path="/articles1"    element={<Articles/>} />
             <Route path="/showPosts" element={<Posts/>} />
             <Route path="/addpost" element={<AddPost/>} />
             <Route path="/addNews" element={<AddNews/>} />

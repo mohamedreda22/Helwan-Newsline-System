@@ -162,7 +162,7 @@ const CollegeDetails = () => {
             <Navbar />
             <div className="college-details-container"> 
             <div className='banner'>
-            <img src={FCAIH} alt="Banner" />
+            <img src={collegeData?.college_back_ground} alt="Banner" />
             <div className="banner-content">
                 <h1>{collegeData?.college_name}</h1>
                 <img src={collegeData?.college_icon} alt="College Icon" className="college-banner" />
