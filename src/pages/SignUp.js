@@ -5,6 +5,7 @@ import logo from '../assets/images/logo.png';
 import Simplert from 'react-simplert';
 import useAlert from '../hooks/useAlert';
 import InputMask from 'react-input-mask';
+import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [formData, setFormData] = useState({
@@ -18,6 +19,7 @@ function SignUp() {
     const [error, setError] = useState('');
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
     const [studentImagePath, setStudentImagePath] = useState(null);
+    const navigate = useNavigate();
 
 
     const handleSubmit = async (e) => {
@@ -44,6 +46,10 @@ function SignUp() {
                     student_image_path: ''
                 });
                 setStudentImagePath(null)
+
+                setTimeout(() => {
+                    navigate("/login");
+                }, 1000);
             } else {
                 showAlertHandler('error', 'Failed', 'Failed to create account', 'Close');
             }
@@ -81,6 +87,7 @@ function SignUp() {
                 reader.readAsDataURL(file);
 
         }
+        console.log(file)
     };
 
     return (
