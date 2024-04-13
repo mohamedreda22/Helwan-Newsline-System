@@ -99,7 +99,7 @@ export const RouterComponent = () => {
         <Route path="/colleges" element={<Colleges/>} />
         <Route path="/colleges/:id" element={<CollegeDetails />} />
         <Route path="/message" element={<Message/>} />
-        <Route path="/landingPage" element={<LandingPage/>} />
+        <Route path="/Helwan-Newsline-System" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
         <Route path="/videos/:id" element={<VideoDetails />} />
 

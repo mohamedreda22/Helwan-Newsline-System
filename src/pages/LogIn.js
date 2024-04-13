@@ -65,7 +65,7 @@ function LogIn() {
                         route = '/showEvents';
                         break;
                     case 'STUDENT':
-                        route = '/landingPage'; 
+                        route = '/Helwan-Newsline-System'; 
                         break;
                     default:
                         break;
