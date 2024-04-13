@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/Helwan-Newsline-System/static/css/main.46007660.css",
-    "main.js": "/Helwan-Newsline-System/static/js/main.dae9da25.js",
+    "main.js": "/Helwan-Newsline-System/static/js/main.63fb5962.js",
     "static/media/HU.png": "/Helwan-Newsline-System/static/media/HU.aa8898cdf8d4f5e2a856.png",
     "static/media/examhall.jpeg": "/Helwan-Newsline-System/static/media/examhall.51dc6b88cf54e02f5dce.jpeg",
     "static/media/universityImage.jpeg": "/Helwan-Newsline-System/static/media/universityImage.51dc6b88cf54e02f5dce.jpeg",
@@ -22,10 +22,10 @@
     "static/media/mail_FILL0_wght400_GRAD0_opsz24.svg": "/Helwan-Newsline-System/static/media/mail_FILL0_wght400_GRAD0_opsz24.a993830408a8604bfac2.svg",
     "static/media/delete.svg": "/Helwan-Newsline-System/static/media/delete.642da2f9203fed7e99a03988591b154e.svg",
     "main.46007660.css.map": "/Helwan-Newsline-System/static/css/main.46007660.css.map",
-    "main.dae9da25.js.map": "/Helwan-Newsline-System/static/js/main.dae9da25.js.map"
+    "main.63fb5962.js.map": "/Helwan-Newsline-System/static/js/main.63fb5962.js.map"
   },
   "entrypoints": [
     "static/css/main.46007660.css",
-    "static/js/main.dae9da25.js"
+    "static/js/main.63fb5962.js"
   ]
 }
