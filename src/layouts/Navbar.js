@@ -1,10 +1,21 @@
-import React from "react";
+import {React,useState,useEffect} from "react";
 import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/CustomNavbar.css";
 
+
 const CustomNavbar = () => {
+  const [userRole, setUserRole] = useState(""); 
+  const handleExit=()=>{
+    sessionStorage.removeItem('token');
+    window.location.href = '/';
+}
+  useEffect(() => {
+    const role = sessionStorage.getItem("token");
+    setUserRole(role);
+  }, []);
+
   const scrollToSection = (sectionId) => {
     const section = document.getElementById(sectionId);
     if (section) {
@@ -16,16 +27,25 @@ const CustomNavbar = () => {
       <Container>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" dir="rtl" className="collapse7">
-          <Nav>
-            <Nav.Link as={Link} to="/login" className="nav-link">تسجيل الدخول</Nav.Link>
-          </Nav>
+        <Nav>
+        {userRole === "STUDENT" ?(
+          <Nav.Link as={Link} to="/logout" className="nav-link logout-link" onClick={() => handleExit()}>
+          تسجيل الخروج
+        </Nav.Link>
+        )
+        : (
+          <Nav.Link as={Link} to="/login" className="nav-link">تسجيل الدخول</Nav.Link>
+        )
+      }
+      </Nav>
+
           <Nav className="me-auto custom-nav-links" >
             <Nav.Link as={Link} to="/landingPage" className="nav-link">الصفحة الرئيسية</Nav.Link>
             <Nav.Link as={Link} to="/colleges" className="nav-link">الكليات</Nav.Link>
-            <Nav.Link className="nav-link" onClick={() => scrollToSection("topNews")}>آخر الأخبار</Nav.Link>
-            <Nav.Link className="nav-link" onClick={() => scrollToSection("topSports")}>رياضة</Nav.Link>
-            <Nav.Link className="nav-link" onClick={() => scrollToSection("topEvents")}>اهم الأحداث</Nav.Link>
-            <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
+{/*             <Nav.Link className="nav-link" onClick={() => scrollToSection("topNews")}>آخر الأخبار</Nav.Link>
+ */}            <Nav.Link as={Link} to="/articles" className="nav-link" >أهم المقالات</Nav.Link>
+{/*             <Nav.Link className="nav-link" onClick={() => scrollToSection("topEvents")}>اهم الأحداث</Nav.Link>
+ */}            <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
           </Nav>
           <Form className="d-flex me-3" dir="rtl">
             <FormControl type="search" placeholder="ابحث هنا" className="me-2" aria-label="Search" />

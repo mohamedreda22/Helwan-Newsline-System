@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
 import {  Card, Row, Col } from 'react-bootstrap';
-import "../styles/ArticleByDetails.css"
+import "./VideoDetails.css";
 import axios from "axios";
+import ArticleItemStudent from "./articleItemStudent";
 
 const ArticleByDetails = () => {
     const { article_id } = useParams();
@@ -25,7 +26,7 @@ const ArticleByDetails = () => {
     useEffect(() => {
         const fetchComments = async () => {
             try {
-                const response = await axios.get(`http://localhost:9090/university/comments/getAllComments/channelType/VIDEO/channelId/${article_id}`);
+                const response = await axios.get(`http://localhost:9090/university/comments/getAllComments/channelType/ARTICLE/channelId/${article_id}`);
                 setComments(response.data);
                 setIsLoading(false);
             } catch (error) {
@@ -130,20 +131,24 @@ const ArticleByDetails = () => {
 
 
     return ( 
-        <div>
-            <h2 className="share" style={{textAlign:"center"}}>مقال عن: {article.article_address}</h2>
+            <div className="video-details-container">
+            <h3 className="video-title" >مقال عن: {article.article_address}</h3>
             <div>
                 <img 
                     src={article.article_image_path} 
                     alt={article.article_address}
                     style={{                         
-                        width: "100%",
-                        height:"800px"
+                        width:"100%",
+                        maxWidth:"90%",
+                        marginLeft:"5%",
+                        maxHeight:"600px",
+                        height:"auto"
+
                     }}
                 /> 
-                <div>                   
-                    <p className="share">تم النشر بواسطة: {article.source_string}</p> 
-                    <p className="content" style={{textAlign:"center"}}>{article.article_content}</p>    
+                <div className="video-info">
+                    <p className="event-card-date1">تم النشر بواسطة: {article.source_string}</p> 
+                    <p className="video-description">{article.article_content}</p>    
                 </div>
             </div>
 
@@ -158,8 +163,8 @@ const ArticleByDetails = () => {
                             <div className="comment-header">
                                 {studentsMap[comment.student_id] && (
                                     <>
-                                        <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
-                                        <h4>{studentsMap[comment.student_id].fullName}</h4>
+                            <h4>{studentsMap[comment.student_id].fullName}</h4>
+                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
                                     </>
                                 )}
                             </div>
@@ -168,9 +173,9 @@ const ArticleByDetails = () => {
                     ))}
                 </div>
 
-                <button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width: "12%", padding: "10px", marginLeft: "1%"}}>
+                {isAuthorized &&(<button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
                     {showCommentSection ? "الغاء" : "أضف تعليقاََ"}
-                </button>
+                    </button>)}
                 {showCommentSection && (
                     <div>
                         <textarea
@@ -195,41 +200,14 @@ const ArticleByDetails = () => {
 
             
 
-<div className="more-of-articles">
-                 <Row dir="rtl">
-                    <h2 className="more">المزيد من المقالات</h2>
-                    {filteredArticles.map((article) => (
-                        <Col key={article.article_id} xs={12} md={4}>
-                            <Card style={{ width: '18rem', marginRight: "90px", marginBottom: "100px" }}>
-                                <Link to={`/article/${article.article_id}`}>
-                                    <Card.Img
-                                        src={article.article_image_path}
-                                        alt={article.article_address}
-                                        style={{
-                                            filter: "blur(2px)",
-                                            opacity: "0.7",
-                                            filter: "brightness(70%)",
-                                            width: "100%",
-                                            height: " 300px",
-                                        }}
-                                    />
-                                </Link>
-                                <Card.Body>
-                                    <Card.Title className="address">{article.article_address} </Card.Title>
-                                    <p className="share">تم النشر بواسطه:{article.source_string}</p>
-                                    <p className="event-card-content">
-                {showFullContent ? article.article_content : (article.article_content.length > 100 ? `${article.article_content.slice(0, 100)}...` : article.article_content)}
-            </p>
-            {article.article_content.length > 100 && (
-                <button onClick={() => setShowFullContent(!showFullContent)} className="load-more-button1">
-                    {showFullContent ? "عرض اقل " : " عرض المزيد"}
-                </button>
-            )} 
-                                </Card.Body>
-                            </Card>
-                        </Col>
-                    ))}
-                </Row>
+    <div className="more-of-articles">
+    <div className="heading" id="topArticles"> المزيد من المقالات</div>
+    <div>
+        {filteredArticles.map(article => (
+            <ArticleItemStudent key={article.article_id} article={article} />
+        ))}
+        </div>
+                    
             </div>
 
 

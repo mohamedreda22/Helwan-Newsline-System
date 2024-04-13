@@ -110,7 +110,7 @@ export const RouterComponent = () => {
         
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/allPosts" element={<PostsStdView/>} />
-        <Route exact path="/see" element={ <SeeMoreArticles/>} />
+        <Route exact path="/articles" element={ <SeeMoreArticles/>} />
         <Route path="/articles/:article_id" element={<ArticlePage/>} />
 
         

@@ -1,6 +1,6 @@
 import {React,useState} from 'react';
 
-const ArticleItemStudent = ({ article }) => {
+const ArticleItemStudent = ({ article ,style}) => {
     const [showFullContent, setShowFullContent] = useState(false);
     const formatDateTime = (dateTimeString) => {
       const dateTime = new Date(dateTimeString);
@@ -14,7 +14,7 @@ const ArticleItemStudent = ({ article }) => {
   const { day, month } = formatDateTime(article.article_creation_date);
     
   return (
-    <div className="event-card-container"> 
+    <div className="event-card-container" style={style}> 
       <div className="event-card-item">
       <img src={article.article_image_path} className='event-card-image' alt='image_test'/>
         <div className="event-card-header">
