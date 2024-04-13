@@ -143,7 +143,7 @@ const ArticleByDetails = () => {
                 /> 
                 <div>                   
                     <p className="share">تم النشر بواسطة: {article.source_string}</p> 
-                    <p className="content" style={{textAlign:"center"}}>{article.articlel_content}</p>    
+                    <p className="content" style={{textAlign:"center"}}>{article.article_content}</p>    
                 </div>
             </div>
 
@@ -218,9 +218,9 @@ const ArticleByDetails = () => {
                                     <Card.Title className="address">{article.article_address} </Card.Title>
                                     <p className="share">تم النشر بواسطه:{article.source_string}</p>
                                     <p className="event-card-content">
-                {showFullContent ? article.articlel_content : (article.articlel_content.length > 100 ? `${article.articlel_content.slice(0, 100)}...` : article.articlel_content)}
+                {showFullContent ? article.article_content : (article.article_content.length > 100 ? `${article.article_content.slice(0, 100)}...` : article.article_content)}
             </p>
-            {article.articlel_content.length > 100 && (
+            {article.article_content.length > 100 && (
                 <button onClick={() => setShowFullContent(!showFullContent)} className="load-more-button1">
                     {showFullContent ? "عرض اقل " : " عرض المزيد"}
                 </button>

@@ -15,9 +15,9 @@ const ArticleItemStudent = ({ article }) => {
         <h3 className="event-card-title">{article.article_address}</h3>
         <span className="source-name"> نشر بواسطة: {article.source_string}</span>
           <p className="event-card-content">
-                {showFullContent ? article.articlel_content : (article.articlel_content.length > 100 ? `${article.articlel_content.slice(0, 100)}...` : article.articlel_content)}
+                {showFullContent ? article.article_content : (article.article_content.length > 100 ? `${article.article_content.slice(0, 100)}...` : article.article_content)}
             </p>
-            {article.articlel_content.length > 100 && (
+            {article.article_content.length > 100 && (
                 <button onClick={() => setShowFullContent(!showFullContent)} className="load-more-button1">
                     {showFullContent ? "عرض اقل " : " عرض المزيد"}
                 </button>

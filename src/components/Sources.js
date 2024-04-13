@@ -11,6 +11,8 @@ const Sources = () => {
 const [showEditModal, setShowEditModal] = useState(false);
 const [editSource, setEditSource] = useState(null);
 const [errorAlert, setErrorAlert] = useState(false);
+const [colleges, setColleges] = useState([]);
+const [departments, setDepartments] = useState([]);
 
   const fetchSources = async () => {
     try { 
@@ -23,9 +25,35 @@ const [errorAlert, setErrorAlert] = useState(false);
       setErrorAlert(true); // Set error alert to true if fetching fails
     }
   };
+  const fetchColleges = async ()=>{
+    try{
+      const response = await axios.get(
+        "http://localhost:9090/university/colleges"
+      );
+      setColleges(response.data);
+    }catch(error){
+      console.error("Error fetching colleges:", error);
+      setErrorAlert(true);
+    }
+  
+  }
+  const fetchDepartments =async ()=>{
+    try{
+      const response = await axios.get(
+        "http://localhost:9090/university/departments"
+      );
+      setDepartments(response.data);
+    }catch(error){
+      console.error("Error fetching departments:", error);
+      setErrorAlert(true);
+    }
+  
+  }
 
   useEffect(() => {
     fetchSources();
+    fetchColleges();
+    fetchDepartments();
   }, []);
 
   const handleDeleteSource = async (sourceId) => {
@@ -63,20 +91,41 @@ const [errorAlert, setErrorAlert] = useState(false);
   return (
     <>
       <div className="mt-2">
-        <div className="notifNum"> عدد الناشرين :{sources.length} </div>
+        <div className="total-events">عدد الناشرين : <span>{sources.length}</span></div>
 
         <Table responsive hover dir="rtl"   style={{marginBottom:"10px"}}>
+          <thead>
+            <tr>
+              <th>الاسم الكامل</th>
+              <th>البريد الالكتروني</th>
+              <th>الكلية</th>   
+              <th>القسم</th>           
+              <th>مسؤول عن</th>
+              <th>حذف</th>
+              <th>تعديل</th>
+            </tr>
+          </thead>
           <tbody>
             {sources.map((source) => (
               <React.Fragment key={source.source_id}>
               <tr>
                 <td>{source.full_name}</td>
                 <td>{source.email}</td>
+                <td>
+                  {colleges.map((college) => (
+                    college.college_id === source.college_id && (
+                      <span key={college.college_id}>{college.college_name}</span>
+                    )
+                  ))}
+                </td>
+                <td>
+                  {departments.map((department) => (
+                    department.department_id === source.department_id && (
+                      <span key={department.department_id}>{department.department_name}</span>
+                    )
+                  ))}
+                </td>
                 <td>{source.source_responsible}</td>
-                <td></td>
-                <td></td>
-                <td></td>
-                <td>{source.source_id}</td>
 
                 <td>
                   <img
