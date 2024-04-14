@@ -40,7 +40,7 @@ const CustomNavbar = () => {
       </Nav>
 
           <Nav className="me-auto custom-nav-links" >
-            <Nav.Link as={Link} to="/Helwan-Newsline-System" className="nav-link">الصفحة الرئيسية</Nav.Link>
+            <Nav.Link as={Link} to="/landingpage" className="nav-link">الصفحة الرئيسية</Nav.Link>
             <Nav.Link as={Link} to="/colleges" className="nav-link">الكليات</Nav.Link>
 {/*             <Nav.Link className="nav-link" onClick={() => scrollToSection("topNews")}>آخر الأخبار</Nav.Link>
  */}            <Nav.Link as={Link} to="/articles" className="nav-link" >أهم المقالات</Nav.Link>
