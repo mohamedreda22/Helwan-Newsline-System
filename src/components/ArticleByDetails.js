@@ -208,7 +208,7 @@ const ArticleByDetails = () => {
     <div>
         {filteredArticles.map(article => (
             // <ArticleItemStudent key={article.article_id} article={article} />
-            <Link key={article.article_id} to={`/article/${article.article_id}`} style={customStyle}>
+            <Link key={article.article_id} to={`/articles/${article.article_id}`} style={customStyle}>
             <ArticleItemStudent article={article} />
         </Link>
         ))}

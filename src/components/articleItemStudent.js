@@ -33,7 +33,7 @@ const ArticleItemStudent = ({ article ,style}) => {
                     {showFullContent ? "عرض اقل " : " عرض المزيد"}
                 </button>
             )}
-        <a href={`/articles/${article.article_id}`} className="links">عرض المزيد</a>
+        <a href={`/articles/${article.article_id}`} className="links" target='blank'>عرض المزيد</a>
           <div className="event-card-source">
 
         </div>

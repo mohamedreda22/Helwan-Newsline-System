@@ -71,7 +71,7 @@ const MoreArticlesForm = () => {
             <h1>قائمة المقالات</h1>
             {articles.map((article) => (
                 // استخدام Link بدلاً من div حول عنصر الـ ArticleItemStudent
-                <Link key={article.article_id} to={`/article/${article.article_id}`} style={customStyle}>
+                <Link key={article.article_id} to={`/articles/${article.article_id}`} style={customStyle}>
                     <ArticleItemStudent article={article} />
                 </Link>
             ))}
