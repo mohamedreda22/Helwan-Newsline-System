@@ -14,7 +14,7 @@ const ArticleItemStudent = ({ article ,style}) => {
   const { day, month } = formatDateTime(article.article_creation_date);
     
   return (
-    <div className="event-card-container" style={style}> 
+    <div className="event-card-container" style={style}>  
       <div className="event-card-item">
       <img src={article.article_image_path} className='event-card-image' alt='image_test'/>
         <div className="event-card-header">

@@ -127,7 +127,10 @@ const ArticleByDetails = () => {
     const filteredArticles = articles.filter(item => item.article_id !== article_id && (!article || item.article_id !== article.article_id)).slice(0, 3);
     
 
-     
+    const customStyle = {
+        width: '49%', 
+    };
+
 
 
     return ( 
@@ -204,7 +207,10 @@ const ArticleByDetails = () => {
     <div className="heading" id="topArticles"> المزيد من المقالات</div>
     <div>
         {filteredArticles.map(article => (
-            <ArticleItemStudent key={article.article_id} article={article} />
+            // <ArticleItemStudent key={article.article_id} article={article} />
+            <Link key={article.article_id} to={`/article/${article.article_id}`} style={customStyle}>
+            <ArticleItemStudent article={article} />
+        </Link>
         ))}
         </div>
                     
@@ -220,6 +226,6 @@ export default ArticleByDetails;
 
 
 
-
+//  Edit to go to the ArticleByDetails page
  
 
