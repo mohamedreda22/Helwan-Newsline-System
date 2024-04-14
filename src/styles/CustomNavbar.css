@@ -43,3 +43,16 @@
   .collapse7{
     font-weight: bold;
   }
+  .nav-link.logout-link {
+    color: #fff; /* White text */
+    background-color: #ff0000; /* Red background color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border-radius: 5px; /* Rounded corners */
+  }
+  
+  .nav-link.logout-link:hover {
+    background-color: #cc0000; /* Darker red background color on hover */
+  }
+  .nav-link.logout-link:active {
+    background-color: #2c12d8; /* Even darker red background color when active */
+  }  

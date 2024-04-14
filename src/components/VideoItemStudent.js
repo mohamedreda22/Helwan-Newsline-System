@@ -32,15 +32,16 @@ function VideoItemStudent({ video ,style}) {
 
     const { day, month } = formatDateTime(video.video_creation_date);
 
-    const showControls=()=>{
-        document.querySelector('.video-player1').controls = true;
-      }
+    const showControls = (event) => {
+        const videoPlayer = event.target;
+        videoPlayer.controls = true;
+    }
 
     return (
        <div className="video-card" style={style}>
       <div className="video-item-container" dir='rtl'>
         <video className="video-player1" onClick={showControls} >
-          <source src={video.video_path} type="video/mp4" />
+        <source src={`http://localhost:3000/${video.video_path}`} type="video/mp4" />
         </video>
         <div className="video-info">
           <h3 className="event-card-address">{video.video_title} </h3>

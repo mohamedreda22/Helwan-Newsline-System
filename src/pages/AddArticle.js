@@ -10,7 +10,7 @@ import '../styles/AddArticle.css';
 function AddArticle() {
   const [formData, setFormData] = useState({
     article_address: "",
-    articlel_content: "",
+    article_content: "",
     source_string: "",
     source_id: "",
     article_image_path: "",
@@ -76,7 +76,7 @@ function AddArticle() {
     setFormData({
       article_address: "",
       source_string: "",
-      articlel_content: "",
+      article_content: "",
       article_image_path: "",
       source_id: "",
     });
@@ -154,9 +154,9 @@ function AddArticle() {
                 as="textarea"
                 rows={5}
                 required
-                value={formData.articlel_content}
+                value={formData.article_content}
                 onChange={handleChange}
-                name="articlel_content"
+                name="article_content"
                 style={{ width: "350px" }} // Set the width inline
 
               />

@@ -6,7 +6,7 @@ import "../styles/EditEvent.css";
 export default function EditArticle({ article, onSave, onCancel }) {
     const [formData, setFormData] = useState({
         article_address: article?.article_address || "",
-        articlel_content: article?.articlel_content || "",        
+        article_content: article?.article_content || "",        
         article_image_path: article?.article_image_path || "",
         source_id: article?.source_id || "",
     });
@@ -19,7 +19,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
     useEffect(() => {
         setFormData({
             article_address: article?.article_address || "",
-            articlel_content: article?.articlel_content || "",
+            article_content: article?.article_content || "",
             source_id: article?.source_id || "",
             article_image_path: article?.article_image_path || "",
         });
@@ -98,11 +98,11 @@ export default function EditArticle({ article, onSave, onCancel }) {
                     />
                 </div>
                 <div className="form-group">
-                    <label className="lable" htmlFor="articlel_content">محتوى المقالة</label>
+                    <label className="lable" htmlFor="article_content">محتوى المقالة</label>
                     <textarea
-                        id="articlel_content"
-                        name="articlel_content"
-                        value={formData.articlel_content}
+                        id="article_content"
+                        name="article_content"
+                        value={formData.article_content}
                         onChange={handleChange}
                         className="form-control"
                         required

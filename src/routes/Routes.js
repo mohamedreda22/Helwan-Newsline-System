@@ -36,6 +36,7 @@ import News from '../pages/News';
 import StudentVideos from "../pages/VideosForStudents";
 import VideoDetails from "../components/videoDetails";
 import AddCollege from "../pages/AddCollege"
+import CollegeDetails from '../pages/CollegeDetails';
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -96,6 +97,7 @@ export const RouterComponent = () => {
         <Route path="/forgotPassword" element={<ForgotPassword/>} />
         <Route path="/updatePassword" element={<UpdatePassword/>} />
         <Route path="/colleges" element={<Colleges/>} />
+        <Route path="/colleges/:id" element={<CollegeDetails />} />
         <Route path="/message" element={<Message/>} />
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
@@ -107,7 +109,7 @@ export const RouterComponent = () => {
         
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/allPosts" element={<PostsStdView/>} />
-        <Route exact path="/see" element={ <SeeMoreArticles/>} />
+        <Route exact path="/articles" element={ <SeeMoreArticles/>} />
         <Route path="/articles/:article_id" element={<ArticlePage/>} />
 
         
@@ -138,7 +140,7 @@ export const RouterComponent = () => {
             <Route path="/sideBar" element={<SideBar/>} />
             <Route path="/message"      element={<Message/>} />
             <Route path="/addarticle"  element={<AddArticle/>} />
-            <Route path="/articles"    element={<Articles/>} />
+            <Route path="/articles1"    element={<Articles/>} />
             <Route path="/showPosts" element={<Posts/>} />
             <Route path="/addpost" element={<AddPost/>} />
             <Route path="/addNews" element={<AddNews/>} />

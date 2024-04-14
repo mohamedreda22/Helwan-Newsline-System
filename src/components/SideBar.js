@@ -38,7 +38,7 @@ export default function SideBar  ()  {
                         <Nav.Link href="addarticle" className='active'>
                             <span className="material-icons-outlined">add</span> اضافة مقال
                         </Nav.Link>
-                        <Nav.Link href="articles" className='active'>
+                        <Nav.Link href="articles1" className='active'>
                             <span className="material-icons-outlined">article</span> كل المقالات
                         </Nav.Link>
                     </SubMenu>

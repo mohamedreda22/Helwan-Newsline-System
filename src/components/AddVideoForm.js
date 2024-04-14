@@ -90,12 +90,12 @@ const AddVideoForm = ({ onVideoAdded }) => {
         //onVideoAdded(createResponse.data);
         console.log(formData)
 
-        setVideoTitle("");
+/*         setVideoTitle("");
         setVideoDescription("");
         setVideoFile(null);
         setCategoryId("");
         setSourceId("")
-        setError(""); 
+        setError("");  */
 
       } else {
         showAlertHandler('error', 'Failed', 'للاسف فشل اضافة الفيديو ', 'اغلاق');
