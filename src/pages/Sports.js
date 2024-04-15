@@ -33,6 +33,7 @@ function Sports() {
 
   const renderSports = () => {
     return sports.slice(startIndex, endIndex + 1).map((sport) => (
+      
       <SportItem key={sport.sport_id} sport={sport} onDelete={handleDeleteSport} onEdit={handleEditSport} />
     ));
   };
@@ -113,6 +114,18 @@ function Sports() {
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">
+            <thead>
+                <tr>
+                  <th>&emsp;&emsp;
+                    صورة الرياضة &emsp;
+                  عنوان الرياضة    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   تفاصيل الرياضة&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                  تاريخ الاعلان&emsp;
+                 تعديل&emsp;
+                حذف
+                 </th>
+                </tr>
+              </thead>
               <tbody>
                 {renderSports()}
               </tbody>

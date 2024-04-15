@@ -131,6 +131,15 @@ function FAQs() {
               {showAddFaq && <AddFaq onClose={() => setShowAddFaq(false)} />}
             </div>
             <table id="faq-table" className="faq-table">
+            <thead>
+                <tr>
+                  <th>&emsp;&emsp;
+                   السؤال / الاجابة &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                 تعديل&emsp;
+                حذف
+                 </th>
+                </tr>
+              </thead>
               <tbody>
                 {renderFaqs()}
               </tbody>

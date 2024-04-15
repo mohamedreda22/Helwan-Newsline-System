@@ -20,23 +20,23 @@ function Events() {
 
   const eventsPerPage = 9;
 
-    // Pagination hook
-    const {
-      currentPage,
-      totalPages,
-      goToPage,
-      goToFirstPage,
-      goToLastPage,
-    } = usePagination(totalEvents, eventsPerPage);
-  
-    const startIndex = (currentPage - 1) * eventsPerPage;
-    const endIndex = startIndex + eventsPerPage - 1;
+  // Pagination hook
+  const {
+    currentPage,
+    totalPages,
+    goToPage,
+    goToFirstPage,
+    goToLastPage,
+  } = usePagination(totalEvents, eventsPerPage);
 
-    const renderEvents = () => {
-      return events.slice(startIndex, endIndex + 1).map((event) => (
-        <EventItem key={event.event_id} event={event} onDelete={handleDeleteEvent} onEdit={handleEditEvent} />
-      ));
-    };
+  const startIndex = (currentPage - 1) * eventsPerPage;
+  const endIndex = startIndex + eventsPerPage - 1;
+
+  const renderEvents = () => {
+    return events.slice(startIndex, endIndex + 1).map((event) => (
+      <EventItem key={event.event_id} event={event} onDelete={handleDeleteEvent} onEdit={handleEditEvent} />
+    ));
+  };
 
   useEffect(() => {
     fetchEvents();
@@ -52,7 +52,7 @@ function Events() {
   const fetchEvents = async () => {
     try {
       const response = await axios.get("http://localhost:9090/university/events");
-      setTotalEvents(response.data.length); 
+      setTotalEvents(response.data.length);
       setEvents(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -105,48 +105,59 @@ function Events() {
 
   return (
     <div className={`events-page ${isEditing && eventIdToEdit && editedEvent ? 'blur-background' : ''}`}>
-    <SideBar />
+      <SideBar />
       {isEditing && eventIdToEdit && editedEvent ? (
-      <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
-      ):(
+        <EditEvent event={editedEvent} onSave={handleSave} onCancel={handleCancelEdit} />
+      ) : (
         <>
-      
-      <h2>جميع الاحداث</h2>
-      {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
-      {error && <p>{error}</p>}      
+          <h2>جميع الاحداث</h2>
+          {isLoading && <p className="loading-text">جاري تحميل الاحداث...</p>}
+          {error && <p>{error}</p>}
 
-      <div className="total-events">
-        عدد الاحداث : <span>{events.length}</span>
-      </div>
-      <div className="events-container">
-        <table id="events-table" className="events-table">
-          <tbody>
-            {renderEvents()}
-          </tbody>
-        </table>
+          <div className="total-events">
+            عدد الاحداث : <span>{events.length}</span>
+          </div>
+          <div className="events-container">
+            <table id="events-table" className="events-table">
+              <thead>
+                <tr>
+                  <th>&emsp;
+                    صورة الحدث &emsp;
+                  عنوان / وصف    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                  رابط الحدث&emsp;
+                  تاريخ الحدث&emsp;
+                  مكان الحدث&emsp;
+                 حذف&emsp;
+                 تعديل 
 
-        {totalEvents > eventsPerPage && (
+                 </th>
+                </tr>
+              </thead>
+              <tbody>
+                {renderEvents()}
+              </tbody>
+            </table>
+
+            {totalEvents > eventsPerPage && (
               <div className="pagination">
-                  <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
-                  <div className="page-numbers">
-                      {Array.from({ length: totalPages }, (_, index) => (
-                          <span
-                              key={index + 1}
-                              className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-                              onClick={() => goToPage(index + 1)}
-                              disabled={currentPage === index + 1}
-
-                          >
-                              {index + 1}
-                          </span>
-                      ))}
-                     </div>
-              <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
-                            </div>
-
-                                     )}
-      </div>
-      </>
+                <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
+                <div className="page-numbers">
+                  {Array.from({ length: totalPages }, (_, index) => (
+                    <span
+                      key={index + 1}
+                      className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                      onClick={() => goToPage(index + 1)}
+                      disabled={currentPage === index + 1}
+                    >
+                      {index + 1}
+                    </span>
+                  ))}
+                </div>
+                <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
+              </div>
+            )}
+          </div>
+        </>
       )}
     </div>
   );
