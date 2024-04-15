@@ -1,17 +1,24 @@
 /* styles.css */
-.video-details-container {
+.post-details-container {
     margin: 20px;
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
     background-color: #f9f9f9;
   }
+  .postImg{
+    margin: 10px;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+   max-width: 120px;
+  }
   
-  .video-info {
+  .post-info {
     margin-bottom: 20px;
   }
   
-  .video-title {
+  .post-title {
     font-size: 30px;
     font-weight: bold;
     text-align: right;
@@ -19,7 +26,7 @@
     
   }
   
-  .video-description {
+  .post-description {
     font-size: 20px;    
     text-align: right;
     padding-right: 10px;
@@ -27,7 +34,7 @@
 
   }
   
-  .video-player {
+  .post-player {
     width: 100%;
     height: 500px;
   }
@@ -66,24 +73,4 @@
     background-color: #cccccc86;
     border-radius: 20px;
   }
-.postCards{
-  width: 400px;
-  height: 300px;
-}
-.postImage {
-  width: 200px; /* Set your desired width for the image */
-  height: 200px; /* Set your desired height for the image */
-  object-fit: cover; /* Ensure the image covers the entire area */
-}
-
-.postContent {
-  height: 100px; /* Set your desired height for the text area */
-  overflow: hidden; /* Hide overflow content */
-}
-
-.sourceText {
-  /* Add any additional styles for the source text here */
-}
-.postD-sourceSt{
-  margin-top: 30px;
-}
+a{text-decoration: none;}
