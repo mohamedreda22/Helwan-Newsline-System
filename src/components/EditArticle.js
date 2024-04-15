@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Simplert from 'react-simplert'
 import "../styles/EditEvent.css";
+import Row from "react-bootstrap/Row";
 
 export default function EditArticle({ article, onSave, onCancel }) {
     const [formData, setFormData] = useState({
@@ -22,6 +23,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
             article_content: article?.article_content || "",
             source_id: article?.source_id || "",
             article_image_path: article?.article_image_path || "",
+            source_string: article?.source_string
         });
     }, [article]);
 
@@ -108,8 +110,9 @@ export default function EditArticle({ article, onSave, onCancel }) {
                         required
                     />
                 </div>
+                <Row className="article-form-row">
                 <div className="form-group">
-                    <label className="lable" htmlFor="source_id">مصدر المقالة</label>
+                    <label className="lable" htmlFor="source_id">المصدر </label>
                     <select
                         id="source_id"
                         name="source_id"
@@ -118,7 +121,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                         className="form-control"
                         required
                     >
-                        <option value="">اختر مصدر المقالة</option>
+                        <option value="">اختر المصدر </option>
                         {sources.map(source => (
                             <option key={source.source_id} value={source.source_id}>
                                 {source.full_name}
@@ -126,6 +129,18 @@ export default function EditArticle({ article, onSave, onCancel }) {
                         ))}
                     </select>
                 </div>
+                <div className="form-group">
+                    <label className="lable" htmlFor="article_address"> مصدر المقال</label>
+                    <input
+                        id="source_string"
+                        name="source_string"
+                        value={formData.source_string}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                    />
+                </div>
+                </Row>
                 <div className="form-group">
                     <label className="lable" htmlFor="article_image_path">تعديل الصورة</label>
                     <br/>
