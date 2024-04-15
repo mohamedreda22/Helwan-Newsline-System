@@ -135,7 +135,7 @@ function LogIn() {
                             required
                         />
                     </div>
-                    <div className="form-group">
+{/*                     <div className="form-group">
                         <label className='remember-me'  htmlFor="remember-me">تذكرني دائما</label>
                         <input
                             type="checkbox"
@@ -145,8 +145,8 @@ function LogIn() {
                             className="checkbox"
                             //checked={formData.rememberMe}
                         />
-                    </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit">
+                    </div> */}
+                    <button type="submit" disabled={isLoading} className="btn-submit" >
                         {isLoading ? 'جاري تسجيل الدخول' : 'تسجيل الدخول'}
                     </button>
                     {error && <div className="error">{error}</div>}
