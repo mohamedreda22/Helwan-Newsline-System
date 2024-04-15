@@ -109,6 +109,18 @@ function News() {
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">
+            <thead>
+                <tr>
+                  <th>&emsp;&emsp;
+                    صورة الخبر &emsp;
+                  عنوان الخبر    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                  تاريخ النشر&emsp;&emsp;
+                  مصدر الخبر&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                 تعديل&emsp;
+                حذف
+                 </th>
+                </tr>
+              </thead>
               <tbody>
                 {renderNews()}
               </tbody>

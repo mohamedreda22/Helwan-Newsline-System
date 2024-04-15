@@ -122,6 +122,19 @@ function Posts() {
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">
+            <thead>
+                <tr>
+                  <th>&emsp;&emsp;
+                    صورة المنشور &emsp;
+                   محتوي المشور    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    المصدر&emsp;&emsp;&emsp;&emsp;
+                   تاريخ النشر&emsp;&emsp;&emsp;
+                   مصدر المنشور&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                 تعديل&emsp;
+                حذف
+                 </th>
+                </tr>
+              </thead>
               <tbody>
                 {renderPosts()}
               </tbody>

@@ -18,13 +18,10 @@ const ShowDepartments = () => {
   const [editedDepartment, setEditedDepartment] = useState(null);
   const [successAlert, setSuccessAlert] = useState(false);
   const [errorAlert, setErrorAlert] = useState(false);
-  const [userRole, setUserRole] = useState(""); 
   const [departmentEditId, setDepartmentEditId] = useState (null);
 
   useEffect(() => {
     fetchColleges();
-    const role = localStorage.getItem("userRole");
-    setUserRole(role);
   }, []);
 
   useEffect(() => {
@@ -39,6 +36,7 @@ const ShowDepartments = () => {
         `http://localhost:9090/university/colleges/getAllDepartments/${collegeId}`
       );
       setDepartments(response.data);
+      console.log("Response data:", response.data);
     } catch (error) {
       console.error("Error fetching departments:", error);
       setErrorAlert(true);
@@ -119,9 +117,9 @@ const ShowDepartments = () => {
       </select>
       <div>
         {departments.map((department) => (
-          <div key={department.id} dir="rtl" className="dataContainer">
+          <div key={department.department_id} dir="rtl" className="dataContainer">
             <div className="depName">
-              <p>{department.name}</p>
+              <p>{department.department_name}</p>
             </div>
             <button
               type="button"

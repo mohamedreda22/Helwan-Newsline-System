@@ -110,6 +110,19 @@ function Articles() {
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">
+            <thead>
+                <tr>
+                  <th>&emsp;
+                    صورة المقال &emsp;
+                  عنوان المقال    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   نص المقال&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   مصدر المقال&emsp;
+                  تاريخ النشر&emsp;
+                 تعديل&emsp;
+                حذف
+                 </th>
+                </tr>
+              </thead>
               <tbody>
                 {renderArticles()}
               </tbody>

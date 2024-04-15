@@ -17,7 +17,7 @@ const NotFound = () => {
         <p className="not-found-message">Please check the URL or contact the administrator for assistance.</p>
         <div className="btn-container">
         <button className='btn-submit' onClick={() => navigate('/login')}>Back to LogIn page</button>
-        <button className='btn-submit' onClick={() => navigate('/collages')} style={{backgroundColor: "blue"}}>Go to Collages page</button>
+        <button className='btn-submit' onClick={() => navigate('/colleges')} style={{backgroundColor: "blue"}}>Go to Colleges page</button>
 
       </div>
       

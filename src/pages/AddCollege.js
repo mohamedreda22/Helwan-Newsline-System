@@ -1,6 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import SideBar from '../components/SideBar';
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
@@ -11,6 +9,8 @@ function AddCollege() {
   const [formData, setFormData] = useState({
     college_name: "",
     college_icon: "",
+    college_back_ground: "",
+
   });
 
   const handleChange = (e) => {
@@ -21,7 +21,7 @@ function AddCollege() {
     });
   };
 
-  const handleFileChange = (event) => {
+  const handleFileChange1 = (event) => {
     const file = event.target.files[0];
     const reader = new FileReader();
 
@@ -30,6 +30,19 @@ function AddCollege() {
         setFormData({
           ...formData,
           college_icon: reader.result,
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };  const handleFileChange2 = (event) => {
+    const file = event.target.files[0];
+    const reader = new FileReader();
+
+    if (file) {
+      reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          college_back_ground: reader.result,
         });
       };
       reader.readAsDataURL(file);
@@ -83,7 +96,16 @@ function AddCollege() {
             <Form.Control 
               type="file" 
               name="college_icon" 
-              onChange={handleFileChange} 
+              onChange={handleFileChange1} 
+              required 
+            />
+          </Form.Group>
+          <Form.Group controlId="collegeBackGround">
+            <Form.Label className='lable'>خلفية الكلية</Form.Label>
+            <Form.Control 
+              type="file" 
+              name="college_back_ground" 
+              onChange={handleFileChange2} 
               required 
             />
           </Form.Group>
