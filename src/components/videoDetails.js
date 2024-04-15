@@ -122,7 +122,8 @@ const VideoDetails = () => {
         return <p>{error}</p>;
     }
 
-    const modifiedVideoPath = videoData?.video_path.replace('/videos', '');
+    const modifiedVideoPath = videoData?.video_path?.replace('/videos', '');
+
 
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);

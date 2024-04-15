@@ -4,7 +4,7 @@ import Simplert from 'react-simplert';
 import SideBar from './SideBar';
 import './EditVideo.css';
 
-function EditVideo({ video, onSave, onCancel,onFileChange }) {
+function EditVideo({ video, onSave, onCancel }) {
   const [formData, setFormData] = useState({
     video_title: video?.video_title || "",
     category_id: video?.category_id || "",
@@ -16,13 +16,13 @@ function EditVideo({ video, onSave, onCancel,onFileChange }) {
   const [error, setError] = useState('');
   const [showSuccessAlert, setShowSuccessAlert] = useState(false);
   const [showErrorAlert, setShowErrorAlert] = useState(false);
-  const [videoFile, setVideoFile] = useState(null);
   const [categories, setCategories] = useState([]);
   const [sources, setSources] = useState([]);
+  const [videoFile, setVideoFile] = useState(null);
 
 
  
-
+/* 
   useEffect(()=>{
     setFormData({
       ...formData,
@@ -32,7 +32,7 @@ function EditVideo({ video, onSave, onCancel,onFileChange }) {
       video_path: video?.video_path || "",
       source_id:video?.source_id || "",
     })
-  }, [video, videoFile]); 
+  }, [video]);  */
 
   const fetchVideoDetails = async () => {
     try {
@@ -41,7 +41,6 @@ function EditVideo({ video, onSave, onCancel,onFileChange }) {
       setFormData({
         video_title: videoData.video_title,
         video_description: videoData.video_description,
-        video_path: videoData.video_path,
         category_id: videoData.category_id,
         source_id: videoData.source_id,
       });
@@ -80,101 +79,52 @@ const fetchSources = async () => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
   };
-
-/*   const handleFileChange = (e) => {
-    const file = e.target.files[0];
-    setVideoFile(file);
-    if (onFileChange) {
-      onFileChange(file);
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  try {
+    setIsLoading(true);
+    let videoPath = formData.video_path; // Keep the old video_path
+    if (videoFile) {
+      // If a new video file is uploaded, update the video path
+      const videoFormData = new FormData();
+      videoFormData.append("video", videoFile);
+      const uploadResponse = await axios.post(
+        "http://localhost:5000/upload",
+        videoFormData
+      );
+      videoPath = uploadResponse.data.filePath;
     }
 
-  }; */
-/*   const handleFileChange = (e) => {
-    setVideoFile(e.target.files[0]);
-    if (onFileChange) {
-      onFileChange(e.target.files[0]);
-    }
-  }; */
+    const updatedFormData = {
+      ...formData,
+      video_title: formData.video_title,
+      video_description: formData.video_description,
+      video_path: videoPath, // Use the updated video path
+      category_id: formData.category_id,
+      source_id: formData.source_id,
+    };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setIsLoading(true);
-        const videoFormData = new FormData();
-        videoFormData.append('video', videoFile);
-        const uploadResponse = await axios.post('http://localhost:5000/upload', videoFormData);
-        const videoPath = uploadResponse.data.filePath;
-        //updatedFormData = uploadResponse.data.filePath;
-        console.log("path",videoPath)
-        const updatedFormData = {
-          ...formData,
-          video_path: videoPath,
-        };
-      
-      const response = await axios.put(`http://localhost:9090/university/videos/${video.video_id}`, updatedFormData);
-      if (response && (response.status === 200 || response.status === 201 || response.status === 202)) {
-        setShowSuccessAlert(true);
-        onSave(updatedFormData);
-        console.log(updatedFormData)
-      }
-      else{
-        setShowErrorAlert('error', 'Failed', 'للاسف فشل تعديل الفيديو ', 'اغلاق');
-        setError('حدث خطأ أثناء تعديل الفيديو');
-      }
-    } catch (error) {
-      console.error('Error updating video:', error);
-      if (error.response) {
-        setShowErrorAlert('error', 'Failed', error.response.data.message, 'اغلاق');
-    } else {
-        setShowErrorAlert('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
-    }
-    } finally {
-      setIsLoading(false);
-    }
-  };
+    const response = await axios.put(
+      `http://localhost:9090/university/videos/${video.video_id}`,
+      updatedFormData
+    );
 
-/*   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setIsLoading(true);
-      const updatedFormData = { ...formData };
-      if (videoFile) {
-        const videoFormData = new FormData();
-        videoFormData.append('video', videoFile);
-        const uploadResponse = await axios.post('http://localhost:5000/upload', videoFormData);
-        //updatedFormData.video_path = uploadResponse.data.filePath;
-        updatedFormData = {
-          ...updatedFormData,
-          video_path: uploadResponse.data.filePath,
-        };
-      }
-      const response = await axios.put(`http://localhost:9090/university/videos/${video.video_id}`, updatedFormData);
-      if (response && (response.status === 200 ||response.status === 201 || response.status === 202)) {
-        setShowSuccessAlert(true);
-        onSave(updatedFormData);
-      }
-    } catch (error) {
-      console.error('Error updating video:', error);
-      setShowErrorAlert(true);
-    } finally {
-      setIsLoading(false);
-    }
-  }; */
-/*   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      setIsLoading(true);
-      const response = await axios.put(`http://localhost:9090/university/videos/${video.video_id}`, formData);
-      if (response.status === 200) {
+    if (response && (response.status === 200 || response.status === 201 || response.status === 202)) {
       setShowSuccessAlert(true);
-      onSave(formData);}
-    } catch (error) {
-      console.error('Error updating video:', error);
-      setShowErrorAlert(true);
-    } finally {
-      setIsLoading(false);
+      onSave(updatedFormData);
+      console.log(updatedFormData);
+      setTimeout(() => {
+        window.location.reload();
+      }, 1000);
+    } else {
+      setShowErrorAlert('error', 'Failed', 'للاسف فشل تعديل الفيديو ', 'اغلاق');
+      setError('حدث خطأ أثناء تعديل الفيديو');
     }
-  }; */
+  } catch (error) {
+    console.error('Error updating video:', error);
+    setShowErrorAlert(true);
+  }
+};
 
   return (
     <div className="edit-video-page">
@@ -244,17 +194,14 @@ const fetchSources = async () => {
               required
             />
           </div>
-          <div className="form-group">
-            <label htmlFor="video_path" className="lable">تعديل الفيديو:</label>
+            <div className="form-group">
+            <label className="lable">ملف الفيديو:</label>
             <input
               className="form-control-video"
               type="file"
-              accept="video/*"
-              id='video_path'
-              name='video_path'
               onChange={(e) => setVideoFile(e.target.files[0])}
-              //onChange={(e) => setVideoFile(e.target.files[0])}
-              />
+              required
+            />
           </div>
           <div className="btn-container2">
                 <button type="submit" className="btn-submit" style={{ width: "30%" }}>

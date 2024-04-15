@@ -15,7 +15,7 @@ function VideoList() {
   const [editedVideo, setEditedVideo] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [videoIdToEdit, setVideoIdToEdit] = useState(null);
-  const [videoFile, setVideoFile] = useState(null);
+  const [videoFile, setVideoFile] = useState(null); // Define videoFile state
 
   const videosPerPage = 9;
 
@@ -48,18 +48,6 @@ function VideoList() {
       setIsLoading(false);
     }
   };
-/*   const handleEdit = async (videoId) => {
-    try {
-      setIsLoading(true);
-      const response = await axios.get(`http://localhost:9090/university/videos/${videoId}`);
-      const videoData = response.data;
-      setEditedVideo(videoData);
-    } catch (error) {
-      console.error("Error fetching video for editing:", error);
-      setError("An error occurred while fetching the video for editing.");
-      setIsLoading(false);
-    }
-  }; */
   
   const handleEditVideo = (eventId) => {
     setIsEditing(true);
@@ -68,7 +56,7 @@ function VideoList() {
   const handleCancelEdit = () => {
     setIsEditing(false);
     setEditedVideo(null);
-    setVideoFile(null); 
+
 
   };
 
@@ -79,6 +67,30 @@ function VideoList() {
     }
   }, [isEditing, videoIdToEdit, videos]);
 
+  const handleSave = async (updatedVideo ,videoFile) => {
+    try {
+      // Fetch the video file path
+      const response = await axios.post("http://localhost:5000/upload", videoFile);
+      const videoPath = response.data.filePath;
+  
+      // Update the video path in updatedVideo
+      updatedVideo.video_path = videoPath;
+  
+      // Make the PUT request with updatedVideo
+      await axios.put(`http://localhost:9090/university/videos/${videoIdToEdit}`, updatedVideo);
+  
+      // Reset states and fetch updated videos
+      setIsEditing(false);
+      setEditedVideo(null);
+      fetchVideos();
+    } catch (error) {
+      console.error("Error updating video:", error);
+      setError("An error occurred while updating the video.");
+    }
+  };
+  
+
+
   const handleDelete = async (videoId) => {
     try {
       await axios.delete(`http://localhost:9090/university/videos/${videoId}`);
@@ -88,72 +100,14 @@ function VideoList() {
       setError("An error occurred while deleting the video.");
     }
   }
-/*   const handleSave = async () => {
-    try {
-      const updatedVideo = {
-        video_title: editedVideo.video_title, 
-        video_description: editedVideo.video_description,
-        category_id: editedVideo.category_id,
-        source_id: editedVideo.source_id,
-        video_path: editedVideo.video_path,
-      };
-        
 
-      await axios.put(`http://localhost:9090/university/videos/${editedVideo.video_id}`,updatedVideo);
-      fetchVideos();
-      handleCancelEdit();
-    } catch (error) {
-      console.error("Error updating video:", error);
-      setError("An error occurred while updating the video.");
-    }
-  } */
-
-  const handleSave = async () => {
-    try {
-      let updatedVideoCopy = { ...editedVideo }; // Copy the editedVideo object
-  
-      // If videoFile exists, upload the file and update the video_path
-      if (videoFile) {
-        const videoFormData = new FormData();
-        videoFormData.append('video', videoFile);
-        const uploadResponse = await axios.post('http://localhost:5000/upload', videoFormData);
-        const videoPath = uploadResponse.data.filePath;
-        updatedVideoCopy = {
-          ...updatedVideoCopy,
-          video_path: videoPath,
-        };
-      }
-  
-/*       // Update the video with edited data
-      updatedVideoCopy = {
-        ...updatedVideoCopy,
-        video_title: formData.video_title,
-        video_description: formData.video_description,
-        category_id: formData.category_id,
-        source_id: formData.source_id,
-      }; */
-  
-      // Send the updated video data to the server
-      await axios.put(`http://localhost:9090/university/videos/${editedVideo.video_id}`, updatedVideoCopy);
-      fetchVideos();
-      handleCancelEdit();
-      console.log("updatedVideoCopy",updatedVideoCopy)
-    } catch (error) {
-      console.error("Error updating video:", error);
-      setError("An error occurred while updating the video.");
-    }
-  };
-  
-  const handleFileChange = (e) => {
-    setVideoFile(e.target.files[0]); // Update videoFile state when a new file is selected
-  };
 
   const renderVideos = () => {
     return videos.slice(startIndex, endIndex + 1).map((video) => (
       <VideoItem 
       key={video.video_id} 
       video={video} 
-      onDelete={handleDelete}      
+      onDelete={handleDelete}     
       onEdit={handleEditVideo} 
 />
     ));
@@ -166,8 +120,8 @@ function VideoList() {
         <EditVideo
           video={editedVideo}
           onCancel={handleCancelEdit}
-          onSave={handleSave}
-          onFileChange={handleFileChange} 
+          onSave={(updatedVideo, videoFile) => handleSave(updatedVideo, videoFile)} // Pass videoFile to handleSave
+          setVideoFile={setVideoFile} // Pass setVideoFile function to EditVideo
         />
       ):
       <>
