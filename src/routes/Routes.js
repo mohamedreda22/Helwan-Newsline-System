@@ -35,6 +35,7 @@ import Sports from '../pages/Sports';
 import News from '../pages/News';
 import StudentVideos from "../pages/VideosForStudents";
 import VideoDetails from "../components/videoDetails";
+import PostDetails from '../pages/PostDetails';
 import AddCollege from "../pages/AddCollege"
 import CollegeDetails from '../pages/CollegeDetails';
 
@@ -102,13 +103,15 @@ export const RouterComponent = () => {
         <Route path="/landingPage" element={<LandingPage/>} />
         <Route path="/videos" element={<StudentVideos/>} />
         <Route path="/videos/:id" element={<VideoDetails />} />
+        <Route path="/posts/:post_id" element={<PostDetails />} />
 
+        
 
 
           
         
         <Route path="/importantEvents" element={<ImportantEvents/>} />
-        <Route path="/allPosts" element={<PostsStdView/>} />
+        <Route path="/posts" element={<PostsStdView/>} />
         <Route exact path="/articles" element={ <SeeMoreArticles/>} />
         <Route path="/articles/:article_id" element={<ArticlePage/>} />
 

@@ -9,9 +9,17 @@ import date from "../assets/icons/time.svg";
 
 const PostsStdView = () => {
   const [posts, setPosts] = useState([]);
-  const [errorAlert, setErrorAlert] = useState(false);
-  const [categories, setCategories] = useState([]);
   const [showMore, setShowMore] = useState(false);
+
+  const handlePostClick = async (postId) => {
+    try {
+      // Open the post details in a new tab
+      window.open(`/posts/${postId}`, "_blank");
+    } catch (error) {
+      console.error("Error opening post details:", error);
+      // Handle error
+    }
+  };
 
   const formatDateTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
@@ -28,23 +36,11 @@ const PostsStdView = () => {
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching posts:", error);
-      setErrorAlert(true);
-    }
-  };
-
-  const fetchCategories = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9090/university/categories/getAllPosts/{categoryId}"
-      );
-      setCategories(response.data);
-    } catch (error) {
-      console.error("Error fetching categories:", error);
+      // Handle error
     }
   };
 
   useEffect(() => {
-    fetchCategories();
     fetchPosts();
   }, []);
 
@@ -104,9 +100,14 @@ const PostsStdView = () => {
                         height={18}
                         className="post-icon"
                       />
-                    <div className="event-card-date1" >
-                        <span className="day1">{formatDateTime(postItem.post_creation_date).day}</span> {/* Display day */}
-                        <span className="event-card-month1">{formatDateTime(postItem.post_creation_date).month}</span>
+                      <div className="event-card-date1">
+                        <span className="day1">
+                          {formatDateTime(postItem.post_creation_date).day}
+                        </span>{" "}
+                        {/* Display day */}
+                        <span className="event-card-month1">
+                          {formatDateTime(postItem.post_creation_date).month}
+                        </span>
                       </div>
                     </div>
                     <div className="card-meta card-meta--date post-icons">
@@ -129,12 +130,11 @@ const PostsStdView = () => {
                       />
                       5555
                     </div>
-                    <a
-                      href={`/posts/${postItem.post_id}`}
-                      className="btn btn--with-icon"
-                      target="blank"
-                    >
-                      <button class="postDetailsBtn">
+                    <a className="btn btn--with-icon" target="blank">
+                      <button
+                        class="postDetailsBtn"
+                        onClick={() => handlePostClick(postItem.post_id)}
+                      >
                         تفاصيل اكثر
                         <span class="arrow">
                           <svg

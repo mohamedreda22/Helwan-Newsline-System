@@ -227,19 +227,7 @@ function ImportantEvents() {
                         {formatDateTime(eventItem.event_date).month}
                       </span>
                     </li>
-                    <li className="tags">
-                      <ul>
-                        <li>
-                          <Link to="#">Learn</Link>
-                        </li>
-                        <li>
-                          <Link to="#">Code</Link>
-                        </li>
-                        <li>
-                          <Link to="#">JavaScript</Link>
-                        </li>
-                      </ul>
-                    </li>
+                    
                   </ul>
                 </div>
                 <div className="impEvents-description">
