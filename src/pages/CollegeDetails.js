@@ -213,7 +213,7 @@ const CollegeDetails = () => {
                 <div className="heading" id="topPosts">آخر المنشورات </div>
                 <div className="description">
               <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-              <Link className="links" to="/allPosts">رؤية جميع المنشورات</Link>
+              <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
             </div>
             {posts.slice(0, displayedPosts).map(post => (
                         <PostItemStudent key={post.post_id} post={post} />
