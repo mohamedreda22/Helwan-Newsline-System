@@ -116,7 +116,6 @@ function LandingPage() {
             <div className="heading" id="topNews">آخر الأخبار</div>
             <div className="description">
               <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-              <Link className="links" to="/news">رؤية جميع الأخبار</Link>
             </div>
             <div>
               {news.slice(0, displayedNews).map(news => (
@@ -131,7 +130,6 @@ function LandingPage() {
             <div className="heading" id="topEvents">اهم الاحداث</div>
             <div className="description">
               <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
-              <Link className="links" to="/events">رؤية جميع الفعاليات</Link>
             </div>
             <div>
               {events.slice(0, displayedEvents).map(event => (
@@ -163,7 +161,7 @@ function LandingPage() {
             
             <div className="description">
               <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-              <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
+              <Link className="links" to="/allPosts">رؤية جميع المنشورات</Link>
             </div>
             <div>
               {posts.slice(0, displayedPosts).map(post => (
@@ -179,7 +177,6 @@ function LandingPage() {
             <div className="heading">الرياضة</div>
             <div className="description">
               <div>تقام الأنشطة الرياضية بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
-              <Link className="links" to="/sports">رؤية جميع الأنشطة الرياضية</Link>
             </div>
             <div>
             {sports.slice(0, displayedSports).map(sport => (
