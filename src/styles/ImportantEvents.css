@@ -82,9 +82,14 @@ body {
   right: 0;
   bottom: 0;
   left: 0;
-  background-size: cover;
+  background-size:contain;
+  background-repeat: no-repeat;
   background-position: center;
   transition: transform 0.2s;
+  max-height:250px;
+  max-width:300px;
+  height:250px;
+  width:300px;
 }
 
 .blog-card .details,
@@ -166,9 +171,8 @@ body {
 
 .imp-event-Des {
   font-size: 1rem;
-  font-weight: 300;
-  text-transform: uppercase;
-  color: #a2a2a2;
+  font-weight: 350;
+  color: #3d3b3b;
   margin-top: 5px;
   text-align: right;
 }
@@ -249,4 +253,12 @@ body {
   .blog-card.alt .details {
     padding-left: 25px;
   }
+}
+.header0{
+  color: rgb(0, 0, 0);
+  padding: 10px;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 300;
+  font-family: 'Poppins', sans-serif;
 }

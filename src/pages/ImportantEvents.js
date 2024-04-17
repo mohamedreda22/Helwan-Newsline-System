@@ -122,11 +122,10 @@ import React, { useState, useEffect } from "react";
 import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import "../styles/ImportantEvents.css";
-import { Link } from "react-router-dom";
 import axios from "axios";
-import hu from "../assets/images/HU.png";
 import Calendar from "react-calendar";
 import "react-calendar/dist/Calendar.css";
+import watch from "../assets/icons/watch.png";
 
 function ImportantEvents() {
   const [events, setEvents] = useState([]);
@@ -206,7 +205,6 @@ function ImportantEvents() {
         </div>
         {/* <div className=" row event-cards1"> */}
         <div className=" row">
-
           {events.length > 0 ? (
             events.map((eventItem) => (
               <div className="blog-card alt col-8 " key={eventItem.event_id}>
@@ -231,13 +229,14 @@ function ImportantEvents() {
                   </ul>
                 </div>
                 <div className="impEvents-description">
-                  <h1>{eventItem.event_address}</h1>
+                <h1 className="header0">{eventItem.event_address.length > 45 ? `${eventItem.event_address.slice(0, 45)}...` : eventItem.event_address}</h1>
                   <h3 className="imp-event-Des">{eventItem.event_description}</h3>
-                  <p>{eventItem.event_link_path}</p>
-                  <p className="read-more">
-                    <Link to="#">Read More</Link>
-                  </p>
-                </div>
+                  <div>
+                    <a href={eventItem.event_link_path} target="_blank" rel="noreferrer" className="event-item-link">
+                        <span>مشاهدة اللقاء</span>
+                        <img src={watch} alt="Watch Event" className="watch-icon" />
+                    </a>
+                    </div>                </div>
               </div>
             ))
           ) : (

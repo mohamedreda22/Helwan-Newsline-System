@@ -44,6 +44,7 @@ const CustomNavbar = () => {
             <Nav.Link as={Link} to="/colleges" className="nav-link">الكليات</Nav.Link>
             <Nav.Link as={Link} to="/articles" className="nav-link" >أهم المقالات</Nav.Link>
             <Nav.Link as={Link} to="/posts" className="nav-link"> آخر المنشورات</Nav.Link>
+            <Nav.Link as={Link} to="/importantEvents" className="nav-link"> الأحداث الهامة</Nav.Link>
            <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
           </Nav>
           <Form className="d-flex me-3" dir="rtl">
