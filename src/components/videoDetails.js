@@ -11,10 +11,12 @@ const VideoDetails = () => {
     const [error, setError] = useState("");
     const [comment, setComment] = useState("");
     const [comments, setComments] = useState([]);
+    const [likes, setLikes] = useState([]);
     const [showCommentSection, setShowCommentSection] = useState(false); 
     const [studentsMap, setStudentsMap] = useState({});
     const [isAuthorized, setIsAuthorized] = useState(false);
     const [videos, setVideos] = useState([]);
+    
     
     const { id } = useParams();
 
@@ -42,6 +44,19 @@ const VideoDetails = () => {
                 setIsLoading(false);
             }
         };
+
+        const fetchLikes = async ()=>{
+            try {
+                const response = await axios.get(`http://localhost:9090/university/likes/getAllLikes/channelType/VIDEO/channelId/${id}`);
+                setLikes(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching likes:", error);
+                setError("An error occurred while fetching likes.");
+                setIsLoading(false);
+            }
+        
+        }
         
         const fetchVideos = async () => {
             try {
@@ -87,6 +102,7 @@ const VideoDetails = () => {
         fetchStudents();
         checkAuthorization();
         fetchVideos();
+        fetchLikes();
     }, [id]);
 
     const handleSubmitComment = async () => {
@@ -100,10 +116,10 @@ const VideoDetails = () => {
     
             const response = await axios.post('http://localhost:9090/university/comments', {
                 student_id: parseInt(studentId), // Parse to integer if needed
-                channel_id: id, // Assuming channel_id is equivalent to video_id
+channel_id: id, // Assuming channel_id is equivalent to video_id
                 channel_type: "VIDEO",
                 student_comment: comment
-            });
+            });                
             const newComment = response.data;
             setComments([...comments, newComment]);
             setComment(""); // Clear comment input after submission
@@ -112,6 +128,35 @@ const VideoDetails = () => {
             // Handle error submission
         }
     };
+    const handleAddLike = async () => {
+        try {
+            const studentId = sessionStorage.getItem('student_id');
+            if (!studentId) {
+                console.error("Student ID not found in sessionStorage.");
+                return;
+            }
+          // Check if the user has already liked the video
+          const hasLiked = likes.some(like => like.student_id === parseInt(studentId));
+
+          if (hasLiked) {
+              console.log("You have already liked this video.");
+              return;
+          }
+    
+            const response = await axios.post('http://localhost:9090/university/likes', {
+                student_id: parseInt(studentId),
+                channel_id: id,
+                channel_type: "VIDEO"
+            });                
+            const newLike = response.data;
+            // Assuming there's a state variable for likes, add the new like to it
+            setLikes([...likes, newLike]);
+        } catch (error) {
+            console.error("Error adding like:", error);
+            // Handle error adding like
+        }
+    };
+    
     
 
     if (isLoading) {
@@ -151,12 +196,70 @@ const VideoDetails = () => {
                     Your browser does not support the video tag or the file format of this video.
                 </video>
                 <div className="video-info">
-                    <div className="event-card-date1" >
+                    <div className="event-card-date1">
                         <span className="day1">{day}</span>
                         <span className="month1">{month}</span> :نشر بتاريخ
+                        {!isAuthorized && (<>
+                        <button className="Btn" style={{width:"17%"}}>
+                            <span className="leftContainer" style={{width:"100%"}}>
+                            <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
+                                </svg>
+                                <span className="like">please login</span>
+                            </span>
+                            <span className="likeCount">
+                                {likes.length}
+                            </span>
+                            
+                        </button>
+                        <span style={{display:"-webkit-flex"}}> 
+                        {likes.map((like, index) => (
+                            <div key={index} className="like" style={{width:"35px"}}>
+                                {studentsMap[like.student_id] && (
+                                    <>
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                    </>
+                                )}
+                            </div>
+                        ))}</span></>
+                    )}  
+                        {isAuthorized && (<>
+                        <button className="Btn" onClick={handleAddLike}>
+                            <span className="leftContainer">
+                                <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
+                                </svg>
+                                <span className="like">Like</span>
+                            </span>
+                            <span className="likeCount">
+                                {likes.length}
+                            </span>
+                        </button>
+                        <span style={{display:"-webkit-flex"}}> 
+                        {likes.map((like, index) => (
+                            <div key={index} className="like" style={{width:"35px"}}>
+                                {studentsMap[like.student_id] && (
+                                    <>
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                    </>
+                                )}
+                            </div>
+                        ))}</span>
+                        
+                        </>
+
+                        
+                    )}
                     </div>
+                    
                     <h3 className="video-title">{videoData?.video_title} </h3>
                     <p className="video-description">{videoData?.video_description}</p>
+                </div>
+                <div className="video-likes">
+                    <div className="likes">
+
+                    </div>
+
                 </div>
                 <div className='video-comments'>
                     <div className="heading">:التعليقات</div>
@@ -196,7 +299,7 @@ const VideoDetails = () => {
                 )}
                     {!isAuthorized && (
                         <>
-                            <p style={{color:"red"}}>لأضافة تعليقاََ يجب عليك تسجيل الدخول اولاََ </p>
+                            <p style={{color:"red"}}>لأضافة تعليقاََ او إعجاباََ يجب عليك تسجيل الدخول اولاََ </p>
                         </>
                     )}
                 </div>

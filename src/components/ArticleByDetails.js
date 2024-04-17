@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import {  Card, Row, Col } from 'react-bootstrap';
 import "./VideoDetails.css";
 import axios from "axios";
 import ArticleItemStudent from "./articleItemStudent";
@@ -18,11 +17,8 @@ const ArticleByDetails = () => {
     const [showCommentSection, setShowCommentSection] = useState(false);
     const [studentsMap, setStudentsMap] = useState({});
     const [isAuthorized, setIsAuthorized] = useState(false);
-
-
-
-
-
+    const [likes, setLikes] = useState([]);
+    
     useEffect(() => {
         const fetchComments = async () => {
             try {
@@ -56,6 +52,18 @@ const ArticleByDetails = () => {
             }
         };
 
+        const fetchLikes = async () => {
+            try {
+                const response = await axios.get(`http://localhost:9090/university/likes/getAllLikes/channelType/ARTICLE/channelId/${article_id}`);
+                setLikes(response.data);
+                setIsLoading(false);
+            } catch (error) {
+                console.error("Error fetching likes:", error);
+                setError("An error occurred while fetching likes.");
+                setIsLoading(false);
+            }
+        };
+
         const checkAuthorization = () => {
             const studentId = sessionStorage.getItem('student_id');
             if (studentId) {
@@ -65,6 +73,7 @@ const ArticleByDetails = () => {
 
         fetchComments();
         fetchStudents();
+        fetchLikes();
         checkAuthorization();
     }, [article_id]);
 
@@ -93,7 +102,7 @@ const ArticleByDetails = () => {
     const handleAddComment = () => {
         setShowCommentSection(true);
     };
-   
+
     useEffect(() => {
         fetchArticles();
     }, [article_id]); 
@@ -125,107 +134,178 @@ const ArticleByDetails = () => {
     }
 
     const filteredArticles = articles.filter(item => item.article_id !== article_id && (!article || item.article_id !== article.article_id)).slice(0, 3);
-    
 
     const customStyle = {
         width: '49%', 
     };
 
+    const handleAddLike = async () => {
+        try {
+            const studentId = sessionStorage.getItem('student_id');
+            if (!studentId) {
+                console.error("Student ID not found in sessionStorage.");
+                return;
+            }
 
+            // Check if the user has already liked the article
+            const hasLiked = likes.some(like => like.student_id === parseInt(studentId));
+
+            if (hasLiked) {
+                console.log("You have already liked this article.");
+                return;
+            }
+    
+            const response = await axios.post('http://localhost:9090/university/likes', {
+                student_id: parseInt(studentId),
+                channel_id: article_id,
+                channel_type: "ARTICLE"
+            });                
+            const newLike = response.data;
+            // Assuming there's a state variable for likes, add the new like to it
+            setLikes([...likes, newLike]);
+        } catch (error) {
+            console.error("Error adding like:", error);
+        }
+    };
+
+    // Function to format the date
+    const formatDate = (dateString) => {
+        const date = new Date(dateString);
+        const day = date.getDate();
+        const month = date.toLocaleString('default', { month: 'long' });
+        return `${day} ${month}`;
+    };
 
     return ( 
-            <div className="video-details-container">
-            <h3 className="video-title" >مقال عن: {article.article_address}</h3>
-            <div>
-                <img 
-                    src={article.article_image_path} 
-                    alt={article.article_address}
-                    style={{                         
-                        width:"100%",
-                        maxWidth:"90%",
-                        marginLeft:"5%",
-                        maxHeight:"600px",
-                        height:"auto"
-
-                    }}
-                /> 
-                <div className="video-info">
-                    <p className="event-card-date1">تم النشر بواسطة: {article.source_string}</p> 
-                    <p className="video-description">{article.article_content}</p>    
-                </div>
-            </div>
-
-
-
-                        <div className='video-comments'>
-              <div className="heading">:التعليقات</div>
-                 <hr />
-                <div className='comment'>
-                   {comments.map((comment, index) => (
-                        <div key={index} className='single-comment'>
-                            <div className="comment-header">
-                                {studentsMap[comment.student_id] && (
+            <div className="video-details-container" >
+                <h3 className="video-title">مقال عن: {article.article_address}</h3>
+                <div>
+                    <img 
+                        src={article.article_image_path} 
+                        alt={article.article_address}
+                        style={{                         
+                            width:"100%",
+                            maxWidth:"90%",
+                            marginLeft:"5%",
+                            maxHeight:"600px",
+                            height:"auto",
+                            objectFit:"cover",
+                            borderRadius:"10px",
+                            scale:"100%"
+                        }}
+                    /> 
+                    <div className="video-info">
+                    <div className="event-card-date1" style={{display:"flex"}}>
+                        <p className="day1"> {formatDate(article.article_creation_date).split(' ')[0]}</p>
+                        <p className="month1">{formatDate(article.article_creation_date).split(' ')[1]}</p> 
+                        &emsp;:تم النشر بتاريخ
+                    </div>
+                    {!isAuthorized && (<>
+                        <button className="Btn" style={{width:"17%"}}>
+                            <span className="leftContainer" style={{width:"100%"}}>
+                            <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
+                                </svg>
+                                <span className="like">please login</span>
+                            </span>
+                            <span className="likeCount">
+                                {likes.length}
+                            </span>
+                            
+                        </button>
+                        <span style={{display:"-webkit-flex"}}> 
+                        {likes.map((like, index) => (
+                            <div key={index} className="like" style={{width:"35px"}}>
+                                {studentsMap[like.student_id] && (
                                     <>
-                            <h4>{studentsMap[comment.student_id].fullName}</h4>
-                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
                                     </>
                                 )}
                             </div>
-                            <li className='comment-content'>{comment.student_comment} ●</li>
-                        </div>
-                    ))}
+                        ))}</span></>
+                    )}                    
+                    {isAuthorized && (<>
+                        <button className="Btn" onClick={handleAddLike}>
+                            <span className="leftContainer">
+                                <svg fill="white" viewBox="0 0 512 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M47.6 300.4L228.3 469.1c7.5 7 17.4 10.9 27.7 10.9s20.2-3.9 27.7-10.9L464.4 300.4c30.4-28.3 47.6-68 47.6-109.5v-5.8c0-69.9-50.5-129.5-119.4-141C347 36.5 300.6 51.4 268 84L256 96 244 84c-32.6-32.6-79-47.5-124.6-39.9C50.5 55.6 0 115.2 0 185.1v5.8c0 41.5 17.2 81.2 47.6 109.5z"></path>
+                                </svg>
+                                <span className="like">Like</span>
+                            </span>
+                            <span className="likeCount">
+                                {likes.length}
+                            </span>
+                        </button>
+                        <span style={{display:"-webkit-flex"}}> 
+                        {likes.map((like, index) => (
+                            <div key={index} className="like" style={{width:"35px"}}>
+                                {studentsMap[like.student_id] && (
+                                    <>
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                    </>
+                                )}
+                            </div>
+                        ))}</span></>
+                    )}
+
+                        <p className="video-description">{article.article_content}</p>    
+                    </div>
                 </div>
 
-                {isAuthorized &&(<button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
-                    {showCommentSection ? "الغاء" : "أضف تعليقاََ"}
-                    </button>)}
-                {showCommentSection && (
-                    <div>
-                        <textarea
-                            rows="4"
-                            cols="50"
-                            placeholder=".......أضف تعليقاََ"
-                            value={comment}
-                            onChange={(e) => setComment(e.target.value)}
-                            className='comment-box'
-                        />
-                        <br />
-                        <button onClick={handleSubmitComment} className='btn-submit' style={{width: "12%", padding: "10px", marginLeft: "15%"}}>أضافة التعليق </button>
+                <div className='video-comments'>
+                    <div className="heading">:التعليقات</div>
+                    <hr />
+                    <div className='comment'>
+                        {comments.map((comment, index) => (
+                            <div key={index} className='single-comment'>
+                                <div className="comment-header">
+                                    {studentsMap[comment.student_id] && (
+                                        <>
+                                            <h4>{studentsMap[comment.student_id].fullName}</h4>
+                                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
+                                        </>
+                                    )}
+                                </div>
+                                <li className='comment-content'>{comment.student_comment} ●</li>
+                            </div>
+                        ))}
                     </div>
-                )}
-                {!isAuthorized && (
-                    <>
-                        <p style={{color: "red"}}>لأضافة تعليقاََ يجب عليك تسجيل الدخول اولاََ </p>
-                    </>
-                )}
+
+                    {isAuthorized && (<button onClick={() => setShowCommentSection(!showCommentSection)} className='btn-submit' style={{width:"12%",padding:"10px",marginLeft:"1%"}}>
+                        {showCommentSection ? "الغاء" : "أضف تعليقاََ"}
+                    </button>)}
+                    {showCommentSection && (
+                        <div>
+                            <textarea
+                                rows="4"
+                                cols="50"
+                                placeholder=".......أضف تعليقاََ"
+                                value={comment}
+                                onChange={(e) => setComment(e.target.value)}
+                                className='comment-box'
+                            />
+                            <br />
+                            <button onClick={handleSubmitComment} className='btn-submit' style={{width: "12%", padding: "10px", marginLeft: "15%"}}>أضافة التعليق </button>
+                        </div>
+                    )}
+                    {!isAuthorized && (
+                        <>
+                            <p style={{color: "red"}}>لأضافة تعليقاََ او اعجاباً يجب عليك تسجيل الدخول اولاََ </p>
+                        </>
+                    )}
+                </div>
+                <div className="more-of-articles">
+                    <div className="heading" id="topArticles"> المزيد من المقالات</div>
+                    <div>
+                        {filteredArticles.map(article => (
+                            <Link key={article.article_id} to={`/articles/${article.article_id}`} style={customStyle}>
+                                <ArticleItemStudent article={article} />
+                            </Link>
+                        ))}
+                    </div>
+                </div>
             </div>
-
-
-            
-
-    <div className="more-of-articles">
-    <div className="heading" id="topArticles"> المزيد من المقالات</div>
-    <div>
-        {filteredArticles.map(article => (
-            // <ArticleItemStudent key={article.article_id} article={article} />
-            <Link key={article.article_id} to={`/articles/${article.article_id}`} style={customStyle}>
-            <ArticleItemStudent article={article} />
-        </Link>
-        ))}
-        </div>
-                    
-            </div>
-
-
-        </div>
     );
 }
  
 export default ArticleByDetails;
-
-
-
-
-//  Edit to go to the ArticleByDetails page
- 
-

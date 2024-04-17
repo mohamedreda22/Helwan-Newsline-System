@@ -42,10 +42,9 @@ const CustomNavbar = () => {
           <Nav className="me-auto custom-nav-links" >
             <Nav.Link as={Link} to="/landingpage" className="nav-link">الصفحة الرئيسية</Nav.Link>
             <Nav.Link as={Link} to="/colleges" className="nav-link">الكليات</Nav.Link>
-{/*             <Nav.Link className="nav-link" onClick={() => scrollToSection("topNews")}>آخر الأخبار</Nav.Link>
- */}            <Nav.Link as={Link} to="/articles" className="nav-link" >أهم المقالات</Nav.Link>
-{/*             <Nav.Link className="nav-link" onClick={() => scrollToSection("topEvents")}>اهم الأحداث</Nav.Link>
- */}            <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
+            <Nav.Link as={Link} to="/articles" className="nav-link" >أهم المقالات</Nav.Link>
+            <Nav.Link as={Link} to="/posts" className="nav-link"> آخر المنشورات</Nav.Link>
+           <Nav.Link as={Link} to="/videos" className="nav-link"> آخر الفيديوهات</Nav.Link>
           </Nav>
           <Form className="d-flex me-3" dir="rtl">
             <FormControl type="search" placeholder="ابحث هنا" className="me-2" aria-label="Search" />
