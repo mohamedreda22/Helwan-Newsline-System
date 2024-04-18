@@ -79,10 +79,11 @@ export default function EditNews({ news, onSave, onCancel }) {
 
 
     return (
+        <div className="add-event-page" style={{padding:"75px",marginRight:"80px",scale:"105%"}}>
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الأخبار</h2>
+            <h2 className="header" style={{paddingRight:"8%"}}>تعديل الأخبار</h2>
             <form onSubmit={handleSubmit} >
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="news_content">محتوى الخبر</label>
                     <textarea
                         id="news_content"
@@ -93,7 +94,7 @@ export default function EditNews({ news, onSave, onCancel }) {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="news_source_id">مصدر الخبر</label>
                     <select
                         id="news_source_id"
@@ -111,7 +112,7 @@ export default function EditNews({ news, onSave, onCancel }) {
                         ))}
                     </select>
                 </div>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="news_image">تعديل الصورة</label>
                     <br/>
                     <input 
@@ -123,7 +124,7 @@ export default function EditNews({ news, onSave, onCancel }) {
                     /> 
                 </div>
                 {/* Submit and cancel buttons */}
-                <div className="btn-container1">
+                <div className="btn-container1" style={{padding:"0px",marginTop:"10px"}}>
                     <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                         حفظ التغييرات
                     </button>
@@ -150,5 +151,6 @@ export default function EditNews({ news, onSave, onCancel }) {
                 customCloseBtnText= 'تم '
             />
         </div>
+    </div>
     );
 }

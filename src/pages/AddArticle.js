@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/SideBar';
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
 import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
 import axios from 'axios';
 import '../styles/AddArticle.css';
 
@@ -148,14 +145,14 @@ function AddArticle() {
                 value={formData.article_content}
                 onChange={handleChange}
                 name="article_content"
-                style={{ width: "350px" }} // Set the width inline
+                style={{ width: "350px" }} 
 
               />
             </div>
           <button            
             type="submit" 
             className='btn-submit'
-            style={{width:"45%",marginRight:"120px"}}>
+            style={{width:"45%",marginRight:"120px",padding:"10px",marginTop:"6px"}}>
             اضافة مقال
           </button>
         </form>

@@ -77,8 +77,7 @@ const fetchSources = async () => {
 
 
   return (
-
-    <div className="edit-faq-container" dir="rtl">    <SideBar/>
+    <div className="edit-faq-container" dir="rtl" style={{padding:"70px",marginRight:"130px"}}>    <SideBar/>
       <h2 className="header" >تعديل السؤال الشائع</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
@@ -121,7 +120,7 @@ const fetchSources = async () => {
             required
           />
         </div>
-        <div className="btn-container4">
+        <div className="btn-container5" style={{padding:"0px",marginTop:"15px"}}>
         <button type="submit" className="btn-submit" disabled={isLoading} style={{width:"30%"}} >
         {isLoading ? 'جاري التحديث...' : 'حفظ التغييرات'}
         </button>

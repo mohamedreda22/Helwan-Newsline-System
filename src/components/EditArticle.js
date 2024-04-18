@@ -85,8 +85,9 @@ export default function EditArticle({ article, onSave, onCancel }) {
     };
 
     return (
+        <div className="add-event-page" style={{padding:"50px",marginRight:"80px",scale:"105%"}}>
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل المقالة</h2>
+            <h2 className="header" style={{paddingRight:"10%"}}>تعديل المقالة</h2>
             <form onSubmit={handleSubmit} >
                 <div className="form-group">
                     <label className="lable" htmlFor="article_address">عنوان المقالة</label>
@@ -99,7 +100,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="article_content">محتوى المقالة</label>
                     <textarea
                         id="article_content"
@@ -111,7 +112,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                     />
                 </div>
                 <Row className="article-form-row">
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="source_id">المصدر </label>
                     <select
                         id="source_id"
@@ -129,7 +130,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                         ))}
                     </select>
                 </div>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="article_address"> مصدر المقال</label>
                     <input
                         id="source_string"
@@ -141,7 +142,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                     />
                 </div>
                 </Row>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="article_image_path">تعديل الصورة</label>
                     <br/>
                     <input 
@@ -153,7 +154,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                     /> 
                 </div>
                 {/* Submit and cancel buttons */}
-                <div className="btn-container1">
+                <div className="btn-container1" style={{padding:"0px",marginTop:"10px"}}>
                     <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                         حفظ التغييرات
                     </button>
@@ -179,6 +180,7 @@ export default function EditArticle({ article, onSave, onCancel }) {
                 onClose={() => setShowSuccessAlert(false)}
                 customCloseBtnText= 'تم '
             />
+        </div>
         </div>
     );
 }

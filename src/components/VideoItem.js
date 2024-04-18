@@ -13,7 +13,7 @@ function VideoItem({ video, onDelete,onEdit }) {
   }
 
   return (
-    <div className="video-card">
+    <div className="video-card" >
       <div className="video-item-container" dir='rtl'>
         <video className="video-player1" onClick={showControls}>
           <source src={video.video_path} type="video/mp4" />

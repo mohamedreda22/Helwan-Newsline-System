@@ -79,12 +79,12 @@ function AddNews() {
   };
 
   return (
-    <div className='add-article-page'>
+    <div className='add-article-page' >
       <SideBar />
-      <div className='add-article-container'>
+      <div className='add-article-container' style={{scale:"110%"}}>
         <h1 className='header'>اضافة خبر</h1>
         <Form className='article-form' onSubmit={handleSubmit} dir='rtl'>
-          <Form.Group controlId="newsContent">
+          <Form.Group controlId="newsContent" style={{marginTop:"10px"}}>
             <Form.Label className='lable'>محتوى الخبر</Form.Label>
             <Form.Control 
               as="textarea" 
@@ -95,7 +95,7 @@ function AddNews() {
               required 
             />
           </Form.Group>
-          <Form.Group controlId="newsImage">
+          <Form.Group controlId="newsImage" style={{marginTop:"10px"}}>
             <Form.Label className='lable'>صورة الخبر</Form.Label>
             <Form.Control 
               type="file" 
@@ -104,7 +104,7 @@ function AddNews() {
               required 
             />
           </Form.Group>
-          <Form.Group controlId="newsSource">
+          <Form.Group controlId="newsSource" style={{marginTop:"10px"}}>
             <Form.Label className='lable'>مصدر الخبر</Form.Label>
             <Form.Control 
               as="select" 
@@ -124,7 +124,7 @@ function AddNews() {
           <button 
             type="submit" 
             className="btn-submit"
-            style={{width:"45%",marginRight:"80px",marginTop:"10px"}}>
+            style={{width:"45%",marginRight:"80px",marginTop:"20px"}}>
             حفظ
           </button>
         </Form>

@@ -87,8 +87,9 @@ export default function EditSport({ sport, onSave, onCancel }) {
 
 
     return (
-        <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الرياضة</h2>
+        <div className="add-event-page" style={{padding:"50px",marginRight:"80px",scale:"105%"}}>
+        <div className="edit-event-container" dir="rtl" >
+            <h2 className="header" style={{paddingRight:"10%"}}>تعديل الرياضة</h2>
             <form onSubmit={handleSubmit} >
                 <div className="form-group">
                     <label className="lable" htmlFor="sport_address">عنوان الرياضة</label>
@@ -142,7 +143,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
                     /> 
                 </div>
                 {/* Submit and cancel buttons */}
-                <div className="btn-container1">
+                <div className="btn-container1" style={{padding:"0px",marginTop:"10px"}}>
                     <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                         حفظ التغييرات
                     </button>
@@ -168,6 +169,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
                 onClose={() => setShowSuccessAlert(false)}
                 customCloseBtnText= 'تم '
             />
+        </div>
         </div>
     );
 }

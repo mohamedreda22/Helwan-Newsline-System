@@ -217,7 +217,7 @@ channel_id: id, // Assuming channel_id is equivalent to video_id
                             <div key={index} className="like" style={{width:"35px"}}>
                                 {studentsMap[like.student_id] && (
                                     <>
-                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar1" style={{scale:"70%"}} />
                                     </>
                                 )}
                             </div>
@@ -240,7 +240,7 @@ channel_id: id, // Assuming channel_id is equivalent to video_id
                             <div key={index} className="like" style={{width:"35px"}}>
                                 {studentsMap[like.student_id] && (
                                     <>
-                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                        <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar1" style={{scale:"75%"}} />
                                     </>
                                 )}
                             </div>
@@ -271,7 +271,7 @@ channel_id: id, // Assuming channel_id is equivalent to video_id
                                     {studentsMap[comment.student_id] && (
                                         <>
                                             <h4>{studentsMap[comment.student_id].fullName}</h4>
-                                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
+                                            <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar1"  />
                                         </>
                                     )}
                                 </div>

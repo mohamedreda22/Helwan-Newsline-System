@@ -5,7 +5,7 @@ import SideBar from "./SideBar";
 import useAlert from "../hooks/useAlert";
 import Simplert from 'react-simplert';
 
-const AddVideoForm = ({ onVideoAdded }) => {
+const AddVideoForm = () => {
   const [formData, setFormData] = useState({
     video_title: "",
     video_description: "",
@@ -121,7 +121,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
         <h1 className="header" dir="rtl">
         إضافة فيديو
       </h1>
-          <div className="form-row">
+          <div className="form-row" style={{marginTop:"10px"}}>
             <div className="form-group">
               <label className="lable" htmlFor="videoTitle">
                 عنوان الفيديو:
@@ -131,6 +131,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
                 value={videoTitle}
                 onChange={(e) => setVideoTitle(e.target.value)}
                 required
+                
               />
             </div>
             <div className="form-group">
@@ -174,7 +175,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
               ))}
             </select>
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{marginTop:"10px"}}>
             <label className="lable" htmlFor="videoDescription">
               الوصف:
             </label>
@@ -187,7 +188,7 @@ const AddVideoForm = ({ onVideoAdded }) => {
               required
             />
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{marginTop:"10px"}}>
             <label className="lable">ملف الفيديو:</label>
             <input
               className="form-control-video"

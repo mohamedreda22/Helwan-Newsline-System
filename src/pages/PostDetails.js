@@ -219,7 +219,7 @@ const PostDetails = () => {
                              <div key={index} className="like" style={{width:"35px"}}>
                                  {studentsMap[like.student_id] && (
                                      <>
-                                         <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                         <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar1" />
                                      </>
                                  )}
                              </div>
@@ -242,7 +242,7 @@ const PostDetails = () => {
                              <div key={index} className="like" style={{width:"35px"}}>
                                  {studentsMap[like.student_id] && (
                                      <>
-                                         <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar" style={{scale:"70%"}} />
+                                         <img src={studentsMap[like.student_id].avatar} alt="Avatar" className="avatar1"/>
                                      </>
                                  )}
                              </div>
@@ -262,7 +262,7 @@ const PostDetails = () => {
                                 {studentsMap[comment.student_id] && (
                                     <>
                                         <h4>{studentsMap[comment.student_id].fullName}</h4>
-                                        <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar" />
+                                        <img src={studentsMap[comment.student_id].avatar} alt="Avatar" className="avatar1" />
                                     </>
                                 )}
                             </div>

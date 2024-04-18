@@ -127,10 +127,9 @@ const handleSubmit = async (e) => {
 };
 
   return (
-    <div className="edit-video-page">
-      <SideBar />
-      <div className="edit-video-container">      
-      <h2 className="header"  >تعديل الفيديو</h2>
+    <div className="add-event-page" style={{padding:"70px",marginRight:"80px"}}>
+      <div className="edit-video-container" style={{padding:"70px",marginRight:"80px"}}>      
+      <h2 className="header" style={{padding:"0"}}>تعديل الفيديو</h2>
 
         <form className="form-container" onSubmit={handleSubmit} dir='rtl'>
           <div className="form-row">
@@ -183,7 +182,7 @@ const handleSubmit = async (e) => {
               ))}
             </select>
           </div>
-          <div className="form-group">
+          <div className="form-group" style={{marginTop:"10px"}}>
             <label htmlFor="video_description" className="label">وصف الفيديو</label>
             <textarea
               id="video_description"
@@ -194,7 +193,7 @@ const handleSubmit = async (e) => {
               required
             />
           </div>
-            <div className="form-group">
+            <div className="form-group" style={{marginTop:"10px"}}>
             <label className="lable">ملف الفيديو:</label>
             <input
               className="form-control-video"

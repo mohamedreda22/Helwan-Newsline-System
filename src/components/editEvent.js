@@ -142,8 +142,9 @@ export default function EditEvent({ event, onSave, onCancel }) {
             };
 
     return (
+        <div className="add-event-page" style={{padding:"12px",marginRight:"50px"}}>
         <div className="edit-event-container" dir="rtl">
-            <h2 className="header" style={{paddingRight:"25%"}}>تعديل الحدث</h2>
+            <h2 className="header" style={{paddingRight:"0%"}}>تعديل الحدث</h2>
             <form onSubmit={handleSubmit} >
                 {/* Form inputs */}
                 <div className="form-row" >
@@ -267,7 +268,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                      name="event_image_path"
                      onChange={handleCombinedFileChange}
                       /> 
-                                <table className="image-table">
+{/*                                 <table className="image-table">
                                     <tbody>
                                         <tr>
                                             <td>
@@ -280,10 +281,9 @@ export default function EditEvent({ event, onSave, onCancel }) {
                                             </td>
                                         </tr>
                                     </tbody>
-                                </table>
+                                </table> */}
                     </div>
-                <div className="btn-container1">
-                
+                <div className="btn-container1" >
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>
                     حفظ التغييرات
                 </button>
@@ -309,6 +309,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
                 onClose={() => setShowSuccessAlert(false)}
                 customCloseBtnText= 'تم '
             />
+        </div>
         </div>
     );
 }
