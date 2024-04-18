@@ -1,8 +1,9 @@
 .signup-page {
-    background-image: url('../assets/images/examhall.jpeg');
-    background-size:cover;
+    background-image: url('../assets/images/examhall.jpeg'); 
+    background-size: cover;
     background-position: center; 
-    background-blend-mode: difference;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
     display: flex;
     justify-content: center;
     align-items: center;
@@ -10,8 +11,8 @@
     animation: slideIn 1s ease-in-out;
     position: relative;
     z-index: 1;
-    overflow-y: auto; 
     scrollbar-width: none;
+    overflow: hidden;
 }
 
 .signup-container {
@@ -19,9 +20,8 @@
     padding: 40px;
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    width: 430px;
+    width: 550px;
     position: relative;
-    backdrop-filter: blur(2px); 
     background-color: rgba(196, 196, 196, 0.5); 
 }
 
@@ -53,9 +53,8 @@
 }
 
 .form-group {
-    margin-bottom: 20px;
     position: relative; 
-    left: 5px;
+    margin-bottom: 0px !important;
 }
 
 .btn-submit {
@@ -68,7 +67,6 @@
     font-size: 18px;
     width: 65%; 
     transition: background-color 0.3s;
-    margin-right: 20px;
 }
 
 .btn-submit:hover {
@@ -91,12 +89,6 @@ input[type="text"] {
     text-indent: 10px;
     backdrop-filter: blur(1px); 
     background-color: rgba(254, 254, 254, 0.663); 
-}
-
-.checkbox {
-    margin-bottom: 20px;
-    margin-right: 10px;
-    font-size: 18px;
 }
 
 .error {

@@ -38,6 +38,8 @@ import VideoDetails from "../components/videoDetails";
 import PostDetails from '../pages/PostDetails';
 import AddCollege from "../pages/AddCollege"
 import CollegeDetails from '../pages/CollegeDetails';
+import Profile from '../pages/Profile';
+
 
 
 //import { useUserRole } from '../hooks/UserRoleContext';
@@ -114,6 +116,10 @@ export const RouterComponent = () => {
         <Route path="/posts" element={<PostsStdView/>} />
         <Route exact path="/articles" element={ <SeeMoreArticles/>} />
         <Route path="/articles/:article_id" element={<ArticlePage/>} />
+        <Route path="/profile" element={<Profile/>} />
+        <Route path="/studentDashbord" element={<StudentDashboard/>} />
+        
+
 
         
         
