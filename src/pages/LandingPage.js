@@ -15,7 +15,7 @@ function LandingPage() {
   const [events, setEvents] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
-  const [displayedEvents, setDisplayedEvents] = useState(3); // Initial number of events displayed
+  const [displayedEvents, setDisplayedEvents] = useState(3); 
   const [articles, setArticles] = useState([]);
   const [displayedArticles, setDisplayedArticles] = useState(3); 
   const [posts, setPosts] = useState([]);
@@ -24,20 +24,58 @@ function LandingPage() {
   const [displayedSports, setDisplayedSports] = useState(3);
   const [news, setNews] = useState([]);
   const [displayedNews, setDisplayedNews] = useState(3);
+  const [currentIndex, setCurrentIndex] = useState(0);
 
+  useEffect(() => {
+    const intervalId = setInterval(() => {
+      setCurrentIndex(prevIndex => (prevIndex === events.length - 1 ? 0 : prevIndex + 1));
+    }, 3000);
+
+    return () => clearInterval(intervalId);
+  }, [events]);
 
 
   useEffect(() => {
+/*     fetchData("events", setEvents);
+    fetchData("articles", setArticles);
+    fetchData("posts", setPosts);
+    fetchData("sports", setSports);
+    fetchData("news", setNews); */
     fetchEvents();
     fetchArticles();
     fetchPosts();
     fetchSports();
-    fetchNews();  
+    fetchNews();   
   }, []);
 
+  const SlideShow = ({ items }) => {
+    return (
+      <div>
+        {items.map((item, index) => (
+          <div key={index} style={{ display: index === currentIndex ? 'block' : 'none' }}>
+            {/* Render your item component here */}
+            {/* For example: <EventItemStudent event={item} /> */}
+            <EventItemStudent event={item} /> 
+          </div>
+        ))}
+      </div>
+    );
+  };
+
+
+/*    const fetchData = async (category, setData) => {
+    try {
+      const response = await axios.get(`http://localhost:9090/university/${category}/getForCategory/{categoryId}?categoryId=1`);
+      setData(response.data);
+    } catch (error) {
+      console.error(`Error fetching ${category}:`, error);
+    }
+  };  */
+
+    //works fine
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/events");
+      const response = await axios.get("http://localhost:9090/university/events/getForCategory/{categoryId}?categoryId=1");
       setEvents(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -47,38 +85,30 @@ function LandingPage() {
     }
   };
 
-  const loadMoreEvents = () => {
-    setDisplayedEvents(prevCount => prevCount + 3);
-  };
-
-  const fetchArticles = async () => {
+      //not working بيعرض كل العناصر في الفئة الاولي حتي لو كانت فئة مختلفة
+    const fetchArticles = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/articles");
+      const response = await axios.get("http://localhost:9090/university/articles/getForCategory/{categoryId}?categoryId=1");
       setArticles(response.data);
     } catch (error) {
       console.error("Error fetching articles:", error);
     }
   };
 
-  const loadMoreArticles = () => {
-    setDisplayedArticles(prevCount => prevCount + 3);
-  };
-
+      //works fine
   const fetchPosts =async ()=>{
     try {
-      const response = await axios.get("http://localhost:9090/university/posts");
+      const response = await axios.get("http://localhost:9090/university/posts/getForCategory/1");
       setPosts(response.data);
     } catch (error) {
       console.error("Error fetching posts:", error);
     }
   }
-  const loadMorePosts =()=>{
-    setDisplayedPosts(prevCount => prevCount + 3);
-  }
 
-  const fetchSports = async () => {
+      //not working بيعرض كل العناصر في الفئة الاولي حتي لو كانت فئة مختلفة
+    const fetchSports = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/sports");
+      const response = await axios.get("http://localhost:9090/university/sports/getForCategory/{categoryId}?categoryId=1");
       setSports(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -88,13 +118,11 @@ function LandingPage() {
     }
   };
 
-  const loadMoreSports = () => {
-    setDisplayedSports(prevCount => prevCount + 3);
-  };
 
+      //not working بيعرض كل العناصر في الفئة الاولي حتي لو كانت فئة مختلفة
   const fetchNews = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/news");
+      const response = await axios.get("http://localhost:9090/university/news/getForCategory/{categoryId}?categoryId=1");
       setNews(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -102,11 +130,23 @@ function LandingPage() {
       setError("An error occurred while fetching news.");
       setIsLoading(false);
     }
-  }
+  }   
+
+  const loadMoreSports = () => {
+    setDisplayedSports(prevCount => prevCount + 3);
+  };
   const loadMoreNews = () => {
     setDisplayedNews(prevCount => prevCount + 3);
   };
-
+  const loadMoreArticles = () => {
+    setDisplayedArticles(prevCount => prevCount + 3);
+  };
+  const loadMorePosts =()=>{
+    setDisplayedPosts(prevCount => prevCount + 3);
+  };
+  const loadMoreEvents = () => {
+    setDisplayedEvents(prevCount => prevCount + 3);
+  };
   return (
     <div className="container-fluid bg-gray">
       <div className="row">
