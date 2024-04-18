@@ -151,13 +151,85 @@ const handleToogleChange = (e) => {
   return (
     <>
     <CustomNavbar />
-    <div className="profile-container" dir='rtl'>
+    <div className="profile-container" dir='rtl' style={{marginTop:"-45px"}}>
       <div className="sidebar" >
         <div style={{marginRight:"45px"}}>
         <img src={profileData.student_image_path} alt="Student Image" className="avatar" style={{marginRight:"10px",borderRadius:"20px"}} />
         <h3>{profileData.full_name}</h3></div>
-        <div  style={{paddingLeft:"60px",marginTop:"10px",marginRight:"-60px"}}>
-        <button className='btn-submit' style={{backgroundColor:"red"}} onClick={handleLogout}>تسجيل الخروج</button>
+        <div className="form-group" style={{marginTop:"10px"}}>
+                    <label className="lable">تعديل الصورة:</label>
+                    <br/>
+                    <input 
+                        className="form-control"
+                        type="file" 
+                        id="student_image_path" 
+                        name="student_image_path"
+                        onChange={handleFileChange}
+                        style={{width:"80%",fontWeight:"bold",alignSelf:"center",padding:"0"}}
+                    /> 
+                </div>
+        <div className='form-row' style={{marginRight:"25px"}}>
+          <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"#091160",marginLeft:"15px"}} >  الاشعارات :</div>
+          <div className="toggle-switch" >
+            <input 
+              className="toggle-input" 
+              id="toggle" 
+              type="checkbox" 
+              name="notify_me" 
+              checked={formData.notify_me} 
+              onChange={handleToogleChange} 
+            />
+            <label className="toggle-label" htmlFor="toggle"></label>
+
+          </div></div>
+{/*           <div className="profile-table-container" style={{scale:"85%",marginRight:"-30px",marginTop:"0px"}}>
+          <table className="profile-table">
+  <tbody>
+  <tr>
+  <td>القسم:</td>
+  <td>
+    {departments.map((department) => (
+      <span key={department.department_id}>
+        {department.department_id === formData.student_department_id && department.department_name}
+      </span>
+    ))}
+  </td>
+</tr>
+
+
+    <tr>
+      <td>الكلية:</td>
+      <td>
+        {colleges.map((college) => (
+          <span key={college.college_id}>
+            {college.college_id === formData.student_college_id && college.college_name}
+          </span>
+        ))}
+      </td>
+    </tr>
+    <tr>
+      <td>الفرقة:</td>
+      <td>{formData.student_brand}</td>
+    </tr>
+    <tr>
+      <td>الفئة الأكاديمية:</td>
+      <td>{formData.student_academic_category}</td>
+    </tr>
+    <tr>
+      <td>فريق العمل:</td>
+      <td>{formData.student_team}</td>
+    </tr>
+    <tr>
+      <td>الإشعارات:</td>
+      <td>{formData.notify_me ? 'مفعلة' : 'غير مفعلة'}</td>
+    </tr>
+  </tbody>
+</table> 
+</div> */}
+
+          
+        <div  style={{paddingLeft:"60px",marginTop:"120px",marginRight:"-60px"}}>
+        <button className='btn-submit' style={{backgroundColor:"#118923ba"}} onClick={handleLogout}>تسجيل الخروج</button>
         <button className='btn-submit' style={{backgroundColor:"black"}}  onClick={handleDeleteAccount}> حذف الحساب</button>
         </div>
       </div>
@@ -190,22 +262,7 @@ const handleToogleChange = (e) => {
                             />
           </div></div>
           <hr/>
-          <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"red"}} >  الاشعارات :</div>
-          <div className="toggle-switch">
-            <input 
-              className="toggle-input" 
-              id="toggle" 
-              type="checkbox" 
-              name="notify_me" 
-              checked={formData.notify_me} 
-              onChange={handleToogleChange} 
-            />
-            <label className="toggle-label" htmlFor="toggle"></label>
-
-          </div>
-
-          <hr/>
-          <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"red"}} > البيانات الدراسية :</div>
+                    <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"red"}} > البيانات الدراسية :</div>
           <div className="form-row" >
           <div className="form-group" style={{marginTop:"10px"}}>
             <div className="heading1">الكلية</div>
@@ -241,18 +298,6 @@ const handleToogleChange = (e) => {
            <input type="text" name="student_team" value={formData.student_team} onChange={handleChange} /></div>
            </div>
             <hr/>
-         <div className="form-group" style={{marginTop:"10px"}}>
-                    <label className="lable">تعديل الصورة</label>
-                    <br/>
-                    <input 
-                        className="form-control"
-                        type="file" 
-                        id="student_image_path" 
-                        name="student_image_path"
-                        onChange={handleFileChange}
-                        style={{width:"50%",fontWeight:"bold",alignSelf:"center",marginRight:"30px"}}
-                    /> 
-                </div>
           <button type="submit" className='btn-submit' style={{backgroundColor:"#091160",width:"50%",fontWeight:"bold",alignSelf:"center",marginLeft:"30px"}} onClick={handleSubmit}>حفظ التغيرات</button>
         </form>
       </div>

@@ -141,3 +141,34 @@
 .toggle-switch.dark .toggle-input:checked + .toggle-label::before {
   transform: translateX(16px);
 }
+/* Add this CSS to your Profile.css file */
+.profile-table-container {
+  margin-top: 20px;
+}
+
+.profile-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+.profile-table th,
+.profile-table td {
+  padding: 8px;
+  border: 1px solid #ddd;
+  text-align: right;
+}
+
+.profile-table th {
+  background-color: #d22323;
+  color: #333;
+  font-weight: bold;
+}
+
+.profile-table tr:nth-child(even) {
+  background-color: #f2f2f2;
+}
+
+.profile-table tr:hover {
+  background-color: #ddd;
+}
+

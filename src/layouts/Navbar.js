@@ -87,9 +87,9 @@ const CustomNavbar = () => {
             )}
          
         </Navbar.Collapse>
-        <Navbar.Brand className="navbar-brand" style={{scale:"80%"}} >
-          <img src={universityLogo} className="logo" alt="University Logo" style={{marginTop:"90px"}} />
-          <div className="brand-info" style={{scale:"80%",marginBottom:"20px"}}>
+        <Navbar.Brand className="navbar-brand" style={{scale:"120%"}} >
+          <img src={universityLogo} className="logo" alt="University Logo" style={{marginTop:"20px"}} />
+{/*           <div className="brand-info" style={{scale:"80%",marginBottom:"20px"}}>
             <h3 className="brand-title">مرحبًا بك في جامعة حلوان</h3>
             <p className="brand-subtitle">Welcome to Helwan University</p>
             <div className="location-info">
@@ -98,7 +98,7 @@ const CustomNavbar = () => {
                 عين حلوان - القاهرة - مصر
               </a>
             </div>
-          </div>
+          </div> */}
         </Navbar.Brand>
       </Container>
     </Navbar>
