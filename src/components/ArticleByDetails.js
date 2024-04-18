@@ -40,7 +40,7 @@ const ArticleByDetails = () => {
                 students.forEach(student => {
                     studentsObj[student.student_id] = {
                         fullName: student.full_name,
-                        avatar: student.student_avatar
+                        avatar: student.student_image_path
                     };
                 });
                 setStudentsMap(studentsObj);

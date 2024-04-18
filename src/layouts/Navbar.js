@@ -1,5 +1,5 @@
 import {React,useState,useEffect} from "react";
-import { Navbar, Nav, Container, Form, FormControl, Button } from "react-bootstrap";
+import { Navbar, Nav, Container} from "react-bootstrap";
 import { Link } from "react-router-dom";
 import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/CustomNavbar.css";
@@ -29,7 +29,7 @@ const CustomNavbar = () => {
   const fetchAvatar = (studentId) => { 
     axios.get(`http://localhost:9090/university/students/${studentId}`)
     .then((response) => {
-      setProfileAvatar(response.data.student_avatar);
+      setProfileAvatar(response.data.student_image_path);
     })
     .catch((error) => {
       console.error('Error:', error);
@@ -87,9 +87,9 @@ const CustomNavbar = () => {
             )}
          
         </Navbar.Collapse>
-        <Navbar.Brand className="navbar-brand" style={{scale:"75%",padding:"0px"}} >
-          <img src={universityLogo} className="logo" alt="University Logo" />
-          <div className="brand-info">
+        <Navbar.Brand className="navbar-brand" style={{scale:"80%"}} >
+          <img src={universityLogo} className="logo" alt="University Logo" style={{marginTop:"90px"}} />
+          <div className="brand-info" style={{scale:"80%",marginBottom:"20px"}}>
             <h3 className="brand-title">مرحبًا بك في جامعة حلوان</h3>
             <p className="brand-subtitle">Welcome to Helwan University</p>
             <div className="location-info">
