@@ -1,10 +1,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
-import Button from "react-bootstrap/Button";
-import Col from "react-bootstrap/Col";
-import Row from "react-bootstrap/Row";
-import "../styles/AddPostForm.css";
 import SideBar from "../components/SideBar";
 
 function AddPostForm() {
@@ -101,17 +97,16 @@ function AddPostForm() {
   };
 
   return (
-    <div className="add-event-page">
+    <div className="add-event-page" style={{ paddingRight:"0px",marginRight:"100px",marginTop:"20px"}}>
       <SideBar/>
-
-      <div dir="rtl" className="form-container6">
-      <h1 className="header" dir="rtl" style={{marginLeft:"60px"}}>
+      <div dir="rtl" className="form-container" >
+      <h1 className="header" dir="rtl">
         إضافة منشور
       </h1>
         <Form onSubmit={handleSubmit}>
-          <Row className="mb-3 mt-4">
-                <Form.Group as={Col} md="6">
-                  <Form.Label className="lable"> التصنيف</Form.Label>
+        <div className="form-row">
+        <div className="form-group">
+                  <Form.Label className="lable" >التصنيف</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={handleChange}
@@ -128,10 +123,10 @@ function AddPostForm() {
                       </option>
                     ))}
                   </Form.Select>
-                </Form.Group>
+                </div>
   
-                <Form.Group as={Col} md="6">
-                  <Form.Label className="lable">المصدر</Form.Label>
+                <div className="form-group" >
+                  <Form.Label className="lable" >المصدر</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={handleChange}
@@ -145,10 +140,9 @@ function AddPostForm() {
                       </option>
                     ))}
                   </Form.Select>
-
-                </Form.Group>
-                <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
-                <Form.Label className="lable"> مصدر المنشور</Form.Label>
+                </div></div>
+                <div className="form-group" >
+                <label className="lable" style={{marginTop:"15px"}}> مصدر المنشور</label>
                 <Form.Control
                   required
                   type="text"
@@ -156,38 +150,32 @@ function AddPostForm() {
                   value={formData.source_string}
                   onChange={handleChange}
                 />
-              </Form.Group>
-              </Row>
-          <Form.Group as={Col} md="8" /* controlId="validationCustom04" */>
-            <Form.Label className="lable">كتابة منشور</Form.Label>
+              </div>
+              <div className="form-group">
+            <label className="lable">كتابة منشور</label>
             <Form.Control
               as="textarea"
-              rows={8}
+              rows={6}
               required
               name="post_content"
               value={formData.post_content}
               onChange={handleChange}
-              style={{ width: "400px" }} // Set the width inline
+              style={{ width: "400px" }}
               />
-          </Form.Group>
-          <Form.Group
-            as={Col}
-            md="10"
-            /* controlId="formFileMultiple" */
-            className="mb-4"
-          >
-            <Form.Label className="lable">إضافة صورة (اختياري)</Form.Label>
+          </div>
+          <div className="form-group">
+            <label className="lable">إضافة صورة (اختياري)</label>
             <Form.Control
               type="file"
               id="post_image_path"
               name="post_image_path"
               onChange={handleFileChange}
             />
-          </Form.Group>
+          </div>
           <button            
             type="submit" 
             className='btn-submit'
-            style={{width:"45%",marginRight:"100px" }}>
+            style={{width:"45%",marginRight:"120px",marginTop:"10px" }}>
             أضافة خبر
           </button>
         </Form>

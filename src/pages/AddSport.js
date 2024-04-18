@@ -131,12 +131,13 @@ function AddSports() {
               ))}
             </Form.Control>
           </Form.Group>
-          <Button 
+          <button 
             type="submit" 
-            style={{backgroundColor:"#091160",padding:"10px",width:"150px",marginRight:"75px",marginTop:"15px"}}
+            className="btn-submit"
+            style={{width:"45%",marginRight:"80px",marginTop:"10px"}}
           >
             حفظ
-          </Button>
+          </button>
         </Form>
       </div>
     </div>

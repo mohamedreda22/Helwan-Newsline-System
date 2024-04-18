@@ -83,15 +83,14 @@ function AddArticle() {
   };
 
   return (
-    <div className='add-article-page'>
+    <div className='add-event-page'>
       <SideBar />
-      <div className='add-article-container'>
+      <div className='add-event-container'>
         <h1 className='header'>اضافة مقال</h1>
-        <Form className='article-form' onSubmit={handleSubmit} dir='rtl'>
-          <Row className="article-form-row">
-            <Col>
-              <Form.Group as={Col} md="10" /* controlId="validationCustom01" */ className='article-form-group'>
-                <Form.Label className='label'>العنوان</Form.Label>
+        <form className='event-form' onSubmit={handleSubmit} dir='rtl'>
+        <div className="form-row">
+            <div className="form-group">
+                <label className='label'>العنوان</label>
                 <Form.Control
                   className='article-form-control'
                   required
@@ -100,11 +99,9 @@ function AddArticle() {
                   onChange={handleChange}
                   name="article_address"
                 />
-              </Form.Group>
-            </Col>
-            <Col>
-              <Form.Group as={Col} md="10" /* controlId="validationCustom01" */ className='article-form-group'>
-                <Form.Label className='label'>المصدر</Form.Label>
+              </div>
+            <div className="form-group">
+                <lable className='label'>المصدر</lable>
                 <Form.Select
                     aria-label="Default select example"
                     onChange={handleChange}
@@ -118,13 +115,10 @@ function AddArticle() {
                     </option>
                   ))}
                 </Form.Select>
-              </Form.Group>
-            </Col>
-          </Row>
-          <Row>
-            <Row>
-            <Form.Group as={Col} md="8" /* controlId="formFileMultiple" */ className="article-form-group">
-            <Form.Label className='label'> مصدر المقال</Form.Label>
+              </div>
+          </div>
+            <div className="form-group">
+            <label className='label'> مصدر المقال</label>
               <Form.Control
                 className='article-form-control'
                 required
@@ -133,9 +127,9 @@ function AddArticle() {
                 onChange={handleChange}
                 name="source_string"
               />
-            </Form.Group>
-            <Form.Group as={Col} md="10" /* controlId="formFileMultiple" */ className="article-form-group">
-               <Form.Label className='label'>اختر صورة</Form.Label>
+            </div>
+            <div className="form-group">
+               <label className='label'>اختر صورة</label>
               <Form.Control
                 className='article-form-control-file'
                 type="file"
@@ -143,12 +137,9 @@ function AddArticle() {
                 onChange={handleFileChange}
                 required
               />
-            </Form.Group>
-            </Row>
-          </Row>
-          <Row>
-            <Form.Group as={Col} md="6" /* controlId="validationCustom01" */ className="article-form-group">
-              <Form.Label className='label'>المقال</Form.Label>
+            </div>
+          <div className="form-group">
+              <label className='label' >نص المقال</label>
               <Form.Control
                 className='article-form-control'
                 as="textarea"
@@ -160,15 +151,14 @@ function AddArticle() {
                 style={{ width: "350px" }} // Set the width inline
 
               />
-            </Form.Group>
-          </Row>
+            </div>
           <button            
             type="submit" 
             className='btn-submit'
             style={{width:"45%",marginRight:"120px"}}>
             اضافة مقال
           </button>
-        </Form>
+        </form>
       </div>
     </div>
   );

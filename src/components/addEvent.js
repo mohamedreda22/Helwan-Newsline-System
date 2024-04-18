@@ -241,6 +241,7 @@ export default function AddEvent() {
                         />
                         </div>
                      </div>
+                     
                     <LocalizationProvider dateAdapter={AdapterLuxon}>
                         <div className="form-group" style={{ display: "flex", flexDirection: "column", gap: "15px" }}>
                             <DateTimePicker
@@ -270,6 +271,7 @@ export default function AddEvent() {
                             <option value="NO">لا</option>
                         </select>
                     </div>
+                    {formData.event_broadcast === "YES" && (
                     <div className="form-group">
                         <label className="lable" htmlFor="event_link_path">لينك اللقاء</label>
                         <input
@@ -280,7 +282,7 @@ export default function AddEvent() {
                             onChange={handleChange}
                             className="form-control"
                         />
-                    </div>
+                    </div>)}
                     </div>
                     <div className="form-group">
                      <label className="lable" htmlFor="event_image_path">رفع الصورة</label>
@@ -293,7 +295,7 @@ export default function AddEvent() {
                      onChange={handleCombinedFileChange}
                      required /> 
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"45%",marginRight:"110px"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"45%",marginRight:"110px",marginTop:"5px"}}>
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
                     {error && <div className="error">{error}</div>}

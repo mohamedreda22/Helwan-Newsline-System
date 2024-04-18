@@ -1,12 +1,14 @@
 .add-article-page {
   padding: 20px;
   background-color: #f4f4f4;
-  min-height: 100vh;
+  height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   padding-right: 140px;
+  overflow: hidden;
+  overflow-y: hidden;
 }
 
 .add-article-container {
@@ -16,6 +18,8 @@
     max-width: 500px;
     margin: 0 auto;
     background-color: #D9D9D94D; 
+    overflow: hidden;
+    overflow-y: hidden;
 }
 
 .article-header {
