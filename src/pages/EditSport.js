@@ -10,11 +10,15 @@ export default function EditSport({ sport, onSave, onCancel }) {
         sport_content: sport?.sport_content || "",        
         sport_image: sport?.sport_image || "",
         sport_source_id: sport?.sport_source_id || "",
+        category_id: sport?.category_id || "",
+
+
     });
 
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [sources, setSources] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     
 
@@ -25,6 +29,8 @@ export default function EditSport({ sport, onSave, onCancel }) {
             sport_address: sport?.sport_address || "",
             sport_content: sport?.sport_content || "",
             sport_source_id: sport?.sport_source_id || "",
+            category_id: sport?.category_id || "",
+
         })
     },[sport])
 
@@ -59,6 +65,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
 
     useEffect(() => {
         fetchSources();
+        fetchCategories();
     }, []);
 
     const fetchSources = async () => {
@@ -69,6 +76,16 @@ export default function EditSport({ sport, onSave, onCancel }) {
             console.error('Error fetching sources:', error);
         }
     };
+    const fetchCategories = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:9090/university/categories"
+          );
+          setCategories(response.data);
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+        }
+      };
 
     const handleFileChange = (event) => {
         const file = event.target.files[0] ;
@@ -91,7 +108,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
         <div className="edit-event-container" dir="rtl" >
             <h2 className="header" style={{paddingRight:"10%"}}>تعديل الرياضة</h2>
             <form onSubmit={handleSubmit} >
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="sport_address">عنوان الرياضة</label>
                     <input
                         id="sport_address"
@@ -102,7 +119,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
                         required
                     />
                 </div>
-                <div className="form-group">
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="sport_content">محتوى الرياضة</label>
                     <textarea
                         id="sport_content"
@@ -113,6 +130,7 @@ export default function EditSport({ sport, onSave, onCancel }) {
                         required
                     />
                 </div>
+                <div className="form-row" style={{marginTop:"10px"}}>
                 <div className="form-group">
                     <label className="lable" htmlFor="sport_source_id">مصدر الرياضة</label>
                     <select
@@ -131,7 +149,25 @@ export default function EditSport({ sport, onSave, onCancel }) {
                         ))}
                     </select>
                 </div>
-                <div className="form-group">
+                <div className="form-group" >
+            <label className='lable'>التصنيف</label>
+            <select 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </select>
+          </div>
+                </div>
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="sport_image">تعديل الصورة</label>
                     <br/>
                     <input 

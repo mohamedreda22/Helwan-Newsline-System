@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import SideBar from '../components/SideBar';
-import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
@@ -8,14 +7,18 @@ import '../styles/AddArticle.css';
 function AddNews() {
     
   const [sources, setSources] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     news_content: "",
     news_image: "",
     news_source_id: "",
+    category_id: ""
+
   });
 
   useEffect(() => {
     fetchSources();
+    fetchCategories();
   }, []);
 
   const fetchSources = async () => {
@@ -50,6 +53,16 @@ function AddNews() {
       reader.readAsDataURL(file);
     }
   };
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/categories"
+      );
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -75,6 +88,7 @@ function AddNews() {
       news_content: "",
       news_image: "",
       news_source_id: "",
+      category_id: ""
     });
   };
 
@@ -104,7 +118,8 @@ function AddNews() {
               required 
             />
           </Form.Group>
-          <Form.Group controlId="newsSource" style={{marginTop:"10px"}}>
+          <div className="form-row">
+          <div className="form-group" style={{marginTop:"10px"}}>
             <Form.Label className='lable'>مصدر الخبر</Form.Label>
             <Form.Control 
               as="select" 
@@ -120,7 +135,25 @@ function AddNews() {
                     </option>
                 ))}
             </Form.Control>
-          </Form.Group>
+          </div>
+          <div className="form-group" style={{marginTop:"10px"}}>
+            <Form.Label className='lable'>التصنيف</Form.Label>
+            <Form.Control 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </Form.Control>
+          </div>
+          </div>
           <button 
             type="submit" 
             className="btn-submit"

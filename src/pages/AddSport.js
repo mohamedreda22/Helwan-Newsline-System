@@ -7,6 +7,7 @@ import '../styles/AddArticle.css';
 
 function AddSports() {
   const [sources, setSources] = useState([]);
+  const [categories, setCategories] = useState([]);
   const [formData, setFormData] = useState({
     sport_address:"",
     sport_content: "",
@@ -16,6 +17,7 @@ function AddSports() {
 
   useEffect(() => {
     fetchSources();
+    fetchCategories();
   }, []);
 
   const fetchSources = async () => {
@@ -24,6 +26,17 @@ function AddSports() {
       setSources(response.data);
     } catch (error) {
       console.error('Error fetching sources:', error);
+    }
+  };
+
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/categories"
+      );
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
     }
   };
 
@@ -114,7 +127,8 @@ function AddSports() {
               required 
             />
           </Form.Group>
-          <Form.Group controlId="sportSource">
+          <div className="form-row">
+          <Form.Group controlId="sportSource" style={{marginTop:"10px"}}>
             <Form.Label className='label'>مصدر الرياضة</Form.Label>
             <Form.Control 
               as="select" 
@@ -131,10 +145,28 @@ function AddSports() {
               ))}
             </Form.Control>
           </Form.Group>
+          <div className="form-group" style={{marginTop:"10px"}}>
+            <Form.Label className='lable'>التصنيف</Form.Label>
+            <Form.Control 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </Form.Control>
+          </div>
+          </div>
           <button 
             type="submit" 
             className="btn-submit"
-            style={{width:"45%",marginRight:"80px",marginTop:"10px"}}
+            style={{width:"45%",marginRight:"80px",marginTop:"30px"}}
           >
             حفظ
           </button>

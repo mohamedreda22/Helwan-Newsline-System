@@ -11,13 +11,26 @@ function AddArticle() {
     source_string: "",
     source_id: "",
     article_image_path: "",
+    category_id: "",
   });
 
   const [sources, setSources] = useState([]);
+  const [categories, setCategories] = useState([]);
 
   useEffect(() => {
     fetchSources();
+    fetchCategories();
   }, []);
+  const fetchCategories = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/categories"
+      );
+      setCategories(response.data);
+    } catch (error) {
+      console.error("Error fetching categories:", error);
+    }
+  };
 
   const fetchSources = async () => {
     try {
@@ -76,6 +89,7 @@ function AddArticle() {
       article_content: "",
       article_image_path: "",
       source_id: "",
+      category_id: "",
     });
   };
 
@@ -114,7 +128,8 @@ function AddArticle() {
                 </Form.Select>
               </div>
           </div>
-            <div className="form-group">
+          <div className="form-row">
+            <div className="form-group" >
             <label className='label'> مصدر المقال</label>
               <Form.Control
                 className='article-form-control'
@@ -125,6 +140,24 @@ function AddArticle() {
                 name="source_string"
               />
             </div>
+            <div className="form-group" style={{marginTop:"10px"}}>
+            <label className='lable'>التصنيف</label>
+            <Form.Control 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </Form.Control>
+          </div>
+          </div>
             <div className="form-group">
                <label className='label'>اختر صورة</label>
               <Form.Control

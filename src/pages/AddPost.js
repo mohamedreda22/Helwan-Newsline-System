@@ -141,6 +141,7 @@ function AddPostForm() {
                     ))}
                   </Form.Select>
                 </div></div>
+                <div className="form-row">
                 <div className="form-group" >
                 <label className="lable" style={{marginTop:"15px"}}> مصدر المنشور</label>
                 <Form.Control
@@ -151,6 +152,24 @@ function AddPostForm() {
                   onChange={handleChange}
                 />
               </div>
+              <div className="form-group" style={{marginTop:"10px"}}>
+            <Form.Label className='lable'>التصنيف</Form.Label>
+            <Form.Control 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </Form.Control>
+            </div>
+          </div>
               <div className="form-group">
             <label className="lable">كتابة منشور</label>
             <Form.Control

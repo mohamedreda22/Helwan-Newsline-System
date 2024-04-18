@@ -15,6 +15,7 @@ export default function EditPost({ post, onSave, onCancel }) {
     const [showSuccessAlert, setShowSuccessAlert] = useState(false);
     const [showErrorAlert, setShowErrorAlert] = useState(false);
     const [sources, setSources] = useState([]);
+    const [categories, setCategories] = useState([]);
 
     useEffect(() => {
         setFormData({
@@ -23,11 +24,14 @@ export default function EditPost({ post, onSave, onCancel }) {
             source_id: post?.source_id || "",
             source_string: post?.source_string || "",
             post_image_path: post?.post_image_path || "",
+            category_id: post?.category_id || "",
+
         });
     }, [post]);
 
     useEffect(() => {
         fetchSources();
+        fetchCategories();
     }, []);
 
     const fetchSources = async () => {
@@ -38,6 +42,16 @@ export default function EditPost({ post, onSave, onCancel }) {
             console.error('Error fetching sources:', error);
         }
     };
+    const fetchCategories = async () => {
+        try {
+          const response = await axios.get(
+            "http://localhost:9090/university/categories"
+          );
+          setCategories(response.data);
+        } catch (error) {
+          console.error("Error fetching categories:", error);
+        }
+      };
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -110,6 +124,7 @@ export default function EditPost({ post, onSave, onCancel }) {
                         required
                     />
                 </div>
+                <div className="form-row" style={{marginTop:"10px"}}>
                 <div className="form-group">
                     <label className="lable" htmlFor="source_id">المصدر </label>
                     <select
@@ -129,6 +144,25 @@ export default function EditPost({ post, onSave, onCancel }) {
                     </select>
                 </div>
                 <div className="form-group">
+                    <label className="lable" htmlFor="category_id">التصنيف</label>
+                    <select
+                        id="category_id"
+                        name="category_id"
+                        value={formData.category_id}
+                        onChange={handleChange}
+                        className="form-control"
+                        required
+                    >
+                        <option value="">اختر التصنيف</option>
+                        {categories.map(category => (
+                            <option key={category.category_id} value={category.category_id}>
+                                {category.category_name}
+                            </option>
+                        ))}
+                    </select>
+                </div>
+                </div>
+                <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable" htmlFor="post_image_path">تعديل صورة المنشور</label>
                     <br/>
                     <input 
