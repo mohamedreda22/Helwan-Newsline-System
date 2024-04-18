@@ -4,6 +4,10 @@ import axios from 'axios';
 import CustomNavbar from "../layouts/Navbar"
 import Footer from "../layouts/Footer"
 import InputMask from 'react-input-mask';
+import editPhoto from '../assets/icons/add_photo_alternate.png';
+
+
+
 
 const Profile = () => {
   const [profileData, setProfileData] = useState(null);
@@ -154,9 +158,38 @@ const handleToogleChange = (e) => {
     <div className="profile-container" dir='rtl' style={{marginTop:"-45px"}}>
       <div className="sidebar" >
         <div style={{marginRight:"45px"}}>
-        <img src={profileData.student_image_path} alt="Student Image" className="avatar" style={{marginRight:"10px",borderRadius:"20px"}} />
+        <label htmlFor="fileInput" style={{ position: 'relative', display: 'inline-block' }}>
+  <img
+    src={profileData.student_image_path}
+    alt="Student Image"
+    className="avatar"
+    style={{ marginRight: "10px", borderRadius: "20px" }}
+  />
+  <input
+    id="fileInput"
+    type="file"
+    style={{ display: 'none' }}
+    onChange={handleFileChange}
+  />
+  <div
+    style={{
+      position: 'absolute',
+      bottom: '2%',
+      left: '0',
+      width: '30px',
+      height: '30px',
+      cursor: 'pointer',
+      borderRadius: '10px',
+      backgroundColor: 'gray',
+      backgroundImage: `url(${editPhoto})`,
+      backgroundSize: 'cover',
+    }}
+  />
+</label>
+
         <h3>{profileData.full_name}</h3></div>
-        <div className="form-group" style={{marginTop:"10px"}}>
+        
+{/*         <div className="form-group" style={{marginTop:"10px"}}>
                     <label className="lable">تعديل الصورة:</label>
                     <br/>
                     <input 
@@ -165,9 +198,9 @@ const handleToogleChange = (e) => {
                         id="student_image_path" 
                         name="student_image_path"
                         onChange={handleFileChange}
-                        style={{width:"80%",fontWeight:"bold",alignSelf:"center",padding:"0"}}
+                        style={{width:"20%",alignSelf:"center",padding:"0",backgroundImage: `url(${editPhoto})`}}
                     /> 
-                </div>
+                </div> */}
         <div className='form-row' style={{marginRight:"25px"}}>
           <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"#091160",marginLeft:"15px"}} >  الاشعارات :</div>
           <div className="toggle-switch" >
@@ -229,14 +262,14 @@ const handleToogleChange = (e) => {
 
           
         <div  style={{paddingLeft:"60px",marginTop:"120px",marginRight:"-60px"}}>
-        <button className='btn-submit' style={{backgroundColor:"#118923ba"}} onClick={handleLogout}>تسجيل الخروج</button>
-        <button className='btn-submit' style={{backgroundColor:"black"}}  onClick={handleDeleteAccount}> حذف الحساب</button>
+        <button className='btn-submit' style={{backgroundColor:"#091160",boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"}} onClick={handleLogout}>تسجيل الخروج</button>
+        <button className='btn-submit' style={{backgroundColor:"white",color:"black",boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"}}  onClick={handleDeleteAccount}> حذف الحساب</button>
         </div>
       </div>
       <div className="content" >
-        <form className="profile-form" onSubmit={handleSubmit}>
-        <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"red"}} > البيانات الاساسية :</div>
-        <div className="form-row" style={{marginTop:"10px"}}>
+        <form className="profile-form" onSubmit={handleSubmit} style={{marginTop:"-13px"}}>
+        <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"red",marginTop:"0px"}} > البيانات الاساسية :</div>
+        <div className="form-row" style={{marginTop:"5px"}}>
           <div className="form-group">
           <div className="heading1">الاسم الكامل</div>
           <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} /></div>
