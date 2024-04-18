@@ -113,7 +113,7 @@ function LandingPage() {
         <Navbar />
         <div className="page-section">
           <div className="news-section">
-            <div className="heading" id="topNews">آخر الأخبار</div>
+            <div className="heading" id="topNews" style={{marginTop:"0px"}}>آخر الأخبار</div>
             <div className="description">
               <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
             </div>

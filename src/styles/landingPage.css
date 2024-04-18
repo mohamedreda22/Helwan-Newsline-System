@@ -28,8 +28,8 @@
     color: #fc5007;
   }
   .page-section{
-    padding: 50px 0;
-  }
+    top: 0;
+    }
   .load-more-button{
     display: block;
     margin: 0 auto;
