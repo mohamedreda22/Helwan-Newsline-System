@@ -295,7 +295,7 @@ export default function AddEvent() {
                      onChange={handleCombinedFileChange}
                      required /> 
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"45%",marginRight:"110px",marginTop:"5px"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"45%",marginRight:"110px",marginTop:"10px"}}>
                         {isLoading ? 'جاري إضافة الحدث' : 'إضافة الحدث'}
                     </button>
                     {error && <div className="error">{error}</div>}

@@ -103,7 +103,7 @@ function AddFaq() {
     return (
         <div className="add-faq-page" dir="rtl">
             <div className="add-faq-container">
-                <h1 className="header">إضافة سؤال شائع</h1>
+                <h1 className="header"style={{marginTop:"0px"}}>إضافة سؤال شائع</h1>
                 <form onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label className="lable" htmlFor="question">السؤال</label>
@@ -146,7 +146,7 @@ function AddFaq() {
                             required
                         />
                     </div>
-                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"35%",marginRight:"160px"}}>
+                    <button type="submit" disabled={isLoading} className="btn-submit" style={{width:"35%",marginRight:"160px",marginTop:"10px"}}>
                         {isLoading ? 'جاري إضافة السؤال' : 'إضافة السؤال'}
                     </button>
 

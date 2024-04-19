@@ -108,19 +108,9 @@ function AddNews() {
               onChange={handleChange} 
               required 
             />
-          </Form.Group>
-          <Form.Group controlId="newsImage" style={{marginTop:"10px"}}>
-            <Form.Label className='lable'>صورة الخبر</Form.Label>
-            <Form.Control 
-              type="file" 
-              name="news_image" 
-              onChange={handleFileChange} 
-              required 
-            />
-          </Form.Group>
-          <div className="form-row">
+          <div className="form-row" >
           <div className="form-group" style={{marginTop:"10px"}}>
-            <Form.Label className='lable'>مصدر الخبر</Form.Label>
+            <label className='lable'>مصدر الخبر</label>
             <Form.Control 
               as="select" 
               name="news_source_id" 
@@ -137,7 +127,7 @@ function AddNews() {
             </Form.Control>
           </div>
           <div className="form-group" style={{marginTop:"10px"}}>
-            <Form.Label className='lable'>التصنيف</Form.Label>
+            <label className='lable'>التصنيف</label>
             <Form.Control 
               as="select" 
               name="category_id" 
@@ -154,11 +144,21 @@ function AddNews() {
             </Form.Control>
           </div>
           </div>
+          </Form.Group>
+          <Form.Group controlId="newsImage" style={{marginTop:"10px"}}>
+            <Form.Label className='lable'>صورة الخبر</Form.Label>
+            <Form.Control 
+              type="file" 
+              name="news_image" 
+              onChange={handleFileChange} 
+              required 
+            />
+          </Form.Group>
           <button 
             type="submit" 
             className="btn-submit"
             style={{width:"45%",marginRight:"80px",marginTop:"25px"}}>
-            حفظ
+            اضافة خبر
           </button>
         </Form>
       </div>

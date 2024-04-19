@@ -156,7 +156,7 @@ function SignUp() {
                             />
                         </div>
                     </div>
-                    <div className="form-row">
+                    <div className="form-row" style={{marginTop:"10px"}}>
                         <div className="form-group">
                             
                             <input
@@ -171,7 +171,7 @@ function SignUp() {
 
                             />
                         </div>
-                        <div className="form-group">
+                        <div className="form-group" style={{marginTop:"10px"}}>
                             <InputMask
                                 mask="9999-999-9999"
                                 maskChar=" "
@@ -185,7 +185,7 @@ function SignUp() {
                             />
                         </div>
                     </div>
-                    <div className="form-row">
+                    <div className="form-row" style={{marginTop:"18px"}}>
                     <div className="form-group">
 {/*                         <label className="lable">الكلية</label>
  */}                        <select
@@ -221,7 +221,7 @@ function SignUp() {
                         </select>
                     </div>
                     </div>
-                    <div className="form-group">
+                    <div className="form-group" style={{marginTop:"20px"}}>
 {/*                         <label className="lable" htmlFor="student_image_path">رفع الصورة</label>
  */}                        <input
                             type="file"

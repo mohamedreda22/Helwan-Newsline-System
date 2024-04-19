@@ -1,6 +1,5 @@
 .add-event-page {
     padding: 20px;
-    background-color: #f4f4f4;
     height: 100vh;
     display: flex;
     justify-content: center;
@@ -12,7 +11,6 @@
 }
 
 .add-event-container {
-    background-color: #D9D9D94D;
     padding: 50px;
     border-radius: 10px;
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
@@ -160,3 +158,16 @@
     margin-top: 20px;
     margin-right: 75px;
     }
+
+.btn-submit:hover {
+    background-color: #0d1f5e;
+}
+body{
+    background-color: #84848411 !important;
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+/*     overflow-x: hidden;
+    overflow-y: hidden; */
+}

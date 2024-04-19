@@ -117,17 +117,7 @@ function AddSports() {
               onChange={handleChange} 
               required 
             />
-          </Form.Group>
-          <Form.Group controlId="sportImage">
-            <Form.Label className='label'>صورة الرياضة</Form.Label>
-            <Form.Control 
-              type="file" 
-              name="sport_image" 
-              onChange={handleFileChange} 
-              required 
-            />
-          </Form.Group>
-          <div className="form-row">
+                      <div className="form-row">
           <Form.Group controlId="sportSource" style={{marginTop:"10px"}}>
             <Form.Label className='label'>مصدر الرياضة</Form.Label>
             <Form.Control 
@@ -163,12 +153,22 @@ function AddSports() {
             </Form.Control>
           </div>
           </div>
+          </Form.Group>
+          <Form.Group controlId="sportImage" style={{marginTop:"10px"}}>
+            <Form.Label className='label'>صورة الرياضة</Form.Label>
+            <Form.Control 
+              type="file" 
+              name="sport_image" 
+              onChange={handleFileChange} 
+              required 
+            />
+          </Form.Group>
           <button 
             type="submit" 
             className="btn-submit"
             style={{width:"45%",marginRight:"80px",marginTop:"30px"}}
           >
-            حفظ
+            اضافة رياضة
           </button>
         </Form>
       </div>

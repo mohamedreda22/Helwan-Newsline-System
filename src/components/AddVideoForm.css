@@ -1,11 +1,9 @@
-
 .form-container5 {
   padding: 50px;
   border-radius: 10px;
   box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   max-width: 500px;
   margin: 0 auto;
-  background-color: #D9D9D94D; 
 }
 
 .form-container h2 {
@@ -100,7 +98,6 @@ textarea {
 }
 .add-video-page{
   padding: 20px;
-  background-color: #f4f4f4;
   min-height: 100vh;
   display: flex;
   justify-content: center;

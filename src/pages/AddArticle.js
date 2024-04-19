@@ -185,7 +185,7 @@ function AddArticle() {
           <button            
             type="submit" 
             className='btn-submit'
-            style={{width:"45%",marginRight:"120px",padding:"10px",marginTop:"6px"}}>
+            style={{width:"45%",marginRight:"120px",padding:"10px",marginTop:"10px"}}>
             اضافة مقال
           </button>
         </form>

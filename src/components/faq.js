@@ -104,14 +104,14 @@ function FAQs() {
   };
 
   return (
-    <div className={`faqs-page ${isEditing && faqIdToEdit && editedFaq ? 'blur-background' : ''}`}>
+    <div className={`faqs-page ${isEditing && faqIdToEdit && editedFaq ?  'blur-background' : ''}`}>
       {isEditing && faqIdToEdit && editedFaq ? (
         <EditFaq faq={editedFaq} onCancel={handleCancelEdit}  onSave={handleSave}/>
       ) : (
         <>
         <SideBar/>
           <h2></h2>{/*HIGH IMPORTANT DON'T DARE TO REMOVE IT 💀*/ }
-          <h1 className="header" dir="rtl">إضافة سؤال شائع</h1>
+          <h1 className="header" dir="rtl">الاسئلة الشائعة</h1>
           <div className="total-faqs">
             <h3>إجمالي الأسئلة: {faqs.length}</h3>
           </div>

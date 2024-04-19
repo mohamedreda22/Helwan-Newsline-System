@@ -142,7 +142,7 @@ export default function EditEvent({ event, onSave, onCancel }) {
             };
 
     return (
-        <div className="add-event-page" style={{padding:"12px",marginRight:"50px"}}>
+        <div className="add-event-page" style={{padding:"12px",marginRight:"160px"}}>
         <div className="edit-event-container" dir="rtl">
             <h2 className="header" style={{paddingRight:"0%"}}>تعديل الحدث</h2>
             <form onSubmit={handleSubmit} >

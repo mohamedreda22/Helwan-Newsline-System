@@ -97,9 +97,9 @@ function AddPostForm() {
   };
 
   return (
-    <div className="add-event-page" style={{ padding:"30px",marginRight:"100px",marginTop:"20px"}}>
+    <div className="add-event-page" style={{ padding:"30px",marginRight:"100px",marginTop:"5px"}}>
       <SideBar/>
-      <div dir="rtl" className="form-container">
+      <div dir="rtl" className="add-article-container">
       <h1 className="header" dir="rtl">
         إضافة منشور
       </h1>
@@ -179,7 +179,7 @@ function AddPostForm() {
             type="submit" 
             className='btn-submit'
             style={{width:"45%",marginRight:"120px",marginTop:"10px" }}>
-            أضافة خبر
+            أضافة منشور
           </button>
         </Form>
       </div>

@@ -77,8 +77,8 @@ const fetchSources = async () => {
 
 
   return (
-    <div className="edit-faq-container" dir="rtl" style={{padding:"70px",marginRight:"130px"}}>    <SideBar/>
-      <h2 className="header" >تعديل السؤال الشائع</h2>
+    <div className="edit-faq-container" dir="rtl" style={{padding:"50px",marginRight:"30px",marginLeft:"30px",marginTop:"30px"}}>    <SideBar/>
+      <h2 className="header" style={{marginRight:"-70px"}}>تعديل السؤال الشائع</h2>
       <form onSubmit={handleSubmit}>
         <div className="form-group">
           <label className="lable" htmlFor="question">السؤال</label>
