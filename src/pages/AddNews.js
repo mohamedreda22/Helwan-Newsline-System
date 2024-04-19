@@ -95,7 +95,7 @@ function AddNews() {
   return (
     <div className='add-article-page' >
       <SideBar />
-      <div className='add-article-container' style={{scale:"110%"}}>
+      <div className='add-article-container' style={{scale:"100%"}}>
         <h1 className='header'>اضافة خبر</h1>
         <Form className='article-form' onSubmit={handleSubmit} dir='rtl'>
           <Form.Group controlId="newsContent" style={{marginTop:"10px"}}>
@@ -157,7 +157,7 @@ function AddNews() {
           <button 
             type="submit" 
             className="btn-submit"
-            style={{width:"45%",marginRight:"80px",marginTop:"20px"}}>
+            style={{width:"45%",marginRight:"80px",marginTop:"25px"}}>
             حفظ
           </button>
         </Form>
