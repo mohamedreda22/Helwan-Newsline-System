@@ -9,6 +9,11 @@ import PostItemStudent from "../components/postItemStudent";
 import SportItemStudent from "../components/sportItemStudent";
 import NewsItemStudent from "../components/newsItemStudent"; 
 
+import Carousel from 'react-bootstrap/Carousel';
+import { Container, Row, Col } from 'react-bootstrap';
+import HUImage from '../assets/images/HU.png';
+
+
 import axios from "axios";
 
 function LandingPage() {
@@ -56,6 +61,12 @@ function LandingPage() {
   };
 
 
+// test the carousele //
+const [index, setIndex] = useState(0);
+const handleSelect = (selectedIndex) => {
+  setIndex(selectedIndex);
+};
+// //////////////////////////////////
    const fetchData = async (category, setData) => {
     try {
       const response = await axios.get(`http://localhost:9090/university/${category}/getForCategory/1`);
@@ -83,6 +94,7 @@ function LandingPage() {
   };
   return (
     <div className="container-fluid bg-gray">
+      
       <div className="row">
         <Navbar />
         <div className="page-section">
@@ -91,6 +103,49 @@ function LandingPage() {
             <div className="description">
               <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
             </div>
+
+            {/* just testing the carousel for news section */}
+            <Container fluid>
+              <Row>
+                {/* First item (col-10, align to right) */}
+                <Col xs={12} lg={8} className="order-lg-last">
+                  <Carousel style={{ height: '100%' }} activeIndex={index} onSelect={handleSelect}>
+                    <Carousel.Item>
+                      <img src={HUImage} alt="First slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+                      <Carousel.Caption>
+                        <h3>First slide label</h3>
+                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img src={HUImage} alt="Second slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+                      <Carousel.Caption>
+                        <h3>Second slide label</h3>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                    <Carousel.Item>
+                      <img src={HUImage} alt="Third slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
+                      <Carousel.Caption>
+                        <h3>Third slide label</h3>
+                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
+                      </Carousel.Caption>
+                    </Carousel.Item>
+                  </Carousel>
+                </Col>
+
+                {/* Second item (col-2, align to left) */}
+                <Col xs={12} lg={4} className="order-lg-first">
+                  <div style={{ backgroundColor: 'lightgreen', height: '100%' }}>
+                    Content for second item
+                  </div>
+                </Col>
+              </Row>
+              <Row>
+
+              </Row>
+            </Container>
+            {/* end of news sectionn */}
             <div>
               {news.slice(0, displayedNews).map(news => (
                 <NewsItemStudent key={news.news_id} news={news} />
@@ -160,7 +215,9 @@ function LandingPage() {
                 <button className="load-more-button" onClick={loadMoreSports}> عرض المزيد</button>
               )}
             </div>
+            
           </div>
+          
           <div className="send-notification-section">
             <div className="heading">إرسال إشعار</div>
             <div className="description">
@@ -171,7 +228,10 @@ function LandingPage() {
               <button className="send-notification-button">إرسال</button>
             </div>
           </div>
+
         </div>
+        
+        
         <Footer />
       </div>
     </div>
