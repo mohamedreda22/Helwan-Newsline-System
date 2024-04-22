@@ -81,6 +81,7 @@ const AddDepartmentForm = () => {
             الرجاء إدخال اسم القسم
           </Form.Control.Feedback>
         </Form.Group>
+        {/* اعادة تعيين القسم بعد اختبار الكلية لمرة واحدة فقط! */}
         <Form.Group /* controlId="collegeName" */>
           <Form.Label>اسم الكلية</Form.Label>
           <Form.Select
