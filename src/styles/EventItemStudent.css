@@ -13,6 +13,8 @@
     background-color: #fff; /* Background color for the card */
     transition: transform 0.2s; /* Smooth transition for hover effect */
     animation: fadeIn 0.5s ease; /* Animation for fading in */
+    height: 415px;
+    overflow: hidden;
 }
 
 .event-card-container:hover {
