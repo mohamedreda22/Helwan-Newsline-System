@@ -4,6 +4,7 @@ import "../components/VideoDetails.css";
 import axios from "axios";
 import PostItemStudent from "../components/postItemStudent";
 import Navbar from "../layouts/Navbar";
+import Cookies from 'js-cookie';
 
 const PostDetails = () => {
     const { post_id } = useParams();
@@ -65,7 +66,7 @@ const PostDetails = () => {
         };
 
         const checkAuthorization = () => {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (studentId) {
                 setIsAuthorized(true);
             }
@@ -79,9 +80,9 @@ const PostDetails = () => {
 
     const handleSubmitComment = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                console.error("Student ID not found in sessionStorage.");
+                console.error("Student ID not found in Cookies.");
                 return;
             }
 
@@ -141,9 +142,9 @@ const PostDetails = () => {
 
     const handleAddLike = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                console.error("Student ID not found in sessionStorage.");
+                console.error("Student ID not found in Cookies.");
                 return;
             }
 

@@ -3,12 +3,13 @@ import { useParams, Link } from "react-router-dom";
 import "./VideoDetails.css";
 import axios from "axios";
 import ArticleItemStudent from "./articleItemStudent";
+import Cookies from 'js-cookie';
+
 
 const ArticleByDetails = () => {
     const { article_id } = useParams();
     const [articles, setArticles] = useState([]);
     const [article, setArticle] = useState(null);
-
     const [showFullContent, setShowFullContent] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
@@ -65,7 +66,7 @@ const ArticleByDetails = () => {
         };
 
         const checkAuthorization = () => {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (studentId) {
                 setIsAuthorized(true);
             }
@@ -79,9 +80,9 @@ const ArticleByDetails = () => {
 
     const handleSubmitComment = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                console.error("Student ID not found in sessionStorage.");
+                console.error("Student ID not found in Cookies.");
                 return;
             }
 
@@ -141,9 +142,9 @@ const ArticleByDetails = () => {
 
     const handleAddLike = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                console.error("Student ID not found in sessionStorage.");
+                console.error("Student ID not found in Cookies.");
                 return;
             }
 

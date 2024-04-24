@@ -5,6 +5,7 @@ import CustomNavbar from "../layouts/Navbar"
 import Footer from "../layouts/Footer"
 import InputMask from 'react-input-mask';
 import editPhoto from '../assets/icons/add_photo_alternate.png';
+import Cookies from 'js-cookie';
 
 
 
@@ -26,7 +27,7 @@ const Profile = () => {
     notify_me:'',
   });
 
-  const studentId = sessionStorage.getItem('student_id');
+  const studentId = Cookies.get('student_id');
 
   useEffect(() => {
     if (studentId) {
@@ -87,8 +88,8 @@ const handleToogleChange = (e) => {
 
   const handleLogout = () => {
     // Implement logout functionality
-    sessionStorage.removeItem('token');
-    sessionStorage.removeItem('student_id');
+    Cookies.remove('userRole');
+    Cookies.remove('student_id');
     window.location.href = '/';
 
   };
@@ -101,8 +102,8 @@ const handleToogleChange = (e) => {
       .then(response => response.json())
       .then(data => {
         console.log(data); // Handle response as needed
-        localStorage.removeItem('token');
-        sessionStorage.removeItem('student_id');
+        Cookies.remove('userRole');
+        Cookies.remove('student_id');
         window.location.href = '/';
       })
       .catch(error => {

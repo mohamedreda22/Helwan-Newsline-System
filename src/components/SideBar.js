@@ -4,10 +4,11 @@ import logo from "../assets/images/logo.png";
 import '../styles/SideBar.css';
 import { Nav } from 'react-bootstrap';
 import { Link } from 'react-router-dom';
+import Cookies from 'js-cookie';
 
 export default function SideBar  ()  {
     const handleExit=()=>{
-        sessionStorage.removeItem('token');
+        Cookies.remove('userRole');
         window.location.href = '/';
     }
     return ( 
