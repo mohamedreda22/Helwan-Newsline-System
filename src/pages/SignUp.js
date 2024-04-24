@@ -156,7 +156,7 @@ function SignUp() {
                             />
                         </div>
                     </div>
-                    <div className="form-row" style={{marginTop:"10px"}}>
+                    <div className="form-row" style={{marginTop:"15px"}}>
                         <div className="form-group">
                             
                             <input
@@ -171,7 +171,7 @@ function SignUp() {
 
                             />
                         </div>
-                        <div className="form-group" style={{marginTop:"10px"}}>
+                        <div className="form-group" style={{marginTop:"0px"}}>
                             <InputMask
                                 mask="9999-999-9999"
                                 maskChar=" "
@@ -182,20 +182,21 @@ function SignUp() {
                                 onChange={handleChange}
                                 className="form-control"
                                 required
+                                style={{padding: "10px 20px",borderBottom:" 2px solid #000000"}}
+
                             />
                         </div>
                     </div>
-                    <div className="form-row" style={{marginTop:"18px"}}>
+                    <div className="form-row" style={{marginTop:"15px"}}>
                     <div className="form-group">
-{/*                         <label className="lable">الكلية</label>
- */}                        <select
+                       <select
                             name="college_id"
                             value={formData.college_id}
                             onChange={handleChange}
                             className="form-control"
                             required
-                            
-                        >
+                            style={{padding: "10px 20px",borderBottom:" 2px solid #000000"}}
+                            >
                             <option value="">اختر الكلية</option>
                             {colleges.map((college) => (
                                 <option key={college.college_id} value={college.college_id}>
@@ -211,7 +212,8 @@ function SignUp() {
                             onChange={handleChange}
                             className="form-control"
                             required
-                        >
+                            style={{padding: "10px 20px",borderBottom:" 2px solid #000000"}}
+                            >
                             <option value="">اختر القسم</option>
                                 {departments.map((department) => (
                                     <option key={department.department_id} value={department.department_id}>

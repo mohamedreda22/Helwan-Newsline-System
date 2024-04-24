@@ -113,6 +113,7 @@ function AddSource() {
                 value={formData.source_full_name} 
                 onChange={handleChange} 
                 required 
+                style={{height:"50px"}}
               />
             </Form.Group>
             <Form.Group as={Col} md="5" controlId="sourceResponsible" className='form-group'>
@@ -123,6 +124,7 @@ function AddSource() {
                 value={formData.source_responsible} 
                 onChange={handleChange} 
                 required 
+                style={{height:"50px"}}
               />
             </Form.Group>
           </Row>
@@ -135,6 +137,7 @@ function AddSource() {
                 value={formData.source_email} 
                 onChange={handleChange} 
                 required 
+                style={{borderBottom:"none"}}
               />
             </Form.Group>
             <Form.Group as={Col} md="5" controlId="sourcePassword" className='form-group'>
@@ -145,6 +148,7 @@ function AddSource() {
                 value={formData.source_password} 
                 onChange={handleChange} 
                 required 
+                style={{borderBottom:"none"}}
               />
             </Form.Group>
           </Row>
@@ -157,6 +161,7 @@ function AddSource() {
                 value={formData.college_id} 
                 onChange={handleChange} 
                 required 
+                style={{height:"50px"}}
               >
                 <option value="">اختر الكلية</option>
                 {colleges.map((college) => (
@@ -174,7 +179,7 @@ function AddSource() {
                 value={formData.source_department_id} 
                 onChange={handleChange} 
                 required 
-
+                style={{height:"50px"}}
               >
                 <option value="" >اختر القسم</option>
                 {departments.map((department) => (
@@ -188,8 +193,9 @@ function AddSource() {
           <Button 
             type="submit" 
             className="btn-submit" 
-            style={{backgroundColor:"#091160",padding:"15px",width:"150px",marginRight:"200px",fontWeight:"bold"}}
-          >
+            style={{backgroundColor:"#091160",width:"35%",marginRight:"170px",marginTop:"20px",padding:"15px",fontWeight:"bold",borderRadius:"18px" }}
+/*             style={{padding:"15px",width:"150px",marginRight:"200px",fontWeight:"bold"}}
+ */          >
             تسجيل
           </Button>
         </Form>

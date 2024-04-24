@@ -133,6 +133,22 @@ const ShowDepartments = () => {
 
   return (
     <div className="mt-2 container">
+      <Simplert
+        showSimplert={errorAlert}
+        type="error"
+        title="Error"
+        message="  حدث خطأ ما يرجي اعادة المحاولة  والتأكد من اختيار الكلية"
+        onClose={() => setErrorAlert(false)}
+        customCloseBtnText="اغلاق"
+      />
+      <Simplert
+        showSimplert={successAlert}
+        type="success"
+        title={"Success"}
+        message="تمت إضافة القسم بنجاح"
+        onClose={() => setSuccessAlert(false)}
+        customCloseBtnText="تم"
+      />
       <NavbarSource />
       <button type="button" className="AddDep" onClick={handleShowAddModal}>
         إضافة <FaPlus />
@@ -235,22 +251,7 @@ const ShowDepartments = () => {
           />
         </Modal.Body>
       </Modal>
-      <Simplert
-        showSimplert={errorAlert}
-        type="error"
-        title="Error"
-        message="  حدث خطأ ما يرجي اعادة المحاولة  والتأكد من اختيار الكلية"
-        onClose={() => setErrorAlert(false)}
-        customCloseBtnText="اغلاق"
-      />
-      <Simplert
-        showSimplert={successAlert}
-        type="success"
-        title={"Success"}
-        message="تمت إضافة القسم بنجاح"
-        onClose={() => setSuccessAlert(false)}
-        customCloseBtnText="تم"
-      />
+      
     </div>
   );
 };

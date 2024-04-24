@@ -215,52 +215,6 @@ const handleToogleChange = (e) => {
             <label className="toggle-label" htmlFor="toggle"></label>
 
           </div></div>
-{/*           <div className="profile-table-container" style={{scale:"85%",marginRight:"-30px",marginTop:"0px"}}>
-          <table className="profile-table">
-  <tbody>
-  <tr>
-  <td>القسم:</td>
-  <td>
-    {departments.map((department) => (
-      <span key={department.department_id}>
-        {department.department_id === formData.student_department_id && department.department_name}
-      </span>
-    ))}
-  </td>
-</tr>
-
-
-    <tr>
-      <td>الكلية:</td>
-      <td>
-        {colleges.map((college) => (
-          <span key={college.college_id}>
-            {college.college_id === formData.student_college_id && college.college_name}
-          </span>
-        ))}
-      </td>
-    </tr>
-    <tr>
-      <td>الفرقة:</td>
-      <td>{formData.student_brand}</td>
-    </tr>
-    <tr>
-      <td>الفئة الأكاديمية:</td>
-      <td>{formData.student_academic_category}</td>
-    </tr>
-    <tr>
-      <td>فريق العمل:</td>
-      <td>{formData.student_team}</td>
-    </tr>
-    <tr>
-      <td>الإشعارات:</td>
-      <td>{formData.notify_me ? 'مفعلة' : 'غير مفعلة'}</td>
-    </tr>
-  </tbody>
-</table> 
-</div> */}
-
-          
         <div  style={{paddingLeft:"60px",marginTop:"120px",marginRight:"-60px"}}>
         <button className='btn-submit' style={{backgroundColor:"#091160",boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"}} onClick={handleLogout}>تسجيل الخروج</button>
         <button className='btn-submit' style={{backgroundColor:"white",color:"black",boxShadow: "0px 2px 5px 0px rgba(0, 0, 0, 0.5)"}}  onClick={handleDeleteAccount}> حذف الحساب</button>
@@ -275,11 +229,11 @@ const handleToogleChange = (e) => {
           <input type="text" name="full_name" value={formData.full_name} onChange={handleChange} /></div>
           <div className="form-group">
           <div className="heading1">البريد الالكتروني</div>
-          <input type="email" name="student_email" value={formData.email} onChange={handleChange} disabled/></div></div>
+          <input type="email" name="student_email" value={formData.email} onChange={handleChange} disabled style={{border:"1px solid #ccc"}}/></div></div>
           <div className="form-row" style={{marginTop:"20px"}}>
           <div className="form-group">
           <div className="heading1">كلمة المرور</div>
-          <input type="password" name="student_password" value={formData.password} onChange={handleChange} /></div>
+          <input type="password" name="student_password" value={formData.password} onChange={handleChange}  style={{border:"1px solid #ccc"}}/></div>
           <div className="form-group">
           <div className="heading1">رقم الهاتف</div>
           <InputMask
@@ -299,7 +253,7 @@ const handleToogleChange = (e) => {
           <div className="form-row" >
           <div className="form-group" style={{marginTop:"10px"}}>
             <div className="heading1">الكلية</div>
-            <select name="college_id" value={formData.student_college_id} onChange={handleChange} disabled>
+            <select name="college_id" value={formData.student_college_id} onChange={handleChange} disabled style={{height:"45px"}}>
             <option value="">اختر الكلية</option>
             {colleges.map((college) => (
                 <option key={college.college_id} value={college.college_id}>
@@ -309,7 +263,7 @@ const handleToogleChange = (e) => {
             </select></div>
             <div className="form-group" style={{marginTop:"10px"}}>
             <div className="heading1">القسم</div>
-            <select name="department_id" value={formData.student_department_id} onChange={handleChange} disabled>
+            <select name="department_id" value={formData.student_department_id} onChange={handleChange} disabled style={{height:"45px"}}>
             <option value="">اختر القسم</option>
             {departments.map((department) => (
                 <option key={department.department_id} value={department.department_id}>
