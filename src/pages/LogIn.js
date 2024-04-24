@@ -1,13 +1,12 @@
-import React, { useState,useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import logo from '../assets/images/logo.png';
 import '../styles/LogIn.css';
 import axios from 'axios';
 import useAlert from '../hooks/useAlert';
 import Simplert from 'react-simplert';
 import { useNavigate } from 'react-router-dom';
-import UserRoleContext  from '../hooks/UserRoleContext'
-//import { useUserRole } from '../hooks/UserRoleContext'
-
+import Cookies from 'js-cookie';
+import UserRoleContext from '../hooks/UserRoleContext';
 
 function LogIn() {
     const [formData, setFormData] = useState({
@@ -19,9 +18,6 @@ function LogIn() {
     const [isLoading, setIsLoading] = useState(false);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
     const navigate = useNavigate();
-    //const { setUserRole } = useUserRole();
-
-
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -35,25 +31,26 @@ function LogIn() {
         try {
             const response = await axios.post('http://localhost:9090/university/auth/login', formData);
             console.log('Response:', response);
-            if (response && response.status === 202 ) {
+            if (response && response.status === 202) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
-                console.log('Form data submitted:', response.data);
-                console.log('Token from response:', response.data.userRole);
-                sessionStorage.setItem('token', response.data.userRole);
+               // console.log('Form data submitted:', response.data);
+                //console.log('Token from response:', response.data.userRole);
 
-                // Store student_id in sessionStorage
-                if(response.data.userRole==="STUDENT"){
-                    sessionStorage.setItem('student_id', response.data.id);
-                    console.log('Student ID:', response.data.id);
+                // Store token in cookie
+                Cookies.set('userRole', response.data.userRole, { expires: 1 }); 
+
+                // Store student_id in cookie if user role is STUDENT
+                if (response.data.userRole === "STUDENT") {
+                    Cookies.set('student_id', response.data.id);
+                   // console.log('Student ID:', response.data.id);
                 }
-                
 
                 setFormData({
                     email: '',
                     password: '',
                 });
                 const userRole = response.data.userRole;
-                console.log('User Role:', userRole); 
+                //console.log('User Role:', userRole);
                 setUserRole(userRole);
                 // Set appropriate route based on user role
                 let route = '/';
@@ -65,23 +62,21 @@ function LogIn() {
                         route = '/showEvents';
                         break;
                     case 'STUDENT':
-                        route = '/landingPage'; 
+                        route = '/landingPage';
                         break;
                     default:
                         break;
                 }
 
-
                 // Navigate to the determined route
-                navigate(route);       
+                navigate(route);
 
-                setTimeout(function() {
+                setTimeout(function () {
                     window.location.reload();
-                }, 1000); 
-               //localStorage.setItem('token', response.data.token);
+                }, 1000);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
-                console.log('Response data:', response.data);
+               // console.log('Response data:', response.data);
             }
         } catch (error) {
             console.error('Error:', error);
@@ -89,10 +84,9 @@ function LogIn() {
                 showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
             } else {
                 showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
-            }            
+            }
             setIsLoading(false);
-
-        } 
+        }
     };
 
     const handleChange = (e) => {
@@ -135,26 +129,15 @@ function LogIn() {
                             required
                         />
                     </div>
-{/*                     <div className="form-group">
-                        <label className='remember-me'  htmlFor="remember-me">تذكرني دائما</label>
-                        <input
-                            type="checkbox"
-                            id="rememberMe"
-                            name="rememberMe"
-                            value="rememberMe"
-                            className="checkbox"
-                            //checked={formData.rememberMe}
-                        />
-                    </div> */}
                     <button type="submit" disabled={isLoading} className="btn-submit" >
                         {isLoading ? 'جاري تسجيل الدخول' : 'تسجيل الدخول'}
                     </button>
                     {error && <div className="error">{error}</div>}
                 </form>
                 <div className="links-container">
-                         <a href="/forgotPassword" className="link forgot-password">نسيت كلمة المرور؟</a>
-                         <a href="/signUp" className="link register">ليس لديك حساب؟ سجل الان</a>
-                     </div>
+                    <a href="/forgotPassword" className="link forgot-password">نسيت كلمة المرور؟</a>
+                    <a href="/signUp" className="link register">ليس لديك حساب؟ سجل الان</a>
+                </div>
             </div>
             <Simplert
                 showSimplert={showAlert}

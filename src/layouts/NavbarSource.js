@@ -2,11 +2,12 @@ import React from 'react';
 import universityLogo from "../assets/images/logo.png";
 import "../styles/Navbar.css";
 import { Link } from "react-router-dom";
+import Cookies from 'js-cookie';
 
 const NavbarSource = () => {
 
     const handleExit=()=>{
-        sessionStorage.removeItem('token');
+      Cookies.remove('userRole');
         window.location.href = '/';
     }
     return ( 

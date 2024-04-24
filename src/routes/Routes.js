@@ -39,6 +39,7 @@ import PostDetails from '../pages/PostDetails';
 import AddCollege from "../pages/AddCollege"
 import CollegeDetails from '../pages/CollegeDetails';
 import Profile from '../pages/Profile';
+import Cookies from 'js-cookie';
 
 
 
@@ -52,14 +53,14 @@ export const RouterComponent = () => {
 
 
   useEffect(() => {
-    console.log('Attempting to get token from session storage');
-    const token = sessionStorage.getItem('token');
-    console.log('Token from session storage:', token);
+    //console.log('Attempting to get token from Cookies');
+    const token = Cookies.get('userRole');
+    //console.log('Token from Cookies:', token);
     if (token) {
       setIsAuthenticated(true);
-      console.log('User is authenticated');
-      const userRoleFromSession = sessionStorage.getItem('token');
-      console.log('User role from session storage:', userRoleFromSession);
+      //console.log('User is authenticated');
+      const userRoleFromSession = Cookies.get('userRole');
+      //console.log('User role from Cookies:', userRoleFromSession);
       setUserRole(userRoleFromSession);
     }
     setLoading(false);
@@ -81,7 +82,7 @@ export const RouterComponent = () => {
   
 
   const logout = () => {
-    sessionStorage.removeItem('token');
+    Cookies.remove('userRole');
     setIsAuthenticated(false);
     console.log('User logged out');
 

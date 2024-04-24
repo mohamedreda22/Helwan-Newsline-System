@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/CustomNavbar.css";
 import axios from "axios";
+import Cookies from 'js-cookie';
 
 
 const CustomNavbar = () => {
@@ -11,16 +12,16 @@ const CustomNavbar = () => {
   const [profileAvatar, setProfileAvatar] = useState('');
 
   const handleExit=()=>{
-    sessionStorage.removeItem('token');
+    Cookies.remove('userRole');
     window.location.href = '/';
 }
   useEffect(() => {
-    const role = sessionStorage.getItem("token");
-    setUserRole(role);
+    const userRole = Cookies.get('userRole');
+    setUserRole(userRole);
   }, []);
 
   useEffect(() => {
-    const studentId = sessionStorage.getItem("student_id");
+    const studentId = Cookies.get("student_id");
     if (studentId) {
       fetchAvatar(studentId); // Pass studentId as an argument
     }

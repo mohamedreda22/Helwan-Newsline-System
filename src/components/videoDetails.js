@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import './VideoDetails.css';
 import Navbar from '../layouts/Navbar';
 import VideoItemStudent from './VideoItemStudent';
+import Cookies from 'js-cookie';
 
 const VideoDetails = () => {
     const [videoData, setVideoData] = useState(null);
@@ -91,7 +92,7 @@ const VideoDetails = () => {
         };
 
         const checkAuthorization = () => {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (studentId) {
                 setIsAuthorized(true);
             }
@@ -107,10 +108,10 @@ const VideoDetails = () => {
 
     const handleSubmitComment = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                // Handle the case where student_id is not found in sessionStorage
-                console.error("Student ID not found in sessionStorage.");
+                // Handle the case where student_id is not found in Cookies
+                console.error("Student ID not found in Cookies.");
                 return;
             }
     
@@ -130,9 +131,9 @@ channel_id: id, // Assuming channel_id is equivalent to video_id
     };
     const handleAddLike = async () => {
         try {
-            const studentId = sessionStorage.getItem('student_id');
+            const studentId = Cookies.get('student_id');
             if (!studentId) {
-                console.error("Student ID not found in sessionStorage.");
+                console.error("Student ID not found in Cookies.");
                 return;
             }
           // Check if the user has already liked the video
