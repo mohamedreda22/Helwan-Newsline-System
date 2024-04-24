@@ -1,7 +1,15 @@
-import React from 'react';
-import '../styles/EventItemStudent.css'; 
+import React, { useState, useEffect } from 'react';
+import '../styles/EventItemStudent.css';
+import axios from 'axios';
+import  "./NewsItemStudent.css"
 
 function NewsItemStudent({ news }) {
+    const [sources, setSources] = useState([]);
+
+    useEffect(() => {
+        fetchSources();
+    }, []);
+
     // Function to format the date and time
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);
@@ -12,20 +20,33 @@ function NewsItemStudent({ news }) {
 
     const { day, month } = formatDateTime(news.news_creation_date);
 
-    return (
-        <div className="event-card-container">
-            <div className="event-card-item">
-                <img src={news.news_image} alt="News Thumbnail" className="event-card-image" />
-                <div className="event-card-date1">
-                    <span className="day1">{day}</span>
-                    <span className="event-card-month1">{month}</span>
-                </div>
-                <div>
-                    <div className="news-item-content" >{news.news_content}</div>
-                </div>
+    const fetchSources = async () => {
+        try {
+            const response = await axios.get("http://localhost:9090/university/sources");
+            setSources(response.data);
+        } catch (error) {
+            console.error("Error fetching sources:", error);
+        }
+    };
 
+    return (
+        <div className="news-item-container" style={{height:"100px"}}>
+            <img src={news.news_image} alt="News Thumbnail" className="news-item-image" />
+            <div className="news-item-details">
+            <div className="news-item-content" dir='rtl'>{news.news_content.length > 70 ? `${news.news_content.slice(0, 66)}...` : news.news_content}</div>
+                <div className="news-item-source" dir='rtl' style={{display:"flex",justifyContent:"space-between"}}>
+                    {sources.map((source) => (
+                        source.college_id === news.college_id && (
+                            <p key={source.college_id}>{source.full_name}</p>
+                        )
+                    ))}                
+                    <div className="event-card-date1" style={{display:"flex"}}>
+                    <span className="day1">{day}</span>
+                    <span className="month1">{month}</span>
+                </div>
                 </div>
             </div>
+        </div>
     );
 }
 

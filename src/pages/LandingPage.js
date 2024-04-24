@@ -8,10 +8,8 @@ import ArticleItemStudent from "../components/articleItemStudent";
 import PostItemStudent from "../components/postItemStudent";
 import SportItemStudent from "../components/sportItemStudent";
 import NewsItemStudent from "../components/newsItemStudent"; 
-
 import Carousel from 'react-bootstrap/Carousel';
 import { Container, Row, Col } from 'react-bootstrap';
-import HUImage from '../assets/images/HU.png';
 
 
 import axios from "axios";
@@ -28,6 +26,9 @@ function LandingPage() {
   const [news, setNews] = useState([]);
   const [displayedNews, setDisplayedNews] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [index, setIndex] = useState(0);
+  const [sources, setSources] = useState([]);
+
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -44,25 +45,22 @@ function LandingPage() {
     fetchData("posts", setPosts);
     fetchData("sports", setSports);
     fetchData("news", setNews); 
+    fetchSources();
   }, []);
 
-  const SlideShow = ({ items }) => {
-    return (
-      <div>
-        {items.map((item, index) => (
-          <div key={index} style={{ display: index === currentIndex ? 'block' : 'none' }}>
-            {/* Render your item component here */}
-            {/* For example: <EventItemStudent event={item} /> */}
-            <EventItemStudent event={item} /> 
-          </div>
-        ))}
-      </div>
-    );
+
+  const fetchSources = async () => {
+    try {
+      const response = await axios.get(
+        "http://localhost:9090/university/sources"
+      );
+      setSources(response.data);
+    } catch (error) {
+      console.error("Error fetching sources:", error);
+    }
   };
 
-
 // test the carousele //
-const [index, setIndex] = useState(0);
 const handleSelect = (selectedIndex) => {
   setIndex(selectedIndex);
 };
@@ -98,63 +96,77 @@ const handleSelect = (selectedIndex) => {
       <div className="row">
         <Navbar />
         <div className="page-section">
-          <div className="news-section">
-            <div className="heading" id="topNews" style={{marginTop:"0px"}}>آخر الأخبار</div>
-            <div className="description">
-              <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-            </div>
+        <div className="news-section" style={{marginTop:"-40px"}}>
+{/*           <div className="heading" id="topNews" style={{marginTop:"0px"}}>آخر الأخبار</div>
+          <div className="description">
+            <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
+          </div> */}
 
-            {/* just testing the carousel for news section */}
-            <Container fluid>
-              <Row>
-                {/* First item (col-10, align to right) */}
-                <Col xs={12} lg={8} className="order-lg-last">
-                  <Carousel style={{ height: '100%' }} activeIndex={index} onSelect={handleSelect}>
-                    <Carousel.Item>
-                      <img src={HUImage} alt="First slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
-                      <Carousel.Caption>
-                        <h3>First slide label</h3>
-                        <p>Nulla vitae elit libero, a pharetra augue mollis interdum.</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <img src={HUImage} alt="Second slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
-                      <Carousel.Caption>
-                        <h3>Second slide label</h3>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                    <Carousel.Item>
-                      <img src={HUImage} alt="Third slide" style={{ objectFit: 'cover', height: '100%', width: '100%' }} />
-                      <Carousel.Caption>
-                        <h3>Third slide label</h3>
-                        <p>Praesent commodo cursus magna, vel scelerisque nisl consectetur.</p>
-                      </Carousel.Caption>
-                    </Carousel.Item>
-                  </Carousel>
-                </Col>
+          {/* Carousel for news section */}
+<Container fluid>
+  <Row>
+    {/* First item (col-10, align to right) */}
+    <Col xs={12} lg={8} className="order-lg-last">
+      <Carousel style={{ height: '100%' }} activeIndex={index} onSelect={handleSelect}>
+        {news.slice(0, 10).map((item, index) => (
+          <Carousel.Item key={index}>
+          <img src={item.news_image} alt={item.news_content} style={{ objectFit: 'fit', height: '100%', width: '100%', maxHeight: "360px" }} />
+          <Carousel.Caption style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)', padding: '10px', borderRadius: '50px' }}>
+            <h3 style={{ color: '#fff' }}>{item.news_content}</h3>
+            {sources.map((source) => (
+              source.college_id === source.college_id && (
+                <p key={source.college_id} style={{ color: '#fff' }}>{source.full_name}</p>
+              )
+            ))}
+          </Carousel.Caption>
+        </Carousel.Item>
 
-                {/* Second item (col-2, align to left) */}
-                <Col xs={12} lg={4} className="order-lg-first">
-                  <div style={{ backgroundColor: 'lightgreen', height: '100%' }}>
-                    Content for second item
-                  </div>
-                </Col>
-              </Row>
-              <Row>
-
-              </Row>
-            </Container>
-            {/* end of news sectionn */}
-            <div>
-              {news.slice(0, displayedNews).map(news => (
-                <NewsItemStudent key={news.news_id} news={news} />
-              ))}
-              {news.length > displayedNews && (
-                <button className="load-more-button" onClick={loadMoreNews}> عرض المزيد</button>
-              )}
-            </div>
+        ))}
+      </Carousel>
+    </Col>
+    {/* Second item (col-2, align to left) */}
+    <Col xs={12} lg={4} className="order-lg-first">
+      <div style={{ backgroundColor: 'white', height: '100%' }}>
+        {/* Display the first 3 news items in the sidebar */}
+        {news.slice(0, 3).map((item, index) => (
+          <div key={index}>
+            {/* Render your item component here */}
+            {/* For example: <NewsItemStudent news={item} /> */}
+            <NewsItemStudent news={item} />
           </div>
+        ))}
+      </div>
+    </Col>
+  </Row>
+</Container>
+
+{/* Display the rest of the news items in rows */}
+<Container fluid style={{marginTop:"7px"}}>
+  {news.slice(3).reduce((rows, item, index) => {
+    if (index % 3 === 0) {
+      rows.push([]);
+    }
+    rows[rows.length - 1].push(item);
+    return rows;
+    }, []).slice(0, 2).map((row, rowIndex) => (
+    <Row key={rowIndex}>
+      {row.map((item, colIndex) => (
+      <Col xs={12} lg={4} key={colIndex}>
+        <NewsItemStudent news={item} />
+      </Col>
+      ))}
+    </Row>
+    ))}
+  </Container>
+{/*           <div>
+            {news.slice(0, displayedNews).map(news => (
+              <NewsItemStudent key={news.news_id} news={news} />
+            ))}
+            {news.length > displayedNews && (
+              <button className="load-more-button" onClick={loadMoreNews}> عرض المزيد</button>
+            )}
+          </div> */}
+        </div>
           <div className="events-section">
             <div className="heading" id="topEvents">اهم الاحداث</div>
             <div className="description">
