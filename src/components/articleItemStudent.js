@@ -23,9 +23,9 @@ const ArticleItemStudent = ({ article ,style}) => {
                     <span className="event-card-month1">{month}</span> 
                 </div>
         </div>          
-        <h3 className="event-card-title">{article.article_address}</h3>
+        <h3 className="event-card-title" >{article.article_address}</h3>
         <span className="source-name"> نشر بواسطة: {article.source_string}</span>
-          <p className="event-card-content">
+          <p className="event-card-content" dir='rtl'>
                 {showFullContent ? article.article_content : (article.article_content.length > 100 ? `${article.article_content.slice(0, 100)}...` : article.article_content)}
             </p>
             

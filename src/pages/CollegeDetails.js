@@ -160,7 +160,7 @@ const CollegeDetails = () => {
     return (
         <>
             <Navbar />
-            <div className="college-details-container"> 
+            <div className="college-details-container" style={{marginTop:"-40px"}} > 
             <div className='banner'>
             <img src={collegeData?.college_back_ground} alt="Banner" />
             <div className="banner-content">

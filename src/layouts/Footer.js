@@ -1,4 +1,4 @@
-import universityLogo from "../assets/images/universityLogo.png";
+//import universityLogo from "../assets/images/universityLogo.png";
 import "../styles/Footer.css";
 import { Link } from "react-router-dom";
 
@@ -6,9 +6,9 @@ const Footer = () => {
   return (
     <div className="containerxxl">
       <footer className="text-center footer-container">
-        <div className="footer-logo">
+{/*         <div className="footer-logo">
           <img src={universityLogo} alt="universityLogo" />
-        </div>
+        </div> */}
         <ul className="footer-links">
           <li>
             <Link to="/" className="footer-links">
