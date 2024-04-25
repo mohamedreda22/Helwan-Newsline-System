@@ -10,6 +10,7 @@ import SportItemStudent from "../components/sportItemStudent";
 import NewsItemStudent from "../components/newsItemStudent"; 
 import Carousel from 'react-bootstrap/Carousel';
 import { Container, Row, Col } from 'react-bootstrap';
+import chatbot from "../assets/icons/robot_assistant.svg";
 
 
 import axios from "axios";
@@ -28,7 +29,10 @@ function LandingPage() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [index, setIndex] = useState(0);
   const [sources, setSources] = useState([]);
-
+  const [emailInput, setEmailInput] = useState('');
+  const [question, setQuestion] = useState("");
+  const [response, setResponse] = useState("");
+  const [chatbotOpen, setChatbotOpen] = useState(false);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -38,6 +42,9 @@ function LandingPage() {
     return () => clearInterval(intervalId);
   }, [events]);
 
+  const toggleChatbot = () => {
+    setChatbotOpen(prevState => !prevState);
+  };
 
   useEffect(() => {
     fetchData("events", setEvents);
@@ -74,6 +81,42 @@ const handleSelect = (selectedIndex) => {
     }
   }; 
 
+  const handleEmailSend = async () => {
+    try {
+      const response = await axios.post(
+        "http://localhost:9090/university/Emails",
+        {
+          Notification_email: emailInput
+        }
+      );
+  
+      if (response && (response.status === 200 || response.status === 201 || response.status === 202)) {
+        setEmailInput(response.data);
+        alert('E-mail has been sent!');
+        console.log("show data for email send :",response.data)
+        return true;
+      } else {
+        console.error("Error sending email:", response.data);
+        alert('E-mail has not been sent!');
+      }
+    } catch (error) {
+      console.error("Error sending email:", error);
+      alert('Error sending email. Please try again later.');
+    }
+  }
+
+  const handleAskChatbot = async () => {
+    try {
+      const encodedQuestion = encodeURIComponent(question);
+      console.log("Encoded question:", encodedQuestion);
+      const response = await axios.get(`http://localhost:9090/university/chatbot/ask?question=${encodedQuestion}`);
+      console.log("Chatbot response:", response.data);
+      setResponse(response.data);
+    } catch (error) {
+      console.error("Error asking chatbot:", error);
+    }
+  };
+  
 
   const loadMoreSports = () => {
     setDisplayedSports(prevCount => prevCount + 3);
@@ -92,7 +135,10 @@ const handleSelect = (selectedIndex) => {
   };
   return (
     <div className="container-fluid bg-gray">
-      
+      <div className="chatbot-icon" onClick={toggleChatbot}>
+  <img src="chatbot-icon.png" alt="Chatbot" />
+</div>
+
       <div className="row">
         <Navbar />
         <div className="page-section">
@@ -236,14 +282,44 @@ const handleSelect = (selectedIndex) => {
               <div>أدخل بريدك الإلكتروني لتلقي إشعارات حول الأحداث والمقالات الجديدة</div>
             </div>
             <div className="notification-form">
-              <input type="email" placeholder="أدخل بريدك الإلكتروني" />
-              <button className="send-notification-button">إرسال</button>
+            <input
+                type="email"
+                placeholder="أدخل بريدك الإلكتروني"
+                value={emailInput}
+                onChange={(e) => setEmailInput(e.target.value)}
+              />
+            <button className="send-notification-button" onClick={handleEmailSend}>إرسال</button>
             </div>
           </div>
 
         </div>
-        
-        
+            {/* Chatbot section */}
+            {chatbotOpen && (
+          <div className="chatbot-section">
+            <div className="chatbot-icon" onClick={toggleChatbot}>
+              <img src={chatbot} alt="Chatbot" />
+            </div>
+            <div className="card5"> 
+            <div >
+              <div className="chat-header" style={{display:"flex"}} >Chat               
+              <div className="close-chatbot" onClick={toggleChatbot} style={{marginLeft:"170px"}}>❌</div>
+              </div>
+              </div>
+              <div className="chat-window">
+                {/* Render chat messages here */}
+                <ul className="message-list">
+                  <li className="message">Hello! How can I help you today?</li>
+                  {response && <li className="message">{response}</li>}
+                  
+                  </ul> 
+              </div>
+              <div className="chat-input">
+                <input type="text" className="message-input" placeholder="Type your message here" />
+                <button className="send-button" onClick={handleAskChatbot}>Send</button>
+              </div>
+            </div>
+          </div>
+        )}        
         <Footer />
       </div>
     </div>
