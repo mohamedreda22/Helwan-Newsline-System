@@ -111,9 +111,28 @@ const handleSelect = (selectedIndex) => {
       console.log("Encoded question:", encodedQuestion);
       const response = await axios.get(`http://localhost:9090/university/chatbot/ask?question=${encodedQuestion}`);
       console.log("Chatbot response:", response.data);
-      setResponse(response.data);
+      const responseData = response.data;
+      // Check if any pattern matches the user's question
+    let matchedResponse = null;
+    for (const item of responseData) {
+      for (const pattern of item.patterns) {
+        if (question.includes(pattern)) {
+          matchedResponse = item.responses[Math.floor(Math.random() * item.responses.length)];
+          break;
+        }
+      }
+      if (matchedResponse) {
+        break;
+      }
+    }
+
+    // Set the response to display
+    setResponse(matchedResponse || "Sorry, I couldn't understand your question.");
+
     } catch (error) {
       console.error("Error asking chatbot:", error);
+      setResponse("Sorry, I couldn't understand your question.");
+      
     }
   };
   
@@ -136,7 +155,7 @@ const handleSelect = (selectedIndex) => {
   return (
     <div className="container-fluid bg-gray">
       <div className="chatbot-icon" onClick={toggleChatbot}>
-  <img src="chatbot-icon.png" alt="Chatbot" />
+  <img src={chatbot} alt="Chatbot" />
 </div>
 
       <div className="row">
@@ -309,7 +328,7 @@ const handleSelect = (selectedIndex) => {
                 {/* Render chat messages here */}
                 <ul className="message-list">
                   <li className="message">Hello! How can I help you today?</li>
-                  {response && <li className="message">{response}</li>}
+                  <li className="message">{response}</li>
                   
                   </ul> 
               </div>
