@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
 import delete_icon from '../assets/icons/delete.svg';
 import edit_icon from '../assets/icons/edit.svg';
 import '../styles/EventItem.css';

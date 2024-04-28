@@ -1,1 +1,28 @@
- 
+.news-item-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    padding: 5px;
+  }
+  
+  .news-item-image {
+    width: 100px;
+    height: 100px;
+    margin-right: 20px;
+  }
+  
+  .news-item-details {
+    flex-grow: 1;
+  }
+  
+  .news-item-content {
+    font-size: 14px;
+    margin-bottom: 5px;
+  }
+  
+  .news-item-source {
+    font-size: 14px;
+    color: gray;
+  }
+  

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import './Profile.css'; 
+import '../styles/Profile.css'; 
 import axios from 'axios';
 import CustomNavbar from "../layouts/Navbar"
 import Footer from "../layouts/Footer"
@@ -101,7 +101,6 @@ const handleToogleChange = (e) => {
     })
       .then(response => response.json())
       .then(data => {
-        console.log(data); // Handle response as needed
         Cookies.remove('userRole');
         Cookies.remove('student_id');
         window.location.href = '/';
@@ -189,19 +188,6 @@ const handleToogleChange = (e) => {
 </label>
 
         <h3>{profileData.full_name}</h3></div>
-        
-{/*         <div className="form-group" style={{marginTop:"10px"}}>
-                    <label className="lable">تعديل الصورة:</label>
-                    <br/>
-                    <input 
-                        className="form-control"
-                        type="file" 
-                        id="student_image_path" 
-                        name="student_image_path"
-                        onChange={handleFileChange}
-                        style={{width:"20%",alignSelf:"center",padding:"0",backgroundImage: `url(${editPhoto})`}}
-                    /> 
-                </div> */}
         <div className='form-row' style={{marginRight:"25px"}}>
           <div className="heading1" style={{fontSize:"1.3rem",fontWeight:"bold",color:"#091160",marginLeft:"15px"}} >  الاشعارات :</div>
           <div className="toggle-switch" >

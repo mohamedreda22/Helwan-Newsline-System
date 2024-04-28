@@ -25,7 +25,6 @@ function LandingPage() {
   const [sports, setSports] = useState([]);
   const [displayedSports, setDisplayedSports] = useState(3);
   const [news, setNews] = useState([]);
-  const [displayedNews, setDisplayedNews] = useState(3);
   const [currentIndex, setCurrentIndex] = useState(0);
   const [index, setIndex] = useState(0);
   const [sources, setSources] = useState([]);
@@ -74,12 +73,9 @@ function LandingPage() {
     }
   };
 
-// test the carousele //
 const handleSelect = (selectedIndex) => {
   setIndex(selectedIndex);
 };
-
-// //////////////////////////////////
    const fetchData = async (category, setData) => {
     try {
       const response = await axios.get(`http://localhost:9090/university/${category}/getForCategory/1`);
@@ -122,37 +118,6 @@ const handleSelect = (selectedIndex) => {
     }
   }
 
-/*   const handleAskChatbot = async () => {
-    try {
-      const encodedQuestion = encodeURIComponent(question);
-      console.log("Encoded question:", encodedQuestion);
-      const response = await axios.get(`http://localhost:9090/university/chatbot/ask?question=${encodedQuestion}`);
-      console.log("Chatbot response:", response.data);
-      const responseData = response.data;
-      // Check if any pattern matches the user's question
-    let matchedResponse = null;
-    for (const item of responseData) {
-      for (const pattern of item.patterns) {
-        if (question.includes(pattern)) {
-          matchedResponse = item.responses[Math.floor(Math.random() * item.responses.length)];
-          break;
-        }
-      }
-      if (matchedResponse) {
-        break;
-      }
-    }
-
-    // Set the response to display
-    setResponse(matchedResponse || "Sorry, I couldn't understand your question.");
-
-    } catch (error) {
-      console.error("Error asking chatbot:", error);
-      setResponse("Sorry, I couldn't understand your question.");
-      
-    }
-  }; */
-
   const handleAskChatbot = async (question) => {
     try {
       // Fetch FAQs
@@ -178,9 +143,6 @@ const handleSelect = (selectedIndex) => {
   const loadMoreSports = () => {
     setDisplayedSports(prevCount => prevCount + 3);
   };
-  const loadMoreNews = () => {
-    setDisplayedNews(prevCount => prevCount + 3);
-  };
   const loadMoreArticles = () => {
     setDisplayedArticles(prevCount => prevCount + 3);
   };
@@ -200,11 +162,6 @@ const handleSelect = (selectedIndex) => {
         <Navbar />
         <div className="page-section">
         <div className="news-section" style={{marginTop:"-40px"}}>
-{/*           <div className="heading" id="topNews" style={{marginTop:"0px"}}>آخر الأخبار</div>
-          <div className="description">
-            <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-          </div> */}
-
           {/* Carousel for news section */}
 <Container fluid>
   <Row>
@@ -233,8 +190,6 @@ const handleSelect = (selectedIndex) => {
         {/* Display the first 3 news items in the sidebar */}
         {news.slice(0, 3).map((item, index) => (
           <div key={index}>
-            {/* Render your item component here */}
-            {/* For example: <NewsItemStudent news={item} /> */}
             <NewsItemStudent news={item} />
           </div>
         ))}
@@ -261,14 +216,6 @@ const handleSelect = (selectedIndex) => {
     </Row>
     ))}
   </Container>
-{/*           <div>
-            {news.slice(0, displayedNews).map(news => (
-              <NewsItemStudent key={news.news_id} news={news} />
-            ))}
-            {news.length > displayedNews && (
-              <button className="load-more-button" onClick={loadMoreNews}> عرض المزيد</button>
-            )}
-          </div> */}
         </div>
           <div className="events-section">
             <div className="heading" id="topEvents">اهم الاحداث</div>
@@ -384,11 +331,6 @@ const handleSelect = (selectedIndex) => {
                     </div>
                   )}
                 </div>
-
-              {/* <div className="chat-input" >
-                <input  className="message-input" placeholder="Type your message here" />
-                <button className="send-button" onClick={handleAskChatbot} >Send</button>
-              </div> */}
             </div>
           </div>
         )}        

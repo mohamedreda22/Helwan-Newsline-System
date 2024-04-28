@@ -1,7 +1,7 @@
 import React from "react";
 import edit_icon from '../assets/icons/edit.svg';
 import delete_icon from '../assets/icons/delete.svg';
-import '../styles/FAQItem.css'; // Add your CSS file for styling
+import '../styles/FAQItem.css';
 
 const FaqItem = ({ faq, onDelete, onEdit }) => {
   const handleEdit = () => {

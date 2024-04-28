@@ -4,7 +4,7 @@ import VideoItem from "./VideoItem";
 import usePagination from '../hooks/usePagination'; 
 import arrow_left from '../assets/icons/arrow_circle_left.svg';
 import arrow_right from '../assets/icons/arrow_circle_right.svg';
-import SideBar from "./SideBar";
+import SideBar from '../layouts/SideBar';
 import EditVideo from "./EditVideo"
 
 function VideoList() {
@@ -15,7 +15,7 @@ function VideoList() {
   const [editedVideo, setEditedVideo] = useState(null);
   const [isEditing, setIsEditing] = useState(false);
   const [videoIdToEdit, setVideoIdToEdit] = useState(null);
-  const [videoFile, setVideoFile] = useState(null); // Define videoFile state
+  const [videoFile, setVideoFile] = useState(null);
 
   const videosPerPage = 9;
 

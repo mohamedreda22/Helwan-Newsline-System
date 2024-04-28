@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import SideBar from '../components/SideBar';
-import Button from "react-bootstrap/Button";
+import SideBar from '../layouts/SideBar';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';

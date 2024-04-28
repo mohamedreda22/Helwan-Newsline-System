@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Simplert from 'react-simplert';
-//import Sidebar from './SideBar';
 import '../styles/AddFaq.css';
 import useAlert from '../hooks/useAlert';
 
@@ -64,17 +63,13 @@ function AddFaq() {
             let errorMessage = 'حدث خطأ أثناء إضافة السؤال';
             if (error.response) {
                 if (error.response.status === 400) {
-                    // Handle specific error codes if needed
                     errorMessage = 'Bad request: Please check your input data.';
                 } else {
-                    // Handle other status codes
                     errorMessage = 'An error occurred while processing your request.';
                 }
             } else if (error.request) {
-                // The request was made but no response was received
                 errorMessage = 'Could not connect to the server. Please try again later.';
             } else {
-                // Something happened in setting up the request that triggered an Error
                 errorMessage = 'An unexpected error occurred. Please try again later.';
             }
             showAlertHandler('error', 'Failed', errorMessage, 'اغلاق');

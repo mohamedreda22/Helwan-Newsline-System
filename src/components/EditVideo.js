@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Simplert from 'react-simplert';
-import SideBar from './SideBar';
-import './EditVideo.css';
+import SideBar from '../layouts/SideBar';
+import '../styles/EditVideo.css';
 
 function EditVideo({ video, onSave, onCancel }) {
   const [formData, setFormData] = useState({
@@ -19,20 +19,6 @@ function EditVideo({ video, onSave, onCancel }) {
   const [categories, setCategories] = useState([]);
   const [sources, setSources] = useState([]);
   const [videoFile, setVideoFile] = useState(null);
-
-
- 
-/* 
-  useEffect(()=>{
-    setFormData({
-      ...formData,
-      video_title: video?.video_title || "",
-      category_id: video?.category_id || "",
-      video_description: video?.video_description || "",
-      video_path: video?.video_path || "",
-      source_id:video?.source_id || "",
-    })
-  }, [video]);  */
 
   const fetchVideoDetails = async () => {
     try {

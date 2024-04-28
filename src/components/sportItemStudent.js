@@ -1,16 +1,7 @@
 import React from 'react';
-import delete_icon from '../assets/icons/delete.svg';
-import edit_icon from '../assets/icons/edit.svg';
 import '../styles/EventItemStudent.css'; 
 
-function SportItemStudent({ sport, onDelete, onEdit }) {
-    const handleDelete = () => {
-        onDelete(sport.sport_id);
-    };
-
-    const handleEdit = () => {
-        onEdit(sport.sport_id);
-    };
+function SportItemStudent({ sport }) {
 
     const formatDateTime = (dateTimeString) => {
         const dateTime = new Date(dateTimeString);

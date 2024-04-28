@@ -33,24 +33,17 @@ function LogIn() {
             console.log('Response:', response);
             if (response && response.status === 202) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
-               // console.log('Form data submitted:', response.data);
-                //console.log('Token from response:', response.data.userRole);
-
                 // Store token in cookie
                 Cookies.set('userRole', response.data.userRole, { expires: 1 }); 
-
                 // Store student_id in cookie if user role is STUDENT
                 if (response.data.userRole === "STUDENT") {
                     Cookies.set('student_id', response.data.id);
-                   // console.log('Student ID:', response.data.id);
                 }
-
                 setFormData({
                     email: '',
                     password: '',
                 });
                 const userRole = response.data.userRole;
-                //console.log('User Role:', userRole);
                 setUserRole(userRole);
                 // Set appropriate route based on user role
                 let route = '/';
@@ -67,16 +60,13 @@ function LogIn() {
                     default:
                         break;
                 }
-
                 // Navigate to the determined route
                 navigate(route);
-
                 setTimeout(function () {
                     window.location.reload();
-                }, 1000);
+                }, 10);
             } else {
                 showAlertHandler('error', 'Failed', 'للاسف فشل تسجيل الدخول ', 'اغلاق');
-               // console.log('Response data:', response.data);
             }
         } catch (error) {
             console.error('Error:', error);

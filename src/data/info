@@ -1,6 +1,0 @@
-The Data folder is dedicated to storing data-related assets for your React project.
-This can include JSON files, mock data,
-or any other data resources utilized within your application.
-
-Simply like test for APIs before actuary deploy!
-<a href="https://github.com/mohamedreda22/portfolio2024/blob/master/src/data/certificationsdata.js">Visit</a>

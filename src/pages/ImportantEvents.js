@@ -203,7 +203,6 @@ function ImportantEvents() {
           className="calendar2"
           />
         </div>
-        {/* <div className=" row event-cards1"> */}
         <div className=" row">
           {events.length > 0 ? (
             events.map((eventItem) => (

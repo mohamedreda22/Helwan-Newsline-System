@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Simplert from 'react-simplert';
-import Sidebar from "./SideBar";
+import Sidebar from "../layouts/SideBar";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DateTimePicker } from "@mui/x-date-pickers/DateTimePicker";
 import { AdapterLuxon } from '@mui/x-date-pickers/AdapterLuxon';
@@ -163,7 +163,6 @@ export default function AddEvent() {
             <div className="add-event-container">
                 <h1 className="header">إضافة حدث</h1>
                 <form onSubmit={handleSubmit}>
-                    {/* Your form inputs */}
                     <div className="form-row">
                         <div className="form-group">
                         <label className="lable" htmlFor="event_address">العنوان</label>
@@ -254,7 +253,6 @@ export default function AddEvent() {
                             />
                         </div>
                     </LocalizationProvider>
-                    {/* Your remaining form inputs */}
                     <div className="form-row">
                     <div className="form-group">
                         <label className="lable" htmlFor="event_broadcast">سيتم بثه؟</label>

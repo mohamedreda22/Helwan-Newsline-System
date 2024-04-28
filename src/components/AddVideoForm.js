@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "./AddVideoForm.css"; 
-import SideBar from "./SideBar";
+import "../styles/AddVideoForm.css"; 
+import SideBar from "../layouts/SideBar";
 import useAlert from "../hooks/useAlert";
 import Simplert from 'react-simplert';
 
@@ -89,14 +89,6 @@ const AddVideoForm = () => {
         showAlertHandler('success', 'Success', 'تم اضافة الفيديو بنجاح', 'تم');
         //onVideoAdded(createResponse.data);
         console.log(formData)
-
-/*         setVideoTitle("");
-        setVideoDescription("");
-        setVideoFile(null);
-        setCategoryId("");
-        setSourceId("")
-        setError("");  */
-
       } else {
         showAlertHandler('error', 'Failed', 'للاسف فشل اضافة الفيديو ', 'اغلاق');
         setError('حدث خطأ أثناء إضافة الفيديو');

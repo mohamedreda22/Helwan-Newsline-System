@@ -20,7 +20,6 @@ const PostsStdView = () => {
       window.open(`/posts/${postId}`, "_blank");
     } catch (error) {
       console.error("Error opening post details:", error);
-      // Handle error
     }
   };
 

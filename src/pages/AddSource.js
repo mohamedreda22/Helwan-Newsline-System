@@ -65,7 +65,6 @@ function AddSource() {
     // If the changed field is college_id, fetch departments for the selected college
     if (name === 'college_id') {
       fetchDepartments(value);
-
     }
   };
 
@@ -193,9 +192,7 @@ function AddSource() {
           <Button 
             type="submit" 
             className="btn-submit" 
-            style={{backgroundColor:"#091160",width:"35%",marginRight:"170px",marginTop:"20px",padding:"15px",fontWeight:"bold",borderRadius:"18px" }}
-/*             style={{padding:"15px",width:"150px",marginRight:"200px",fontWeight:"bold"}}
- */          >
+            style={{backgroundColor:"#091160",width:"35%",marginRight:"170px",marginTop:"20px",padding:"15px",fontWeight:"bold",borderRadius:"18px" }}         >
             تسجيل
           </Button>
         </Form>

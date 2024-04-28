@@ -8,7 +8,7 @@ const StudentVideos = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
-    const [displayedVideos, setDisplayedVideos] = useState(3); // Initial number of videos displayed
+    const [displayedVideos, setDisplayedVideos] = useState(3); 
 
     useEffect(() => {
         fetchVideos();

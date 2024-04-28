@@ -1,5 +1,5 @@
 import React from "react";
-import SideBar from "../components/SideBar";
+import SideBar from '../layouts/SideBar';
 import ShowNotifications from "../components/ShowNotifications";
 import SearchBar from "../layouts/SearchBar";
 import "../styles/Notifications.css";

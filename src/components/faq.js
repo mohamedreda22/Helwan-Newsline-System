@@ -4,7 +4,7 @@ import FaqItem from './faqItem';
 import EditFaq from "./editFaq";
 import "../styles/Faq.css"; 
 import AddFaq from "./addFaq";
-import SideBar from "./SideBar";
+import SideBar from '../layouts/SideBar';
 import usePagination from '../hooks/usePagination';
 import arrow_left from '../assets/icons/arrow_circle_left.svg';
 import arrow_right from '../assets/icons/arrow_circle_right.svg';
@@ -70,7 +70,7 @@ function FAQs() {
     try {
       const response = await axios.get("http://localhost:9090/university/faqs");
       setFAQs(response.data);
-      setTotalFaqs(response.data.length); // Set total FAQs
+      setTotalFaqs(response.data.length); 
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching FAQs:", error);

@@ -224,8 +224,7 @@ function SignUp() {
                     </div>
                     </div>
                     <div className="form-group" style={{marginTop:"20px"}}>
-{/*                         <label className="lable" htmlFor="student_image_path">رفع الصورة</label>
- */}                        <input
+                        <input
                             type="file"
                             id="student_image_path"
                             name="student_image_path"

@@ -6,7 +6,7 @@ import "../styles/Events.css";
 import usePagination from '../hooks/usePagination';
 import arrow_left from '../assets/icons/arrow_circle_left.svg';
 import arrow_right from '../assets/icons/arrow_circle_right.svg';
-import SideBar from "../components/SideBar";
+import SideBar from '../layouts/SideBar';
 
 function Posts() {
   const [posts, setPosts] = useState([]);

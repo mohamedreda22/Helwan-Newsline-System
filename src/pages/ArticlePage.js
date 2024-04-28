@@ -23,43 +23,4 @@ const ArticlePage = () => {
 export default ArticlePage;
 
 
-
-
-// import React, { useState, useEffect } from "react";
-// import axios from "axios";
-
-// const ArticlePage = ({ match }) => {
-//   const [article, setArticle] = useState(null);
-
-//   useEffect(() => {
-//     const fetchArticle = async () => {
-//       try {
-//         const response = await axios.get(`http://localhost:9090/university/articles/${match.params.articleId}`);
-//         setArticle(response.data);
-//       } catch (error) {
-//         console.error('Error fetching article:', error);
-//       }
-//     };
-
-//     fetchArticle();
-//   }, [match.params.articleId]);
-
-//   if (!article) {
-//     return <div>Loading...</div>;
-//   }
-
-//   return (
-//     <div>
-//       <h1>{article.article_address}</h1>
-//       <img src={article.article_image_path} alt={article.article_address} />
-      
-//       <p>{article.date}</p>
-//       <p>{article.article_content}</p>
-//     </div>
-//   );
-// };
-
-// export default ArticlePage;
-
-
  

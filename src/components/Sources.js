@@ -22,7 +22,7 @@ const [departments, setDepartments] = useState([]);
       setSources(response.data);
     } catch (error) {
       console.error("Error fetching sources:", error);
-      setErrorAlert(true); // Set error alert to true if fetching fails
+      setErrorAlert(true); 
     }
   };
   const fetchColleges = async ()=>{
@@ -66,14 +66,14 @@ const [departments, setDepartments] = useState([]);
       );
 
       if (response && (response.status === 202 || response.status === 200)) {
-        setShowEditModal(false); // Close modal after successful deletion
+        setShowEditModal(false); 
       } else {
         throw new Error("An error occurred while deleting the source.");
       }
     } catch (error) {
       console.error("Error deleting source:", error);
-      setErrorAlert(true); // Set error alert to true if deletion fails
-      fetchSources(); // Restore articles if deletion fails
+      setErrorAlert(true); 
+      fetchSources();
     }
   };
 

@@ -146,7 +146,6 @@ export default function EditEvent({ event, onSave, onCancel }) {
         <div className="edit-event-container" dir="rtl">
             <h2 className="header" style={{paddingRight:"0%"}}>تعديل الحدث</h2>
             <form onSubmit={handleSubmit} >
-                {/* Form inputs */}
                 <div className="form-row" >
                 <div className="form-group">
                     <label className="lable" htmlFor="event_address">العنوان</label>
@@ -268,20 +267,6 @@ export default function EditEvent({ event, onSave, onCancel }) {
                      name="event_image_path"
                      onChange={handleCombinedFileChange}
                       /> 
-{/*                                 <table className="image-table">
-                                    <tbody>
-                                        <tr>
-                                            <td>
-                                                <label className="image-label">الصورة القديمة:</label><br />
-                                                {event.event_image_path && <img src={event.event_image_path} alt="Old Event" className="image-preview" />}
-                                            </td>
-                                            <td>
-                                                <label className="image-label">الصورة الجديدة:</label><br />
-                                                {previewImage && <img src={previewImage} alt="New Event" className="image-preview" />}
-                                            </td>
-                                        </tr>
-                                    </tbody>
-                                </table> */}
                     </div>
                 <div className="btn-container1" >
                 <button type="submit" className="btn-submit"  style={{width:"30%"}}>

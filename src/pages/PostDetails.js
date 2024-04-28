@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useParams, Link } from "react-router-dom";
-import "../components/VideoDetails.css";
+import "../styles/VideoDetails.css";
 import axios from "axios";
 import PostItemStudent from "../components/postItemStudent";
 import Navbar from "../layouts/Navbar";

@@ -1,6 +1,5 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
-import { UserRoleProvider } from '../hooks/UserRoleContext'; 
 import LogIn from '../pages/LogIn';
 import Colleges from '../pages/Colleges';
 import Events from '../components/events';
@@ -9,11 +8,10 @@ import FAQs from "../components/faq";
 import SignUp from "../pages/SignUp";
 import ForgotPassword from "../pages/ForgotPassword";
 import UpdatePassword from "../pages/UpdatePassword";
-import StudentDashboard from "../pages/StudentsDashboard";
 import ShowDepartments from "../components/ShowDepartments"
 import Posts from "../pages/Posts";
 import AddPost from "../pages/AddPost";
-import SideBar from "../components/SideBar";
+import SideBar from '../layouts/SideBar';
 import {PrivateRoutes} from './PrivateRoutes';
 import NotFound from '../pages/NotFound'
 import VideoList from '../components/videoList';
@@ -40,44 +38,23 @@ import AddCollege from "../pages/AddCollege"
 import CollegeDetails from '../pages/CollegeDetails';
 import Profile from '../pages/Profile';
 import Cookies from 'js-cookie';
-
-
-
-//import { useUserRole } from '../hooks/UserRoleContext';
+import Loading from '../components/loading';
 
 export const RouterComponent = () => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(true);
   const [userRole, setUserRole] = useState('');
-  //const { userRole } = useUserRole();
 
 
   useEffect(() => {
-    //console.log('Attempting to get token from Cookies');
     const token = Cookies.get('userRole');
-    //console.log('Token from Cookies:', token);
     if (token) {
       setIsAuthenticated(true);
-      //console.log('User is authenticated');
       const userRoleFromSession = Cookies.get('userRole');
-      //console.log('User role from Cookies:', userRoleFromSession);
       setUserRole(userRoleFromSession);
     }
     setLoading(false);
   }, [setIsAuthenticated]);
-
-
-/*   useEffect(() => {
-    console.log("Attempting to get userRole from useContext hook");
-    console.log("User Role from useContext hook:", userRole);
-    if (userRole) {
-      setIsAuthenticated(true);
-      console.log('User is authenticated');
-    } else {
-      // If userRole is not available, it might still be loading or not authenticated
-      setLoading(false);
-    }
-  }, [userRole, setIsAuthenticated]); */
   
   
 
@@ -107,29 +84,17 @@ export const RouterComponent = () => {
         <Route path="/videos" element={<StudentVideos/>} />
         <Route path="/videos/:id" element={<VideoDetails />} />
         <Route path="/posts/:post_id" element={<PostDetails />} />
+        <Route path="/Loading" element={<Loading/>} />
 
-        
 
-
-          
-        
         <Route path="/importantEvents" element={<ImportantEvents/>} />
         <Route path="/posts" element={<PostsStdView/>} />
         <Route exact path="/articles" element={ <SeeMoreArticles/>} />
         <Route path="/articles/:article_id" element={<ArticlePage/>} />
         <Route path="/profile" element={<Profile/>} />
-        <Route path="/studentDashbord" element={<StudentDashboard/>} />
-        
-
-
-        
-        
 
         {isAuthenticated ? (
           <Route element={<PrivateRoutes isAuthenticated={isAuthenticated} logout={logout} />}>
-{/*           {userRole === 'STUDENT' && (
-              <Route path="/landingPage" element={<LandingPage/>} />
-            )} */}
             {userRole === 'ADMIN' && (
               <>
               <Route path="/showDepartments" element={<ShowDepartments/>} />
@@ -144,7 +109,6 @@ export const RouterComponent = () => {
             <Route path="/addEvent" element={<AddEvent/>} />
             <Route path="/showEvents" element={<Events/>} />
             <Route path="/faq" element={<FAQs/>} />
-            <Route path="/dashboard" element={<StudentDashboard/>} />
             <Route path="/videoList" element={<VideoList/>} />
             <Route path="/addVideo" element={<AddVideoForm/>} />
             <Route path="/sideBar" element={<SideBar/>} />
@@ -156,17 +120,14 @@ export const RouterComponent = () => {
             <Route path="/addNews" element={<AddNews/>} />
             <Route path="/addSport" element={<AddSport/>} />
             <Route path="/showSports" element={<Sports/>} />
-            <Route path="/showNews" element={<News/>} />
+            <Route path="/showNews" element={<News/>} />            
 
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />
             </Route>
                     ) : (
-                        <Route path="*" element={<NotFound/>} />
-
-/*           <Navigate to="/collages" />
- */
+                        <Route path="*" element={<Loading/>} />
 )}
 
       </Routes>

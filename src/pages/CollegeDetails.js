@@ -9,9 +9,8 @@ import SportItemStudent from "../components/sportItemStudent";
 import NewsItemStudent from "../components/newsItemStudent";
 import VideoItemStudent from "../components/VideoItemStudent";
 import Footer from '../layouts/Footer';
-import FCAIH from "../assets/images/484.jpg"
 import { Link } from "react-router-dom";
-import './CollegeDetails.css';
+import '../styles/CollegeDetails.css';
 
 
 const CollegeDetails = () => {
@@ -31,10 +30,6 @@ const CollegeDetails = () => {
     const [displayedNews, setDisplayedNews] = useState(3);
     const [displayedVideos, setDisplayedVideos] = useState(4);
     
-
-
-
-
     const { id } = useParams();
     const loadMorePosts =()=>{
         setDisplayedPosts(prevCount => prevCount + 3);
@@ -82,7 +77,7 @@ const CollegeDetails = () => {
         const fetchEvents = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/events?college_id=${id}`);
-                console.log("Events response:", response.data); // Log the response data
+                console.log("Events response:", response.data); 
                 const filterEvents = response.data.filter(event => event.college_id === parseInt(id));
                 setEvents(filterEvents);
             } catch (error) {
@@ -95,7 +90,7 @@ const CollegeDetails = () => {
         const fetchArticles = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/articles?college_id=${id}`);
-                console.log("Articles response:", response.data); // Log the response data
+                console.log("Articles response:", response.data); 
                 const filterArticles = response.data.filter(article => article.college_id === parseInt(id));
                 setArticles(filterArticles);
             } catch (error) {
@@ -106,7 +101,7 @@ const CollegeDetails = () => {
         const fetchPosts = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/posts?college_id=${id}`);
-                console.log("Posts response:", response.data); // Log the response data
+                console.log("Posts response:", response.data); 
                 const filterPosts = response.data.filter(post => post.college_id === parseInt(id));
                 setPosts(filterPosts);
             } catch (error) {
@@ -117,7 +112,7 @@ const CollegeDetails = () => {
         const fetchSports = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/sports?college_id=${id}`);
-                console.log("Sports response:", response.data); // Log the response data
+                console.log("Sports response:", response.data); 
                 const filterSports = response.data.filter(sport => sport.college_id === parseInt(id));
                 setSports(filterSports);
             } catch (error) {
@@ -128,7 +123,7 @@ const CollegeDetails = () => {
         const fetchNews = async () => {
             try {
                 const response = await axios.get(`http://localhost:9090/university/news?college_id=${id}`);
-                console.log("News response:", response.data); // Log the response data
+                console.log("News response:", response.data); 
                 const filterNews = response.data.filter(news => news.college_id === parseInt(id));
                 setNews(filterNews);
             } catch (error) {

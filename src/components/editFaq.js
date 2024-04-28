@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import "../styles/EditFaq.css"; // Add your CSS file for styling
+import "../styles/EditFaq.css";
 import Simplert from 'react-simplert'
-import SideBar from "./SideBar";
+import SideBar from "../layouts/SideBar";
 
 function EditFaq({ faq, onSave, onCancel }) {
   const [formData, setFormData] = useState({

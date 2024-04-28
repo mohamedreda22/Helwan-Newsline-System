@@ -28,12 +28,6 @@ const ArticleItemStudent = ({ article ,style}) => {
           <p className="event-card-content" dir='rtl'>
                 {showFullContent ? article.article_content : (article.article_content.length > 100 ? `${article.article_content.slice(0, 100)}...` : article.article_content)}
             </p>
-            
-{/*             {article.article_content.length > 100 && (
-                <button onClick={() => setShowFullContent(!showFullContent)} className="load-more-button1">
-                    {showFullContent ? "عرض اقل " : " عرض المزيد"}
-                </button>
-            )} */}
         <a href={`/articles/${article.article_id}`} className="links" target='blank'>عرض المزيد</a>
           <div className="event-card-source">
 

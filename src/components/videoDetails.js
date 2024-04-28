@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useParams } from 'react-router-dom';
-import './VideoDetails.css';
+import '../styles/VideoDetails.css';
 import Navbar from '../layouts/Navbar';
 import VideoItemStudent from './VideoItemStudent';
 import Cookies from 'js-cookie';
@@ -117,16 +117,15 @@ const VideoDetails = () => {
     
             const response = await axios.post('http://localhost:9090/university/comments', {
                 student_id: parseInt(studentId), // Parse to integer if needed
-channel_id: id, // Assuming channel_id is equivalent to video_id
+                channel_id: id, // Assuming channel_id is equivalent to video_id
                 channel_type: "VIDEO",
                 student_comment: comment
             });                
             const newComment = response.data;
             setComments([...comments, newComment]);
-            setComment(""); // Clear comment input after submission
+            setComment(""); 
         } catch (error) {
             console.error("Error submitting comment:", error);
-            // Handle error submission
         }
     };
     const handleAddLike = async () => {
@@ -154,7 +153,6 @@ channel_id: id, // Assuming channel_id is equivalent to video_id
             setLikes([...likes, newLike]);
         } catch (error) {
             console.error("Error adding like:", error);
-            // Handle error adding like
         }
     };
     

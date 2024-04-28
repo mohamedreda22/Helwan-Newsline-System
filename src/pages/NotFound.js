@@ -1,5 +1,5 @@
 import React from 'react';
-import '../styles/NotFound.css'; // Import the CSS file for styling
+import '../styles/NotFound.css'; 
 import { useNavigate } from 'react-router-dom'; 
 import logo from '../assets/images/logo.png'; 
 
