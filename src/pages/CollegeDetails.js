@@ -151,6 +151,7 @@ const CollegeDetails = () => {
     const customStyle = {
         width: '23%', 
         backgroundColor: 'lightgray', 
+        minWidth:"150px"
       };
     return (
         <>
