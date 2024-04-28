@@ -122,6 +122,15 @@ function SignUp() {
         console.log(file);
     };
 
+    useEffect(() => {
+        // Add a class to the body element when the component mounts
+        document.body.classList.add('login-page-body');
+        // Remove the class when the component unmounts
+        return () => {
+            document.body.classList.remove('login-page-body');
+        };
+    }, []);
+    
     return (
         <div className="signup-page" dir='rtl'>
             <div className="signup-container">

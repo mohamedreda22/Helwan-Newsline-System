@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import Simplert from 'react-simplert';
-import SideBar from '../layouts/SideBar';
 import '../styles/EditVideo.css';
 
 function EditVideo({ video, onSave, onCancel }) {

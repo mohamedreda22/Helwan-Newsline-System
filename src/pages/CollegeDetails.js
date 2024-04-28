@@ -181,6 +181,7 @@ const CollegeDetails = () => {
                 <div className="heading" id="topEvents">اهم الاحداث</div>
                 <div className="description">
               <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
+                <Link className="links" to="/importantEvents">رؤية جميع الأحداث</Link>
             </div>
             {events.slice(0, displayedEvents).map(event => (
                         <EventItemStudent key={event.event_id} event={event} />
@@ -231,7 +232,7 @@ const CollegeDetails = () => {
                       )}
                 </div>
 
-                <div className="news-section">
+                <div className="news-section" >
                 <div className="heading" id="topNews">آخر الأخبار</div>
                 <div className="description">
               <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>

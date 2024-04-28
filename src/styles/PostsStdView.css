@@ -3,26 +3,16 @@
   padding: 0;
   box-sizing: border-box;
 }
-/* .project-info {
-  padding: 100px 40px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-  position: relative;
-  top: -50px;
-} */
 .project-info {
   padding: 5px 60px;
   display: flex;
   flex-direction: column;
   gap: 10px;
-  /* position: relative; */
   top: -50px;
 }
 
 .card-img-placeholder {
   width: 90%;
-  /* Add styles for card without image */
   padding: 50px 20px;
 }
 
@@ -49,22 +39,6 @@
   justify-content: space-between;
   align-items: center;
 }
-
-/* .tag {
-  font-weight: lighter;
-  color: grey;
-} */
-
-/* DELETE THIS TWO LINE
-.delete {
-  background-color: #b2b2fd;
-}
-
-.card-img div {
-  width: 90%;
-} */
-/*IF USING IMAGES*/
-
 .card {
   background-color: white;
   color: black;
@@ -88,15 +62,14 @@
   justify-content: center;
 }
 
-/* Change the .card-img div to .card-img img to use img*/
 .card-img a,
 .card-img img {
   height: 100%;
-  width: 90%;
-  /* Change this width here to change the width of the color/image */
   object-fit: cover;
   border-radius: 8px;
   box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+  margin-top: 40px;
+  
 }
 
 .card-imgs {
@@ -120,10 +93,10 @@
   display: flex;
   align-items: center;
   color: #787878;
-  margin-right: 5px; /* Adjust the margin between icons */
+  margin-right: 5px; 
 }
 .post-icons:not(:last-child) {
-  margin-right: 10px; /* Add space between icons */
+  margin-right: 10px; 
 }
 
 .postDetailsBtn {

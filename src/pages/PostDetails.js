@@ -292,11 +292,6 @@ const PostDetails = () => {
                 {!isAuthorized && (
                     <p style={{ color: "red" }}>لأضافة تعليقاَ او اعجاباً يجب عليك تسجيل الدخول اولاَ</p>
                 )}
-                     {!isAuthorized && (
-                   <>
-                      <p style={{color: "red"}}>لأضافة تعليقاََ او اعجاباً يجب عليك تسجيل الدخول اولاََ </p>
-                    </>
-                    )}
             </div>
 
             <div className="more-of-articles">

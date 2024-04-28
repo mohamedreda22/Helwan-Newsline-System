@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import '../styles/EventItemStudent.css';
 import axios from 'axios';
-import  "./NewsItemStudent.css"
+import  "../styles/NewsItemStudent.css"
 
-function NewsItemStudent({ news }) {
+function NewsItemStudent({ news,style }) {
     const [sources, setSources] = useState([]);
 
     useEffect(() => {

@@ -4,9 +4,7 @@ import Navbar from "../layouts/Navbar";
 import Footer from "../layouts/Footer";
 import "../styles/PostsStdView.css";
 import comment from "../assets/icons/comment.svg";
-import like from "../assets/icons/like.svg";
 import date from "../assets/icons/time.svg";
-import { useParams } from "react-router-dom";
 
 const PostsStdView = () => {
   const [posts, setPosts] = useState([]);

@@ -8,7 +8,7 @@ const StudentVideos = () => {
     const [videos, setVideos] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState("");
-    const [displayedVideos, setDisplayedVideos] = useState(3); 
+    const [displayedVideos, setDisplayedVideos] = useState(2); 
 
     useEffect(() => {
         fetchVideos();
@@ -31,32 +31,38 @@ const StudentVideos = () => {
     };
 
     return (
-        <div>
+        <div style={{overflowX:"hidden"}}>
             <Navbar />
             {isLoading && <p>Loading...</p>}
             {error && <p>{error}</p>}
-            <div>
-                <div style={{marginLeft:"8%",width:"106%"}}>
-                    {videos.slice(0, 2).map(video => (
-                        <VideoItemStudent key={video.video_id} video={video} />
-                    ))}
-                </div>
+            <div style={{ marginLeft: "11%", width: "106%" }}>
+                {videos.slice(0, 2).map(video => (
+                    <VideoItemStudent key={video.video_id} video={video} />
+                ))}
             </div>
-            <div className="important-videos-section" >
+            <div className="important-videos-section">
                 <div className="heading">أهم الفيديوهات</div>
                 <div className="description">
                     <div>تقوم الجامعة بنشر الفيديوهات الهامة والمفيدة للجميع <br />تابعنا للحصول على كل جديد</div>
                 </div>
             </div>
             <hr />
-            <div>
-                <div className='flex-container'>
-                    {videos.slice(2).map(video => (
-                        <VideoItemStudent key={video.video_id} video={video} />
-                    ))}
-                </div>
+            <div className='flex-container'>
+            {videos.slice(2, 6).map(video => (
+                    <VideoItemStudent key={video.video_id} video={video} />
+                ))}
+
+            </div>            
+            <div className='flex-container'>
+            {videos.slice(6, displayedVideos).map(video => (
+                    <VideoItemStudent key={video.video_id} video={video} />
+                ))}
+
             </div>
-            <Footer/>
+            {videos.length > displayedVideos && (
+                <button className="load-more-button" onClick={loadMoreVideos}>عرض المزيد</button>
+            )}
+            <Footer />
         </div>
     );
 }

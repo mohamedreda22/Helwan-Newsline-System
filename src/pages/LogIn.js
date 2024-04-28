@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import logo from '../assets/images/logo.png';
 import '../styles/LogIn.css';
 import axios from 'axios';
@@ -79,6 +79,15 @@ function LogIn() {
         }
     };
 
+    useEffect(() => {
+        // Add a class to the body element when the component mounts
+        document.body.classList.add('login-page-body');
+        // Remove the class when the component unmounts
+        return () => {
+            document.body.classList.remove('login-page-body');
+        };
+    }, []);
+
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData({
@@ -88,7 +97,7 @@ function LogIn() {
     };
 
     return (
-        <div className="login-page">
+        <div className="login-page" style={{display:"block"}}> 
             <div className="login-container">
                 <div className="logo">
                     <img src={logo} alt="logo" />

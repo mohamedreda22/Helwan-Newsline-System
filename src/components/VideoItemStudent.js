@@ -53,7 +53,7 @@ function VideoItemStudent({ video ,style}) {
             onClick={handleVideoClick}
             href={`/videos/${video.video_id}`}
             target='blank'
-            style={{float:"right",paddingRight:"5px",width:"125px",paddingBottom:"10px",fontSize:"14px",fontWeight:"bold"}}
+            style={{float:"right",paddingRight:"5px",width:"125px",paddingBottom:"10px",fontSize:"14px",fontWeight:"bold",marginRight:"10px",marginTop:"-10px",marginBottom:"5px"}}
         >
             عرض بتفاصيل اكتر
         </button>

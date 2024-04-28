@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import logo from '../assets/images/logo.png';
 import '../styles/ForgotPassword.css'; 
 import axios from 'axios';
@@ -47,6 +47,15 @@ function ForgotPassword() {
     const handleChange = (e) => {
         setEmail(e.target.value);
     };
+
+    useEffect(() => {
+        // Add a class to the body element when the component mounts
+        document.body.classList.add('login-page-body');
+        // Remove the class when the component unmounts
+        return () => {
+            document.body.classList.remove('login-page-body');
+        };
+    }, []);
 
     return (
         <div className="forgot-password-page">

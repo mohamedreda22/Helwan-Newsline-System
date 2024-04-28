@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import useAlert from '../hooks/useAlert';
 import Simplert from 'react-simplert';
@@ -77,6 +77,14 @@ function UpdatePassword() {
         setOtp(e.target.value);
     };
 
+        useEffect(() => {
+        // Add a class to the body element when the component mounts
+        document.body.classList.add('login-page-body');
+        // Remove the class when the component unmounts
+        return () => {
+            document.body.classList.remove('login-page-body');
+        };
+    }, []);
     return (
         <div className="update-password-page">
             <div className="update-password-container">               
@@ -137,6 +145,12 @@ function UpdatePassword() {
                         {isLoading ? 'جاري تحديث كلمة المرور' : 'تحديث كلمة المرور'}
                     </button>
                     {error && <div className="error">{error}</div>}
+                    <a
+                        href="/login"
+                        className="link login"
+                    >
+                        العودة إلى تسجيل الدخول
+                    </a>
                 </form>
             </div>
             <Simplert
