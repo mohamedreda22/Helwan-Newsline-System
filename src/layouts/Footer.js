@@ -11,12 +11,12 @@ const Footer = () => {
         </div> */}
         <ul className="footer-links">
           <li>
-            <Link to="/" className="footer-links">
+            <Link to="/importantEvents" className="footer-links">
               اهم الاحداث{" "}
             </Link>
           </li>
           <li>
-            <Link to="/" className="footer-links">
+            <Link to="/articles" className="footer-links">
               اهم المقالات
             </Link>{" "}
           </li>
