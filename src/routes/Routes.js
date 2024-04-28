@@ -36,6 +36,7 @@ import VideoDetails from "../components/videoDetails";
 import PostDetails from '../pages/PostDetails';
 import AddCollege from "../pages/AddCollege"
 import CollegeDetails from '../pages/CollegeDetails';
+import ShowNotifications from '../components/ShowNotifications';
 import Profile from '../pages/Profile';
 import Cookies from 'js-cookie';
 import Loading from '../components/loading';
@@ -120,8 +121,10 @@ export const RouterComponent = () => {
             <Route path="/addNews" element={<AddNews/>} />
             <Route path="/addSport" element={<AddSport/>} />
             <Route path="/showSports" element={<Sports/>} />
-            <Route path="/showNews" element={<News/>} />            
-
+            <Route path="/showNews" element={<News/>} />     
+            <Route path="/notifications" element={<ShowNotifications/>} />            
+       
+            
               </>
             )}
             <Route path="/logout" element={<Navigate to="/login" />} />

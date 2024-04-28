@@ -39,6 +39,9 @@ function LogIn() {
                 if (response.data.userRole === "STUDENT") {
                     Cookies.set('student_id', response.data.id);
                 }
+                if (response.data.userRole === "SOURCE") {
+                    Cookies.set('source_id', response.data.id);
+                }
                 setFormData({
                     email: '',
                     password: '',

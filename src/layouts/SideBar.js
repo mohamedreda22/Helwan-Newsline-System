@@ -19,6 +19,9 @@ export default function SideBar  ()  {
             <div className="menuItemWrapper">
             <Sidebar className='side2'>
                 <Menu>
+                <Nav.Link as={Link} to="/notifications" className='active'>
+                        <span className="material-icons-outlined">question_mark</span> الإشعارات
+                    </Nav.Link>
                   <SubMenu label=" اهم الاحداث">
                      <Nav.Link as={Link} to="/addEvent" className='active'>
                         <span className="material-icons-outlined">add</span> اضافة حدث

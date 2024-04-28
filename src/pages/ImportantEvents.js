@@ -132,6 +132,7 @@ function ImportantEvents() {
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState("");
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [intialevents, setIntialEvents] = useState([]);
 
   const formatDateTime = (dateTimeString) => {
     const dateTime = new Date(dateTimeString);
@@ -150,6 +151,7 @@ function ImportantEvents() {
         "http://localhost:9090/university/events"
       );
       setEvents(response.data);
+      setIntialEvents(response.data);
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching events:", error);
@@ -159,16 +161,25 @@ function ImportantEvents() {
   };
 
   const handleDateClick = async (date) => {
+    console.log("Date",date);
     setSelectedDate(date);
     const formattedDate = formatDateTime(date);
     const filteredEvents = events.filter((event) => {
       const eventDate = formatDateTime(event.event_date);
+      console.log("Date3",eventDate.day === formattedDate.day &&
+      eventDate.month === formattedDate.month);
+
       return (
         eventDate.day === formattedDate.day &&
         eventDate.month === formattedDate.month
+
       );
     });
-    setEvents(filteredEvents);
+    console.log("Date2",filteredEvents);
+    // setEvents(filteredEvents);
+    setIntialEvents(filteredEvents);
+    console.log("DateEvents",events);
+
   };
 
   const tileClassName = ({ date }) => {
@@ -204,8 +215,8 @@ function ImportantEvents() {
           />
         </div>
         <div className=" row">
-          {events.length > 0 ? (
-            events.map((eventItem) => (
+          {intialevents.length > 0 ? (
+            intialevents.map((eventItem) => (
               <div className="blog-card alt col-8 " key={eventItem.event_id}>
                 <div className="meta">
                   <div
