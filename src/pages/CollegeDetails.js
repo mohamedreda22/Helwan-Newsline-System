@@ -153,101 +153,135 @@ const CollegeDetails = () => {
         backgroundColor: 'lightgray', 
         minWidth:"150px"
       };
+
+      const customStyle1 = {
+        backgroundColor: 'white',
+        padding: "10px",
+        fontSize: "1.2rem",
+        fontWeight: "bold",
+        maxWidth: "400px",  
+        height: "100px",
+        overflow: "hidden",
+        textOverflow: "ellipsis",
+        margin: "10px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        borderRadius: "5px",
+        boxShadow: "0 0 10px rgba(0, 0, 0, 0.1)",
+        minWidth:"400px"
+    };
+    
+    
+    
     return (
         <>
             <Navbar />
             <div className="college-details-container" style={{marginTop:"-40px"}} > 
-            <div className='banner'>
+            <div className='banner' >
             <img src={collegeData?.college_back_ground} alt="Banner" />
-            <div className="banner-content">
+            <div className="banner-content" >
                 <h1>{collegeData?.college_name}</h1>
                 <img src={collegeData?.college_icon} alt="College Icon" className="college-banner" />
             </div>
         </div>
-                <div className="videos-section">
-                <div className="heading">الفيديوهات</div>
-                <div className="description">
-                <div>تقام الفعاليات الهامة بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
-                <Link className="links" to="/videos">رؤية جميع الفيديوهات</Link>
-                </div>
+            <div className="videos-section" dir='rtl'>
+            <div className="heading">الفيديوهات</div>
+            <div className="description">
+            <div>تقام الفعاليات الهامة بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
+            <Link className="links" to="/videos">رؤية جميع الفيديوهات</Link>
+            </div>
+            <div className="video-items-container">
                 {videos.slice(0, displayedVideos).map(video => (
-                        <VideoItemStudent key={video.video_id} video={video} style={customStyle} />
-                    ))}              
-
-                </div>                    
-                {videos.length > displayedVideos && (
-                        <button className="load-more-button" onClick={loadMoreVideos}> عرض المزيد</button>
-                      )}
-                <div className="events-section">
-                <div className="heading" id="topEvents">اهم الاحداث</div>
-                <div className="description">
-              <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
-                <Link className="links" to="/importantEvents">رؤية جميع الأحداث</Link>
+                    <VideoItemStudent key={video.video_id} video={video} style={customStyle} />
+                ))}
             </div>
-            {events.slice(0, displayedEvents).map(event => (
-                        <EventItemStudent key={event.event_id} event={event} />
-                    ))}              
-                    {events.length > displayedEvents && (
-                        <button className="load-more-button" onClick={loadMoreEvents}>عرض المزيد</button>
-                      )}
-                </div>
-
-                <div className="articles-section">
-                <div className="heading" id="topArticals">اهم المقالات</div>
-                <div className="description">
-              <div>يتم نشر المقالات الهامة والمفيدة للجامعة بانتظام <br></br>قم بزيارة الصفحة التالية لرؤية جميع المقالات</div>
-              <Link className="links" to="/articles">رؤية جميع المقالات</Link>
+            {videos.length > displayedVideos && (
+                <button className="load-more-button" onClick={loadMoreVideos}> عرض المزيد</button>
+            )}
+            </div>                    
+            <div className="events-section" dir='rtl'>
+            <div className="heading" id="topEvents">اهم الاحداث</div>
+            <div className="description">
+            <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
+            <Link className="links" to="/importantEvents">رؤية جميع الأحداث</Link>
             </div>
-            {articles.slice(0, displayedArticles).map(article => (
-                        <ArticleItemStudent key={article.article_id} article={article} />
-                    ))}
-                    {articles.length > displayedArticles && (
+            <div className="event-items-container">
+                {events.slice(0, displayedEvents).map(event => (
+                    <EventItemStudent key={event.event_id} event={event} />
+                ))}
+            </div>
+            {events.length > displayedEvents && (
+                <button className="load-more-button" onClick={loadMoreEvents}>عرض المزيد</button>
+            )}
+            </div>
+
+            <div className="articles-section" dir='rtl'>
+            <div className="heading" id="topArticals">اهم المقالات</div>
+            <div className="description">
+            <div>يتم نشر المقالات الهامة والمفيدة للجامعة بانتظام <br></br>قم بزيارة الصفحة التالية لرؤية جميع المقالات</div>
+            <Link className="links" to="/articles">رؤية جميع المقالات</Link>
+            </div>
+            <div className="article-items-container">
+                {articles.slice(0, displayedArticles).map(article => (
+                    <ArticleItemStudent key={article.article_id} article={article} />
+                ))}
+            </div>
+            {articles.length > displayedArticles && (
                 <button className="load-more-button" onClick={loadMoreArticles}> عرض المزيد</button>
-              )}
-                </div>
-
-                <div className="posts-section">
-                <div className="heading" id="topPosts">آخر المنشورات </div>
-                <div className="description">
-              <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
-              <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
+            )}
             </div>
-            {posts.slice(0, displayedPosts).map(post => (
-                        <PostItemStudent key={post.post_id} post={post} />
-                    ))}
-                    {posts.length > displayedPosts && (
+
+            <div className="posts-section" dir='rtl'>
+            <div className="heading" id="topPosts">آخر المنشورات </div>
+            <div className="description">
+            <div>تقوم الجامعة بنشر المنشورات الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
+            <Link className="links" to="/posts">رؤية جميع المنشورات</Link>
+            </div>
+            <div className="post-items-container">
+                {posts.slice(0, displayedPosts).map(post => (
+                    <PostItemStudent key={post.post_id} post={post} />
+                ))}
+            </div>
+            {posts.length > displayedPosts && (
                 <button className="load-more-button" onClick={loadMorePosts}> عرض المزيد</button>
-              )}
-                </div>
+            )}
+            </div>
 
-                <div className="sports-section">
-                <div className="heading">الرياضة</div>
-                <div className="description">
-              <div>تقام الأنشطة الرياضية بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
+            <div className="sports-section" dir='rtl'>
+            <div className="heading">الرياضة</div>
+            <div className="description">
+            <div>تقام الأنشطة الرياضية بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
             </div>
-            {sports.slice(0, displayedSports).map(sport => (
-                        <SportItemStudent key={sport.sport_id} sport={sport} />
-                    ))}               
-                    {sports.length > displayedSports && (
-                        <button className="load-more-button" onClick={loadMoreSports}> عرض المزيد</button>
-                      )}
-                </div>
+            <div className="sport-items-container">
+                {sports.slice(0, displayedSports).map(sport => (
+                    <SportItemStudent key={sport.sport_id} sport={sport} />
+                ))}
+            </div>
+            {sports.length > displayedSports && (
+                <button className="load-more-button" onClick={loadMoreSports}> عرض المزيد</button>
+            )}
+            </div>
 
-                <div className="news-section" >
-                <div className="heading" id="topNews">آخر الأخبار</div>
-                <div className="description">
-              <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
+            <div className="news-section" dir='rtl'>
+            <div className="heading" id="topNews">آخر الأخبار</div>
+            <div className="description">
+            <div>تقوم الجامعة بنشر الأخبار الهامة والمفيدة للجميع <br></br>تابعنا للحصول على كل جديد</div>
             </div>
-            {news.slice(0, displayedNews).map(news => (
-                        <NewsItemStudent key={news.news_id} news={news} />
-                    ))}              
-                    {news.length > displayedNews && (
-                        <button className="load-more-button" onClick={loadMoreNews}> عرض المزيد</button>
-                      )}
-                </div>
+            <div className="news-items-container">
+                {news.slice(0, displayedNews).map(news => (
+                    <div style={{display:"inline-flex"}}>
+                        <NewsItemStudent key={news.news_id} news={news} style={customStyle1} />
+                    </div>
+                ))}
             </div>
-            <Footer />
-        </>
+            {news.length > displayedNews && (
+                <button className="load-more-button" onClick={loadMoreNews}> عرض المزيد</button>
+            )}
+            </div>
+        </div>
+        <Footer />
+    </>
     );
 };
 

@@ -30,7 +30,7 @@ function NewsItemStudent({ news,style }) {
     };
 
     return (
-        <div className="news-item-container" style={{height:"100px"}}>
+        <div className="news-item-container" style={style}>
             <img src={news.news_image} alt="News Thumbnail" className="news-item-image" />
             <div className="news-item-details">
             <div className="news-item-content" dir='rtl'>{news.news_content.length > 70 ? `${news.news_content.slice(0, 66)}...` : news.news_content}</div>

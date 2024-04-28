@@ -5,6 +5,8 @@ import '../styles/VideoDetails.css';
 import Navbar from '../layouts/Navbar';
 import VideoItemStudent from './VideoItemStudent';
 import Cookies from 'js-cookie';
+import Footer from '../layouts/Footer';
+
 
 const VideoDetails = () => {
     const [videoData, setVideoData] = useState(null);
@@ -310,8 +312,8 @@ const VideoDetails = () => {
                     <VideoItemStudent key={video.video_id} video={video} style={customStyle}/>
                 ))}
                 </div>
-
           </div>
+          <Footer/>
         </>
     );
 };

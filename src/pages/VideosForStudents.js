@@ -48,7 +48,7 @@ const StudentVideos = () => {
             </div>
             <hr />
             <div className='flex-container'>
-            {videos.slice(2, 6).map(video => (
+            {videos.slice(2, 5).map(video => (
                     <VideoItemStudent key={video.video_id} video={video} />
                 ))}
 
