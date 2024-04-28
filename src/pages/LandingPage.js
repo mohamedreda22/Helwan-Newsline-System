@@ -33,6 +33,7 @@ function LandingPage() {
   const [question, setQuestion] = useState("");
   const [response, setResponse] = useState("");
   const [chatbotOpen, setChatbotOpen] = useState(false);
+  const [predefinedQuestions, setPredefinedQuestions] = useState([]);
 
   useEffect(() => {
     const intervalId = setInterval(() => {
@@ -55,6 +56,12 @@ function LandingPage() {
     fetchSources();
   }, []);
 
+  useEffect(() => {
+    fetchFAQs()
+    .then((questions) => setPredefinedQuestions(questions))
+    .catch((error) => console.error("Error setting predefined questions:", error));
+  }, []);
+
 
   const fetchSources = async () => {
     try {
@@ -71,6 +78,7 @@ function LandingPage() {
 const handleSelect = (selectedIndex) => {
   setIndex(selectedIndex);
 };
+
 // //////////////////////////////////
    const fetchData = async (category, setData) => {
     try {
@@ -80,6 +88,15 @@ const handleSelect = (selectedIndex) => {
       console.error(`Error fetching ${category}:`, error);
     }
   }; 
+  const fetchFAQs = async () => {
+    try {
+      const response = await axios.get("http://localhost:9090/university/faqs");
+      return response.data;
+    } catch (error) {
+      console.error("Error fetching FAQs:", error);
+      return [];
+    }
+  };
 
   const handleEmailSend = async () => {
     try {
@@ -105,7 +122,7 @@ const handleSelect = (selectedIndex) => {
     }
   }
 
-  const handleAskChatbot = async () => {
+/*   const handleAskChatbot = async () => {
     try {
       const encodedQuestion = encodeURIComponent(question);
       console.log("Encoded question:", encodedQuestion);
@@ -134,9 +151,30 @@ const handleSelect = (selectedIndex) => {
       setResponse("Sorry, I couldn't understand your question.");
       
     }
+  }; */
+
+  const handleAskChatbot = async (question) => {
+    try {
+      // Fetch FAQs
+      const faqs = await fetchFAQs();
+      // Match user's question with available questions in the data
+      const matchedFAQ = faqs.find((faq) => faq.question.includes(question));
+      // Set the response based on matched FAQ or default message
+      setResponse(matchedFAQ ? matchedFAQ.answer : "Sorry, I couldn't understand your question.");
+    } catch (error) {
+      console.error("Error asking chatbot:", error);
+      setResponse("Sorry, I couldn't understand your question.");
+    }
   };
   
-
+  const handleQuestionSelect = (selectedQuestion) => {
+    console.log("Selected question:", selectedQuestion);
+    setQuestion(selectedQuestion);
+    console.log("Question state after setting:", question);
+    handleAskChatbot(selectedQuestion);
+  };
+  
+  
   const loadMoreSports = () => {
     setDisplayedSports(prevCount => prevCount + 3);
   };
@@ -321,21 +359,36 @@ const handleSelect = (selectedIndex) => {
             <div className="card5"> 
             <div >
               <div className="chat-header" style={{display:"flex"}} >Chat               
-              <div className="close-chatbot" onClick={toggleChatbot} style={{marginLeft:"170px"}}>❌</div>
+              <div className="close-chatbot" onClick={toggleChatbot} style={{marginLeft:"230px"}}>❌</div>
               </div>
               </div>
               <div className="chat-window">
-                {/* Render chat messages here */}
-                <ul className="message-list">
-                  <li className="message">Hello! How can I help you today?</li>
-                  <li className="message">{response}</li>
-                  
-                  </ul> 
-              </div>
-              <div className="chat-input">
-                <input type="text" className="message-input" placeholder="Type your message here" />
-                <button className="send-button" onClick={handleAskChatbot}>Send</button>
-              </div>
+                  {/* Render chat messages here */}
+                  <ul className="message-list" dir="rtl">
+                    {predefinedQuestions.map((faq, index) => (
+                      <li key={index} className="chatbot-question" onClick={() => handleQuestionSelect(faq.question)}>
+                        {faq.question}
+                      </li>
+                    ))}
+                    <h2></h2>
+                    {question && (
+                      <li  key={index} className="chatbot-question" onClick={() => handleQuestionSelect(question)}>
+                        {question}
+                      </li>
+                    )}
+                  </ul>
+                  {/* Display the response */}
+                  {response && (
+                    <div className="chatbot-response" dir="rtl">
+                      <p>{response}</p>
+                    </div>
+                  )}
+                </div>
+
+              {/* <div className="chat-input" >
+                <input  className="message-input" placeholder="Type your message here" />
+                <button className="send-button" onClick={handleAskChatbot} >Send</button>
+              </div> */}
             </div>
           </div>
         )}        
