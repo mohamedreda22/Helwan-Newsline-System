@@ -160,8 +160,8 @@ const handleSelect = (selectedIndex) => {
 
       <div className="row">
         <Navbar />
-        <div className="page-section">
-        <div className="news-section" style={{marginTop:"-40px"}}>
+        <div className="page-section" >
+        <div className="news-section" style={{marginTop:"-40px"}} >
           {/* Carousel for news section */}
 <Container fluid>
   <Row>
@@ -217,7 +217,7 @@ const handleSelect = (selectedIndex) => {
     ))}
   </Container>
         </div>
-          <div className="events-section">
+          <div className="events-section" dir="rtl">
             <div className="heading" id="topEvents">اهم الاحداث</div>
             <div className="description">
               <div>تقام فعاليات الجامعة علي مدار العام، بدءا من <br></br>العروض التعليمية وحتى المحاضرات العامة</div>
@@ -232,7 +232,7 @@ const handleSelect = (selectedIndex) => {
               
             </div>
           </div>
-          <div className="articles-section">
+          <div className="articles-section" dir="rtl">
             <div className="heading" id="topArticals">اهم المقالات</div>
             <div className="description">
               <div>يتم نشر المقالات الهامة والمفيدة للجامعة بانتظام <br></br>قم بزيارة الصفحة التالية لرؤية جميع المقالات</div>
@@ -247,7 +247,7 @@ const handleSelect = (selectedIndex) => {
               )}
             </div>
           </div>
-          <div className="posts-section">
+          <div className="posts-section" dir="rtl">
             <div className="heading" id="topPosts">آخر المنشورات </div>
             
             <div className="description">
@@ -264,7 +264,7 @@ const handleSelect = (selectedIndex) => {
 
             </div>
           </div>
-          <div className="sports-section" id="topSports">
+          <div className="sports-section" id="topSports" dir="rtl">
             <div className="heading">الرياضة</div>
             <div className="description">
               <div>تقام الأنشطة الرياضية بانتظام في الجامعة <br></br>تابعنا للحصول على كل جديد</div>
