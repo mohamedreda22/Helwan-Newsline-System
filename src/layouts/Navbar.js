@@ -13,6 +13,7 @@ const CustomNavbar = () => {
 
   const handleExit=()=>{
     Cookies.remove('userRole');
+    Cookies.remove('student_id');
     window.location.href = '/';
 }
   useEffect(() => {
