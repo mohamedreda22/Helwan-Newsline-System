@@ -21,7 +21,7 @@ const FaqItem = ({ faq, onDelete, onEdit }) => {
             <div className="faq-item-question" >{faq.question}</div>
             <div className="faq-item-answer">{faq.answer}</div>         
       </div>  
-      <div > 
+      <div style={{display:"flex"}}> 
         <img src={edit_icon} alt="Edit" className="edit-icon" onClick={handleEdit}
         />
         <img src={delete_icon} alt="Delete" className="delete-icon" onClick={handleDelete}

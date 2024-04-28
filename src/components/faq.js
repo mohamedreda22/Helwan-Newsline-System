@@ -108,7 +108,7 @@ function FAQs() {
       {isEditing && faqIdToEdit && editedFaq ? (
         <EditFaq faq={editedFaq} onCancel={handleCancelEdit}  onSave={handleSave}/>
       ) : (
-        <>
+        <div >
         <SideBar/>
           <h2></h2>{/*HIGH IMPORTANT DON'T DARE TO REMOVE IT 💀*/ }
           <h1 className="header" dir="rtl">الاسئلة الشائعة</h1>
@@ -120,7 +120,7 @@ function FAQs() {
           {!isLoading && !error && faqs.length === 0 && (
             <p className="empty-text">لا توجد أسئلة شائعة في الوقت الحالي.</p>
           )}
-          <div className="faqs-container">
+          <div className="faqs-container" style={{}}>
             <div className="add-faq-btn-container">
               <button
                 className="add-faq-btn"
@@ -134,7 +134,7 @@ function FAQs() {
             <thead>
                 <tr>
                   <th>&emsp;&emsp;
-                   السؤال / الاجابة &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   السؤال / الاجابة &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                  تعديل&emsp;
                 حذف
                  </th>
@@ -165,7 +165,7 @@ function FAQs() {
 
                                      )}
           </div>
-        </>
+        </div>
       )}
     </div>
   );
