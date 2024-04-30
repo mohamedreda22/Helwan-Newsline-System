@@ -36,9 +36,7 @@ export default function SideBar() {
         }
     };
 
-    const handleNotificationClick = (postId) => {
-        console.log(`Navigating to post/event/article with id ${postId}`);
-    };
+   
 
     return ( 
         <div className='sideBar' dir="rtl">
@@ -49,9 +47,9 @@ export default function SideBar() {
                 <Sidebar className='side2'>
                     <Menu>
                         <Nav.Link onClick={() => setShowNotifications(!showNotifications)} className='active'>
-                            <span className="material-icons-outlined">notifications</span> الإشعارات {notifications.length > 0 && <span>({notifications.length})</span>}
+                            <span className="material-icons-outlined notify icon">notifications</span> الإشعارات {notifications.length > 0 && <span>({notifications.length})</span>}
                         </Nav.Link>
-                        {showNotifications && <NotificationWindow notifications={notifications} onClick={handleNotificationClick} />}
+                        {showNotifications && <NotificationWindow notifications={notifications}  />}
                         <SubMenu label=" اهم الاحداث">
                             <Nav.Link as={Link} to="/addEvent" className='active'>
                                 <span className="material-icons-outlined">add</span> اضافة حدث

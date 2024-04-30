@@ -44,7 +44,7 @@ const CustomNavbar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav" dir="rtl" className="collapse7">
           <Nav>
-          {userRole === "STUDENT" ? (
+          {userRole === "STUDENT" || userRole === "SOURCE"  ? (
             <Nav.Link as={Link} to="/logout" className="nav-link logout-link" onClick={() => handleExit()}>
               تسجيل الخروج
             </Nav.Link>
