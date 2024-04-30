@@ -30,7 +30,7 @@ function LogIn() {
 
         try {
             const response = await axios.post('http://localhost:9090/university/auth/login', formData);
-            console.log('Response:', response);
+            //console.log('Response:', response);
             if (response && response.status === 202) {
                 showAlertHandler('success', 'Success', 'تم تسجيل الدخول بنجاح', 'تم');
                 // Store token in cookie

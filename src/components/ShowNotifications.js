@@ -49,7 +49,7 @@ const ShowNotifications = () => {
   const fetchNotifications = async () => {
     try {
       const response = await axios.get(`http://localhost:9090/university/notifications/source/${sourceId}`);
-      console.log("Response:", response.data);
+      //console.log("Response:", response.data);
       setNotifications(response.data);
     } catch (error) {
       console.error('Error fetching notifications:', error);

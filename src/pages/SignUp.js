@@ -37,7 +37,7 @@ function SignUp() {
 
         try {
             const response = await axios.post('http://localhost:9090/university/students', formData);
-            console.log('Response:', response.data);
+            //console.log('Response:', response.data);
 
             if (response && (response.status === 200 || response.status === 201)) {
                 showAlertHandler('success', 'Success', 'Account created successfully', 'Close');

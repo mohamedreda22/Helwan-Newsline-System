@@ -28,7 +28,7 @@ export default function SideBar() {
           const sourceId = Cookies.get('source_id'); // Get sourceId from cookies
           if (sourceId) {
             const response = await axios.get(`http://localhost:9090/university/notifications/source/${sourceId}`);
-            console.log("Response:", response.data); 
+            //console.log("Response:", response.data); 
             setNotifications(response.data);
           }
         } catch (error) {

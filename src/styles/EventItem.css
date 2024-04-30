@@ -41,8 +41,8 @@
 }
 
 .event-item-container .event-item-image {
-    width: 77px;
-    height: 76px;
+    width: 120px;
+    height: 100px;
     border-radius: 10%;
     object-fit: cover;
 }

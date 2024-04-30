@@ -23,6 +23,7 @@ const AddVideoForm = () => {
   const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
+  
 
   useEffect(() => {
     fetchCategories();
@@ -89,6 +90,13 @@ const AddVideoForm = () => {
         showAlertHandler('success', 'Success', 'تم اضافة الفيديو بنجاح', 'تم');
         //onVideoAdded(createResponse.data);
         console.log(formData)
+        setVideoTitle("");
+        setVideoDescription("");
+        setVideoFile(null);
+        setCategoryId("");
+        setSourceId("")
+        setError(""); 
+
       } else {
         showAlertHandler('error', 'Failed', 'للاسف فشل اضافة الفيديو ', 'اغلاق');
         setError('حدث خطأ أثناء إضافة الفيديو');

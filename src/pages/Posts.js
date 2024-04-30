@@ -126,10 +126,10 @@ function Posts() {
                 <tr>
                   <th>&emsp;&emsp;
                     صورة المنشور &emsp;
-                   محتوي المشور    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   محتوي المشور    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                     المصدر&emsp;&emsp;&emsp;&emsp;
-                   تاريخ النشر&emsp;&emsp;&emsp;
-                   مصدر المنشور&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   تاريخ النشر&emsp;&emsp;&emsp;&emsp;&emsp;
+                   مصدر المنشور&emsp;&emsp;&emsp;&emsp;
                  تعديل&emsp;
                 حذف
                  </th>

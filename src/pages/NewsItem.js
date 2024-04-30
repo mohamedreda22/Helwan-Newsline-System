@@ -50,13 +50,13 @@ function NewsItem({ news, onDelete, onEdit }) {
         <tr>
             <td>
                 <div className="event-item-container" dir='rtl'>
-                    <img src={news.news_image} className='event-item-image' alt='image_test' style={{ height: "100px", width: "100px", maxWidth: "15%" }} />
-                    <div className="event-item-address">{news.news_content}</div>
-                    <div className="event-card-date">
+                    <img src={news.news_image} className='event-item-image' alt='image_test' />
+                    <div className="event-item-description" style={{width:"300px",fontSize:"20px"}}>{news.news_content}</div>
+                    <div className="event-card-date" >
                         <span className="day">{day}</span> {/* Display day */}
                         <span className="event-card-month">{month}</span>
                     </div>
-                    <div className="event-item-address">{sourceFullName}</div>
+                    <div className="event-item-address" style={{textAlign:"center"}} >{sourceFullName}</div>
                     <img src={edit_icon} alt="Edit News" className="edit-icon" onClick={handleEdit} />
                     <img src={delete_icon} alt="Delete News" className="delete-icon" onClick={handleDelete} />
                 </div>

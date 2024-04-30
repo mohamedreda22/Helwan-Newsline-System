@@ -113,7 +113,7 @@ function Articles() {
             <thead>
                 <tr>
                   <th>&emsp;
-                    صورة المقال &emsp;
+                    صورة المقال &emsp;&emsp;&emsp;
                   عنوان المقال    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                    نص المقال&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                    مصدر المقال&emsp;

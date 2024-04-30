@@ -36,13 +36,13 @@ function PostItem({ post, onDelete, onEdit, sources }) {
                         alt="Post Image"
                         style={{ height: '100px', width: '100px', maxWidth: '15%' }}
                     />
-                     <div className="event-item-description">{post.post_content}</div>
-                    <div className="event-source-content">{post.source_string}</div>
+                     <div className="event-item-description" style={{width:"350px"}}>{post.post_content}</div>
+                    <div className="event-source-content" >{post.source_string}</div>
                     <div className="event-card-date" >
                         <span className="day">{day}</span> {/* Display day */}
                         <span className="event-card-month">{month}</span> 
                     </div>
-                    <div className="event-item-address">{getSourceFullName(post.source_id)}</div>
+                    <div className="event-item-address" style={{textAlign:"center"}}>{getSourceFullName(post.source_id)}</div>
 
                     <img src={edit_icon} alt="Edit Post" className="edit-icon" onClick={handleEdit} />
                     <img src={delete_icon} alt="Delete Post" className="delete-icon" onClick={handleDelete} />

@@ -112,10 +112,10 @@ function News() {
             <thead>
                 <tr>
                   <th>&emsp;&emsp;
-                    صورة الخبر &emsp;
-                  عنوان الخبر    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                  تاريخ النشر&emsp;&emsp;
-                  مصدر الخبر&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    صورة الخبر &emsp;&emsp;&emsp;&emsp;
+                  عنوان الخبر    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                  تاريخ النشر&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                  مصدر الخبر&emsp;&emsp;&emsp;&emsp;&emsp;&emsp; 
                  تعديل&emsp;
                 حذف
                  </th>
