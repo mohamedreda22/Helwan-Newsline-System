@@ -81,7 +81,7 @@ function ImportantEvents() {
         <div className="event-mainImg">
           <div className="event-MainImg-overlay">
             <div className="bb">
-              <h1 dir="rtl" class="mainImg-title">
+              <h1 dir="rtl" className="mainImg-title">
                 اهم الاحداث التي تقام بجامعه حلون لحظه بلحظه
               </h1>
             </div>
@@ -89,19 +89,19 @@ function ImportantEvents() {
         </div>
         <Row>
           {/* Calendar */}
-          <Col className="col-4">
+          <Col className="col-md-4 col-xm-2">
             <Calendar
               onChange={handleDateClick}
               value={selectedDate}
               tileClassName={tileClassName}
               className="calendar2"
             />
-            <Button onClick={handleReturnAllEvents} className="btn btn-danger m-4">
+            <Button onClick={handleReturnAllEvents} className="all-events-btn btn btn-danger m-4">
              كل الاحداث
             </Button>
           </Col>
           {/* Event cards */}
-          <Col dir="rtl" className="mr-4 col-8">
+          <Col dir="rtl" className="mr-4 col-md-8 col-xm-10">
             {initialEvents.length > 0 ? (
               initialEvents.map((eventItem) => (
                 <Card

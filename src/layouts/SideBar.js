@@ -26,7 +26,7 @@ export default function SideBar() {
 
     const fetchNotifications = async () => {
         try {
-          const sourceId = Cookies.get('source_id'); // Get sourceId from cookies
+          const sourceId = Cookies.get('source_id'); 
           if (sourceId) {
             const response = await axios.get(`http://localhost:9090/university/notifications/source/${sourceId}`);
             //console.log("Response:", response.data); 
