@@ -4,6 +4,8 @@ import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
 import { Row,Col } from 'react-bootstrap';
+import Table from 'react-bootstrap/Table';
+
 import NavbarSource from '../layouts/NavbarSource'
 
 function AddSource() {

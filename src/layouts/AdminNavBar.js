@@ -1,7 +1,5 @@
-import Container from "react-bootstrap/Container";
-import Nav from "react-bootstrap/Nav";
-import Navbar from "react-bootstrap/Navbar";
 import React from "react";
+import { Container, Nav, Navbar } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import "../styles/AdminNavBar.css";
 import universityLogo from "../assets/images/universityLogo.png";
@@ -22,9 +20,9 @@ const AdminNavBar = () => {
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
           <Nav className="links  mr-auto">
-            <Nav.Link href="#addPublisher">إضافة ناشر</Nav.Link>
-            <Nav.Link href="#allPublishers">كل الناشرين</Nav.Link>
-            <Nav.Link href="#departments">الأقسام</Nav.Link>
+            <Nav.Link as={Link} to="/addPublisher">إضافة ناشر</Nav.Link>
+            <Nav.Link as={Link} to="/allPublishers">كل الناشرين</Nav.Link>
+            <Nav.Link as={Link} to="/departments">الأقسام</Nav.Link>
           </Nav>
         </Navbar.Collapse>
       </Container>

@@ -3,7 +3,7 @@ import React, { useState, useEffect } from "react";
 import delete_icon from "../assets/icons/delete.svg";
 import "../styles/Articles.css";
 import Simplert from "react-simplert";
-import { Table, Modal } from "react-bootstrap";
+import { Table, Modal, Container, Row, Col } from "react-bootstrap";
 import EditSource from "../pages/EditSource";
  
 const Sources = () => {
@@ -89,90 +89,92 @@ const [departments, setDepartments] = useState([]);
   };
 
   return (
-    <>
-      <div className="mt-2">
-        <div className="total-events">عدد الناشرين : <span>{sources.length}</span></div>
+    <Container fluid>
+      <Row className="mt-2">
+        <Col>
+          <div className="total-events">عدد الناشرين: <span>{sources.length}</span></div>
+          <div className="table-responsive">
+            <Table hover dir="rtl" style={{ marginBottom: "10px", width: "100%" }}>
+              <thead>
+                <tr>
+                  <th style={{ width: "10%" }}>الاسم الكامل</th>
+                  <th style={{ width: "15%" }}>البريد الالكتروني</th>
+                  <th style={{ width: "15%" }}>الكلية</th>
+                  <th style={{ width: "15%" }}>القسم</th>
+                  <th style={{ width: "15%" }}>مسؤول عن</th>
+                  <th style={{ width: "10%" }}>حذف</th>
+                  <th style={{ width: "10%" }}>تعديل</th>
+                </tr>
+              </thead>
+              <tbody>
+                {sources.map((source) => (
+                  <React.Fragment key={source.source_id}>
+                    <tr>
+                      <td>{source.full_name}</td>
+                      <td>{source.email}</td>
+                      <td>
+                        {colleges.map((college) => (
+                          college.college_id === source.college_id && (
+                            <span key={college.college_id}>{college.college_name}</span>
+                          )
+                        ))}
+                      </td>
+                      <td>
+                        {departments.map((department) => (
+                          department.department_id === source.department_id && (
+                            <span key={department.department_id}>{department.department_name}</span>
+                          )
+                        ))}
+                      </td>
+                      <td>{source.source_responsible}</td>
 
-        <Table responsive hover dir="rtl"   style={{marginBottom:"10px"}}>
-          <thead>
-            <tr>
-              <th>الاسم الكامل</th>
-              <th>البريد الالكتروني</th>
-              <th>الكلية</th>   
-              <th>القسم</th>           
-              <th>مسؤول عن</th>
-              <th>حذف</th>
-              <th>تعديل</th>
-            </tr>
-          </thead>
-          <tbody>
-            {sources.map((source) => (
-              <React.Fragment key={source.source_id}>
-              <tr>
-                <td>{source.full_name}</td>
-                <td>{source.email}</td>
-                <td>
-                  {colleges.map((college) => (
-                    college.college_id === source.college_id && (
-                      <span key={college.college_id}>{college.college_name}</span>
-                    )
-                  ))}
-                </td>
-                <td>
-                  {departments.map((department) => (
-                    department.department_id === source.department_id && (
-                      <span key={department.department_id}>{department.department_name}</span>
-                    )
-                  ))}
-                </td>
-                <td>{source.source_responsible}</td>
+                      <td>
+                        <img
+                          src={delete_icon}
+                          alt="Delete source"
+                          className="icon"
+                          onClick={() => handleDeleteSource(source.source_id)}
+                        />
+                      </td>
 
-                <td>
-                  <img
-                    src={delete_icon}
-                    alt="Delete source"
-                    className="icon"
-                    onClick={() => handleDeleteSource(source.source_id)}
-                  />
-                </td>
+                      <td>
+                        <button className="btnsource" onClick={() => handleEditSource(source.source_id)}>تعديل</button>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td colSpan="7"></td> {/* This element is used to create the separator between rows */}
+                    </tr>
+                  </React.Fragment>
+                ))}
+              </tbody>
+            </Table>
+          </div>
+        </Col>
+      </Row>
 
-                <td>
-                  
-                  <button className="btnsource" onClick={() => handleEditSource(source.source_id) }>تعديل</button>
-                </td>
-              </tr>
-               <tr>
-               <td colSpan="9"></td> {/* هذا العنصر لإنشاء الفاصل بين الصفوف */}
-             </tr>
-             </React.Fragment>
-            ))}
-          </tbody>
-        </Table>
+      <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>
+        <Modal.Header closeButton>
+          <div className="d-flex justify-content-between align-items-center w-100">
+            <Modal.Title>تعديل  الناشر</Modal.Title>
+          </div>
+        </Modal.Header>
+        <Modal.Body>
+          {editSource && (
+            <EditSource sourceId={editSource.source_id} onClose={handleCloseEditModal} />
+          )}
+        </Modal.Body>
+      </Modal>
 
-        <Modal dir="rtl" show={showEditModal} onHide={handleCloseEditModal}>
-          <Modal.Header closeButton>
-            <div className="d-flex justify-content-between align-items-center w-100">
-              <Modal.Title>تعديل  الناشر</Modal.Title>
-            </div>
-          </Modal.Header>
-          <Modal.Body>
-            {editSource && (
-              <EditSource sourceId={editSource.source_id} onClose={handleCloseEditModal} />
-            )}
-          </Modal.Body>
-        </Modal>
-
-        {/* Error Simplert */}
-        <Simplert
-          showSimplert={errorAlert}
-          type="error"
-          title="Error"
-          message="An error occurred while fetching or deleting articles."
-          onClose={() => setErrorAlert(false)}
-          customCloseBtnText="Close"
-        />
-      </div>
-    </>
+      {/* Error Simplert */}
+      <Simplert
+        showSimplert={errorAlert}
+        type="error"
+        title="Error"
+        message="An error occurred while fetching or deleting articles."
+        onClose={() => setErrorAlert(false)}
+        customCloseBtnText="Close"
+      />
+    </Container>
   );
 };
 
