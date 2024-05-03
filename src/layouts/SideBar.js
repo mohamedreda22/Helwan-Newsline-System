@@ -14,6 +14,7 @@ export default function SideBar() {
 
     const handleExit = () => {
         Cookies.remove('userRole');
+        Cookies.remove('source_id');
         window.location.href = '/';
     }
 

@@ -18,7 +18,7 @@ function Events() {
   const [editedEvent, setEditedEvent] = useState(null);
   const [totalEvents, setTotalEvents] = useState(0);
 
-  const eventsPerPage = 9;
+  const eventsPerPage = 4;
 
   // Pagination hook
   const {
@@ -29,18 +29,15 @@ function Events() {
     goToLastPage,
   } = usePagination(totalEvents, eventsPerPage);
 
-  const startIndex = (currentPage - 1) * eventsPerPage;
-  const endIndex = startIndex + eventsPerPage - 1;
-
   const renderEvents = () => {
-    return events.slice(startIndex, endIndex + 1).map((event) => (
+    return events.map((event) => (
       <EventItem key={event.event_id} event={event} onDelete={handleDeleteEvent} onEdit={handleEditEvent} />
     ));
   };
 
   useEffect(() => {
     fetchEvents();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (isEditing && eventIdToEdit) {
@@ -51,9 +48,11 @@ function Events() {
 
   const fetchEvents = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/events");
-      setTotalEvents(response.data.length);
+      const response = await axios.get(`http://localhost:9090/university/events?page=${currentPage-1}&size=${eventsPerPage}`);
+      const response1 = await axios.get(`http://localhost:9090/university/events`);
+      setTotalEvents(response1.data.length);
       setEvents(response.data);
+      console.log(response1.data)
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching events:", error);
@@ -115,7 +114,7 @@ function Events() {
           {error && <p>{error}</p>}
 
           <div className="total-events">
-            عدد الاحداث : <span>{events.length}</span>
+            عدد الاحداث : <span>{totalEvents}</span>
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">

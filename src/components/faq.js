@@ -18,7 +18,7 @@ function FAQs() {
   const [editedFaq, setEditedFaq] = useState(null);
   const [showAddFaq, setShowAddFaq] = useState(false); 
   const [totalFaqs, setTotalFaqs] = useState(0);
-  const faqsPerPage = 8; 
+  const faqsPerPage = 4; 
 
   // Pagination hook
   const {
@@ -28,13 +28,11 @@ function FAQs() {
     goToFirstPage,
     goToLastPage,
   } = usePagination(totalFaqs, faqsPerPage);
-
-  const startIndex = (currentPage - 1) * faqsPerPage;
-  const endIndex = startIndex + faqsPerPage - 1;
+ 
 
   useEffect(() => {
     fetchFAQs();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (isEditing && faqIdToEdit) {
@@ -44,7 +42,7 @@ function FAQs() {
   }, [isEditing, faqIdToEdit, faqs]);
 
   const renderFaqs = () => {
-    return faqs.slice(startIndex, endIndex + 1).map((faq) => (
+    return faqs.map((faq) => (
       <FaqItem key={faq.id} faq={faq} onDelete={handleDeleteFAQ} onEdit={handleEditFAQ} />
     ));
   };
@@ -68,9 +66,10 @@ function FAQs() {
 
   const fetchFAQs = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/faqs");
+      const response = await axios.get(`http://localhost:9090/university/faqs?page=${currentPage-1}&size=${faqsPerPage}`);
+      const response1 = await axios.get('http://localhost:9090/university/faqs');
       setFAQs(response.data);
-      setTotalFaqs(response.data.length); 
+      setTotalFaqs(response1.data.length); 
       setIsLoading(false);
     } catch (error) {
       console.error("Error fetching FAQs:", error);
@@ -113,7 +112,7 @@ function FAQs() {
           <h2></h2>{/*HIGH IMPORTANT DON'T DARE TO REMOVE IT 💀*/ }
           <h1 className="header" dir="rtl">الاسئلة الشائعة</h1>
           <div className="total-faqs">
-            <h3>إجمالي الأسئلة: {faqs.length}</h3>
+            <h3>إجمالي الأسئلة: {totalFaqs}</h3>
           </div>
           {isLoading && <p className="loading-text">جاري تحميل الأسئلة...</p>}
           {error && <p className="error-text">{error}</p>}

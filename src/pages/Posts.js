@@ -18,7 +18,7 @@ function Posts() {
   const [totalPosts, setTotalPosts] = useState(0);
   const [sources, setSources] = useState([]);
 
-  const postsPerPage = 9;
+  const postsPerPage = 4;
 
   // Pagination hook
   const {
@@ -28,9 +28,7 @@ function Posts() {
     goToFirstPage,
     goToLastPage,
   } = usePagination(totalPosts, postsPerPage);
-
-  const startIndex = (currentPage - 1) * postsPerPage;
-  const endIndex = startIndex + postsPerPage - 1;
+ 
 
   const fetchSources = async () => {
     try {
@@ -43,15 +41,17 @@ function Posts() {
 
 
   const renderPosts = () => {
-    return posts.slice(startIndex, endIndex + 1).map((post) => (
+    return posts.map((post) => (
       <PostItem key={post.post_id} post={post} sources={sources} onDelete={handleDeletePost} onEdit={handleEditPost} />
     ));
   };
 
   useEffect(() => {
     fetchPosts();
+  }, [currentPage]);
+  useEffect(()=>{
     fetchSources();
-  }, []);
+  })
 
   useEffect(() => {
     if (isEditing && postIdToEdit) {
@@ -63,8 +63,9 @@ function Posts() {
 
   const fetchPosts = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/posts");
-      setTotalPosts(response.data.length);
+      const response = await axios.get(`http://localhost:9090/university/posts?page=${currentPage-1}&size=${postsPerPage}`);
+      const response1 = await axios.get (`http://localhost:9090/university/posts`)
+      setTotalPosts(response1.data.length);
       setPosts(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -118,7 +119,7 @@ function Posts() {
           {error && <p>{error}</p>}
 
           <div className="total-events">
-            عدد المنشورات : <span>{posts.length}</span>
+            عدد المنشورات : <span>{totalPosts}</span>
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">

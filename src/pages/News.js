@@ -17,7 +17,7 @@ function News() {
   const [editedNews, setEditedNews] = useState(null);
   const [totalNews, setTotalNews] = useState(0);
 
-  const newsPerPage = 9;
+  const newsPerPage = 4;
 
   // Pagination hook
   const {
@@ -28,18 +28,16 @@ function News() {
     goToLastPage,
   } = usePagination(totalNews, newsPerPage);
 
-  const startIndex = (currentPage - 1) * newsPerPage;
-  const endIndex = startIndex + newsPerPage - 1;
 
   const renderNews = () => {
-    return news.slice(startIndex, endIndex + 1).map((singleNews) => (
+    return news.map((singleNews) => (
       <NewsItem key={singleNews.news_id} news={singleNews} onDelete={handleDeleteNews} onEdit={handleEditNews} />
     ));
   };
 
   useEffect(() => {
     fetchNews();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (isEditing && newsIdToEdit) {
@@ -50,8 +48,9 @@ function News() {
 
   const fetchNews = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/news");
-      setTotalNews(response.data.length);
+      const response = await axios.get(`http://localhost:9090/university/news?page=${currentPage-1}&size=${newsPerPage}`);
+      const response1=await axios.get(`http://localhost:9090/university/news`)
+      setTotalNews(response1.data.length);
       setNews(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -105,7 +104,7 @@ function News() {
           {error && <p>{error}</p>}
 
           <div className="total-events">
-            عدد الأخبار : <span>{news.length}</span>
+            عدد الأخبار : <span>{totalNews}</span>
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">

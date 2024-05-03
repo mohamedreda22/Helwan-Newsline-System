@@ -17,7 +17,7 @@ function Articles() {
   const [editedArticle, setEditedArticle] = useState(null);
   const [totalArticles, setTotalArticles] = useState(0);
 
-  const articlesPerPage = 9;
+  const articlesPerPage = 4;
 
   // Pagination hook
   const {
@@ -28,18 +28,16 @@ function Articles() {
     goToLastPage,
   } = usePagination(totalArticles, articlesPerPage);
 
-  const startIndex = (currentPage - 1) * articlesPerPage;
-  const endIndex = startIndex + articlesPerPage - 1;
 
   const renderArticles = () => {
-    return articles.slice(startIndex, endIndex + 1).map((article) => (
+    return articles.map((article) => (
       <ArticleItem key={article.article_id} article={article} onDelete={handleDeleteArticle} onEdit={handleEditArticle} />
     ));
   };
 
   useEffect(() => {
     fetchArticles();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (isEditing && articleIdToEdit) {
@@ -51,8 +49,9 @@ function Articles() {
 
   const fetchArticles = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/articles");
-      setTotalArticles(response.data.length);
+      const response = await axios.get(`http://localhost:9090/university/articles?page=${currentPage-1}&size=${articlesPerPage}`);
+      const response1 = await axios.get (`http://localhost:9090/university/articles`)
+      setTotalArticles(response1.data.length);
       setArticles(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -106,7 +105,7 @@ function Articles() {
           {error && <p>{error}</p>}
 
           <div className="total-events">
-            عدد المقالات : <span>{articles.length}</span>
+            عدد المقالات : <span>{totalArticles}</span>
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">

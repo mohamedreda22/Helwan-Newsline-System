@@ -17,7 +17,7 @@ function Sports() {
   const [editedSport, setEditedSport] = useState(null);
   const [totalSports, setTotalSports] = useState(0);
 
-  const sportsPerPage = 9;
+  const sportsPerPage = 4;
 
   // Pagination hook
   const {
@@ -28,19 +28,15 @@ function Sports() {
     goToLastPage,
   } = usePagination(totalSports, sportsPerPage);
 
-  const startIndex = (currentPage - 1) * sportsPerPage;
-  const endIndex = startIndex + sportsPerPage - 1;
-
   const renderSports = () => {
-    return sports.slice(startIndex, endIndex + 1).map((sport) => (
-      
+    return sports.map((sport) => (
       <SportItem key={sport.sport_id} sport={sport} onDelete={handleDeleteSport} onEdit={handleEditSport} />
     ));
   };
 
   useEffect(() => {
     fetchSports();
-  }, []);
+  }, [currentPage]);
 
   useEffect(() => {
     if (isEditing && sportIdToEdit) {
@@ -52,8 +48,9 @@ function Sports() {
 
   const fetchSports = async () => {
     try {
-      const response = await axios.get("http://localhost:9090/university/sports");
-      setTotalSports(response.data.length);
+      const response = await axios.get(`http://localhost:9090/university/sports?page=${currentPage-1}&size=${sportsPerPage}`);
+      const response1=await axios.get(`http://localhost:9090/university/sports`)
+      setTotalSports(response1.data.length)
       setSports(response.data);
       setIsLoading(false);
     } catch (error) {
@@ -108,15 +105,15 @@ function Sports() {
           {error && <p>{error}</p>}
 
           <div className="total-events">
-            عدد الرياضات : <span>{sports.length}</span>
+            عدد الرياضات : <span>{totalSports}</span>
           </div>
           <div className="events-container">
             <table id="events-table" className="events-table">
             <thead>
                 <tr>
                   <th>&emsp;&emsp;
-                    صورة الرياضة &emsp;
-                  عنوان الرياضة    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    صورة الرياضة &emsp;&emsp;&emsp;&emsp;
+                  عنوان الرياضة    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                    تفاصيل الرياضة&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                   تاريخ الاعلان&emsp;
                  تعديل&emsp;
@@ -129,24 +126,25 @@ function Sports() {
               </tbody>
             </table>
 
-            {totalSports > sportsPerPage && (
-              <div className="pagination">
-                <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
-                <div className="page-numbers">
-                  {Array.from({ length: totalPages }, (_, index) => (
-                    <span
-                      key={index + 1}
-                      className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
-                      onClick={() => goToPage(index + 1)}
-                      disabled={currentPage === index + 1}
-                    >
-                      {index + 1}
-                    </span>
-                  ))}
-                </div>
-                <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
-              </div>
-            )}
+                    {totalSports > sportsPerPage && (
+          <div className="pagination">
+            <img src={arrow_left} onClick={goToFirstPage} alt="Left Arrow" className="arrow-icon" />
+            <div className="page-numbers">
+              {Array.from({ length: totalPages }, (_, index) => (
+                <span
+                  key={index + 1}
+                  className={`page-btn ${currentPage === index + 1 ? 'active' : ''}`}
+                  onClick={() => goToPage(index + 1)}
+                  disabled={currentPage === index + 1}
+                >
+                  {index + 1}
+                </span>
+              ))}
+            </div>
+            <img src={arrow_right} onClick={goToLastPage} alt="Right Arrow" className="arrow-icon" />
+          </div>
+        )}
+
           </div>
         </>
       )}
