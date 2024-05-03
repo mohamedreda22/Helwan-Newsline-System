@@ -3,6 +3,7 @@ import SideBar from '../layouts/SideBar';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
+import Cookies from "js-cookie";
 
 function AddArticle() {
   const [formData, setFormData] = useState({
@@ -16,10 +17,10 @@ function AddArticle() {
 
   const [sources, setSources] = useState([]);
   const [categories, setCategories] = useState([]);
+  const sourceId = Cookies.get('source_id'); 
 
   useEffect(() => {
-    fetchSources();
-    fetchCategories();
+     fetchCategories();
   }, []);
   const fetchCategories = async () => {
     try {
@@ -32,19 +33,13 @@ function AddArticle() {
     }
   };
 
-  const fetchSources = async () => {
-    try {
-      const response = await axios.get('http://localhost:9090/university/sources');
-      setSources(response.data);
-    } catch (error) {
-      console.error('Error fetching sources:', error);
-    }
-  };
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      source_id: sourceId,
       [name]: value,
     });
   };
@@ -111,22 +106,24 @@ function AddArticle() {
                   name="article_address"
                 />
               </div>
-            <div className="form-group">
-                <lable className='label'>المصدر</lable>
-                <Form.Select
-                    aria-label="Default select example"
-                    onChange={handleChange}
-                    value={formData.source_id}
-                    name="source_id"
-                  >
-                  <option value="">اختر المصدر</option>
-                  {sources.map((source) => (
-                    <option key={source.source_id} value={source.source_id}>
-                      {source.full_name}
-                    </option>
-                  ))}
-                </Form.Select>
-              </div>
+              <div className="form-group" style={{marginTop:"10px"}}>
+            <label className='lable'>التصنيف</label>
+            <Form.Control 
+              as="select" 
+              name="category_id" 
+              value={formData.category_id} 
+              onChange={handleChange} 
+              required 
+              style={{height:"45px"}}
+            >
+              <option value="">اختر التصنيف</option>
+              {categories.map((category) => (
+                <option key={category.category_id} value={category.category_id}>
+                  {category.category_name}
+                </option>
+              ))}
+            </Form.Control>
+          </div>
           </div>
           <div className="form-row">
             <div className="form-group" >
@@ -140,23 +137,7 @@ function AddArticle() {
                 name="source_string"
               />
             </div>
-            <div className="form-group" style={{marginTop:"10px"}}>
-            <label className='lable'>التصنيف</label>
-            <Form.Control 
-              as="select" 
-              name="category_id" 
-              value={formData.category_id} 
-              onChange={handleChange} 
-              required 
-            >
-              <option value="">اختر التصنيف</option>
-              {categories.map((category) => (
-                <option key={category.category_id} value={category.category_id}>
-                  {category.category_name}
-                </option>
-              ))}
-            </Form.Control>
-          </div>
+            
           </div>
             <div className="form-group">
                <label className='label'>اختر صورة</label>

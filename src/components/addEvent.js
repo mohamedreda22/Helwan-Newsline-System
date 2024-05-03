@@ -9,6 +9,7 @@ import { DateTime } from 'luxon';
 import TextField from '@mui/material/TextField';
 import '../styles/AddEvent.css';
 import useAlert from "../hooks/useAlert";
+import Cookies from "js-cookie";
 
 
 export default function AddEvent() {
@@ -27,17 +28,13 @@ export default function AddEvent() {
     const [error, setError] = useState('');
     const [categories, setCategories] = useState([]);
     const [eventImagePath, setEventImagePath] = useState(null);
-    const [sources, setSources] = useState([]);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
+    const sourceId = Cookies.get('source_id'); 
 
 
     useEffect(() => {
         fetchCategories();
     }, []);
-
-    useEffect(()=>{
-        fetchSources();
-    },[]);
 
     const fetchCategories = async () => {
         try {
@@ -48,21 +45,8 @@ export default function AddEvent() {
         }
     };
 
-    const fetchSources = async () =>{
-        try {
-            const response = await axios.get('http://localhost:9090/university/sources');
-            setSources(response.data)
-        }
-        catch(error){
-            console.error('Error fetching sources:', error);
-        }
-    };
-
     const handleSubmit = async (e) => {
                 e.preventDefault()
-
-
-
            if (!formData.event_address || !formData.category_id  || !formData.event_place) {
             showAlertHandler('error', 'Failed', 'برجاء ملئ كل البيانات', 'اغلاق');
             return;
@@ -117,6 +101,7 @@ export default function AddEvent() {
         const { name, value } = e.target;
         setFormData({
             ...formData,
+            source_id:sourceId,
             [name]: value,
         });
     };
@@ -208,25 +193,6 @@ export default function AddEvent() {
                         />
                     </div>
                     <div className="form-row">
-                     <div className="form-group">
-                        <label className="lable" htmlFor="source_id">المصدر</label>
-                        <select
-                                id="source_id"
-                                name="source_id"
-                                value={formData.source_id}
-                                onChange={handleChange}
-                                className="form-control"
-                                required
-                        >
-                                <option value="">اختر المصدر</option>
-                                {sources.map(source => (
-                                    <option key={source.source_id} 
-                                    value={source.source_id}>
-                                        {source.full_name}
-                                        </option>
-                                ))}
-                            </select>
-                        </div> 
                     <div className="form-group">
                         <label className="lable" htmlFor="event_place">المكان</label>
                         <input

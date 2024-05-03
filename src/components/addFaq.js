@@ -3,6 +3,7 @@ import axios from 'axios';
 import Simplert from 'react-simplert';
 import '../styles/AddFaq.css';
 import useAlert from '../hooks/useAlert';
+import Cookies from "js-cookie";
 
 function AddFaq() {
     const [formData, setFormData] = useState({
@@ -14,7 +15,8 @@ function AddFaq() {
     const [error, setError] = useState('');
     const [sources, setSources] = useState([]);
     const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
-    
+    const sourceId = Cookies.get('source_id'); 
+
 
     useEffect(() => {
         setFormData({
@@ -22,21 +24,7 @@ function AddFaq() {
             answer: "",
             source_id: "",
         });
-    }, []);
-
-    useEffect(()=>{
-        fetchSources();
-    },[]);    
-    
-    const fetchSources = async () =>{
-        try {
-            const response = await axios.get('http://localhost:9090/university/sources');
-            setSources(response.data)
-        }
-        catch(error){
-            console.error('Error fetching sources:', error);
-        }
-    };
+    }, []);  
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -91,6 +79,7 @@ function AddFaq() {
         const { name, value } = e.target;
         setFormData({
             ...formData,
+            source_id:sourceId,
             [name]: name === 'source_id' ? parseInt(value, 10) || '' : value
         });
     };
@@ -112,24 +101,6 @@ function AddFaq() {
                             required
                         />
                     </div>
-                    <div className="form-group">
-                        <label className="lable" htmlFor="source_id">المصدر</label>
-                        <select
-                                id="source_id"
-                                name="source_id"
-                                value={formData.source_id}
-                                onChange={handleChange}
-                                className="form-control"
-                                required
-                        >
-                                <option value="">اختر المصدر</option>
-                                {sources.map(source => (
-                                    <option key={source.source_id} value={source.source_id}>
-                                        {source.full_name}
-                                        </option>
-                                ))}
-                            </select>
-                        </div> 
                     <div className="form-group">
                         <label className="lable" htmlFor="answer">الإجابة</label>
                         <textarea

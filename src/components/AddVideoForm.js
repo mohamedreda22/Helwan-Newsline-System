@@ -4,6 +4,7 @@ import "../styles/AddVideoForm.css";
 import SideBar from "../layouts/SideBar";
 import useAlert from "../hooks/useAlert";
 import Simplert from 'react-simplert';
+import Cookies from "js-cookie";
 
 const AddVideoForm = () => {
   const [formData, setFormData] = useState({
@@ -24,11 +25,11 @@ const AddVideoForm = () => {
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   
+  const sourceId = Cookies.get('source_id'); 
 
   useEffect(() => {
     fetchCategories();
-    fetchSources();
-  }, []);
+   }, []);
 
   const fetchCategories = async () => {
     try {
@@ -41,16 +42,7 @@ const AddVideoForm = () => {
     }
   };
 
-  const fetchSources = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9090/university/sources"
-      );
-      setSources(response.data);
-    } catch (error) {
-      console.error("Error fetching sources:", error);
-    }
-  };
+ 
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -71,7 +63,7 @@ const AddVideoForm = () => {
         video_description: videoDescription,
         video_path: videoPath,
         category_id: category_id,
-        source_id: source_id,
+        source_id: sourceId,
       });
 
       // Submit the form data to the second endpoint
@@ -134,28 +126,8 @@ const AddVideoForm = () => {
                 
               />
             </div>
-            <div className="form-group">
-              <label className="label" htmlFor="source_id">
-                المصدر:
-              </label>
-              <select
-                id="source_id"
-                name="source_id"
-                value={source_id}
-                onChange={(e) => setSourceId(e.target.value)}
-                className="form-control"
-                required
-              >
-                <option value="">اختر مصدرا</option>
-                {sources.map((source) => (
-                  <option key={source.source_id} value={source.source_id}>
-                    {source.full_name}
-                  </option>
-                ))}
-              </select>
-            </div>
-          </div>
-          <div className="form-group">
+
+          <div className="form-group" style={{marginTop:"-10px"}}>
             <label className="label" htmlFor="category_id">
               التصنيف:
             </label>
@@ -174,7 +146,8 @@ const AddVideoForm = () => {
                 </option>
               ))}
             </select>
-          </div>
+          </div>          </div>
+
           <div className="form-group" style={{marginTop:"10px"}}>
             <label className="lable" htmlFor="videoDescription">
               الوصف:

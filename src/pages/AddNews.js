@@ -3,6 +3,7 @@ import SideBar from '../layouts/SideBar';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
+import Cookies from "js-cookie";
 
 function AddNews() {
     
@@ -15,25 +16,19 @@ function AddNews() {
     category_id: ""
 
   });
+  const sourceId = Cookies.get('source_id'); 
 
   useEffect(() => {
-    fetchSources();
-    fetchCategories();
+     fetchCategories();
   }, []);
 
-  const fetchSources = async () => {
-    try {
-      const response = await axios.get('http://localhost:9090/university/sources');
-      setSources(response.data);
-    } catch (error) {
-      console.error('Error fetching sources:', error);
-    }
-  };
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      news_source_id: sourceId,
       [name]: value,
     });
   };
@@ -109,24 +104,7 @@ function AddNews() {
               required 
             />
           <div className="form-row" >
-          <div className="form-group" style={{marginTop:"10px"}}>
-            <label className='lable'>مصدر الخبر</label>
-            <Form.Control 
-              as="select" 
-              name="news_source_id" 
-              value={formData.news_source_id} 
-              onChange={handleChange} 
-              required 
-            >
-              <option value="">اختر المصدر</option>
-                {sources.map((source) => (
-                    <option key={source.source_id} value={source.source_id}>
-                    {source.full_name}
-                    </option>
-                ))}
-            </Form.Control>
-          </div>
-          <div className="form-group" style={{marginTop:"10px"}}>
+          <div className="form-group" style={{marginTop:"10px",marginRight:"10px"}}>
             <label className='lable'>التصنيف</label>
             <Form.Control 
               as="select" 

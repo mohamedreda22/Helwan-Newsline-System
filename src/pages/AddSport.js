@@ -3,6 +3,7 @@ import SideBar from '../layouts/SideBar';
 import Form from "react-bootstrap/Form";
 import axios from 'axios';
 import '../styles/AddArticle.css';
+import Cookies from "js-cookie";
 
 function AddSports() {
   const [sources, setSources] = useState([]);
@@ -15,18 +16,11 @@ function AddSports() {
   });
 
   useEffect(() => {
-    fetchSources();
-    fetchCategories();
+     fetchCategories();
   }, []);
 
-  const fetchSources = async () => {
-    try {
-      const response = await axios.get('http://localhost:9090/university/sources');
-      setSources(response.data);
-    } catch (error) {
-      console.error('Error fetching sources:', error);
-    }
-  };
+  const sourceId = Cookies.get('source_id'); 
+
 
   const fetchCategories = async () => {
     try {
@@ -43,6 +37,7 @@ function AddSports() {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      sport_source_id: sourceId,
       [name]: value,
     });
   };
@@ -116,25 +111,8 @@ function AddSports() {
               onChange={handleChange} 
               required 
             />
-                      <div className="form-row">
-          <Form.Group controlId="sportSource" style={{marginTop:"10px"}}>
-            <Form.Label className='label'>مصدر الرياضة</Form.Label>
-            <Form.Control 
-              as="select" 
-              name="sport_source_id" 
-              value={formData.sport_source_id} 
-              onChange={handleChange} 
-              required 
-            >
-              <option value="">اختر المصدر</option>
-              {sources.map((source) => (
-                <option key={source.source_id} value={source.source_id}>
-                  {source.full_name}
-                </option>
-              ))}
-            </Form.Control>
-          </Form.Group>
-          <div className="form-group" style={{marginTop:"10px"}}>
+          <div className="form-row">
+          <div className="form-group" style={{marginTop:"10px",marginRight:"10px"}}>
             <Form.Label className='lable'>التصنيف</Form.Label>
             <Form.Control 
               as="select" 

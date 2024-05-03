@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Form from "react-bootstrap/Form";
 import SideBar from '../layouts/SideBar';
+import Cookies from "js-cookie";
 
 function AddPostForm() {
   const [formData, setFormData] = useState({
@@ -13,11 +14,11 @@ function AddPostForm() {
   });
   const [categories, setCategories] = useState([]);
   const [sources, setSources] = useState([]);
+  const sourceId = Cookies.get('source_id'); 
 
   useEffect(() => {
     fetchCategories();
-    fetchSources();
-  }, []);
+   }, []);
 
   const fetchCategories = async () => {
     try {
@@ -29,22 +30,13 @@ function AddPostForm() {
       console.error("Error fetching categories:", error);
     }
   };
-
-  const fetchSources = async () => {
-    try {
-      const response = await axios.get(
-        "http://localhost:9090/university/sources"
-      );
-      setSources(response.data);
-    } catch (error) {
-      console.error("Error fetching sources:", error);
-    }
-  };
+ 
 
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({
       ...formData,
+      source_id: sourceId,
       [name]: value,
     });
   };
@@ -105,13 +97,25 @@ function AddPostForm() {
       </h1>
         <Form onSubmit={handleSubmit}>
         <div className="form-row">
-        <div className="form-group">
-                  <Form.Label className="lable" >التصنيف</Form.Label>
+                <div className="form-group" >
+                <label className="lable" style={{marginTop:"15px"}}> مصدر المنشور</label>
+                <Form.Control
+                  required
+                  type="text"
+                  name="source_string"
+                  value={formData.source_string}
+                  onChange={handleChange}
+                  style={{width:"180px"}}
+                />
+              </div>
+              <div className="form-group">
+                  <Form.Label className="lable" style={{marginTop:"15px"}} >التصنيف</Form.Label>
                   <Form.Select
                     aria-label="Default select example"
                     onChange={handleChange}
                     value={formData.category_id}
                     name="category_id"
+                    style={{height:"45px",marginTop:"-9px"}}
                   >
                     <option value="">اختر التصنيف</option>
                     {categories.map((category) => (
@@ -124,37 +128,9 @@ function AddPostForm() {
                     ))}
                   </Form.Select>
                 </div>
-  
-                <div className="form-group" >
-                  <Form.Label className="lable" >المصدر</Form.Label>
-                  <Form.Select
-                    aria-label="Default select example"
-                    onChange={handleChange}
-                    value={formData.source_id}
-                    name="source_id"
-                  >
-                    <option value="">اختر المصدر</option>
-                    {sources.map((source) => (
-                      <option key={source.source_id} value={source.source_id}>
-                        {source.full_name}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div></div>
-                <div className="form-row">
-                <div className="form-group" >
-                <label className="lable" style={{marginTop:"15px"}}> مصدر المنشور</label>
-                <Form.Control
-                  required
-                  type="text"
-                  name="source_string"
-                  value={formData.source_string}
-                  onChange={handleChange}
-                  style={{width:"180px"}}
-                />
-              </div>
-          </div>
-              <div className="form-group">
+                </div>
+
+               <div className="form-group">
             <label className="lable">كتابة منشور</label>
             <Form.Control
               as="textarea"
