@@ -168,3 +168,17 @@
     text-overflow: ellipsis;  
   }
  
+  @media (max-width: 768px) {
+    .event-card-container {
+      width: 100%; 
+      margin-right: 0;
+      margin-bottom: 25px; 
+    }
+  }
+  
+  @media (min-width: 768px) {
+    .event-card-container {
+      width: calc(33.33% - 20px); 
+    }
+  }
+  
