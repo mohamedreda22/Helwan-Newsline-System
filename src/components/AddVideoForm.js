@@ -20,7 +20,6 @@ const AddVideoForm = () => {
   const [category_id, setCategoryId] = useState("");
   const [source_id, setSourceId] = useState("");
   const [categories, setCategories] = useState([]);
-  const [sources, setSources] = useState([]);
   const { showAlert, showAlertHandler, hideAlertHandler, alertType, alertTitle, alertMessage, customCloseBtnText } = useAlert();
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
@@ -42,10 +41,9 @@ const AddVideoForm = () => {
     }
   };
 
- 
-
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true); // Set loading state to true
     try {
       // First, upload the video file to get the video path
       const videoFormData = new FormData();
@@ -80,53 +78,47 @@ const AddVideoForm = () => {
           createResponse.status === 202)
       ) {
         showAlertHandler('success', 'Success', 'تم اضافة الفيديو بنجاح', 'تم');
-        //onVideoAdded(createResponse.data);
-        console.log(formData)
         setVideoTitle("");
         setVideoDescription("");
         setVideoFile(null);
         setCategoryId("");
-        setSourceId("")
+        setSourceId("");
         setError(""); 
-
       } else {
         showAlertHandler('error', 'Failed', 'للاسف فشل اضافة الفيديو ', 'اغلاق');
         setError('حدث خطأ أثناء إضافة الفيديو');
-       
-    }
+      }
     } catch (error) {
       console.error("Error adding video:", error);
       if (error.response) {
         showAlertHandler('error', 'Failed', error.response.data.message, 'اغلاق');
-    } else {
+      } else {
         showAlertHandler('error', 'Failed', 'حدث خطأ. يرجى المحاولة مرة أخرى في وقت لاحق.', 'اغلاق');
-    }
-      } finally {
-          setIsLoading(false);
       }
+    } finally {
+      setIsLoading(false); // Set loading state to false
+    }
   };
 
   return (
     <div className="add-video-page" dir="rtl">
       <SideBar />
-        <form className="form-container5" onSubmit={handleSubmit}>      
+      <form className="form-container5" onSubmit={handleSubmit}>
         <h1 className="header" dir="rtl">
-        إضافة فيديو
-      </h1>
-          <div className="form-row" style={{marginTop:"10px"}}>
-            <div className="form-group">
-              <label className="lable" htmlFor="videoTitle">
-                عنوان الفيديو:
-              </label>
-              <input
-                type="text"
-                value={videoTitle}
-                onChange={(e) => setVideoTitle(e.target.value)}
-                required
-                
-              />
-            </div>
-
+          إضافة فيديو
+        </h1>
+        <div className="form-row" style={{marginTop:"10px"}}>
+          <div className="form-group">
+            <label className="lable" htmlFor="videoTitle">
+              عنوان الفيديو:
+            </label>
+            <input
+              type="text"
+              value={videoTitle}
+              onChange={(e) => setVideoTitle(e.target.value)}
+              required
+            />
+          </div>
           <div className="form-group" style={{marginTop:"-10px"}}>
             <label className="label" htmlFor="category_id">
               التصنيف:
@@ -146,46 +138,48 @@ const AddVideoForm = () => {
                 </option>
               ))}
             </select>
-          </div>          </div>
-
-          <div className="form-group" style={{marginTop:"10px"}}>
-            <label className="lable" htmlFor="videoDescription">
-              الوصف:
-            </label>
-            <textarea
-              id="videoDescription"
-              name="videoDescription"
-              value={videoDescription}
-              onChange={(e) => setVideoDescription(e.target.value)}
-              className="form-control"
-              required
-            />
           </div>
-          <div className="form-group" style={{marginTop:"10px"}}>
-            <label className="lable">ملف الفيديو:</label>
-            <input
-              className="form-control-video"
-              type="file"
-              onChange={(e) => setVideoFile(e.target.files[0])}
-              required
-            />
-          </div>
-          <br />
-          <button            
-            type="submit" 
-            className='btn-submit'
-            style={{width:"45%",marginRight:"110px"}}>
-            أضافة فيديو
-          </button>
-        </form>
-        <Simplert
-                showSimplert={showAlert}
-                type={alertType}
-                title={alertTitle}
-                message={alertMessage}
-                onClose={hideAlertHandler}
-                customCloseBtnText={customCloseBtnText}
-            />  
+        </div>
+        <div className="form-group" style={{marginTop:"10px"}}>
+          <label className="lable" htmlFor="videoDescription">
+            الوصف:
+          </label>
+          <textarea
+            id="videoDescription"
+            name="videoDescription"
+            value={videoDescription}
+            onChange={(e) => setVideoDescription(e.target.value)}
+            className="form-control"
+            required
+          />
+        </div>
+        <div className="form-group" style={{marginTop:"10px"}}>
+          <label className="lable">ملف الفيديو:</label>
+          <input
+            className="form-control-video"
+            type="file"
+            onChange={(e) => setVideoFile(e.target.files[0])}
+            required
+          />
+        </div>
+        <br />
+        <button            
+          type="submit" 
+          className='btn-submit'
+          style={{width:"45%",marginRight:"110px"}}
+          disabled={isLoading} // Disable the button when loading
+        >
+          {isLoading ? "جاري الإرسال..." : "أضافة فيديو"}
+        </button>
+      </form>
+      <Simplert
+        showSimplert={showAlert}
+        type={alertType}
+        title={alertTitle}
+        message={alertMessage}
+        onClose={hideAlertHandler}
+        customCloseBtnText={customCloseBtnText}
+      />  
     </div>
   );
 };
