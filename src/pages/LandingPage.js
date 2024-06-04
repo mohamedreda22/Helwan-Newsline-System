@@ -173,11 +173,8 @@ const handleSelect = (selectedIndex) => {
           <img src={item.news_image} alt={item.news_content} style={{ objectFit: 'fit', height: '100%', width: '100%', maxHeight: "360px" }} />
           <Carousel.Caption style={{ backgroundColor: 'rgba(0, 0, 0, 0.3)', padding: '10px', borderRadius: '50px' }}>
             <h3 style={{ color: '#fff' }}>{item.news_content}</h3>
-            {sources.map((source) => (
-              source.college_id === source.college_id && (
-                <p key={source.college_id} style={{ color: '#fff' }}>{source.full_name}</p>
-              )
-            ))}
+            <p style={{ color: '#fff' }}>{sources.find((source) => source.source_id === item.news_source_id)?.full_name}</p>
+
           </Carousel.Caption>
         </Carousel.Item>
 

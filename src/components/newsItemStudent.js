@@ -34,12 +34,8 @@ function NewsItemStudent({ news,style }) {
             <img src={news.news_image} alt="News Thumbnail" className="news-item-image" />
             <div className="news-item-details">
             <div className="news-item-content" dir='rtl'>{news.news_content.length > 70 ? `${news.news_content.slice(0, 66)}...` : news.news_content}</div>
-                <div className="news-item-source" dir='rtl' style={{display:"flex",justifyContent:"space-between"}}>
-                    {sources.map((source) => (
-                        source.college_id === news.college_id && (
-                            <p key={source.college_id}>{source.full_name}</p>
-                        )
-                    ))}                
+                <div className="news-item-source" dir='rtl' style={{display:"flex",justifyContent:"space-between"}}> 
+                    <span>{sources.find((source) => source.source_id === news.news_source_id)?.full_name}</span>              
                     <div className="event-card-date1" style={{display:"flex"}}>
                     <span className="day1">{day}</span>
                     <span className="month1">{month}</span>
