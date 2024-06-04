@@ -261,12 +261,29 @@ const handleToogleChange = (e) => {
             </div>
             </div>
             <div className="form-row" style={{marginTop:"20px"}}>
-            <div className="form-group" >
-            <div className='heading1'>الفرقة</div>
-            <input type="text" name="student_brand" value={formData.student_brand} onChange={handleChange} disabled/></div>
-            <div className="form-group" >
-            <div className='heading1'>الفئة</div>
-            <input type="text" name="student_academic_category" value={formData.student_academic_category} onChange={handleChange} disabled/></div>
+            <div className="form-group">
+  <div className="heading1">الفرقة</div>
+  <select name="student_brand" value={formData.student_brand} onChange={handleChange}>
+    <option value="">اختر الفرقة</option>
+    <option value="option0"> اعدادي هندسة</option>
+    <option value="option1">الفرقة الأولي</option>
+    <option value="option2">الفرقة الثانية</option>
+    <option value="option3">الفرقة الثالثة</option>
+    <option value="option4">الفرقة الرابعة</option>
+    <option value="option5">الفرقة الخامسة</option>
+  </select>
+</div>
+
+<div className="form-group">
+  <div className="heading1">الفئة</div>
+  <select name="student_academic_category" value={formData.student_academic_category} onChange={handleChange}>
+    <option value="">اختر الفئة</option>
+    <option value="category1">مستجد</option>
+    <option value="category2">وافد</option>
+    <option value="category3">خريج</option>
+  </select>
+</div>
+
             <div className="form-group" >
             <div className="heading1">فريق العمل</div>
            <input type="text" name="student_team" value={formData.student_team} onChange={handleChange} /></div>

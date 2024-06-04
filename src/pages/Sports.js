@@ -112,9 +112,9 @@ function Sports() {
             <thead>
                 <tr>
                   <th>&emsp;&emsp;
-                    صورة الرياضة &emsp;&emsp;&emsp;&emsp;
-                  عنوان الرياضة    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
-                   تفاصيل الرياضة&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                    صورة الرياضة &emsp;&emsp;&emsp;
+                  عنوان الرياضة    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+                   تفاصيل الرياضة&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
                   تاريخ الاعلان&emsp;
                  تعديل&emsp;
                 حذف

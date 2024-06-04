@@ -9,9 +9,9 @@ import { useNavigate } from 'react-router-dom';
 
 function SignUp() {
     const [formData, setFormData] = useState({
-        student_full_name: '',
-        student_email: '',
-        student_password: '',
+        full_name: '',
+        email: '',
+        password: '',
         student_phone: '',
         student_image_path: '',
         department_id:'',
@@ -28,7 +28,7 @@ function SignUp() {
     const handleSubmit = async (e) => {
         e.preventDefault();
 
-        if (!formData.student_email || !formData.student_password) {
+        if (!formData.email || !formData.password) {
             setError('Please fill in all fields');
             return;
         }
@@ -37,14 +37,13 @@ function SignUp() {
 
         try {
             const response = await axios.post('http://localhost:9090/university/students', formData);
-            //console.log('Response:', response.data);
 
             if (response && (response.status === 200 || response.status === 201)) {
                 showAlertHandler('success', 'Success', 'Account created successfully', 'Close');
                 setFormData({
-                    student_full_name: '',
-                    student_email: '',
-                    student_password: '',
+                    full_name: '',
+                    email: '',
+                    password: '',
                     student_phone: '',
                     student_image_path: '',
                     department_id:'',
@@ -100,7 +99,6 @@ function SignUp() {
             ...formData,
             [name]: value,
         });
-                // Fetch departments based on selected college
            if (name === 'college_id') {
               fetchDepartments(value);
           }
@@ -143,9 +141,9 @@ function SignUp() {
                         <div className="form-group" >
                             <input
                                 type="text"
-                                name="student_full_name"
+                                name="full_name"
                                 placeholder="Full Name"
-                                value={formData.student_full_name}
+                                value={formData.full_name}
                                 onChange={handleChange}
                                 className="form-control"
                                 required
@@ -155,9 +153,9 @@ function SignUp() {
                         <div className="form-group">
                             <input
                                 type="email"
-                                name="student_email"
+                                name="email"
                                 placeholder="Email"
-                                value={formData.student_email}
+                                value={formData.email}
                                 onChange={handleChange}
                                 className="form-control"
                                 required
@@ -170,9 +168,9 @@ function SignUp() {
                             
                             <input
                                 type="password"
-                                name="student_password"
+                                name="password"
                                 placeholder="Password"
-                                value={formData.student_password}
+                                value={formData.password}
                                 onChange={handleChange}
                                 className="form-control"
                                 required
